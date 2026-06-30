@@ -3,7 +3,7 @@ import { create } from "zustand";
 export interface CartItem {
   id: number;
   name: string;
-  price: string;
+  price: number;
   image: string;
   quantity: number;
 }
@@ -60,7 +60,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   totalPrice: () =>
     get().items.reduce(
-      (sum, item) => sum + parseFloat(item.price) * item.quantity,
+      (sum, item) => sum + item.price * item.quantity,
       0
     ),
 }));
