@@ -11,7 +11,6 @@ export default function Home() {
       category: "Power Weeders",
       price: 45000,
       image: "/products/power-weeder.jpg",
-      badge: { label: "Best Seller", tone: "red" as const },
       variants: 2,
     },
     {
@@ -20,7 +19,6 @@ export default function Home() {
       category: "Rotavators",
       price: 115000,
       image: "/products/rotavator.jpg",
-      badge: { label: "New", tone: "green" as const },
     },
     {
       id: 3,
@@ -57,7 +55,6 @@ export default function Home() {
       category: "Seed Drills",
       price: 35000,
       image: "/products/seed-drill.jpg",
-      badge: { label: "Featured", tone: "orange" as const },
     },
     {
       id: 8,
@@ -88,7 +85,6 @@ export default function Home() {
             category={product.category}
             price={product.price}
             image={product.image}
-            badge={product.badge}
             variants={product.variants}
           />
         ))}

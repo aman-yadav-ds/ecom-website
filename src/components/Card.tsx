@@ -2,14 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export type BadgeTone = "red" | "green" | "orange";
-
 interface CardProps {
   title: string;
   category: string;
   price: number;
   image: string;
-  badge?: { label: string; tone?: BadgeTone };
   variants?: number;
   href?: string;
 }
@@ -19,7 +16,6 @@ const Card: React.FC<CardProps> = ({
   category,
   price,
   image,
-  badge,
   variants,
   href = "#",
 }) => {
@@ -28,24 +24,6 @@ const Card: React.FC<CardProps> = ({
       <div className="flex flex-col gap-4">
         {/* Image Container */}
         <div className="relative bg-light-200 aspect-[4/5] overflow-hidden group-hover:opacity-95 transition-opacity">
-          {/* Badge */}
-          {badge && (
-            <div className="absolute top-4 left-4 z-10 bg-light-100 px-3 py-1 rounded-full">
-              <span
-                className={`text-caption font-medium ${badge.tone === "red"
-                  ? "text-red"
-                  : badge.tone === "green"
-                    ? "text-green"
-                    : badge.tone === "orange"
-                      ? "text-orange"
-                      : "text-dark-900"
-                  }`}
-              >
-                {badge.label}
-              </span>
-            </div>
-          )}
-
           {/* Product Image */}
           <div className="relative w-full h-full p-4 transition-transform duration-500 group-hover:scale-105">
             <Image
