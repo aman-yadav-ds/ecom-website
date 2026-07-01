@@ -70,35 +70,29 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-light-100">
-      <Navbar />
+    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="mb-10">
+        <h1 className="text-heading-2 text-dark-900 mb-4">
+          Featured Implements
+        </h1>
+        <p className="text-lead text-dark-700 max-w-2xl">
+          Discover our premium range of agriculture equipment, engineered for high performance and durability on Indian farms.
+        </p>
+      </div>
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-10">
-          <h1 className="text-heading-2 text-dark-900 mb-4">
-            Featured Implements
-          </h1>
-          <p className="text-lead text-dark-700 max-w-2xl">
-            Discover our premium range of agriculture equipment, engineered for high performance and durability on Indian farms.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
-          {products.map((product) => (
-            <Card
-              key={product.id}
-              title={product.title}
-              category={product.category}
-              price={product.price}
-              image={product.image}
-              badge={product.badge}
-              variants={product.variants}
-            />
-          ))}
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            title={product.title}
+            category={product.category}
+            price={product.price}
+            image={product.image}
+            badge={product.badge}
+            variants={product.variants}
+          />
+        ))}
+      </div>
+    </main>
   );
 }
