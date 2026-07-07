@@ -24,7 +24,6 @@ export default function ContactUsPage() {
                 fill
                 className="object-cover"
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                loading='eager'
               />
             </div>
           </div>
@@ -58,7 +57,6 @@ export default function ContactUsPage() {
                 fill
                 className="object-cover"
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                loading='eager'
               />
             </div>
           </div>
@@ -70,7 +68,7 @@ export default function ContactUsPage() {
               KOREVA products are distributed globally through a network of authorized importers and dealers.
             </p>
             <div className="pt-4">
-              <Link href="/importers-list" className="inline-block w-full md:w-auto text-center bg-brand-black hover:bg-brand-red text-light-100 font-bold py-4 px-8 transition-colors uppercase tracking-wider text-sm shadow-md hover:shadow-xl">
+              <Link href="/services-events/importers-list" className="inline-block w-full md:w-auto text-center bg-brand-black hover:bg-brand-red text-light-100 font-bold py-4 px-8 transition-colors uppercase tracking-wider text-sm shadow-md hover:shadow-xl">
                 Click here to find Importers List
               </Link>
             </div>
@@ -87,7 +85,6 @@ export default function ContactUsPage() {
                 fill
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 className="object-cover"
-                loading='eager'
               />
             </div>
           </div>
