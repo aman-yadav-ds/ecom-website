@@ -19,6 +19,7 @@ export default function AuthLayout({
               width={80}
               height={30}
               className="object-contain"
+              style={{ height: "auto" }}
             />
           </Link>
         </div>

@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand Colors (Koreva 9) */
+  --color-brand-red: #a80000;
+  /* Deep red from the logo '9' */
+  --color-brand-red-accent: #d32f2f;
+  /* Vibrant red for hover states/CTAs */
+  --color-brand-black: #080808;
+  /* Deep black for strong headings & logos */
+  --color-brand-dark: #1a1a1a;
+  /* Off-black for readable primary body text */
+
   /* Dark shades */
   --color-dark-900: #111111;
   --color-dark-700: #757575;
@@ -15,6 +25,7 @@
   /* Supporting colors */
   --color-green: #007d48;
   --color-red: #d33918;
+  /* Retained your original red for error/alert states */
   --color-orange: #d37918;
 
   /* Font family */
