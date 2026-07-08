@@ -47,33 +47,6 @@ export default function ContactUsPage() {
           </div>
         </div>
 
-        {/* Section 2: Find Importers List */}
-        <div className="flex flex-col lg:flex-row-reverse items-center gap-10 lg:gap-16">
-          <div className="w-full lg:w-1/2">
-            <div className="relative aspect-[4/3] w-full rounded overflow-hidden shadow-lg">
-              <Image
-                src="/contact_importers.webp"
-                alt="Importers and retail store"
-                fill
-                className="object-cover"
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-              />
-            </div>
-          </div>
-          <div className="w-full lg:w-1/2 space-y-6">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-dark-900 uppercase tracking-wide">
-              Find the Importers List of KOREVA GLOBAL LLP
-            </h2>
-            <p className="text-dark-700 text-lg leading-relaxed pt-2">
-              KOREVA products are distributed globally through a network of authorized importers and dealers.
-            </p>
-            <div className="pt-4">
-              <Link href="/services-events/importers-list" className="inline-block w-full md:w-auto text-center bg-brand-black hover:bg-brand-red text-light-100 font-bold py-4 px-8 transition-colors uppercase tracking-wider text-sm shadow-md hover:shadow-xl">
-                Click here to find Importers List
-              </Link>
-            </div>
-          </div>
-        </div>
 
         {/* Section 3: Call Us */}
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
