@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 interface CardProps {
   title: string;
@@ -16,50 +17,58 @@ const Card: React.FC<CardProps> = ({
   category,
   price,
   image,
-  variants,
   href = "#",
 }) => {
   return (
-    <Link href={href} className="group block cursor-pointer">
-      <div className="flex flex-col gap-4">
-        {/* Image Container */}
-        <div className="relative bg-light-200 aspect-[4/5] overflow-hidden group-hover:opacity-95 transition-opacity">
-          {/* Product Image */}
-          <div className="relative w-full h-full p-4 transition-transform duration-500 group-hover:scale-105">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+    <div className="group relative flex flex-col h-full bg-white border border-gray-200 rounded-sm hover:shadow-lg transition-shadow p-6">
+      {/* Image Container */}
+      <div className="relative w-full aspect-[4/3] mb-6 overflow-hidden flex items-center justify-center">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-contain transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
+
+      {/* Content Container */}
+      <div className="flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-dark-900 leading-tight mb-1 group-hover:text-brand-red transition-colors line-clamp-2">
+          <Link href={href} className="before:absolute before:inset-0">
+            {title}
+          </Link>
+        </h3>
+        <p className="text-sm text-gray-500 mb-4">{category}</p>
+        
+        {/* Spacer to push price to bottom if titles vary in height */}
+        <div className="flex-grow" />
+
+        {/* Price & Actions Row */}
+        <div className="flex flex-col mt-2">
+          <span className="text-xl font-bold text-dark-900 mb-6">
+            {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 }).format(price)}*
+          </span>
+          
+          <div className="flex justify-between items-center mt-auto border-t border-gray-100 pt-4">
+            <label className="relative z-10 flex items-center gap-2 cursor-pointer group/checkbox">
+              <input 
+                type="checkbox" 
+                className="w-5 h-5 border-gray-300 rounded-sm text-orange-500 focus:ring-orange-500 cursor-pointer" 
+              />
+              <span className="text-sm text-gray-600 font-medium">Comparison</span>
+            </label>
+            <Link 
+              href={href}
+              className="relative z-10 w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors shadow-md"
+              aria-label={`View details for ${title}`}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Link>
           </div>
-        </div>
-
-        {/* Content Container */}
-        <div className="flex flex-col gap-1 mt-2">
-          {/* Title & Price Row */}
-          <div className="flex justify-between items-start gap-4">
-            <h3 className="text-body-medium text-dark-900 group-hover:text-dark-700 transition-colors line-clamp-2">
-              {title}
-            </h3>
-            <span className="text-body-medium text-dark-900 whitespace-nowrap">
-              {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)}
-            </span>
-          </div>
-
-          {/* Category */}
-          <p className="text-body text-dark-700">{category}</p>
-
-          {/* Variants */}
-          {variants && variants > 0 && (
-            <p className="text-body text-dark-700 mt-1">
-              {variants} {variants === 1 ? "Colour" : "Colours"}
-            </p>
-          )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

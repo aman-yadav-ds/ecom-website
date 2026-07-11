@@ -1,0 +1,187 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Sort from "./Sort";
+import Filters from "./Filters";
+import Card from "./Card";
+import { parseQueryParams } from "@/lib/utils/query";
+import { Filter as FilterIcon } from "lucide-react";
+
+import { ALLOWED_FILTERS } from "@/lib/filter";
+
+export interface ProductListingItem {
+  id: string;
+  name: string;
+  description: string;
+  categoryId: string;
+  categoryName: string;
+  tags: string[];
+  price: number;
+  image: string;
+  variantsCount: number;
+  technicalDetails: Record<string, string>;
+}
+
+interface ProductCatalogClientProps {
+  initialProducts: ProductListingItem[];
+}
+
+export default function ProductCatalogClient({ initialProducts }: ProductCatalogClientProps) {
+  const searchParams = useSearchParams();
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+
+  // Dynamically extract all available filters from technicalDetails
+  const availableFilters = useMemo(() => {
+    const filters: Record<string, Set<string>> = {};
+    
+    initialProducts.forEach(product => {
+      Object.entries(product.technicalDetails).forEach(([key, value]) => {
+        if (!value) return;
+        // Only include keys that are in the allowed filters list
+        if (!ALLOWED_FILTERS.includes(key)) return;
+        
+        if (!filters[key]) {
+          filters[key] = new Set();
+        }
+        filters[key].add(value);
+      });
+    });
+
+    // Convert Sets to Arrays and sort them
+    const result: Record<string, string[]> = {};
+    Object.keys(filters).forEach(key => {
+      result[key] = Array.from(filters[key]).sort();
+    });
+    
+    return result;
+  }, [initialProducts]);
+
+  // Client-side filtering and sorting engine
+  const filteredAndSortedProducts = useMemo(() => {
+    // 1. Parse current URL params
+    const params = parseQueryParams(searchParams.toString());
+    const searchQuery = typeof params.search === 'string' ? params.search.toLowerCase() : '';
+    const sortMode = typeof params.sort === 'string' ? params.sort : 'featured';
+    
+    // Extract active technical filters (anything that isn't search or sort)
+    const activeFilters: Record<string, string[]> = {};
+    Object.keys(params).forEach(key => {
+      if (key !== 'search' && key !== 'sort') {
+        const val = params[key];
+        activeFilters[key] = Array.isArray(val) ? val : [val];
+      }
+    });
+
+    // 2. Filter Array
+    let result = initialProducts.filter(product => {
+      // Search matching
+      if (searchQuery) {
+        const nameMatch = product.name.toLowerCase().includes(searchQuery);
+        const tagMatch = product.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+        if (!nameMatch && !tagMatch) {
+          return false;
+        }
+      }
+
+      // Checkbox filters matching (AND across groups, OR within groups)
+      for (const [filterKey, selectedValues] of Object.entries(activeFilters)) {
+        if (selectedValues.length === 0) continue;
+        
+        if (filterKey === 'category') {
+          if (!selectedValues.includes(product.categoryName)) {
+            return false;
+          }
+        } else {
+          const productDetailValue = product.technicalDetails[filterKey];
+          if (!productDetailValue || !selectedValues.includes(productDetailValue)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
+
+    // 3. Sort Array
+    if (sortMode === 'price_asc') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    } else if (sortMode === 'price_desc') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    }
+    // "featured" doesn't change the order (assumes initial order is featured)
+
+    return result;
+  }, [initialProducts, searchParams]);
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Top Bar: Title */}
+      <div className="flex items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-dark-900">Products</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Showing {filteredAndSortedProducts.length} results
+          </p>
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Filters Sidebar/Drawer */}
+        <Filters 
+          availableFilters={availableFilters}
+          isOpen={isMobileFiltersOpen}
+          onClose={() => setIsMobileFiltersOpen(false)}
+        />
+
+        {/* Product Grid Area */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Controls Bar */}
+          <div className="flex items-center justify-between md:justify-end mb-6 pb-4 border-b border-gray-200">
+            <button
+              onClick={() => setIsMobileFiltersOpen(true)}
+              className="md:hidden flex items-center gap-2 text-sm font-medium text-gray-700 bg-gray-100 px-4 py-2 rounded-lg"
+            >
+              <FilterIcon className="w-4 h-4" />
+              Filters
+            </button>
+            <Sort />
+          </div>
+
+          {/* Grid */}
+          {filteredAndSortedProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredAndSortedProducts.map(product => (
+                <Card
+                  key={product.id}
+                  title={product.name}
+                  category={product.categoryName}
+                  price={product.price}
+                  image={product.image}
+                  variants={product.variantsCount}
+                  href={`/products/${product.id}`}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded-2xl border border-dashed border-gray-300 text-center">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No matching products found</h3>
+              <p className="text-gray-500 mb-6 max-w-md">
+                We couldn&apos;t find any products matching your current search and filter combination.
+              </p>
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                onClick={() => setIsMobileFiltersOpen(false)}
+              >
+                Clear all filters
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

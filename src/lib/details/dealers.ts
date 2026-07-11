@@ -1,7 +1,6 @@
-import { InferInsertModel } from "drizzle-orm";
-import { dealers } from "../db/schema/dealers";
+import { Dealer } from "../types";
 
-export const exampleDealers: InferInsertModel<typeof dealers>[] = [
+export const exampleDealers: Dealer[] = [
   {
     id: "44444444-4444-4444-4444-444444444444",
     name: "AgriTech Solutions",

@@ -1,11 +1,22 @@
-import { InferInsertModel } from "drizzle-orm";
-import { categories } from "../db/schema/categories";
+import { Category } from "../types";
 
-export const exampleCategories: InferInsertModel<typeof categories>[] = [
+export const exampleCategories: Category[] = [
   {
-    id: "11111111-1111-1111-1111-111111111111", // Use a static UUID so products can easily reference it
-    name: "Tractors",
-    slug: "tractors",
-    parentId: null, // Optional: reference another category ID here for subcategories
+    id: "TA",
+    name: "Tractor Attachments",
+    slug: "tractor-attachments",
+    parentId: null,
+  },
+  {
+    id: "SPM",
+    name: "Self Propelled Machinery",
+    slug: "self-propelled-machinery",
+    parentId: null,
+  },
+  {
+    id: "FPU",
+    name: "Food Processing Units",
+    slug: "food-processing-units",
+    parentId: null,
   }
 ];

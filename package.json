@@ -6,16 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "db:seed": "tsx src/lib/db/seed.ts"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
-    "better-auth": "^1.6.23",
-    "drizzle-orm": "^0.45.2",
-    "drizzle-zod": "^0.8.3",
     "lucide-react": "^1.22.0",
     "next": "16.2.9",
+    "query-string": "^9.4.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "zod": "^4.4.3",
@@ -27,7 +23,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",
-    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
