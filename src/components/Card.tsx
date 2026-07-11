@@ -2,8 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import CompareCheckbox from "./CompareCheckbox";
 
 interface CardProps {
+  id?: string;
   title: string;
   category: string;
   price: number;
@@ -13,6 +15,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({
+  id,
   title,
   category,
   price,
@@ -51,13 +54,11 @@ const Card: React.FC<CardProps> = ({
           </span>
           
           <div className="flex justify-between items-center mt-auto border-t border-gray-100 pt-4">
-            <label className="relative z-10 flex items-center gap-2 cursor-pointer group/checkbox">
-              <input 
-                type="checkbox" 
-                className="w-5 h-5 border-gray-300 rounded-sm text-orange-500 focus:ring-orange-500 cursor-pointer" 
-              />
-              <span className="text-sm text-gray-600 font-medium">Comparison</span>
-            </label>
+            {id ? (
+              <CompareCheckbox productId={id} />
+            ) : (
+              <div />
+            )}
             <Link 
               href={href}
               className="relative z-10 w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors shadow-md"

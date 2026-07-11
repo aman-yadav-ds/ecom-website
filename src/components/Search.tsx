@@ -38,14 +38,12 @@ export default function Search({ isOpen, onClose }: SearchProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-start pt-[15vh] justify-center bg-black/70 backdrop-blur-md transition-all duration-400 ease-out ${
-        isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-      }`}
+      className={`fixed inset-0 z-[100] flex items-start pt-[15vh] justify-center bg-black/70 backdrop-blur-md transition-all duration-400 ease-out ${isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        }`}
     >
       <div
-        className={`relative w-full max-w-4xl mx-4 transform transition-all duration-400 ease-out delay-75 ${
-          isOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-8"
-        }`}
+        className={`relative w-full max-w-4xl mx-4 transform transition-all duration-400 ease-out delay-75 ${isOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-8"
+          }`}
       >
         <div className="bg-light-100 shadow-2xl overflow-hidden border-2 border-brand-red rounded-xl">
           <form onSubmit={handleSubmit} className="flex items-center p-3 bg-white">
@@ -71,10 +69,10 @@ export default function Search({ isOpen, onClose }: SearchProps) {
           {/* Quick Links Section */}
           <div className="p-5 md:p-6 bg-light-200/50 border-t border-light-300 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm md:text-base text-dark-700">
             <span className="font-bold text-dark-900 tracking-wide text-xs uppercase">Popular Searches</span>
-            <button type="button" onClick={() => handleQuickLink('Power Weeders')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Power Weeders</button>
-            <button type="button" onClick={() => handleQuickLink('Brush Cutters')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Brush Cutters</button>
-            <button type="button" onClick={() => handleQuickLink('Rotavators')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Rotavators</button>
-            <button type="button" onClick={() => handleQuickLink('Earth Augers')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Earth Augers</button>
+            <button type="button" onClick={() => handleQuickLink('Power Weeder')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Power Weeder</button>
+            <button type="button" onClick={() => handleQuickLink('Brush Cutter')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Brush Cutter</button>
+            <button type="button" onClick={() => handleQuickLink('Rotavator')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Rotavator</button>
+            <button type="button" onClick={() => handleQuickLink('Mini Rice Mill')} className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red">Mini Rice Mill</button>
           </div>
         </div>
       </div>

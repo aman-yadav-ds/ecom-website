@@ -180,6 +180,7 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
               {filteredAndSortedProducts.map(product => (
                 <Card
                   key={product.id}
+                  id={product.id}
                   title={product.name}
                   category={product.categoryName}
                   price={product.price}
