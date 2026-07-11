@@ -17,6 +17,35 @@ const navItems: NavItem[] = [
   { title: "Service and events", hasDropdown: true },
 ];
 
+const ContactStrip = () => (
+  <div className="w-full bg-brand-red text-light-100 py-2 text-center text-sm font-bold uppercase tracking-wider">
+    Contact Us: +91 7455 973 188.
+  </div>
+);
+
+const UtilityStrip = ({ onSearchClick }: { onSearchClick: () => void }) => (
+  <div className="w-full bg-light-200 border-b border-light-300 sticky top-0 z-50">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 text-sm text-dark-900 font-medium">
+      <div className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors">
+        <MapPin className="w-4 h-4" />
+        <span>Find a Dealer</span>
+      </div>
+      <div className="flex items-center space-x-8">
+        <Link href="/services-events/contact-us" className="flex items-center cursor-pointer hover:text-brand-red transition-colors">
+          <Mail className="w-4 h-4" />
+        </Link>
+        <div
+          className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors"
+          onClick={onSearchClick}
+        >
+          <Search className="w-4 h-4" />
+          <span>Product search</span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,37 +84,12 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Search Overlay - Animated */}
       <SearchComponent isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-      <header className="w-full sticky top-0 z-50 flex flex-col" onClick={handleLinkClick}>
-        {/* Top Red Strip */}
-        <div className="w-full bg-brand-red text-light-100 py-2 text-center text-sm font-bold uppercase tracking-wider">
-          Contact Us: +91 7455 973 188.
-        </div>
+      <ContactStrip />
+      <UtilityStrip onSearchClick={() => setIsSearchOpen(true)} />
 
-        {/* Second row (Find Dealer, Mail, Product Search) */}
-        <div className="w-full bg-light-200 border-b border-light-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 text-sm text-dark-900 font-medium">
-            <div className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors">
-              <MapPin className="w-4 h-4" />
-              <span>Find a Dealer</span>
-            </div>
-            <div className="flex items-center space-x-8">
-              <Link href="/services-events/contact-us" className="flex items-center cursor-pointer hover:text-brand-red transition-colors">
-                <Mail className="w-4 h-4" />
-              </Link>
-              <div
-                className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors"
-                onClick={() => setIsSearchOpen(true)}
-              >
-                <Search className="w-4 h-4" />
-                <span>Product search</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <header className="w-full flex flex-col relative z-40" onClick={handleLinkClick}>
         {/* Main Navbar */}
         <div className="w-full bg-light-100 border-b border-light-300 shadow-sm relative" ref={dropdownRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative bg-light-100 z-50">
@@ -210,7 +214,7 @@ const Navbar = () => {
                       <li><Link href="/products?search=Pulveriser" className="hover:text-brand-red transition-colors">Pulveriser</Link></li>
                       <li><Link href="/products?search=MINI+Rice+Mill" className="hover:text-brand-red transition-colors">MINI Rice Mill</Link></li>
                     </ul>
-                    
+
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Lubricants</h3>
                     <ul className="space-y-3 text-[15px] text-dark-700">
                       <li><Link href="/products?category=Lubricants" className="hover:text-brand-red transition-colors font-medium">All Lubricants &gt;</Link></li>

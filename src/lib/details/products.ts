@@ -37,7 +37,7 @@ export const exampleProducts: Product[] = [
     description: "Efficient power reaper for fast, reliable, and clean crop harvesting.",
     categoryId: "SPM",
     tags: ["Power Reaper", "Harvesting", "Self Propelled"],
-    coverImage: "/placeholder.png",
+    coverImage: "/products/power-weeder2.jpeg",
     isPublished: true,
     defaultVariantId: "v-pr-1260"
   },

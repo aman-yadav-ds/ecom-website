@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { MessageSquare, MapPin, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -23,35 +24,7 @@ const Footer = () => {
           </div>
 
           {/* Links Sections */}
-          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-8">
-            <div>
-              <h4 className="text-body font-medium mb-6 uppercase tracking-wider">
-                Products
-              </h4>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="/power-weeders" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Power Weeders
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/brush-cutters" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Brush Cutters
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/rotavators" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Rotavators
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/all-products" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    All Products
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
+          <div className="md:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
               <h4 className="text-body font-medium mb-6 uppercase tracking-wider">
                 Company
@@ -59,22 +32,27 @@ const Footer = () => {
               <ul className="space-y-4">
                 <li>
                   <Link href="/about" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    About Us
+                    About us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/careers" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Careers
+                  <Link href="/catalogue-download" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    Catalogue download
                   </Link>
                 </li>
                 <li>
-                  <Link href="/investors" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Investors
+                  <Link href="/integrity-line" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    KOREVA Integrity Line
                   </Link>
                 </li>
                 <li>
-                  <Link href="/sustainability" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Sustainability
+                  <Link href="/csr" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    CSR
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/e-waste" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    E-Waste
                   </Link>
                 </li>
               </ul>
@@ -82,55 +60,48 @@ const Footer = () => {
 
             <div>
               <h4 className="text-body font-medium mb-6 uppercase tracking-wider">
-                Support
+                KOREVA FAQ
               </h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/help" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Help Center
+                  <Link href="/faq/assortment" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    Questions on the assortment
                   </Link>
                 </li>
                 <li>
+                  <Link href="/faq/self-propelled-machinery" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    Self-propelled machinery
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faq/owner-manuals" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    Owner manuals
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-body font-medium mb-6 uppercase tracking-wider">
+                Service
+              </h4>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3">
+                  <MessageSquare className="w-5 h-5 text-dark-500" />
                   <Link href="/services-events/contact-us" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Contact Us
+                    Contact us
                   </Link>
                 </li>
-                <li>
-                  <Link href="/service" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Service Centers
+                <li className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-dark-500" />
+                  <Link href="/dealer-search" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    Dealer search
                   </Link>
                 </li>
-                <li>
-                  <Link href="/warranty" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Warranty Info
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-body font-medium mb-6 uppercase tracking-wider">
-                Resources
-              </h4>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="/guides" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Farming Guides
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/videos" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Video Tutorials
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/catalogs" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
-                    Product Catalogs
+                <li className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-dark-500" />
+                  <Link href="/newsletter" className="text-caption text-dark-500 hover:text-light-100 transition-colors">
+                    KOREVA Newsletter
                   </Link>
                 </li>
               </ul>
@@ -199,19 +170,23 @@ const Footer = () => {
             <span>© 2025 KOREVA GLOBAL. All Rights Reserved</span>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 text-footnote text-dark-500">
-            <Link href="/guides" className="hover:text-light-100 transition-colors">
-              Guides
-            </Link>
-            <Link href="/terms-of-sale" className="hover:text-light-100 transition-colors">
-              Terms of Sale
-            </Link>
-            <Link href="/terms-of-use" className="hover:text-light-100 transition-colors">
-              Terms of Use
-            </Link>
+          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-footnote text-dark-500">
             <Link href="/privacy-policy" className="hover:text-light-100 transition-colors">
-              Koreva Privacy Policy
+              Privacy policy
             </Link>
+            <Link href="/legal-notice" className="hover:text-light-100 transition-colors">
+              Legal notice
+            </Link>
+            <Link href="/cookies" className="hover:text-light-100 transition-colors">
+              Cookies
+            </Link>
+            <Link href="/legal-information" className="hover:text-light-100 transition-colors">
+              Legal information
+            </Link>
+          </div>
+
+          <div className="text-footnote text-dark-500 text-center md:text-right max-w-xs ml-auto">
+            KOREVA GLOBAL LLP, NH9 KICHHA RUDRAPUR ROAD, KISHANPUR, U.S.NAGAR, UTTARAKHAND, INDIA - 263148
           </div>
         </div>
       </div>

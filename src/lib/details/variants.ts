@@ -126,7 +126,7 @@ export const exampleVariants: Variant[] = [
     id: "v-pr-1260",
     name: "KO-1260 KHET SHAKTI",
     productId: "p-powerreaper",
-    images: ["/placeholder.png"],
+    images: ["/products/power-weeder2.jpeg"],
     price: "120000.00",
     applicableGst: "5",
     technicalDetails: {
