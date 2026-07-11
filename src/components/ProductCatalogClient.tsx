@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Sort from "./Sort";
 import Filters from "./Filters";
@@ -115,15 +115,39 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
     return result;
   }, [initialProducts, searchParams]);
 
+  const router = useRouter();
+  const searchString = searchParams.get('search') || '';
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Top Bar: Title */}
-      <div className="flex items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-dark-900">Products</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Showing {filteredAndSortedProducts.length} results
-          </p>
+          {searchString ? (
+            <div className="flex flex-col items-start">
+              <h1 className="text-xl md:text-2xl font-bold text-dark-900 uppercase tracking-wide">
+                SEARCH RESULT FOR &quot;{searchString.toUpperCase()}&quot; ({filteredAndSortedProducts.length})
+              </h1>
+              <div className="w-8 h-1 bg-dark-900 mt-2 mb-4"></div>
+              <button 
+                onClick={() => {
+                  const newParams = new URLSearchParams(searchParams.toString());
+                  newParams.delete('search');
+                  router.push(`/products?${newParams.toString()}`);
+                }}
+                className="text-sm text-brand-red hover:underline font-medium"
+              >
+                Clear Search
+              </button>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-3xl font-bold text-dark-900">Products</h1>
+              <p className="text-sm text-gray-500 mt-1">
+                Showing {filteredAndSortedProducts.length} results
+              </p>
+            </>
+          )}
         </div>
       </div>
 

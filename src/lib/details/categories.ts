@@ -18,5 +18,17 @@ export const exampleCategories: Category[] = [
     name: "Food Processing Units",
     slug: "food-processing-units",
     parentId: null,
+  },
+  {
+    id: "LUB",
+    name: "Lubricants",
+    slug: "lubricants",
+    parentId: null,
+  },
+  {
+    id: "HT",
+    name: "Hand Tools",
+    slug: "hand-tools",
+    parentId: null,
   }
 ];

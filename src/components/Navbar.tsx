@@ -180,7 +180,61 @@ const Navbar = () => {
                   <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
 
-                <div className="pt-2">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-10 pt-2 pb-8 border-b border-light-300">
+                  {/* Column 1 */}
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Tractor Attachments</h3>
+                    <ul className="space-y-3 text-[15px] text-dark-700">
+                      <li><Link href="/products?category=Tractor+Attachments" className="hover:text-brand-red transition-colors font-medium">All Tractor Attachments &gt;</Link></li>
+                      <li><Link href="/products?search=Harrow" className="hover:text-brand-red transition-colors">Harrow</Link></li>
+                      <li><Link href="/products?search=Rotavator" className="hover:text-brand-red transition-colors">Rotavator</Link></li>
+                    </ul>
+                  </div>
+
+                  {/* Column 2 */}
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Self Propelled Machinery</h3>
+                    <ul className="space-y-3 text-[15px] text-dark-700">
+                      <li><Link href="/products?category=Self+Propelled+Machinery" className="hover:text-brand-red transition-colors font-medium">All Self Propelled Machinery &gt;</Link></li>
+                      <li><Link href="/products?search=Power+Weeder" className="hover:text-brand-red transition-colors">Power Weeder</Link></li>
+                      <li><Link href="/products?search=Power+Reaper" className="hover:text-brand-red transition-colors">Power Reaper</Link></li>
+                      <li><Link href="/products?search=Brush+Cutter" className="hover:text-brand-red transition-colors">Brush Cutter</Link></li>
+                    </ul>
+                  </div>
+
+                  {/* Column 3 */}
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Food Processing Units</h3>
+                    <ul className="space-y-3 text-[15px] text-dark-700 mb-8">
+                      <li><Link href="/products?category=Food+Processing+Units" className="hover:text-brand-red transition-colors font-medium">All Food Processing Units &gt;</Link></li>
+                      <li><Link href="/products?search=Pulveriser" className="hover:text-brand-red transition-colors">Pulveriser</Link></li>
+                      <li><Link href="/products?search=MINI+Rice+Mill" className="hover:text-brand-red transition-colors">MINI Rice Mill</Link></li>
+                    </ul>
+                    
+                    <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Lubricants</h3>
+                    <ul className="space-y-3 text-[15px] text-dark-700">
+                      <li><Link href="/products?category=Lubricants" className="hover:text-brand-red transition-colors font-medium">All Lubricants &gt;</Link></li>
+                    </ul>
+                  </div>
+
+                  {/* Column 4 */}
+                  <div>
+                    <Link href="/products" className="text-[15px] font-bold text-dark-900 hover:text-brand-red flex items-center mb-4 transition-colors tracking-wide uppercase">
+                      Promotions and new arrivals &gt;
+                    </Link>
+                    <ul className="space-y-3 text-[15px] text-dark-700 mb-8">
+                      <li><Link href="/products?sort=featured" className="hover:text-brand-red transition-colors">Current bestsellers</Link></li>
+                      <li><Link href="/products?sort=new" className="hover:text-brand-red transition-colors">New products</Link></li>
+                    </ul>
+
+                    <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Hand Tools</h3>
+                    <ul className="space-y-3 text-[15px] text-dark-700">
+                      <li><Link href="/products?category=Hand+Tools" className="hover:text-brand-red transition-colors font-medium">All Hand Tools &gt;</Link></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="pt-6">
                   <Link href="/products" className="text-[16px] font-bold text-dark-900 hover:text-brand-red flex items-center transition-colors">
                     All products <ArrowRight className="w-4 h-4 ml-1" />
                   </Link>
