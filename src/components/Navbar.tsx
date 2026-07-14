@@ -283,12 +283,12 @@ const Navbar = () => {
                 >
                   <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2 pb-8 border-b border-light-300">
                   <div>
                     <h3 className="text-[16px] font-bold text-dark-900">FAQs and Help</h3>
                     <div className="mt-3 space-y-2 text-sm text-dark-700">
                       <Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">
-                        Contact KOREVA
+                        Contact KOREVA9
                       </Link>
                     </div>
                   </div>
@@ -301,13 +301,19 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="pt-6 w-full">
+                  <Link href="/about" className="text-[16px] font-bold text-dark-900 hover:text-brand-red flex items-center transition-colors">
+                    About Us <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div className={`md:hidden absolute w-full bg-light-100 border-b border-light-300 transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+        <div className={`md:hidden absolute top-full left-0 w-full bg-light-100 border-b border-light-300 transition-all duration-300 ease-in-out origin-top z-30 ${isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
           }`}>
           <div className="px-4 py-4 space-y-2 shadow-xl bg-light-100">
             {navItems.map((item) => (
@@ -328,22 +334,56 @@ const Navbar = () => {
                 </button>
 
                 {/* Mobile Animated Dropdown Content */}
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.title ? "max-h-[500px] opacity-100 mb-2 mt-1" : "max-h-0 opacity-0 mb-0 mt-0"
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.title ? "max-h-[1000px] opacity-100 mb-2 mt-1" : "max-h-0 opacity-0 mb-0 mt-0"
                   }`}>
                   <div className="pl-4 py-2 text-sm text-dark-700 space-y-3 border-l-2 border-brand-red bg-light-200/50 rounded-r-md">
                     {item.title === "Products" ? (
-                      <div className="py-2 pr-2">
-                        <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red transition-colors inline-block">
-                          All products
-                        </Link>
+                      <div className="py-2 pr-2 space-y-4">
+                        <div>
+                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Tractor Attachments</h4>
+                          <ul className="space-y-1.5 text-xs">
+                            <li><Link href="/products?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
+                            <li><Link href="/products?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Self Propelled Machinery</h4>
+                          <ul className="space-y-1.5 text-xs">
+                            <li><Link href="/products?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
+                            <li><Link href="/products?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
+                            <li><Link href="/products?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Food Processing</h4>
+                          <ul className="space-y-1.5 text-xs">
+                            <li><Link href="/products?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
+                            <li><Link href="/products?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Other Categories</h4>
+                          <ul className="space-y-1.5 text-xs">
+                            <li><Link href="/products?category=Hand+Tools" className="text-dark-900 hover:text-brand-red">Hand Tools</Link></li>
+                            <li><Link href="/products?category=Lubricants" className="text-dark-900 hover:text-brand-red">Lubricants</Link></li>
+                          </ul>
+                        </div>
+                        <div className="pt-2 border-t border-brand-red/20">
+                          <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red flex items-center">
+                            All products <ArrowRight className="w-4 h-4 ml-1" />
+                          </Link>
+                        </div>
                       </div>
                     ) : item.title === "Service and events" ? (
                       <div className="py-2 pr-2 space-y-2">
                         <Link href="/services-events/contact-us" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
-                          Contact KOREVA
+                          Contact KOREVA9
                         </Link>
                         <Link href="/dealers" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
                           Find a Dealer
+                        </Link>
+                        <Link href="/about" className="font-bold text-dark-900 hover:text-brand-red transition-colors block mt-4 pt-2 border-t border-brand-red/20">
+                          About Us
                         </Link>
                       </div>
                     ) : (

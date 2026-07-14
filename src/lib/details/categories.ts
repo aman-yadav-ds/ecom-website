@@ -2,31 +2,31 @@ import { Category } from "../types";
 
 export const exampleCategories: Category[] = [
   {
-    id: "TA",
+    id: "tractor-attachments",
     name: "Tractor Attachments",
     slug: "tractor-attachments",
     parentId: null,
   },
   {
-    id: "SPM",
+    id: "self-propelled-machinery",
     name: "Self Propelled Machinery",
     slug: "self-propelled-machinery",
     parentId: null,
   },
   {
-    id: "FPU",
+    id: "food-processing-units",
     name: "Food Processing Units",
     slug: "food-processing-units",
     parentId: null,
   },
   {
-    id: "LUB",
+    id: "lubricants",
     name: "Lubricants",
     slug: "lubricants",
     parentId: null,
   },
   {
-    id: "HT",
+    id: "hand-tools",
     name: "Hand Tools",
     slug: "hand-tools",
     parentId: null,

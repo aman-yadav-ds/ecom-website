@@ -167,7 +167,7 @@ const Footer = () => {
               </svg>
               <span>India</span>
             </div>
-            <span>© 2025 KOREVA GLOBAL. All Rights Reserved</span>
+            <span>© 2026 KOREVA GLOBAL LLP. All Rights Reserved</span>
           </div>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-6 text-footnote text-dark-500">
@@ -179,9 +179,6 @@ const Footer = () => {
             </Link>
             <Link href="/cookies" className="hover:text-light-100 transition-colors">
               Cookies
-            </Link>
-            <Link href="/legal-information" className="hover:text-light-100 transition-colors">
-              Legal information
             </Link>
           </div>
 
