@@ -35,4 +35,12 @@ export interface Dealer {
   contactNo: string | null;
   email: string | null;
   mapLink: string | null;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  website?: string;
+  assortment: string[];
+  services: string[];
+  isPremiumHub: boolean;
 }

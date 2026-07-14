@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Mail, Search, Plus, X, ArrowRight } from "lucide-react";
 import SearchComponent from "./Search";
+import { useModalStore } from "@/store/useModalStore";
 
 type NavItem = {
   title: string;
@@ -26,10 +27,10 @@ const ContactStrip = () => (
 const UtilityStrip = ({ onSearchClick }: { onSearchClick: () => void }) => (
   <div className="w-full bg-light-200 border-b border-light-300 sticky top-0 z-50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 text-sm text-dark-900 font-medium">
-      <div className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors">
+      <Link href="/dealers" className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors">
         <MapPin className="w-4 h-4" />
         <span>Find a Dealer</span>
-      </div>
+      </Link>
       <div className="flex items-center space-x-8">
         <Link href="/services-events/contact-us" className="flex items-center cursor-pointer hover:text-brand-red transition-colors">
           <Mail className="w-4 h-4" />
@@ -51,6 +52,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { openJoinModal } = useModalStore();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -139,15 +141,15 @@ const Navbar = () => {
 
               {/* Right: Join Us */}
               <div className="hidden md:flex flex-shrink-0 items-center">
-                <Link
-                  href="/join"
+                <button
+                  onClick={openJoinModal}
                   className="group inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-brand-black text-light-100 font-medium transition-all duration-300 hover:bg-brand-red hover:shadow-lg focus:outline-none"
                 >
                   <span className="flex items-center gap-2">
                     Join Us
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
-                </Link>
+                </button>
               </div>
 
               {/* Mobile menu button */}
@@ -290,6 +292,14 @@ const Navbar = () => {
                       </Link>
                     </div>
                   </div>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900">Dealer Network</h3>
+                    <div className="mt-3 space-y-2 text-sm text-dark-700">
+                      <Link href="/dealers" className="block hover:text-brand-red transition-colors">
+                        Find a Dealer
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -323,8 +333,17 @@ const Navbar = () => {
                   <div className="pl-4 py-2 text-sm text-dark-700 space-y-3 border-l-2 border-brand-red bg-light-200/50 rounded-r-md">
                     {item.title === "Products" ? (
                       <div className="py-2 pr-2">
-                        <Link href="#" className="font-bold text-dark-900 hover:text-brand-red transition-colors inline-block">
+                        <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red transition-colors inline-block">
                           All products
+                        </Link>
+                      </div>
+                    ) : item.title === "Service and events" ? (
+                      <div className="py-2 pr-2 space-y-2">
+                        <Link href="/services-events/contact-us" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
+                          Contact KOREVA
+                        </Link>
+                        <Link href="/dealers" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
+                          Find a Dealer
                         </Link>
                       </div>
                     ) : (
@@ -335,14 +354,16 @@ const Navbar = () => {
               </div>
             ))}
             <div className="pt-6 pb-4">
-              <Link
-                href="/join"
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  openJoinModal();
+                }}
                 className="group flex w-full items-center justify-center px-6 py-3.5 rounded-full bg-brand-black text-light-100 font-medium hover:bg-brand-red transition-colors shadow-md"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Join Us
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </button>
             </div>
           </div>
         </div>

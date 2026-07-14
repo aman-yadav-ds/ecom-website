@@ -6,6 +6,7 @@ import ProductGallery from "./ProductGallery";
 import VariantSelector from "./VariantSelector";
 import DetailTabsSection from "./DetailTabsSection";
 import CollapsibleFeature from "./CollapsibleFeature";
+import Link from "next/link";
 import { MapPin, Wrench, Shield, FileText } from "lucide-react";
 
 interface ProductInteractiveSectionProps {
@@ -81,10 +82,10 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
 
           {/* Action Area */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <button className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <Link href="/dealers" className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2">
               <MapPin className="w-5 h-5" />
               Find a Local Dealer
-            </button>
+            </Link>
             <label className="flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm cursor-pointer hover:border-dark-500 transition-colors group bg-white">
               <input 
                 type="checkbox" 

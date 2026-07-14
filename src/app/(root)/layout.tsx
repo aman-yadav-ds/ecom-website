@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
+import JoinNetworkModal from "@/components/JoinNetworkModal";
 
 export default function AppLayout({
   children,
@@ -13,6 +14,7 @@ export default function AppLayout({
       <Navbar />
       {children}
       <CompareDrawer />
+      <JoinNetworkModal />
       <Footer />
     </div>
   );
