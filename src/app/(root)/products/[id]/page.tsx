@@ -101,7 +101,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           </Link>
 
           <Link
-            href="#"
+            href="/faq"
             className="flex items-center justify-between p-8 bg-white border border-light-300 rounded-sm hover:border-brand-red hover:shadow-md transition-all group"
           >
             <div className="flex items-center gap-6">

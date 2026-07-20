@@ -12,14 +12,6 @@ export default async function DealersPage(props: { searchParams: Promise<{ [key:
 
   return (
     <div className="flex flex-col min-h-screen bg-light-100">
-      {/* Breadcrumb / Top Area could go here */}
-      <div className="bg-light-200 py-3 px-4 md:px-8 border-b border-light-300 text-sm font-jost text-dark-700">
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
-          <span>Homepage</span>
-          <span>&gt;</span>
-          <span className="font-[600] text-brand-dark uppercase">Find Your Local Koreva Dealer</span>
-        </div>
-      </div>
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col">
         <ScrollReveal animation="slide-bottom">

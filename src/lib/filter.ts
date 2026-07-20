@@ -1,18 +1,18 @@
 export const CATEGORY_FILTERS: Record<string, string[]> = {
-  "Tractor Attachments": ["Brand", "Model", "Working Width", "Machine Weight", "Blades Type"],
-  "Self Propelled Machinery": ["Brand", "Model", "Engine Type", "Material", "Machine Weight"],
-  "Food Processing Units": ["Brand", "Model", "Material", "Machine Weight"],
+  "Tractor Attachments": ["Brand", "Working Width", "Blades Type", "Number of Blades", "Number of Discs"],
+  "Self Propelled Machinery": ["Brand", "Engine Power", "Starting System", "Carry Type", "Transmission Type"],
+  "Food Processing Units": ["Brand", "Motor Power", "Material", "Electricity"],
   "Lubricants": ["Brand", "Type"],
   "Hand Tools": ["Brand", "Material", "Machine Weight"],
 };
 
 export const ALLOWED_FILTERS = [
   "Brand",
-  "Model",
-  "Engine Type",
-  "Blades Type",
-  "Carry Type",
-  "Material",
   "Working Width",
-  "Machine Weight",
+  "Blades Type",
+  "Number of Blades",
+  "Engine Power",
+  "Carry Type",
+  "Motor Power",
+  "Material",
 ];

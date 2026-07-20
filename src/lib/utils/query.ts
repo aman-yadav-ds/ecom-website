@@ -2,7 +2,7 @@ import queryString from 'query-string';
 
 export function updateQueryParams(currentQuery: Record<string, unknown>, newParams: Record<string, unknown>): string {
   const merged = { ...currentQuery, ...newParams };
-  return queryString.stringify(merged, { skipNull: true, skipEmptyString: true });
+  return queryString.stringify(merged, { skipNull: true, skipEmptyString: true, arrayFormat: 'none' });
 }
 
 export function removeQueryParam(currentQuery: Record<string, unknown>, key: string, valueToRemove?: string): string {
@@ -23,7 +23,7 @@ export function removeQueryParam(currentQuery: Record<string, unknown>, key: str
     delete query[key];
   }
   
-  return queryString.stringify(query, { skipNull: true, skipEmptyString: true });
+  return queryString.stringify(query, { skipNull: true, skipEmptyString: true, arrayFormat: 'none' });
 }
 
 export function parseQueryParams(search: string): Record<string, unknown> {
