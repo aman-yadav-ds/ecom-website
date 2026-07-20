@@ -11,7 +11,7 @@ export function AboutUsPreview() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/about_factory_1784013199832.png"
+          src="/images/about_factory_1784013199832.jpg"
           alt="KOREVA Manufacturing Vision"
           fill
           className="object-cover"

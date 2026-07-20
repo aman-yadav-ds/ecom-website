@@ -1,5 +1,6 @@
 import React from "react";
 import { ShieldCheck, Target, MapPin, Wrench } from "lucide-react";
+import { ScrollReveal } from "../ScrollReveal";
 
 const stats = [
   { 
@@ -30,15 +31,21 @@ export function StatsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 text-center">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center justify-center p-2 sm:p-4 hover:bg-white/5 rounded-lg transition-colors duration-300">
-              {stat.icon}
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-100 font-jost mb-1 sm:mb-2">
-                {stat.value}
-              </span>
-              <span className="text-[10px] sm:text-xs md:text-sm font-medium text-light-300 uppercase tracking-wider md:tracking-widest leading-tight md:leading-relaxed">
-                {stat.label}
-              </span>
-            </div>
+            <ScrollReveal 
+              key={index}
+              animation="slide-bottom" 
+              delay={index * 150}
+            >
+              <div className="flex flex-col items-center justify-center p-2 sm:p-4 hover:bg-white/5 rounded-lg transition-colors duration-300 h-full">
+                {stat.icon}
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-100 font-jost mb-1 sm:mb-2">
+                  {stat.value}
+                </span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-medium text-light-300 uppercase tracking-wider md:tracking-widest leading-tight md:leading-relaxed">
+                  {stat.label}
+                </span>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -10,12 +10,14 @@ import { useModalStore } from "@/store/useModalStore";
 type NavItem = {
   title: string;
   hasDropdown: boolean;
+  href?: string;
 };
 
 const navItems: NavItem[] = [
   { title: "Products", hasDropdown: true },
-  { title: "Advice and projects", hasDropdown: true },
-  { title: "Service and events", hasDropdown: true },
+  { title: "Resources", hasDropdown: true },
+  { title: "Service & Support", hasDropdown: true },
+  { title: "Company", hasDropdown: true },
 ];
 
 const ContactStrip = () => (
@@ -115,26 +117,30 @@ const Navbar = () => {
               <nav className="hidden md:flex items-stretch h-full">
                 {navItems.map((item, index) => (
                   <div key={item.title} className={`flex items-stretch border-light-300 ${index === 0 ? 'border-x' : 'border-r'}`}>
-                    <button
-                      className={`flex items-center justify-between px-6 text-[16px] font-bold hover:bg-light-200 transition-colors text-dark-900 ${activeDropdown === item.title ? "bg-light-200" : ""
-                        }`}
-                      onClick={() => toggleDropdown(item.title)}
-                    >
-                      <span>{item.title}</span>
-                      {item.hasDropdown && (
+                    {item.hasDropdown ? (
+                      <button
+                        className={`flex items-center justify-between px-6 text-[16px] font-bold hover:bg-light-200 transition-colors text-dark-900 ${activeDropdown === item.title ? "bg-light-200" : ""}`}
+                        onClick={() => toggleDropdown(item.title)}
+                      >
+                        <span>{item.title}</span>
                         <span className="ml-3 relative w-4 h-4 overflow-hidden">
                           {/* Animated Plus / Cross Icons */}
                           <Plus
-                            className={`absolute inset-0 w-4 h-4 text-dark-900 transition-all duration-300 ${activeDropdown === item.title ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"
-                              }`}
+                            className={`absolute inset-0 w-4 h-4 text-dark-900 transition-all duration-300 ${activeDropdown === item.title ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"}`}
                           />
                           <X
-                            className={`absolute inset-0 w-4 h-4 text-dark-900 transition-all duration-300 ${activeDropdown === item.title ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"
-                              }`}
+                            className={`absolute inset-0 w-4 h-4 text-dark-900 transition-all duration-300 ${activeDropdown === item.title ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"}`}
                           />
                         </span>
-                      )}
-                    </button>
+                      </button>
+                    ) : (
+                      <Link 
+                        href={item.href || "/"}
+                        className="flex items-center justify-between px-6 text-[16px] font-bold hover:bg-light-200 transition-colors text-dark-900"
+                      >
+                        <span>{item.title}</span>
+                      </Link>
+                    )}
                   </div>
                 ))}
               </nav>
@@ -248,14 +254,14 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Advice and Projects Dropdown - Animated */}
+            {/* Resources Dropdown - Animated */}
             <div
-              className={`absolute top-full left-0 w-full bg-light-100 border-b border-light-300 shadow-xl py-10 px-4 sm:px-6 lg:px-8 z-40 transform origin-top transition-all duration-300 ease-in-out ${activeDropdown === "Advice and projects"
+              className={`absolute top-full left-0 w-full bg-light-100 border-b border-light-300 shadow-xl py-10 px-4 sm:px-6 lg:px-8 z-40 transform origin-top transition-all duration-300 ease-in-out ${activeDropdown === "Resources"
                 ? "opacity-100 translate-y-0 visible"
                 : "opacity-0 -translate-y-4 invisible pointer-events-none"
                 }`}
             >
-              <div className="max-w-7xl mx-auto relative flex flex-col items-center justify-center min-h-[200px] text-dark-700">
+              <div className="max-w-7xl mx-auto relative flex flex-col items-start min-h-[150px] text-dark-700">
                 <button
                   onClick={() => setActiveDropdown(null)}
                   className="absolute -top-10 right-0 p-3 bg-brand-black text-light-100 hover:bg-brand-red transition-colors shadow-sm group"
@@ -263,19 +269,43 @@ const Navbar = () => {
                 >
                   <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
-                <h2 className="text-2xl font-bold mb-4">Advice and projects</h2>
-                <p className="text-lg">Detailed navigation for Advice and projects goes here.</p>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Knowledge Base</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/guides" className="block hover:text-brand-red transition-colors">Farming Guides</Link>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Updates</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/news" className="block hover:text-brand-red transition-colors">Latest News</Link>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Assets</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/downloads" className="block hover:text-brand-red transition-colors">Downloads & Brochures</Link>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Tools</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/compare" className="block hover:text-brand-red transition-colors">Compare Products</Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Service and Events Dropdown - Animated */}
+            {/* Service & Support Dropdown - Animated */}
             <div
-              className={`absolute top-full left-0 w-full bg-light-100 border-b border-light-300 shadow-xl py-10 px-4 sm:px-6 lg:px-8 z-40 transform origin-top transition-all duration-300 ease-in-out ${activeDropdown === "Service and events"
+              className={`absolute top-full left-0 w-full bg-light-100 border-b border-light-300 shadow-xl py-10 px-4 sm:px-6 lg:px-8 z-40 transform origin-top transition-all duration-300 ease-in-out ${activeDropdown === "Service & Support"
                 ? "opacity-100 translate-y-0 visible"
                 : "opacity-0 -translate-y-4 invisible pointer-events-none"
                 }`}
             >
-              <div className="max-w-7xl mx-auto relative flex flex-col items-start min-h-[200px] text-dark-700">
+              <div className="max-w-7xl mx-auto relative flex flex-col items-start min-h-[150px] text-dark-700">
                 <button
                   onClick={() => setActiveDropdown(null)}
                   className="absolute -top-10 right-0 p-3 bg-brand-black text-light-100 hover:bg-brand-red transition-colors shadow-sm group"
@@ -283,32 +313,65 @@ const Navbar = () => {
                 >
                   <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2 pb-8 border-b border-light-300">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900">FAQs and Help</h3>
-                    <div className="mt-3 space-y-2 text-sm text-dark-700">
-                      <Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">
-                        Contact KOREVA9
-                      </Link>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">After-Sales</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/spare-parts" className="block hover:text-brand-red transition-colors">Spare Parts</Link>
+                      <Link href="/warranty" className="block hover:text-brand-red transition-colors">Warranty Info</Link>
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900">Dealer Network</h3>
-                    <div className="mt-3 space-y-2 text-sm text-dark-700">
-                      <Link href="/dealers" className="block hover:text-brand-red transition-colors">
-                        Find a Dealer
-                      </Link>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Help</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/faq" className="block hover:text-brand-red transition-colors">FAQs</Link>
+                      <Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Contact Us</Link>
                     </div>
                   </div>
-                </div>
-
-                <div className="pt-6 w-full">
-                  <Link href="/about" className="text-[16px] font-bold text-dark-900 hover:text-brand-red flex items-center transition-colors">
-                    About Us <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Network</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/dealers" className="block hover:text-brand-red transition-colors">Find a Dealer</Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Company Dropdown - Animated */}
+            <div
+              className={`absolute top-full left-0 w-full bg-light-100 border-b border-light-300 shadow-xl py-10 px-4 sm:px-6 lg:px-8 z-40 transform origin-top transition-all duration-300 ease-in-out ${activeDropdown === "Company"
+                ? "opacity-100 translate-y-0 visible"
+                : "opacity-0 -translate-y-4 invisible pointer-events-none"
+                }`}
+            >
+              <div className="max-w-7xl mx-auto relative flex flex-col items-start min-h-[150px] text-dark-700">
+                <button
+                  onClick={() => setActiveDropdown(null)}
+                  className="absolute -top-10 right-0 p-3 bg-brand-black text-light-100 hover:bg-brand-red transition-colors shadow-sm group"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+                </button>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Who We Are</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/about" className="block hover:text-brand-red transition-colors">About Us</Link>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Legal</h3>
+                    <div className="mt-4 space-y-3 text-sm text-dark-700">
+                      <Link href="/legal-notice" className="block hover:text-brand-red transition-colors">Legal Notice</Link>
+                      <Link href="/privacy-policy" className="block hover:text-brand-red transition-colors">Privacy Policy</Link>
+                      <Link href="/cookies" className="block hover:text-brand-red transition-colors">Cookies</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -318,79 +381,95 @@ const Navbar = () => {
           <div className="px-4 py-4 space-y-2 shadow-xl bg-light-100">
             {navItems.map((item) => (
               <div key={item.title} className="border-b border-light-300 last:border-0 pb-2">
-                <button
-                  className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none"
-                  onClick={() => toggleDropdown(item.title)}
-                >
-                  <span>{item.title}</span>
-                  {item.hasDropdown && (
-                    <span className="p-1 relative w-6 h-6">
-                      <Plus className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${activeDropdown === item.title ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"
-                        }`} />
-                      <X className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${activeDropdown === item.title ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"
-                        }`} />
-                    </span>
-                  )}
-                </button>
-
-                {/* Mobile Animated Dropdown Content */}
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.title ? "max-h-[1000px] opacity-100 mb-2 mt-1" : "max-h-0 opacity-0 mb-0 mt-0"
-                  }`}>
-                  <div className="pl-4 py-2 text-sm text-dark-700 space-y-3 border-l-2 border-brand-red bg-light-200/50 rounded-r-md">
-                    {item.title === "Products" ? (
-                      <div className="py-2 pr-2 space-y-4">
-                        <div>
-                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Tractor Attachments</h4>
-                          <ul className="space-y-1.5 text-xs">
-                            <li><Link href="/products?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
-                            <li><Link href="/products?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Self Propelled Machinery</h4>
-                          <ul className="space-y-1.5 text-xs">
-                            <li><Link href="/products?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
-                            <li><Link href="/products?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
-                            <li><Link href="/products?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Food Processing</h4>
-                          <ul className="space-y-1.5 text-xs">
-                            <li><Link href="/products?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
-                            <li><Link href="/products?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Other Categories</h4>
-                          <ul className="space-y-1.5 text-xs">
-                            <li><Link href="/products?category=Hand+Tools" className="text-dark-900 hover:text-brand-red">Hand Tools</Link></li>
-                            <li><Link href="/products?category=Lubricants" className="text-dark-900 hover:text-brand-red">Lubricants</Link></li>
-                          </ul>
-                        </div>
-                        <div className="pt-2 border-t border-brand-red/20">
-                          <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red flex items-center">
-                            All products <ArrowRight className="w-4 h-4 ml-1" />
-                          </Link>
-                        </div>
+                {item.hasDropdown ? (
+                  <>
+                    <button
+                      className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none"
+                      onClick={() => toggleDropdown(item.title)}
+                    >
+                      <span>{item.title}</span>
+                      <span className="p-1 relative w-6 h-6">
+                        <Plus className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${activeDropdown === item.title ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"}`} />
+                        <X className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${activeDropdown === item.title ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"}`} />
+                      </span>
+                    </button>
+                    {/* Mobile Animated Dropdown Content */}
+                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.title ? "max-h-[1000px] opacity-100 mb-2 mt-1" : "max-h-0 opacity-0 mb-0 mt-0"}`}>
+                      <div className="pl-4 py-2 text-sm text-dark-700 space-y-3 border-l-2 border-brand-red bg-light-200/50 rounded-r-md">
+                        {item.title === "Products" && (
+                          <div className="py-2 pr-2 space-y-4">
+                            <div>
+                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Tractor Attachments</h4>
+                              <ul className="space-y-1.5 text-xs">
+                                <li><Link href="/products?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
+                                <li><Link href="/products?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Self Propelled Machinery</h4>
+                              <ul className="space-y-1.5 text-xs">
+                                <li><Link href="/products?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
+                                <li><Link href="/products?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
+                                <li><Link href="/products?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Food Processing</h4>
+                              <ul className="space-y-1.5 text-xs">
+                                <li><Link href="/products?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
+                                <li><Link href="/products?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Other Categories</h4>
+                              <ul className="space-y-1.5 text-xs">
+                                <li><Link href="/products?category=Hand+Tools" className="text-dark-900 hover:text-brand-red">Hand Tools</Link></li>
+                                <li><Link href="/products?category=Lubricants" className="text-dark-900 hover:text-brand-red">Lubricants</Link></li>
+                              </ul>
+                            </div>
+                            <div className="pt-2 border-t border-brand-red/20">
+                              <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red flex items-center">
+                                All products <ArrowRight className="w-4 h-4 ml-1" />
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                        {item.title === "Resources" && (
+                          <div className="py-2 pr-2 space-y-2">
+                            <Link href="/guides" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Farming Guides</Link>
+                            <Link href="/news" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Latest News</Link>
+                            <Link href="/downloads" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Downloads & Brochures</Link>
+                            <Link href="/compare" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Compare Products</Link>
+                          </div>
+                        )}
+                        {item.title === "Service & Support" && (
+                          <div className="py-2 pr-2 space-y-2">
+                            <Link href="/spare-parts" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Spare Parts</Link>
+                            <Link href="/warranty" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Warranty Info</Link>
+                            <Link href="/faq" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">FAQs</Link>
+                            <Link href="/services-events/contact-us" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Contact Us</Link>
+                            <Link href="/dealers" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Find a Dealer</Link>
+                          </div>
+                        )}
+                        {item.title === "Company" && (
+                          <div className="py-2 pr-2 space-y-2">
+                            <Link href="/about" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">About Us</Link>
+                            <Link href="/legal-notice" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Legal Notice</Link>
+                            <Link href="/privacy-policy" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Privacy Policy</Link>
+                            <Link href="/cookies" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Cookies</Link>
+                          </div>
+                        )}
                       </div>
-                    ) : item.title === "Service and events" ? (
-                      <div className="py-2 pr-2 space-y-2">
-                        <Link href="/services-events/contact-us" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
-                          Contact KOREVA9
-                        </Link>
-                        <Link href="/dealers" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">
-                          Find a Dealer
-                        </Link>
-                        <Link href="/about" className="font-bold text-dark-900 hover:text-brand-red transition-colors block mt-4 pt-2 border-t border-brand-red/20">
-                          About Us
-                        </Link>
-                      </div>
-                    ) : (
-                      <p className="py-2 pr-2">Mega menu contents for {item.title}</p>
-                    )}
-                  </div>
-                </div>
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={item.href || "/"}
+                    className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none"
+                  >
+                    <span>{item.title}</span>
+                  </Link>
+                )}
               </div>
             ))}
             <div className="pt-6 pb-4">

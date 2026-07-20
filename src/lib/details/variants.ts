@@ -6,7 +6,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-raino-disc",
     name: "KO-RAINO",
     productId: "ko-harrow-raino",
-    images: ["/products/harrow.jpeg"],
+    images: ["/products/harrrow.webp"],
     price: "85000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -30,7 +30,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-kobra-6ft",
     name: "KOS-KOBRA 6 FT",
     productId: "ko-rotavator",
-    images: ["/products/rotavator.jpg"],
+    images: ["/products/rotavator.png"],
     price: "115000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -51,7 +51,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-chitah-7ft",
     name: "KOP-CHITAH 7 FT",
     productId: "ko-rotavator",
-    images: ["/products/rotavator.jpg"],
+    images: ["/products/rotavator.png"],
     price: "125000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -73,7 +73,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-1080",
     name: "KO-1080 DHURANDHAR",
     productId: "ko-weeeder-dhurandhar",
-    images: ["/products/power-weeder.jpeg"],
+    images: ["/products/power-weeder-dhurandhar.webp"],
     price: "45000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -99,7 +99,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-1110",
     name: "KO-1110 VIJAY",
     productId: "ko-weeder-vijay",
-    images: ["/products/power-weeder2.jpeg"],
+    images: ["/products/power-weeder-vijay.webp"],
     price: "48000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -126,7 +126,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-1260",
     name: "KO-1260 KHET SHAKTI",
     productId: "ko-pr-khetshakti",
-    images: ["/products/power-weeder2.jpeg"],
+    images: ["/products/power-weeder-vijay.webp"],
     price: "120000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -150,7 +150,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-bc-jpro-sp",
     name: "KO-1350 JUGLE PRO (Side Pack)",
     productId: "ko-bc-jpro",
-    images: ["/products/brushcutter.jpeg"],
+    images: ["/products/brushcutter.webp"],
     price: "15000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -174,7 +174,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-bc-jpro-bp",
     name: "KO-1350 BP JUNGLE PRO (Back Pack)",
     productId: "ko-bc-jpro",
-    images: ["/products/brushcutter.jpeg"],
+    images: ["/products/brushcutter.webp"],
     price: "16000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -199,7 +199,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-pulv-1170",
     name: "KO-1170 GRAH LAXMI",
     productId: "ko-pulveriser",
-    images: ["/products/pulveriser.jpeg"],
+    images: ["/products/Pulverizer.webp"],
     price: "25000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -219,7 +219,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-ricemill-1080",
     name: "KO-1080 DHAN LAXMI",
     productId: "ko-ricemill",
-    images: ["/products/mini-rice-mill.jpeg"],
+    images: ["/products/mini-rice-mill.png"],
     price: "35000.00",
     applicableGst: "5",
     technicalDetails: {
