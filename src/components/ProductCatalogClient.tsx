@@ -10,7 +10,7 @@ import { parseQueryParams } from "@/lib/utils/query";
 import { Filter as FilterIcon } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 
-import { ALLOWED_FILTERS } from "@/lib/filter";
+import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 
 export interface ProductListingItem {
   id: string;
@@ -36,12 +36,21 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
   // Dynamically extract all available filters from technicalDetails
   const availableFilters = useMemo(() => {
     const filters: Record<string, Set<string>> = {};
+    const activeCategoryParam = searchParams.get('category');
+    
+    // Determine allowed keys based on category
+    const allowedKeys = (activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam])
+      ? CATEGORY_FILTERS[activeCategoryParam]
+      : ALLOWED_FILTERS;
     
     initialProducts.forEach(product => {
+      // If a category is selected, only process products from that category to generate filters
+      if (activeCategoryParam && product.categoryName !== activeCategoryParam) return;
+
       Object.entries(product.technicalDetails).forEach(([key, value]) => {
         if (!value) return;
         // Only include keys that are in the allowed filters list
-        if (!ALLOWED_FILTERS.includes(key)) return;
+        if (!allowedKeys.includes(key)) return;
         
         if (!filters[key]) {
           filters[key] = new Set();
@@ -57,7 +66,7 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
     });
     
     return result;
-  }, [initialProducts]);
+  }, [initialProducts, searchParams]);
 
   // Client-side filtering and sorting engine
   const filteredAndSortedProducts = useMemo(() => {
@@ -118,11 +127,37 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
 
   const router = useRouter();
   const searchString = searchParams.get('search') || '';
+  const activeCategory = searchParams.get('category') || 'All';
+
+  const categories = [
+    "All",
+    "Tractor Attachments",
+    "Self Propelled Machinery",
+    "Food Processing Units",
+    "Hand Tools",
+    "Lubricants"
+  ];
+
+  const handleCategoryClick = (cat: string) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (cat === "All") {
+      newParams.delete('category');
+    } else {
+      newParams.set('category', cat);
+    }
+    // Clear technical filters when switching categories
+    Array.from(newParams.keys()).forEach(key => {
+      if (key !== 'search' && key !== 'sort' && key !== 'category') {
+        newParams.delete(key);
+      }
+    });
+    router.push(`/products?${newParams.toString()}`);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Top Bar: Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           {searchString ? (
             <div className="flex flex-col items-start">
@@ -150,6 +185,26 @@ export default function ProductCatalogClient({ initialProducts }: ProductCatalog
             </>
           )}
         </div>
+      </div>
+
+      {/* Category Tabs */}
+      <div className="mb-8 border-b border-light-300">
+        <ul className="flex flex-nowrap overflow-x-auto gap-6 hide-scrollbar pb-2">
+          {categories.map((cat) => (
+            <li key={cat} className="flex-shrink-0">
+              <button
+                onClick={() => handleCategoryClick(cat)}
+                className={`pb-2 px-1 text-sm md:text-base font-medium whitespace-nowrap transition-all duration-300 border-b-2 ${
+                  activeCategory === cat
+                    ? "border-brand-red text-brand-red"
+                    : "border-transparent text-dark-700 hover:text-brand-red hover:border-brand-red/30"
+                }`}
+              >
+                {cat}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Main Content Area */}

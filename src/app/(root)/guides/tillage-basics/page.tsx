@@ -8,7 +8,7 @@ export default function TillageBasicsGuide() {
       category="Farming Advice"
       date="June 22, 2026"
       author="Dr. Anand Sharma, Agronomist"
-      heroImage="//."
+      heroImage="/guides/tillage-farming.jpg"
     >
       <p>
         Tillage is the agricultural preparation of soil by mechanical agitation of various types, such as digging, stirring, and overturning. For thousands of years, humans have manipulated the earth to create a hospitable environment for seeds to germinate. 

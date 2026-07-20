@@ -18,7 +18,7 @@ const guides: GuideCard[] = [
     category: "Machine Care",
     excerpt: "Learn why the new 20% Ethanol blend (E20) can choke your petrol power weeder and the exact steps to store your machine safely.",
     icon: Wrench,
-    image: "/placeholder.png",
+    image: "/guides/e20_hero.jpg",
     href: "/guides/e20-petrol"
   },
   {
@@ -26,7 +26,7 @@ const guides: GuideCard[] = [
     category: "Buying Guide",
     excerpt: "Harrow vs. Rotavator: A comprehensive guide on which attachment is best suited for your specific soil type and crop requirements.",
     icon: BookOpen,
-    image: "/placeholder.png",
+    image: "/guides/tractor_attachment_hero.jpg",
     href: "/guides/tractor-attachments"
   },
   {
@@ -34,7 +34,7 @@ const guides: GuideCard[] = [
     category: "Farming Tips",
     excerpt: "Maximize your yield by mastering the basics of soil preparation and secondary tillage using KOREVA9 equipment.",
     icon: Sprout,
-    image: "/placeholder.png",
+    image: "/guides/tillage_basics_hero.jpg",
     href: "/guides/tillage-basics"
   },
   {
@@ -42,7 +42,7 @@ const guides: GuideCard[] = [
     category: "Machine Care",
     excerpt: "Don't just park your machinery. Follow this 10-step checklist to ensure your equipment is ready for the next season.",
     icon: Wrench,
-    image: "/placeholder.png",
+    image: "/guides/maintenance_hero.jpg",
     href: "/guides/maintenance-checklist"
   }
 ];

@@ -9,7 +9,7 @@ export default function MaintenanceChecklistGuide() {
       category="Maintenance"
       date="May 30, 2026"
       author="KOREVA Service Division"
-      heroImage="//."
+      heroImage="/guides/maintenance.jpg"
     >
       <p>
         The harvest is in, the fields are resting, and the season is officially over. However, simply parking your heavy machinery in a shed and walking away is a guaranteed recipe for expensive repairs next spring.

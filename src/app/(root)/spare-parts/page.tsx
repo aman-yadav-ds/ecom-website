@@ -12,7 +12,7 @@ export default function SparePartsPage() {
         <div className="flex flex-col md:flex-row bg-white border border-light-300 shadow-sm overflow-hidden mb-16">
           <div className="w-full md:w-1/2 relative min-h-[350px]">
             <Image 
-              src="//." 
+              src="/media/spare_parts.jpg" 
               alt="KOREVA9 Spare Parts Inventory"
               fill
               className="object-cover"

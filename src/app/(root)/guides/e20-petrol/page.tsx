@@ -8,7 +8,7 @@ export default function E20PetrolGuide() {
       category="Machine Care"
       date="July 10, 2026"
       author="KOREVA Engineering Team"
-      heroImage="//."
+      heroImage="/guides/carburetor.jpg"
     >
       <p>
         The introduction of E20 petrol (a blend of 20% ethanol and 80% petrol) across fuel stations represents a significant step forward for the environment. However, for small agricultural engines—specifically power weeders and brush cutters—it introduces a critical maintenance challenge: <strong>carburetor corrosion and clogging.</strong>

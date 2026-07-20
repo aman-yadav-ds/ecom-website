@@ -23,7 +23,7 @@ const newsItems: NewsItem[] = [
     date: "July 12, 2026",
     author: "KOREVA PR",
     category: "Network Expansion",
-    image: "//."
+    image: "/media/news_dealership.jpg"
   },
   {
     id: "2",

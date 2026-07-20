@@ -8,7 +8,7 @@ export default function TractorAttachmentsGuide() {
       category="Buying Guide"
       date="July 05, 2026"
       author="Agricultural Advisory Team"
-      heroImage="//."
+      heroImage="/guides/tractor-attachment.jpg"
     >
       <p>
         Investing in a KOREVA9 tractor is only the first step toward maximizing your farm's productivity. The true power of your machinery is unlocked by selecting the correct implements for your specific soil type, crop requirements, and field conditions. 
