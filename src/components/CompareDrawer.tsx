@@ -6,6 +6,7 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
 import { exampleProducts, exampleVariants } from "@/lib/details";
+import { buildQueryString } from "@/lib/utils/query";
 
 const CompareDrawer = () => {
   const { selectedProductIds, removeProduct, clearAll } = useCompareStore();
@@ -34,10 +35,9 @@ const CompareDrawer = () => {
     };
   }).filter(Boolean) as { id: string; name: string; image: string }[];
 
-  const queryParams = new URLSearchParams();
-  if (selectedProductIds.length > 0) {
-    queryParams.set("ids", selectedProductIds.join(","));
-  }
+  const queryStringResult = selectedProductIds.length > 0
+    ? buildQueryString({ ids: selectedProductIds.join(",") })
+    : "";
 
   return (
     <div
@@ -76,10 +76,10 @@ const CompareDrawer = () => {
                       </div>
                       <button
                         onClick={() => removeProduct(product.id)}
-                        className="absolute -top-2 -right-2 bg-white border border-gray-300 text-gray-500 hover:text-brand-red hover:border-brand-red rounded-full p-1 shadow-sm transition-colors"
-                        aria-label="Remove item"
+                        className="absolute -top-3 -right-3 w-8 h-8 min-w-[32px] min-h-[32px] bg-white border border-gray-300 text-gray-700 hover:text-brand-red hover:border-brand-red rounded-full flex items-center justify-center shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                        aria-label="Remove product from comparison"
                       >
-                        <X className="w-3 h-3 md:w-4 md:h-4" />
+                        <X className="w-4 h-4" />
                       </button>
                     </>
                   ) : (
@@ -93,18 +93,18 @@ const CompareDrawer = () => {
           </div>
 
           {/* Actions Area */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto shrink-0">
             <button
               onClick={clearAll}
-              className="text-sm font-medium text-gray-500 hover:text-dark-900 transition-colors"
+              className="text-xs sm:text-sm font-bold text-gray-600 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs min-h-[44px] px-3 py-2"
             >
-              Remove all and close
+              Clear All
             </button>
             <Link
-              href={`/compare?${queryParams.toString()}`}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold shadow-md transition-colors w-full sm:w-auto text-center"
+              href={`/compare${queryStringResult ? `?${queryStringResult}` : ""}`}
+              className="bg-brand-red hover:bg-brand-red-accent text-white px-8 py-3 rounded-lg font-bold shadow-md transition-colors w-full sm:w-auto text-center flex items-center justify-center min-h-[44px] uppercase text-sm tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
             >
-              Compare ({selectedProductIds.length})
+              Compare Products ({selectedProductIds.length})
             </Link>
           </div>
 
@@ -115,3 +115,4 @@ const CompareDrawer = () => {
 };
 
 export default CompareDrawer;
+

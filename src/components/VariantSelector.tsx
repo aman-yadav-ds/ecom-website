@@ -35,7 +35,7 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({
               aria-selected={isActive}
               tabIndex={isActive ? 0 : -1}
               onClick={() => onVariantChange(variant.id)}
-              className={`px-5 py-2.5 rounded-sm text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-1 border ${
+              className={`min-h-[44px] px-5 py-2.5 rounded-sm text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-1 border flex items-center justify-center ${
                 isActive
                   ? "bg-brand-black text-light-100 border-brand-black shadow-md"
                   : "bg-light-100 text-dark-900 border-light-300 hover:border-brand-red hover:text-brand-red"

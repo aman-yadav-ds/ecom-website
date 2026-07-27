@@ -3,6 +3,10 @@ export interface Category {
   name: string;
   slug: string;
   parentId: string | null;
+  description?: string;
+  tagline?: string;
+  badge?: string;
+  highlights?: string[];
 }
 
 export interface Product {

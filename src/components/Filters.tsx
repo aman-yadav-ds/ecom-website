@@ -97,7 +97,7 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
               <FilterIcon className="w-5 h-5" />
               <h2 className="text-lg font-semibold">Filters</h2>
               {activeFilterCount > 0 && (
-                <span className="flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
+                <span className="flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-brand-red rounded-full">
                   {activeFilterCount}
                 </span>
               )}
@@ -107,7 +107,7 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
               {activeFilterCount > 0 && (
                 <button 
                   onClick={handleClearAll}
-                  className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                  className="text-sm text-brand-red hover:text-brand-red-accent font-bold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs"
                 >
                   Clear
                 </button>
@@ -131,41 +131,38 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
             {filterKeys.map((group) => (
               <div key={group} className="border-b border-gray-100 pb-4 last:border-0">
                 <button
-                  className="flex items-center justify-between w-full text-left"
+                  className="flex items-center justify-between w-full text-left min-h-[44px] py-2 px-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
                   onClick={() => toggleGroup(group)}
                   aria-expanded={expandedGroups[group]}
                 >
-                  <h3 className="text-sm font-medium text-gray-900 capitalize">
+                  <h3 className="text-sm font-bold text-gray-900 capitalize">
                     {group.replace(/([A-Z])/g, ' $1').trim()}
                   </h3>
                   {expandedGroups[group] ? (
-                    <ChevronUp className="w-4 h-4 text-gray-500" />
+                    <ChevronUp className="w-4 h-4 text-brand-red" />
                   ) : (
                     <ChevronDown className="w-4 h-4 text-gray-500" />
                   )}
                 </button>
                 
                 {expandedGroups[group] && (
-                  <div className="mt-3 space-y-2">
+                  <div className="mt-1 space-y-1">
                     {availableFilters[group].map((value) => {
                       const checked = isSelected(group, value);
                       const id = `filter-${group}-${value}`;
                       return (
-                        <div key={value} className="flex items-center">
+                        <label key={value} htmlFor={id} className="flex items-center min-h-[44px] py-1.5 px-1 rounded-xs cursor-pointer select-none hover:bg-light-200 transition-colors">
                           <input
                             id={id}
                             type="checkbox"
                             checked={checked}
                             onChange={(e) => handleCheckboxChange(group, value, e.target.checked)}
-                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
+                            className="w-4 h-4 text-brand-red border-gray-300 rounded focus:ring-brand-red focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer shrink-0"
                           />
-                          <label
-                            htmlFor={id}
-                            className="ml-3 text-sm text-gray-600 cursor-pointer select-none"
-                          >
+                          <span className="ml-3 text-sm text-gray-700 font-medium hover:text-brand-red transition-colors">
                             {value}
-                          </label>
-                        </div>
+                          </span>
+                        </label>
                       );
                     })}
                   </div>

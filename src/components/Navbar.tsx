@@ -28,22 +28,23 @@ const ContactStrip = () => (
 
 const UtilityStrip = ({ onSearchClick }: { onSearchClick: () => void }) => (
   <div className="w-full bg-light-200 border-b border-light-300 sticky top-0 z-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 text-sm text-dark-900 font-medium">
-      <Link href="/dealers" className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors">
-        <MapPin className="w-4 h-4" />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-sm text-dark-900 font-medium">
+      <Link href="/dealers" className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors min-h-[44px] py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red">
+        <MapPin className="w-4 h-4 text-brand-red" />
         <span>Find a Dealer</span>
       </Link>
-      <div className="flex items-center space-x-8">
-        <Link href="/services-events/contact-us" className="flex items-center cursor-pointer hover:text-brand-red transition-colors">
+      <div className="flex items-center space-x-4 sm:space-x-8">
+        <Link href="/services-events/contact-us" aria-label="Contact Us" className="flex items-center cursor-pointer hover:text-brand-red transition-colors min-h-[44px] min-w-[44px] justify-center py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red">
           <Mail className="w-4 h-4" />
         </Link>
-        <div
-          className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors"
+        <button
+          type="button"
+          className="flex items-center space-x-2 cursor-pointer hover:text-brand-red transition-colors min-h-[44px] py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red bg-transparent border-0"
           onClick={onSearchClick}
         >
           <Search className="w-4 h-4" />
           <span>Product search</span>
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -162,7 +163,8 @@ const Navbar = () => {
               <div className="flex items-center md:hidden">
                 <button
                   type="button"
-                  className="p-2 rounded-md text-dark-900 hover:bg-light-200 focus:outline-none relative w-10 h-10 overflow-hidden"
+                  aria-label="Toggle mobile navigation menu"
+                  className="p-2 rounded-md text-dark-900 hover:bg-light-200 focus:outline-none relative w-11 h-11 min-w-[44px] min-h-[44px] overflow-hidden flex items-center justify-center"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   <Plus className={`absolute inset-0 m-auto w-6 h-6 transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"
@@ -197,9 +199,9 @@ const Navbar = () => {
                   <div>
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Tractor Attachments</h3>
                     <ul className="space-y-3 text-[15px] text-dark-700">
-                      <li><Link href="/products?category=Tractor+Attachments" className="hover:text-brand-red transition-colors font-medium">All Tractor Attachments &gt;</Link></li>
-                      <li><Link href="/products?search=Harrow" className="hover:text-brand-red transition-colors">Harrow</Link></li>
-                      <li><Link href="/products?search=Rotavator" className="hover:text-brand-red transition-colors">Rotavator</Link></li>
+                      <li><Link href="/products/tractor-attachments" className="hover:text-brand-red transition-colors font-bold text-brand-red flex items-center">All Tractor Attachments &gt;</Link></li>
+                      <li><Link href="/products/tractor-attachments?search=Harrow" className="hover:text-brand-red transition-colors">Harrow</Link></li>
+                      <li><Link href="/products/tractor-attachments?search=Rotavator" className="hover:text-brand-red transition-colors">Rotavator</Link></li>
                     </ul>
                   </div>
 
@@ -207,41 +209,40 @@ const Navbar = () => {
                   <div>
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Self Propelled Machinery</h3>
                     <ul className="space-y-3 text-[15px] text-dark-700">
-                      <li><Link href="/products?category=Self+Propelled+Machinery" className="hover:text-brand-red transition-colors font-medium">All Self Propelled Machinery &gt;</Link></li>
-                      <li><Link href="/products?search=Power+Weeder" className="hover:text-brand-red transition-colors">Power Weeder</Link></li>
-                      <li><Link href="/products?search=Power+Reaper" className="hover:text-brand-red transition-colors">Power Reaper</Link></li>
-                      <li><Link href="/products?search=Brush+Cutter" className="hover:text-brand-red transition-colors">Brush Cutter</Link></li>
+                      <li><Link href="/products/self-propelled-machinery" className="hover:text-brand-red transition-colors font-bold text-brand-red flex items-center">All Self Propelled &gt;</Link></li>
+                      <li><Link href="/products/self-propelled-machinery?search=Power+Weeder" className="hover:text-brand-red transition-colors">Power Weeder</Link></li>
+                      <li><Link href="/products/self-propelled-machinery?search=Power+Reaper" className="hover:text-brand-red transition-colors">Power Reaper</Link></li>
+                      <li><Link href="/products/self-propelled-machinery?search=Brush+Cutter" className="hover:text-brand-red transition-colors">Brush Cutter</Link></li>
                     </ul>
                   </div>
 
                   {/* Column 3 */}
                   <div>
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Food Processing Units</h3>
-                    <ul className="space-y-3 text-[15px] text-dark-700 mb-8">
-                      <li><Link href="/products?category=Food+Processing+Units" className="hover:text-brand-red transition-colors font-medium">All Food Processing Units &gt;</Link></li>
-                      <li><Link href="/products?search=Pulveriser" className="hover:text-brand-red transition-colors">Pulveriser</Link></li>
-                      <li><Link href="/products?search=MINI+Rice+Mill" className="hover:text-brand-red transition-colors">MINI Rice Mill</Link></li>
+                    <ul className="space-y-3 text-[15px] text-dark-700 mb-6">
+                      <li><Link href="/products/food-processing-units" className="hover:text-brand-red transition-colors font-bold text-brand-red flex items-center">All Food Processing &gt;</Link></li>
+                      <li><Link href="/products/food-processing-units?search=Pulveriser" className="hover:text-brand-red transition-colors">Pulveriser</Link></li>
+                      <li><Link href="/products/food-processing-units?search=MINI+Rice+Mill" className="hover:text-brand-red transition-colors">MINI Rice Mill</Link></li>
                     </ul>
 
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Lubricants</h3>
                     <ul className="space-y-3 text-[15px] text-dark-700">
-                      <li><Link href="/products?category=Lubricants" className="hover:text-brand-red transition-colors font-medium">All Lubricants &gt;</Link></li>
+                      <li><Link href="/products/lubricants" className="hover:text-brand-red transition-colors font-bold text-brand-red flex items-center">All Lubricants &gt;</Link></li>
                     </ul>
                   </div>
 
                   {/* Column 4 */}
                   <div>
                     <Link href="/products" className="text-[15px] font-bold text-dark-900 hover:text-brand-red flex items-center mb-4 transition-colors tracking-wide uppercase">
-                      Promotions and new arrivals &gt;
+                      Promotions & Arrivals &gt;
                     </Link>
-                    <ul className="space-y-3 text-[15px] text-dark-700 mb-8">
-                      <li><Link href="/products?sort=featured" className="hover:text-brand-red transition-colors">Current bestsellers</Link></li>
-                      <li><Link href="/products?sort=new" className="hover:text-brand-red transition-colors">New products</Link></li>
+                    <ul className="space-y-3 text-[15px] text-dark-700 mb-6">
+                      <li><Link href="/products?sort=price_desc" className="hover:text-brand-red transition-colors">High Capacity Fleet</Link></li>
                     </ul>
 
                     <h3 className="text-[15px] font-bold text-dark-900 mb-4 tracking-wide uppercase">Hand Tools</h3>
                     <ul className="space-y-3 text-[15px] text-dark-700">
-                      <li><Link href="/products?category=Hand+Tools" className="hover:text-brand-red transition-colors font-medium">All Hand Tools &gt;</Link></li>
+                      <li><Link href="/products/hand-tools" className="hover:text-brand-red transition-colors font-bold text-brand-red flex items-center">All Hand Tools &gt;</Link></li>
                     </ul>
                   </div>
                 </div>
@@ -399,32 +400,32 @@ const Navbar = () => {
                         {item.title === "Products" && (
                           <div className="py-2 pr-2 space-y-4">
                             <div>
-                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Tractor Attachments</h4>
+                              <Link href="/products/tractor-attachments" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Tractor Attachments &gt;</Link>
                               <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
-                                <li><Link href="/products?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
+                                <li><Link href="/products/tractor-attachments?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
+                                <li><Link href="/products/tractor-attachments?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Self Propelled Machinery</h4>
+                              <Link href="/products/self-propelled-machinery" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Self Propelled Machinery &gt;</Link>
                               <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
-                                <li><Link href="/products?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
-                                <li><Link href="/products?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
+                                <li><Link href="/products/self-propelled-machinery?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
+                                <li><Link href="/products/self-propelled-machinery?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
+                                <li><Link href="/products/self-propelled-machinery?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Food Processing</h4>
+                              <Link href="/products/food-processing-units" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Food Processing &gt;</Link>
                               <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
-                                <li><Link href="/products?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
+                                <li><Link href="/products/food-processing-units?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
+                                <li><Link href="/products/food-processing-units?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Other Categories</h4>
+                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Supplies & Tools</h4>
                               <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products?category=Hand+Tools" className="text-dark-900 hover:text-brand-red">Hand Tools</Link></li>
-                                <li><Link href="/products?category=Lubricants" className="text-dark-900 hover:text-brand-red">Lubricants</Link></li>
+                                <li><Link href="/products/hand-tools" className="text-dark-900 hover:text-brand-red font-medium">Hand Tools &gt;</Link></li>
+                                <li><Link href="/products/lubricants" className="text-dark-900 hover:text-brand-red font-medium">Lubricants &gt;</Link></li>
                               </ul>
                             </div>
                             <div className="pt-2 border-t border-brand-red/20">

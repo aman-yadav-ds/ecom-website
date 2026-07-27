@@ -12,7 +12,7 @@ import { useModalStore } from '@/store/useModalStore';
 // Dynamically import DealerMap with SSR disabled
 const DealerMap = dynamic(() => import('./DealerMap'), {
   ssr: false,
-  loading: () => <div className="w-full h-[600px] bg-gray-100 animate-pulse flex items-center justify-center font-jost text-gray-400 uppercase tracking-wider">Loading Map Interface...</div>
+  loading: () => <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] bg-gray-100 animate-pulse flex items-center justify-center font-jost text-gray-400 uppercase tracking-wider text-xs sm:text-sm">Loading Map Interface...</div>
 });
 
 // Haversine formula to calculate distance between two coordinates in km
@@ -145,7 +145,7 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
             </button>
           </div>
         ) : activeView === 'map' ? (
-          <div className="w-full h-[600px] border border-gray-200 relative z-0 bg-gray-100 mt-4">
+          <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] border border-gray-200 relative z-0 bg-gray-100 mt-4 rounded-sm overflow-hidden">
              <DealerMap 
               dealers={filteredDealers} 
               center={currentCenter}

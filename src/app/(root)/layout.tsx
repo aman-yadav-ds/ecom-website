@@ -13,7 +13,7 @@ export default function AppLayout({
   return (
     <div className="flex flex-col min-h-screen bg-light-100">
       <Navbar />
-      <Breadcrumb />
+      {/* <Breadcrumb /> */}
       {children}
       <CompareDrawer />
       <JoinNetworkModal />

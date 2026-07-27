@@ -18,7 +18,7 @@ const Footer = () => {
                 height={24}
                 width={300}
                 className="object-contain invert mix-blend-screen"
-                style={{ height: "auto" }}
+                style={{ height: "auto", width: "auto" }}
               />
             </Link>
           </div>

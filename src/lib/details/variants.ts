@@ -233,5 +233,166 @@ export const exampleVariants: Variant[] = [
       "Machine Weight": "60 Kg",
       "Material": "SS or MS"
     }
+  },
+  // STOU Lubricants
+  {
+    id: "ko-stou-5l",
+    name: "KOREVA STOU 15W-40 (5L Can)",
+    productId: "ko-stou-15w40",
+    images: ["/products/power-weeder-dhurandhar.webp"],
+    price: "2450.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Viscosity Grade": "15W-40",
+      "API Rating": "API CJ-4 / GL-4",
+      "Container Volume": "5 Litre Can",
+      "Application": "Engine, Transmission, Hydraulics & Wet Brakes",
+      "Base Oil": "Premium Semi-Synthetic",
+      "Pour Point": "-33°C",
+      "Flash Point": "228°C"
+    }
+  },
+  {
+    id: "ko-stou-20l",
+    name: "KOREVA STOU 15W-40 (20L Bucket)",
+    productId: "ko-stou-15w40",
+    images: ["/products/power-weeder-dhurandhar.webp"],
+    price: "8900.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Viscosity Grade": "15W-40",
+      "API Rating": "API CJ-4 / GL-4",
+      "Container Volume": "20 Litre Bucket",
+      "Application": "Engine, Transmission, Hydraulics & Wet Brakes",
+      "Base Oil": "Premium Semi-Synthetic",
+      "Pour Point": "-33°C",
+      "Flash Point": "228°C"
+    }
+  },
+  {
+    id: "ko-stou-210l",
+    name: "KOREVA STOU 15W-40 (210L Drum)",
+    productId: "ko-stou-15w40",
+    images: ["/products/power-weeder-dhurandhar.webp"],
+    price: "82000.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Viscosity Grade": "15W-40",
+      "API Rating": "API CJ-4 / GL-4",
+      "Container Volume": "210 Litre Drum",
+      "Application": "Commercial Fleet & Large Farms",
+      "Base Oil": "Premium Semi-Synthetic",
+      "Pour Point": "-33°C",
+      "Flash Point": "228°C"
+    }
+  },
+  // 4T Agro Lubricants
+  {
+    id: "ko-4t-1l",
+    name: "KOREVA 4T AGRO 20W-50 (1L Bottle)",
+    productId: "ko-4t-agro-20w50",
+    images: ["/products/power-weeder-vijay.webp"],
+    price: "420.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Viscosity Grade": "20W-50",
+      "API Rating": "API SL / JASO MA2",
+      "Container Volume": "1 Litre Bottle",
+      "Application": "Power Weeders, Reapers & 4-Stroke Engines",
+      "Flash Point": "235°C",
+      "Viscosity Index": "138"
+    }
+  },
+  {
+    id: "ko-4t-3-5l",
+    name: "KOREVA 4T AGRO 20W-50 (3.5L Can)",
+    productId: "ko-4t-agro-20w50",
+    images: ["/products/power-weeder-vijay.webp"],
+    price: "1350.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Viscosity Grade": "20W-50",
+      "API Rating": "API SL / JASO MA2",
+      "Container Volume": "3.5 Litre Can",
+      "Application": "Power Weeders, Reapers & 4-Stroke Engines",
+      "Flash Point": "235°C",
+      "Viscosity Index": "138"
+    }
+  },
+  // Secateur PRO
+  {
+    id: "ko-secateur-8inch",
+    name: "KOREVA PRO PRUNER 8-Inch",
+    productId: "ko-secateur-pro",
+    images: ["/products/brushcutter.webp"],
+    price: "850.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "SK5 High Carbon Alloy Steel",
+      "Handle Material": "Ergonomic Aluminium with Non-Slip Rubber",
+      "Cutting Capacity": "20 mm",
+      "Finish / Coating": "Teflon Anti-Rust & Anti-Sap Coating",
+      "Overall Length": "200 mm (8 Inches)",
+      "Weight": "240 Grams"
+    }
+  },
+  {
+    id: "ko-secateur-9inch",
+    name: "KOREVA PRO PRUNER 9-Inch Heavy Duty",
+    productId: "ko-secateur-pro",
+    images: ["/products/brushcutter.webp"],
+    price: "1150.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "SK5 High Carbon Alloy Steel",
+      "Handle Material": "Forged Aluminium Heavy Grip",
+      "Cutting Capacity": "25 mm",
+      "Finish / Coating": "Titanium Coated Anti-Sap",
+      "Overall Length": "225 mm (9 Inches)",
+      "Weight": "310 Grams"
+    }
+  },
+  // Sickle AGRO CUT
+  {
+    id: "ko-sickle-12inch",
+    name: "KOREVA AGRO CUT Sickle 12-Inch (Serrated)",
+    productId: "ko-sickle-agro",
+    images: ["/products/harrrow.webp"],
+    price: "380.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Seasoned Ash Wood",
+      "Cutting Capacity": "Crop & Grass Harvesting",
+      "Finish / Coating": "Black Oxide Anti-Corrosion",
+      "Blade Type": "Micro-Serrated Edge",
+      "Weight": "290 Grams"
+    }
+  },
+  {
+    id: "ko-sickle-14inch",
+    name: "KOREVA AGRO CUT Sickle 14-Inch (Smooth Edge)",
+    productId: "ko-sickle-agro",
+    images: ["/products/harrrow.webp"],
+    price: "450.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Reinforced Ergonomic Hardwood",
+      "Cutting Capacity": "Heavy Stalk & Paddy Harvesting",
+      "Finish / Coating": "Electrophoretic Anti-Rust Coating",
+      "Blade Type": "Smooth Razor Edge",
+      "Weight": "340 Grams"
+    }
   }
 ];
+

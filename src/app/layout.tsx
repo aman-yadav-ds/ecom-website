@@ -1,11 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 
 const jost = Jost({
   variable: '--font-jost',
   subsets: ['latin'],
-})
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#a80000",
+};
 
 export const metadata: Metadata = {
   title: "KOREVA GLOBAL — Premium Agriculture Implements",
@@ -31,11 +38,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${jost.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">
+      <body className="min-h-full flex flex-col bg-black text-white overflow-x-hidden max-w-full">
         {children}
       </body>
     </html>
   );
 }
+

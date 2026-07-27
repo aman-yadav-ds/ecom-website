@@ -70,7 +70,7 @@ export default function DealerMap({ dealers, center, zoom = 7, userLocation }: D
     });
   };
 
-  if (!mounted) return <div className="w-full h-[600px] bg-gray-100 animate-pulse" />;
+  if (!mounted) return <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] bg-gray-100 animate-pulse" />;
 
   return (
     <div className="w-full h-full relative z-0">

@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import VariantSelector from "./VariantSelector";
 import DetailTabsSection from "./DetailTabsSection";
 import CollapsibleFeature from "./CollapsibleFeature";
+import LubricantDetailLayout from "./LubricantDetailLayout";
+import HandToolDetailLayout from "./HandToolDetailLayout";
 import Link from "next/link";
-import { MapPin, Wrench, Shield, FileText } from "lucide-react";
+import { MapPin, Wrench, Shield } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
 
 interface ProductInteractiveSectionProps {
@@ -15,21 +17,22 @@ interface ProductInteractiveSectionProps {
   variants: Variant[];
 }
 
-const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
-  product,
-  variants,
-}) => {
-  // If no variants, fallback to basic product info
+const emptySubscribe = () => () => {};
+function useHasMounted() {
+  return React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionProps) {
   const [activeVariantId, setActiveVariantId] = useState(
     product.defaultVariantId || (variants.length > 0 ? variants[0].id : "")
   );
 
   const { selectedProductIds, toggleProduct } = useCompareStore();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHasMounted();
 
   const isSelected = selectedProductIds.includes(product.id);
   const isMaxReached = selectedProductIds.length >= 3;
@@ -44,8 +47,6 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
   };
 
   const activeVariant = variants.find((v) => v.id === activeVariantId);
-  
-  // Resolve images: if variant has images, use them. Else fallback to product cover image.
   const images = activeVariant?.images?.length
     ? activeVariant.images
     : [product.coverImage];
@@ -57,7 +58,7 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
   });
 
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col gap-16 font-jost">
       {/* Top Grid: Gallery (Left) & Metadata (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16">
         
@@ -75,7 +76,7 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
               {activeVariant?.name || product.name}
             </h1>
             <p className="text-sm font-medium text-dark-500 uppercase tracking-widest">
-              Part No: {activeVariant?.id || product.id}
+              Model Code: {activeVariant?.id || product.id}
             </p>
           </div>
 
@@ -86,7 +87,7 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-sm text-dark-500 font-medium">
-                Includes {activeVariant.applicableGst}% GST. Additional shipping may apply.
+                Includes {activeVariant.applicableGst}% GST. Additional shipping & mounting fees may apply.
               </p>
             )}
           </div>
@@ -102,14 +103,16 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
 
           {/* Action Area */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Link href="/dealers" className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <Link 
+              href="/dealers" 
+              className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+            >
               <MapPin className="w-5 h-5" />
               Find a Local Dealer
             </Link>
             <label 
-              className={`flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              className={`flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-brand-red ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
               onClick={(e) => {
-                // Prevent default behavior if disabled to stop checkbox toggle
                 if (disabled) {
                   e.preventDefault();
                   handleCompareChange();
@@ -118,7 +121,7 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
             >
               <input 
                 type="checkbox" 
-                className="w-5 h-5 border-gray-300 rounded-sm text-orange-500 focus:ring-orange-500 disabled:cursor-not-allowed" 
+                className="w-5 h-5 border-gray-300 rounded-sm text-brand-red focus:ring-brand-red disabled:cursor-not-allowed" 
                 checked={mounted ? isSelected : false}
                 onChange={handleCompareChange}
                 disabled={disabled}
@@ -131,16 +134,16 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
 
           {/* Quick Accordions */}
           <div className="mt-4">
-            <CollapsibleFeature title="Maintenance & Servicing" icon={<Wrench className="w-4 h-4" />}>
-              <ul className="list-disc pl-5 space-y-2 mt-2">
+            <CollapsibleFeature title="Maintenance & Servicing" icon={<Wrench className="w-4 h-4 text-brand-red" />}>
+              <ul className="list-disc pl-5 space-y-2 mt-2 text-sm text-dark-700">
                 <li>Requires oil change every 50 hours of operation.</li>
                 <li>Check belt tension prior to heavy usage.</li>
                 <li>All replacement parts available through certified KOREVA dealers.</li>
               </ul>
             </CollapsibleFeature>
-            <CollapsibleFeature title="Warranty Information" icon={<Shield className="w-4 h-4" />}>
-              <p className="mt-2">
-                This unit is covered by KOREVA's standard 1-year industrial warranty against manufacturing defects. Extended 3-year enterprise warranties are available upon dealer registration.
+            <CollapsibleFeature title="Warranty Information" icon={<Shield className="w-4 h-4 text-brand-red" />}>
+              <p className="mt-2 text-sm text-dark-700">
+                This unit is covered by KOREVA&apos;s standard 1-year industrial warranty against manufacturing defects. Extended 3-year enterprise warranties are available upon dealer registration.
               </p>
             </CollapsibleFeature>
           </div>
@@ -156,6 +159,19 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
       </div>
     </div>
   );
-};
+}
 
-export default ProductInteractiveSection;
+export default function ProductInteractiveSection({
+  product,
+  variants,
+}: ProductInteractiveSectionProps) {
+  if (product.categoryId === "lubricants") {
+    return <LubricantDetailLayout product={product} variants={variants} />;
+  }
+
+  if (product.categoryId === "hand-tools") {
+    return <HandToolDetailLayout product={product} variants={variants} />;
+  }
+
+  return <EquipmentDetailLayout product={product} variants={variants} />;
+}

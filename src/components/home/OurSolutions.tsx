@@ -1,88 +1,107 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { ScrollReveal } from "../ScrollReveal";
 
 const solutions = [
   {
-    title: "AGRI MACHINERY",
-    description: "Next-gen machinery tailored for Indian soils, including Laser Land Levellers, Straw Reapers, Power Sprayers, and heavy-duty Weeders.",
+    title: "AGRICULTURAL MACHINERY",
+    subtitle: "Power Weeders, Rotavators & Harrows",
+    description: "Heavy-duty Power Weeders (DHURANDHAR & VIJAY), tractor-mounted Harrows (RAINO), Rotavators (KOBRA), and Power Reapers engineered for high-yield soil tillage.",
     image: "/images/agri_machinery_new_1784014752914.jpg",
-    link: "/products"
+    link: "/products/self-propelled-machinery",
+    tags: ["Power Weeder", "Harrow", "Rotavator"]
   },
   {
-    title: "GARDEN HAND TOOLS",
-    description: "An extensive collection of 25+ unique, highly durable hand tools including Bill Hooks, Hand Sprayers, Shovels, and more.",
+    title: "GARDEN & HARVEST HAND TOOLS",
+    subtitle: "Forged SK5 Steel Pruners & Sickles",
+    description: "Precision drop-forged SK5 alloy bypass secateurs, harvesting sickles with induction hardened micro-serrations, and ergonomic nursery tools.",
     image: "/images/garden_tools_new_1784014762909.jpg",
-    link: "/products"
+    link: "/products/hand-tools",
+    tags: ["Bypass Secateur", "Sickle", "SK5 Steel"]
   },
   {
-    title: "PREMIUM LUBRICANTS",
-    description: "High-performance engine lubricants engineered to maximize the lifespan and efficiency of your agricultural machinery.",
+    title: "PREMIUM LUBRICANTS & FLUIDS",
+    subtitle: "ISO 9001 Universal STOU Fluids",
+    description: "High-performance STOU 15W-40 Universal Tractor Oils and 4T Heavy Duty Engine Oils formulated for thermal oxidation stability and wet-brake protection.",
     image: "/images/lubricants_new_1784014772364.jpg",
-    link: "/products"
+    link: "/products/lubricants",
+    tags: ["STOU 15W-40", "4T Engine Oil", "ISO 9001"]
   }
 ];
 
 export function OurSolutions() {
   return (
-    <section className="bg-light-100 py-16 md:py-24 px-4 relative">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-brand-red-accent to-brand-red opacity-10" />
+    <section className="bg-light-100 py-16 md:py-24 px-4 relative font-jost">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-brand-red-accent to-brand-red opacity-20" />
       <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4 md:gap-6">
           <ScrollReveal animation="slide-left" className="flex-1">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-black uppercase tracking-tight">
-              KOREVA SOLUTIONS
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-red">
+              Product Ecosystem
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-black uppercase tracking-tight mt-1">
+              KOREVA GLOBAL SOLUTIONS
             </h2>
           </ScrollReveal>
           <ScrollReveal animation="slide-right" className="flex-1 flex justify-start md:justify-end">
-            <p className="max-w-md text-brand-dark text-sm md:text-base border-l-4 border-brand-red pl-4 leading-relaxed">
-              From heavy-duty field preparation to precision gardening and maintenance, KOREVA provides a complete ecosystem of tools designed for the modern Indian farmer.
+            <p className="max-w-md text-brand-dark text-sm md:text-base border-l-4 border-brand-red pl-4 leading-relaxed font-medium">
+              From heavy-duty soil tillage with <strong className="text-dark-900 font-bold">Harrows</strong> and <strong className="text-dark-900 font-bold">Power Weeders</strong> to ISO certified <strong className="text-dark-900 font-bold">STOU Lubricants</strong>, KOREVA GLOBAL LLP delivers a complete agricultural ecosystem.
             </p>
           </ScrollReveal>
         </div>
 
+        {/* 3 Column Grid with 200ms smooth hover overlays */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {solutions.map((solution, index) => (
             <ScrollReveal
               key={index}
               animation="slide-bottom"
-              delay={index * 150}
+              delay={index * 100}
             >
               <div
-                className="group relative h-[380px] md:h-[420px] overflow-hidden rounded-xl cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300"
+                className="group relative h-[400px] md:h-[440px] overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-2xl transition-all duration-200 border border-light-300 hover:border-brand-red flex flex-col justify-end"
               >
-                {/* Subtle red accent line at bottom */}
-                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-brand-red z-30 scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
+                {/* Red accent bar on hover */}
+                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-brand-red z-30 scale-x-0 origin-left transition-transform duration-200 group-hover:scale-x-100" />
 
                 {/* Background Image */}
                 <Image
                   src={solution.image}
-                  alt={solution.title}
+                  alt={`${solution.title} - KOREVA GLOBAL LLP`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-200 group-hover:scale-105"
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/95 via-brand-black/50 md:via-brand-black/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-transparent z-10" />
 
-                {/* Content */}
-                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-20">
-                  <p className="text-brand-red text-[10px] md:text-xs font-bold mb-1 md:mb-2 tracking-[0.2em] uppercase">KOREVA PRODUCT LINE</p>
-                  <h3 className="text-light-100 text-xl md:text-2xl font-bold uppercase mb-2 md:mb-4 group-hover:text-brand-red transition-colors duration-300">
+                {/* Content Overlay */}
+                <div className="relative p-6 md:p-8 z-20 flex flex-col justify-end">
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {solution.tags.map((tag) => (
+                      <span key={tag} className="px-2 py-0.5 bg-brand-red/90 text-white text-[10px] font-bold uppercase rounded-xs tracking-wider">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h3 className="text-light-100 text-xl md:text-2xl font-bold uppercase mb-1 group-hover:text-brand-red transition-colors duration-200">
                     {solution.title}
                   </h3>
-                  {/* Mobile: always show description. Desktop: show on hover */}
-                  <p className="text-light-200 text-sm mb-4 md:mb-6 opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 leading-relaxed">
+                  <p className="text-xs font-bold text-gray-300 uppercase mb-3 tracking-wider">
+                    {solution.subtitle}
+                  </p>
+                  <p className="text-light-200 text-xs md:text-sm mb-5 opacity-90 leading-relaxed font-medium line-clamp-3">
                     {solution.description}
                   </p>
+
                   <Link
                     href={solution.link}
-                    className="flex items-center gap-2 text-brand-red font-bold text-xs md:text-sm group/link w-fit tracking-wide uppercase"
+                    className="inline-flex items-center gap-2 text-white bg-brand-red hover:bg-brand-red-accent font-bold text-xs px-4 py-2.5 rounded-full tracking-wider uppercase transition-all duration-200 group/link w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
                   >
-                    Explore Category
-                    <div className="bg-brand-red text-light-100 rounded-full p-1.5 transition-transform duration-300 group-hover/link:translate-x-1 shadow-md">
-                      <ArrowRight className="w-3 md:w-3.5 h-3 md:h-3.5" />
-                    </div>
+                    <span>Explore Lineup</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
                   </Link>
                 </div>
               </div>

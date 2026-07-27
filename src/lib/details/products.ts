@@ -80,5 +80,48 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/mini-rice-mill.png",
     isPublished: true,
     defaultVariantId: "ko-ricemill-1080"
+  },
+  // Lubricants
+  {
+    id: "ko-stou-15w40",
+    name: "KOREVA - Super Tractor Oil Universal (STOU 15W-40)",
+    description: "Multi-purpose premium lubricant specially formulated for tractor engines, hydraulic systems, wet brakes, and transmissions.",
+    categoryId: "lubricants",
+    tags: ["Tractor Fluid", "Engine Oil", "Hydraulic Oil", "STOU", "Lubricant", "15W-40"],
+    coverImage: "/products/power-weeder-dhurandhar.webp", // clean image fallback
+    isPublished: true,
+    defaultVariantId: "ko-stou-5l"
+  },
+  {
+    id: "ko-4t-agro-20w50",
+    name: "KOREVA - Heavy Duty 4T Agro Engine Oil (20W-50)",
+    description: "High-performance thermal-stable 4-stroke engine oil designed for power weeders, reapers, and small agricultural engines.",
+    categoryId: "lubricants",
+    tags: ["4T Oil", "Engine Oil", "Weeder Oil", "20W-50", "Lubricants"],
+    coverImage: "/products/power-weeder-vijay.webp", // clean image fallback
+    isPublished: true,
+    defaultVariantId: "ko-4t-3-5l"
+  },
+  // Hand Tools
+  {
+    id: "ko-secateur-pro",
+    name: "KOREVA - Bypass Pruning Secateur (PRO PRUNER)",
+    description: "Professional drop-forged SK5 steel pruning shears with ergonomic non-slip grip for precise orchard and vineyard maintenance.",
+    categoryId: "hand-tools",
+    tags: ["Secateur", "Pruning Shears", "Garden Tools", "Hand Tools", "SK5 Steel"],
+    coverImage: "/products/brushcutter.webp", // clean image fallback
+    isPublished: true,
+    defaultVariantId: "ko-secateur-8inch"
+  },
+  {
+    id: "ko-sickle-agro",
+    name: "KOREVA - Heavy Duty Grass & Weed Sickle (AGRO CUT)",
+    description: "High-carbon manganese steel harvesting sickle featuring an induction-hardened edge and comfortable wooden handle.",
+    categoryId: "hand-tools",
+    tags: ["Sickle", "Harvesting Tool", "Hand Tools", "Weed Cutting"],
+    coverImage: "/products/harrrow.webp", // clean image fallback
+    isPublished: true,
+    defaultVariantId: "ko-sickle-12inch"
   }
 ];
+
