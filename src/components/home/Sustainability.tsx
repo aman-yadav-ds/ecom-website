@@ -100,6 +100,7 @@ export function Sustainability() {
                   src="/images/agri_machinery_new_1784014752914.jpg"
                   alt="Sustainable Farming"
                   fill
+                  sizes="(max-width: 768px) 220px, 300px"
                   className="object-cover opacity-90"
                 />
                 <div className="absolute inset-0 bg-[#007d48]/20 mix-blend-multiply" />

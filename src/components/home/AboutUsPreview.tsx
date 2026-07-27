@@ -15,6 +15,7 @@ export function AboutUsPreview() {
           src="/images/about_factory_1784013199832.jpg"
           alt="KOREVA GLOBAL LLP OEM Agricultural Machinery Manufacturing Plant"
           fill
+          sizes="100vw"
           className="object-cover"
         />
         {/* Dark overlay with subtle red gradient */}

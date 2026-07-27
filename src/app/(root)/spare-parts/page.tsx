@@ -15,6 +15,7 @@ export default function SparePartsPage() {
               src="/media/spare_parts.jpg" 
               alt="KOREVA9 Spare Parts Inventory"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">

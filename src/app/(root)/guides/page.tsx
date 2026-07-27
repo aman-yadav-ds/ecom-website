@@ -70,6 +70,7 @@ export default function GuidesPage() {
               src={guides[0].image} 
               alt={guides[0].title}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold uppercase px-3 py-1 tracking-wider flex items-center gap-2">
@@ -103,6 +104,7 @@ export default function GuidesPage() {
                   src={guide.image} 
                   alt={guide.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4 bg-dark-900 text-white text-xs font-bold uppercase px-3 py-1 tracking-wider flex items-center gap-2">

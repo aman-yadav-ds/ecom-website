@@ -41,6 +41,7 @@ export default function NewsPage() {
                 src={featuredArticle.image}
                 alt={featuredArticle.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold uppercase px-3 py-1.5 rounded-xs tracking-wider">
@@ -86,6 +87,7 @@ export default function NewsPage() {
                   src={article.image}
                   alt={article.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-brand-black text-white text-xs font-bold uppercase px-3 py-1 rounded-xs tracking-wider">

@@ -77,6 +77,7 @@ export function OurStrength() {
                   src={strength.image}
                   alt={`${strength.title} - KOREVA GLOBAL LLP`}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-200 group-hover:scale-105"
                 />
                 {/* Overlay */}

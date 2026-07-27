@@ -67,6 +67,7 @@ const CompareDrawer = () => {
                             src={product.image}
                             alt={product.name}
                             fill
+                            sizes="(max-width: 768px) 48px, 64px"
                             className="object-contain"
                           />
                         </div>

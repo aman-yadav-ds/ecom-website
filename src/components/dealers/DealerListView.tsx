@@ -20,13 +20,13 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
   const R = 6371; // Radius of the earth in km
   const dLat = (lat2 - lat1) * (Math.PI / 180);
   const dLon = (lon2 - lon1) * (Math.PI / 180);
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  return R * c; 
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
 }
 
 interface DealerListViewProps {
@@ -36,18 +36,18 @@ interface DealerListViewProps {
 
 export default function DealerListView({ initialDealers, defaultCenter }: DealerListViewProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeRadius, setActiveRadius] = useState(50);
+  const [activeRadius, setActiveRadius] = useState(140);
   const [activeLocation, setActiveLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [activeLocationName, setActiveLocationName] = useState<string>('');
   const router = useRouter();
   const { openJoinModal } = useModalStore();
-  
+
   // View toggle
   const [activeView, setActiveView] = useState<'map' | 'list'>('map');
 
   const resetCriteria = () => {
     setSearchTerm('');
-    setActiveRadius(50);
+    setActiveRadius(500);
     setActiveLocation(null);
     setActiveLocationName('');
   };
@@ -55,12 +55,12 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
   const filteredDealers = useMemo(() => {
     return initialDealers.filter(dealer => {
       // Text Search
-      const searchMatch = !searchTerm || 
+      const searchMatch = !searchTerm ||
         dealer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         dealer.addressLine1.toLowerCase().includes(searchTerm.toLowerCase()) ||
         dealer.addressLine2.toLowerCase().includes(searchTerm.toLowerCase()) ||
         dealer.addressLine3.toLowerCase().includes(searchTerm.toLowerCase());
-      
+
       if (!searchMatch) return false;
 
       // Radius Search
@@ -80,7 +80,7 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
 
   return (
     <div className="flex flex-col w-full">
-      <SearchFilters 
+      <SearchFilters
         onSearch={setSearchTerm}
         onRadiusChange={setActiveRadius}
         onLocationChange={(coords, locName) => {
@@ -93,13 +93,13 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
       {/* Tabs */}
       <div className="flex items-end mb-4 border-b border-gray-200">
         <div className="flex border border-gray-200 border-b-0 overflow-hidden">
-          <button 
+          <button
             onClick={() => setActiveView('map')}
             className={`py-3 px-8 font-jost text-sm font-[600] transition-colors ${activeView === 'map' ? 'bg-[#1a1a1a] text-white' : 'bg-white text-[#1a1a1a] hover:bg-gray-50'}`}
           >
             Map
           </button>
-          <button 
+          <button
             onClick={() => setActiveView('list')}
             className={`py-3 px-8 font-jost text-sm font-[600] transition-colors border-l border-gray-200 ${activeView === 'list' ? 'bg-[#1a1a1a] text-white' : 'bg-white text-[#1a1a1a] hover:bg-gray-50'}`}
           >
@@ -121,14 +121,14 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
               Sorry, Our network currently hasn't been extended to <br />
               <span className="text-brand-red">'{activeLocationName || searchTerm || "this area"}'</span>.
             </p>
-            
+
             <div className="w-16 h-1 bg-light-300 my-4"></div>
 
             <div className="flex flex-col items-center gap-4">
               <p className="font-jost text-lg text-dark-700 font-[500]">
                 Looking to Join Our Network?
               </p>
-              <button 
+              <button
                 onClick={openJoinModal}
                 className="px-8 py-3.5 rounded-full bg-brand-black text-light-100 font-medium hover:bg-brand-red transition-all shadow-md group flex items-center gap-2 uppercase tracking-wider text-sm"
               >
@@ -137,7 +137,7 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
               </button>
             </div>
 
-            <button 
+            <button
               onClick={resetCriteria}
               className="mt-6 font-jost text-sm text-dark-500 hover:text-brand-dark font-[600] underline transition-all"
             >
@@ -146,15 +146,15 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
           </div>
         ) : activeView === 'map' ? (
           <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] border border-gray-200 relative z-0 bg-gray-100 mt-4 rounded-sm overflow-hidden">
-             <DealerMap 
-              dealers={filteredDealers} 
+            <DealerMap
+              dealers={filteredDealers}
               center={currentCenter}
               userLocation={activeLocation}
             />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-             {filteredDealers.map(dealer => {
+            {filteredDealers.map(dealer => {
               let distance: number | undefined = undefined;
               if (activeLocation) {
                 distance = calculateDistance(
@@ -164,9 +164,9 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
               }
               return (
                 <div key={dealer.id} className="block h-full">
-                  <DealerInfoCard 
-                    dealer={dealer} 
-                    distance={distance} 
+                  <DealerInfoCard
+                    dealer={dealer}
+                    distance={distance}
                     onClick={() => router.push(`/dealers/${dealer.id}`)}
                   />
                 </div>

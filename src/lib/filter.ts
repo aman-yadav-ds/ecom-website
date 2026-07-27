@@ -7,21 +7,12 @@ export const CATEGORY_FILTERS: Record<string, string[]> = {
 };
 
 export const ALLOWED_FILTERS = [
-  "Brand",
   "Working Width",
-  "Blades Type",
-  "Number of Blades",
   "Engine Power",
-  "Carry Type",
   "Motor Power",
   "Material",
   "Viscosity Grade",
-  "API Rating",
   "Container Volume",
-  "Application",
-  "Blade Steel",
-  "Handle Material",
-  "Cutting Capacity",
-  "Finish / Coating"
+  "Blade Steel"
 ];
 

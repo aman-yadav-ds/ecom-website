@@ -28,6 +28,7 @@ export default function ArticleLayout({
           src={heroImage}
           alt={title}
           fill
+          sizes="100vw"
           className="object-cover opacity-60"
           priority
         />

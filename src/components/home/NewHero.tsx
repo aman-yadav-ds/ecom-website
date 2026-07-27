@@ -20,6 +20,7 @@ export function NewHero() {
           src="/images/hero_bg_koreva.jpg"
           alt="KOREVA GLOBAL LLP modern agricultural machinery manufacturing facility"
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />

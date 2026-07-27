@@ -15,6 +15,7 @@ export default function AboutPage() {
               src="/images/hero_bg_koreva.jpg"
               alt="KOREVA9 Manufacturing"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />
