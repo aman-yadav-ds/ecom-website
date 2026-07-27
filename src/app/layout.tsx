@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     "KOREVA",
     "Koreva Global",
   ],
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
