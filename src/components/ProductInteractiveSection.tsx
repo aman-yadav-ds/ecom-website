@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import VariantSelector from "./VariantSelector";
@@ -8,6 +8,7 @@ import DetailTabsSection from "./DetailTabsSection";
 import CollapsibleFeature from "./CollapsibleFeature";
 import Link from "next/link";
 import { MapPin, Wrench, Shield, FileText } from "lucide-react";
+import { useCompareStore } from "@/store/useCompareStore";
 
 interface ProductInteractiveSectionProps {
   product: Product;
@@ -22,6 +23,25 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
   const [activeVariantId, setActiveVariantId] = useState(
     product.defaultVariantId || (variants.length > 0 ? variants[0].id : "")
   );
+
+  const { selectedProductIds, toggleProduct } = useCompareStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isSelected = selectedProductIds.includes(product.id);
+  const isMaxReached = selectedProductIds.length >= 3;
+  const disabled = !isSelected && isMaxReached;
+
+  const handleCompareChange = () => {
+    if (disabled) {
+      alert("You can only compare up to 3 products at a time.");
+      return;
+    }
+    toggleProduct(product.id);
+  };
 
   const activeVariant = variants.find((v) => v.id === activeVariantId);
   
@@ -86,12 +106,26 @@ const ProductInteractiveSection: React.FC<ProductInteractiveSectionProps> = ({
               <MapPin className="w-5 h-5" />
               Find a Local Dealer
             </Link>
-            <label className="flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm cursor-pointer hover:border-dark-500 transition-colors group bg-white">
+            <label 
+              className={`flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              onClick={(e) => {
+                // Prevent default behavior if disabled to stop checkbox toggle
+                if (disabled) {
+                  e.preventDefault();
+                  handleCompareChange();
+                }
+              }}
+            >
               <input 
                 type="checkbox" 
-                className="w-5 h-5 border-gray-300 rounded-sm text-orange-500 focus:ring-orange-500 cursor-pointer" 
+                className="w-5 h-5 border-gray-300 rounded-sm text-orange-500 focus:ring-orange-500 disabled:cursor-not-allowed" 
+                checked={mounted ? isSelected : false}
+                onChange={handleCompareChange}
+                disabled={disabled}
               />
-              <span className="text-sm font-bold text-dark-900 group-hover:text-dark-700">Add to Compare</span>
+              <span className={`text-sm font-bold ${isSelected ? 'text-brand-red' : 'text-dark-900 group-hover:text-dark-700'}`}>
+                {isSelected ? 'Added to Compare' : 'Add to Compare'}
+              </span>
             </label>
           </div>
 
