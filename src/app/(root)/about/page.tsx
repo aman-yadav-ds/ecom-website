@@ -55,7 +55,7 @@ export default function AboutPage() {
               </h2>
               <div className="w-16 h-1 bg-brand-red mx-auto rounded-full" />
             </ScrollReveal>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Value 1 */}
               <ScrollReveal animation="fade" delay={0}>
@@ -69,7 +69,7 @@ export default function AboutPage() {
                   </p>
                 </div>
               </ScrollReveal>
-              
+
               {/* Value 2 */}
               <ScrollReveal animation="fade" delay={150}>
                 <div className="bg-white p-8 rounded-xl shadow-sm border border-light-300 hover:border-brand-red transition-colors text-center h-full">
@@ -121,8 +121,8 @@ export default function AboutPage() {
             <p className="text-light-300 text-lg mb-10">
               We are actively expanding our dealer network across India. Partner with KOREVA GLOBAL LLP and be a part of the agricultural revolution.
             </p>
-            <Link 
-              href="/dealers" 
+            <Link
+              href="/dealers"
               className="bg-brand-red hover:bg-brand-red-accent text-light-100 font-semibold py-4 px-10 rounded-full transition-all duration-300 inline-flex items-center justify-center uppercase tracking-wider gap-2 group"
             >
               Become a Dealer

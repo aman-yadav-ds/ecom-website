@@ -272,28 +272,36 @@ const Navbar = () => {
                 </button>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Knowledge Base</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/guides" className="block hover:text-brand-red transition-colors">Farming Guides</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Knowledge Base</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/guides" className="block hover:text-brand-red transition-colors">Farming & Machinery Guides</Link></li>
+                      <li><Link href="/guides" className="block hover:text-brand-red transition-colors">Equipment Operation Tips</Link></li>
+                      <li><Link href="/guides" className="block hover:text-brand-red transition-colors">Soil & Harvesting Best Practices</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Updates</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/news" className="block hover:text-brand-red transition-colors">Latest News</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Updates & News</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/news" className="block hover:text-brand-red transition-colors">Latest Company News</Link></li>
+                      <li><Link href="/news" className="block hover:text-brand-red transition-colors">New Product Announcements</Link></li>
+                      <li><Link href="/news" className="block hover:text-brand-red transition-colors">Agricultural Industry Insights</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Assets</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/downloads" className="block hover:text-brand-red transition-colors">Downloads & Brochures</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Downloads & Assets</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/downloads" className="block hover:text-brand-red transition-colors">Product Catalogues & Brochures</Link></li>
+                      <li><Link href="/downloads" className="block hover:text-brand-red transition-colors">Owner & User Manuals</Link></li>
+                      <li><Link href="/downloads" className="block hover:text-brand-red transition-colors">Technical Specification Sheets</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Tools</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/compare" className="block hover:text-brand-red transition-colors">Compare Products</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Interactive Tools</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/compare" className="block hover:text-brand-red transition-colors font-medium">Compare Machinery</Link></li>
+                      <li><Link href="/dealers" className="block hover:text-brand-red transition-colors font-medium">Find Nearby Dealer</Link></li>
+                      <li><Link href="/products" className="block hover:text-brand-red transition-colors font-medium">Browse All Products</Link></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -316,24 +324,44 @@ const Navbar = () => {
                 </button>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">After-Sales</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/spare-parts" className="block hover:text-brand-red transition-colors">Spare Parts</Link>
-                      <Link href="/warranty" className="block hover:text-brand-red transition-colors">Warranty Info</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">After-Sales Care</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/spare-parts" className="block hover:text-brand-red transition-colors">Genuine Spare Parts</Link></li>
+                      <li><Link href="/warranty" className="block hover:text-brand-red transition-colors">Warranty Info & Registration</Link></li>
+                      <li><Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Equipment Maintenance Support</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Help</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/faq" className="block hover:text-brand-red transition-colors">FAQs</Link>
-                      <Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Contact Us</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Customer Help</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/faq" className="block hover:text-brand-red transition-colors">Frequently Asked Questions (FAQ)</Link></li>
+                      <li><Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Contact Support Team</Link></li>
+                      <li><Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Technical Helpline</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Network</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/dealers" className="block hover:text-brand-red transition-colors">Find a Dealer</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Dealer Network</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/dealers" className="block hover:text-brand-red transition-colors">Find Authorized Dealer</Link></li>
+                      <li>
+                        <button
+                          onClick={() => {
+                            setActiveDropdown(null);
+                            openJoinModal();
+                          }}
+                          className="block text-left hover:text-brand-red transition-colors bg-transparent border-0 p-0 text-sm font-medium cursor-pointer"
+                        >
+                          Become a KOREVA Partner
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Quick Links</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Submit Product Inquiry</Link></li>
+                      <li><Link href="/guides" className="block hover:text-brand-red transition-colors">User Operation Guides</Link></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -356,18 +384,44 @@ const Navbar = () => {
                 </button>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full pt-2">
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Who We Are</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/about" className="block hover:text-brand-red transition-colors">About Us</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Who We Are</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/about" className="block hover:text-brand-red transition-colors">About KOREVA GLOBAL</Link></li>
+                      <li><Link href="/about" className="block hover:text-brand-red transition-colors">Mission, Vision & Legacy</Link></li>
+                      <li><Link href="/about" className="block hover:text-brand-red transition-colors">Manufacturing Excellence</Link></li>
+                    </ul>
                   </div>
                   <div>
-                    <h3 className="text-[16px] font-bold text-dark-900 uppercase">Legal</h3>
-                    <div className="mt-4 space-y-3 text-sm text-dark-700">
-                      <Link href="/legal-notice" className="block hover:text-brand-red transition-colors">Legal Notice</Link>
-                      <Link href="/privacy-policy" className="block hover:text-brand-red transition-colors">Privacy Policy</Link>
-                      <Link href="/cookies" className="block hover:text-brand-red transition-colors">Cookies</Link>
-                    </div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Legal & Compliance</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/legal-notice" className="block hover:text-brand-red transition-colors">Legal Notice</Link></li>
+                      <li><Link href="/privacy-policy" className="block hover:text-brand-red transition-colors">Privacy Policy</Link></li>
+                      <li><Link href="/cookies" className="block hover:text-brand-red transition-colors">Cookie Policy & Settings</Link></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Connect</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li><Link href="/services-events/contact-us" className="block hover:text-brand-red transition-colors">Contact Corporate Headquarters</Link></li>
+                      <li><Link href="/dealers" className="block hover:text-brand-red transition-colors">Authorized Dealer Locations</Link></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-[15px] font-bold text-dark-900 uppercase tracking-wide mb-4">Partnership</h3>
+                    <ul className="space-y-3 text-sm text-dark-700">
+                      <li>
+                        <button
+                          onClick={() => {
+                            setActiveDropdown(null);
+                            openJoinModal();
+                          }}
+                          className="block text-left hover:text-brand-red transition-colors bg-transparent border-0 p-0 text-sm font-medium cursor-pointer"
+                        >
+                          Join Our Dealer Network
+                        </button>
+                      </li>
+                      <li><Link href="/news" className="block hover:text-brand-red transition-colors">Media & Press Room</Link></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -385,7 +439,7 @@ const Navbar = () => {
                 {item.hasDropdown ? (
                   <>
                     <button
-                      className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none"
+                      className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none min-h-[44px]"
                       onClick={() => toggleDropdown(item.title)}
                     >
                       <span>{item.title}</span>
@@ -400,64 +454,65 @@ const Navbar = () => {
                         {item.title === "Products" && (
                           <div className="py-2 pr-2 space-y-4">
                             <div>
-                              <Link href="/products/tractor-attachments" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Tractor Attachments &gt;</Link>
-                              <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products/tractor-attachments?search=Harrow" className="text-dark-900 hover:text-brand-red">Harrow</Link></li>
-                                <li><Link href="/products/tractor-attachments?search=Rotavator" className="text-dark-900 hover:text-brand-red">Rotavator</Link></li>
+                              <Link href="/products/tractor-attachments" className="font-bold text-brand-red text-[12px] uppercase mb-1.5 block hover:underline">Tractor Attachments &gt;</Link>
+                              <ul className="space-y-2 text-xs">
+                                <li><Link href="/products/tractor-attachments?search=Harrow" className="text-dark-900 hover:text-brand-red block py-1">Harrow</Link></li>
+                                <li><Link href="/products/tractor-attachments?search=Rotavator" className="text-dark-900 hover:text-brand-red block py-1">Rotavator</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <Link href="/products/self-propelled-machinery" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Self Propelled Machinery &gt;</Link>
-                              <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products/self-propelled-machinery?search=Power+Weeder" className="text-dark-900 hover:text-brand-red">Power Weeder</Link></li>
-                                <li><Link href="/products/self-propelled-machinery?search=Power+Reaper" className="text-dark-900 hover:text-brand-red">Power Reaper</Link></li>
-                                <li><Link href="/products/self-propelled-machinery?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red">Brush Cutter</Link></li>
+                              <Link href="/products/self-propelled-machinery" className="font-bold text-brand-red text-[12px] uppercase mb-1.5 block hover:underline">Self Propelled Machinery &gt;</Link>
+                              <ul className="space-y-2 text-xs">
+                                <li><Link href="/products/self-propelled-machinery?search=Power+Weeder" className="text-dark-900 hover:text-brand-red block py-1">Power Weeder</Link></li>
+                                <li><Link href="/products/self-propelled-machinery?search=Power+Reaper" className="text-dark-900 hover:text-brand-red block py-1">Power Reaper</Link></li>
+                                <li><Link href="/products/self-propelled-machinery?search=Brush+Cutter" className="text-dark-900 hover:text-brand-red block py-1">Brush Cutter</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <Link href="/products/food-processing-units" className="font-bold text-brand-red text-[11px] uppercase mb-1 block hover:underline">Food Processing &gt;</Link>
-                              <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products/food-processing-units?search=Pulveriser" className="text-dark-900 hover:text-brand-red">Pulveriser</Link></li>
-                                <li><Link href="/products/food-processing-units?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red">MINI Rice Mill</Link></li>
+                              <Link href="/products/food-processing-units" className="font-bold text-brand-red text-[12px] uppercase mb-1.5 block hover:underline">Food Processing &gt;</Link>
+                              <ul className="space-y-2 text-xs">
+                                <li><Link href="/products/food-processing-units?search=Pulveriser" className="text-dark-900 hover:text-brand-red block py-1">Pulveriser</Link></li>
+                                <li><Link href="/products/food-processing-units?search=MINI+Rice+Mill" className="text-dark-900 hover:text-brand-red block py-1">MINI Rice Mill</Link></li>
                               </ul>
                             </div>
                             <div>
-                              <h4 className="font-bold text-brand-red text-[11px] uppercase mb-1">Supplies & Tools</h4>
-                              <ul className="space-y-1.5 text-xs">
-                                <li><Link href="/products/hand-tools" className="text-dark-900 hover:text-brand-red font-medium">Hand Tools &gt;</Link></li>
-                                <li><Link href="/products/lubricants" className="text-dark-900 hover:text-brand-red font-medium">Lubricants &gt;</Link></li>
+                              <h4 className="font-bold text-brand-red text-[12px] uppercase mb-1.5">Supplies & Tools</h4>
+                              <ul className="space-y-2 text-xs">
+                                <li><Link href="/products/hand-tools" className="text-dark-900 hover:text-brand-red font-medium block py-1">Hand Tools &gt;</Link></li>
+                                <li><Link href="/products/lubricants" className="text-dark-900 hover:text-brand-red font-medium block py-1">Lubricants &gt;</Link></li>
                               </ul>
                             </div>
                             <div className="pt-2 border-t border-brand-red/20">
-                              <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red flex items-center">
+                              <Link href="/products" className="font-bold text-dark-900 hover:text-brand-red flex items-center min-h-[44px]">
                                 All products <ArrowRight className="w-4 h-4 ml-1" />
                               </Link>
                             </div>
                           </div>
                         )}
                         {item.title === "Resources" && (
-                          <div className="py-2 pr-2 space-y-2">
-                            <Link href="/guides" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Farming Guides</Link>
-                            <Link href="/news" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Latest News</Link>
-                            <Link href="/downloads" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Downloads & Brochures</Link>
-                            <Link href="/compare" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Compare Products</Link>
+                          <div className="py-2 pr-2 space-y-2.5 text-xs">
+                            <Link href="/guides" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Farming & Machinery Guides</Link>
+                            <Link href="/news" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Latest News & Media</Link>
+                            <Link href="/downloads" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Downloads & Brochures</Link>
+                            <Link href="/compare" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Compare Products</Link>
+                            <Link href="/dealers" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Find a Dealer</Link>
                           </div>
                         )}
                         {item.title === "Service & Support" && (
-                          <div className="py-2 pr-2 space-y-2">
-                            <Link href="/spare-parts" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Spare Parts</Link>
-                            <Link href="/warranty" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Warranty Info</Link>
-                            <Link href="/faq" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">FAQs</Link>
-                            <Link href="/services-events/contact-us" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Contact Us</Link>
-                            <Link href="/dealers" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Find a Dealer</Link>
+                          <div className="py-2 pr-2 space-y-2.5 text-xs">
+                            <Link href="/spare-parts" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Genuine Spare Parts</Link>
+                            <Link href="/warranty" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Warranty Information</Link>
+                            <Link href="/faq" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Frequently Asked Questions</Link>
+                            <Link href="/services-events/contact-us" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Contact Support Team</Link>
+                            <Link href="/dealers" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Dealer Network</Link>
                           </div>
                         )}
                         {item.title === "Company" && (
-                          <div className="py-2 pr-2 space-y-2">
-                            <Link href="/about" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">About Us</Link>
-                            <Link href="/legal-notice" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Legal Notice</Link>
-                            <Link href="/privacy-policy" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Privacy Policy</Link>
-                            <Link href="/cookies" className="font-bold text-dark-900 hover:text-brand-red transition-colors block">Cookies</Link>
+                          <div className="py-2 pr-2 space-y-2.5 text-xs">
+                            <Link href="/about" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">About KOREVA</Link>
+                            <Link href="/legal-notice" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Legal Notice</Link>
+                            <Link href="/privacy-policy" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Privacy Policy</Link>
+                            <Link href="/cookies" className="font-semibold text-dark-900 hover:text-brand-red transition-colors block py-1">Cookie Policy</Link>
                           </div>
                         )}
                       </div>
@@ -466,7 +521,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={item.href || "/"}
-                    className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none"
+                    className="flex w-full items-center justify-between text-[16px] text-dark-900 font-bold py-3 focus:outline-none min-h-[44px]"
                   >
                     <span>{item.title}</span>
                   </Link>
@@ -479,7 +534,7 @@ const Navbar = () => {
                   setIsMobileMenuOpen(false);
                   openJoinModal();
                 }}
-                className="group flex w-full items-center justify-center px-6 py-3.5 rounded-full bg-brand-black text-light-100 font-medium hover:bg-brand-red transition-colors shadow-md"
+                className="group flex w-full items-center justify-center px-6 py-3.5 rounded-full bg-brand-black text-light-100 font-medium hover:bg-brand-red transition-colors shadow-md min-h-[44px]"
               >
                 Join Us
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />

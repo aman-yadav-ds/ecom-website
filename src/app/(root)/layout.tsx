@@ -4,6 +4,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
 import JoinNetworkModal from "@/components/JoinNetworkModal";
+import CookieConsent from "@/components/CookieConsent";
 
 export default function AppLayout({
   children,
@@ -17,6 +18,7 @@ export default function AppLayout({
       {children}
       <CompareDrawer />
       <JoinNetworkModal />
+      <CookieConsent />
       <Footer />
     </div>
   );

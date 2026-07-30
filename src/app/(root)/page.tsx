@@ -7,6 +7,7 @@ import { OurStrength } from "@/components/home/OurStrength";
 import { Sustainability } from "@/components/home/Sustainability";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { AboutUsPreview } from "@/components/home/AboutUsPreview";
+import { NewsletterSection } from "@/components/home/NewsletterSection";
 
 export const metadata: Metadata = {
   title: "KOREVA GLOBAL LLP | Power Weeders, Harrows & Agricultural Machinery India",
@@ -78,6 +79,7 @@ export default function Home() {
         <OurStrength />
         <Sustainability />
         <AboutUsPreview />
+        <NewsletterSection />
       </main>
     </div>
   );

@@ -239,7 +239,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-stou-5l",
     name: "KOREVA STOU 15W-40 (5L Can)",
     productId: "ko-stou-15w40",
-    images: ["/products/power-weeder-dhurandhar.webp"],
+    images: ["/products/stou-lubricant.png"],
     price: "2450.00",
     applicableGst: "18",
     technicalDetails: {
@@ -257,7 +257,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-stou-20l",
     name: "KOREVA STOU 15W-40 (20L Bucket)",
     productId: "ko-stou-15w40",
-    images: ["/products/power-weeder-dhurandhar.webp"],
+    images: ["/products/stou-lubricant.png"],
     price: "8900.00",
     applicableGst: "18",
     technicalDetails: {
@@ -275,7 +275,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-stou-210l",
     name: "KOREVA STOU 15W-40 (210L Drum)",
     productId: "ko-stou-15w40",
-    images: ["/products/power-weeder-dhurandhar.webp"],
+    images: ["/products/stou-lubricant.png"],
     price: "82000.00",
     applicableGst: "18",
     technicalDetails: {
@@ -294,7 +294,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-4t-1l",
     name: "KOREVA 4T AGRO 20W-50 (1L Bottle)",
     productId: "ko-4t-agro-20w50",
-    images: ["/products/power-weeder-vijay.webp"],
+    images: ["/products/4t-agro-lubricant.png"],
     price: "420.00",
     applicableGst: "18",
     technicalDetails: {
@@ -311,7 +311,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-4t-3-5l",
     name: "KOREVA 4T AGRO 20W-50 (3.5L Can)",
     productId: "ko-4t-agro-20w50",
-    images: ["/products/power-weeder-vijay.webp"],
+    images: ["/products/4t-agro-lubricant.png"],
     price: "1350.00",
     applicableGst: "18",
     technicalDetails: {
@@ -329,7 +329,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-secateur-8inch",
     name: "KOREVA PRO PRUNER 8-Inch",
     productId: "ko-secateur-pro",
-    images: ["/products/brushcutter.webp"],
+    images: ["/products/secateur-pro.png"],
     price: "850.00",
     applicableGst: "12",
     technicalDetails: {
@@ -346,7 +346,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-secateur-9inch",
     name: "KOREVA PRO PRUNER 9-Inch Heavy Duty",
     productId: "ko-secateur-pro",
-    images: ["/products/brushcutter.webp"],
+    images: ["/products/secateur-pro.png"],
     price: "1150.00",
     applicableGst: "12",
     technicalDetails: {
@@ -364,7 +364,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-sickle-12inch",
     name: "KOREVA AGRO CUT Sickle 12-Inch (Serrated)",
     productId: "ko-sickle-agro",
-    images: ["/products/harrrow.webp"],
+    images: ["/products/sickle-agro.png"],
     price: "380.00",
     applicableGst: "12",
     technicalDetails: {
@@ -381,7 +381,7 @@ export const exampleVariants: Variant[] = [
     id: "ko-sickle-14inch",
     name: "KOREVA AGRO CUT Sickle 14-Inch (Smooth Edge)",
     productId: "ko-sickle-agro",
-    images: ["/products/harrrow.webp"],
+    images: ["/products/sickle-agro.png"],
     price: "450.00",
     applicableGst: "12",
     technicalDetails: {

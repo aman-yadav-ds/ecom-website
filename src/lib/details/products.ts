@@ -88,7 +88,7 @@ export const exampleProducts: Product[] = [
     description: "Multi-purpose premium lubricant specially formulated for tractor engines, hydraulic systems, wet brakes, and transmissions.",
     categoryId: "lubricants",
     tags: ["Tractor Fluid", "Engine Oil", "Hydraulic Oil", "STOU", "Lubricant", "15W-40"],
-    coverImage: "/products/power-weeder-dhurandhar.webp", // clean image fallback
+    coverImage: "/products/stou-lubricant.png",
     isPublished: true,
     defaultVariantId: "ko-stou-5l"
   },
@@ -98,7 +98,7 @@ export const exampleProducts: Product[] = [
     description: "High-performance thermal-stable 4-stroke engine oil designed for power weeders, reapers, and small agricultural engines.",
     categoryId: "lubricants",
     tags: ["4T Oil", "Engine Oil", "Weeder Oil", "20W-50", "Lubricants"],
-    coverImage: "/products/power-weeder-vijay.webp", // clean image fallback
+    coverImage: "/products/4t-agro-lubricant.png",
     isPublished: true,
     defaultVariantId: "ko-4t-3-5l"
   },
@@ -109,7 +109,7 @@ export const exampleProducts: Product[] = [
     description: "Professional drop-forged SK5 steel pruning shears with ergonomic non-slip grip for precise orchard and vineyard maintenance.",
     categoryId: "hand-tools",
     tags: ["Secateur", "Pruning Shears", "Garden Tools", "Hand Tools", "SK5 Steel"],
-    coverImage: "/products/brushcutter.webp", // clean image fallback
+    coverImage: "/products/secateur-pro.png",
     isPublished: true,
     defaultVariantId: "ko-secateur-8inch"
   },
@@ -119,7 +119,7 @@ export const exampleProducts: Product[] = [
     description: "High-carbon manganese steel harvesting sickle featuring an induction-hardened edge and comfortable wooden handle.",
     categoryId: "hand-tools",
     tags: ["Sickle", "Harvesting Tool", "Hand Tools", "Weed Cutting"],
-    coverImage: "/products/harrrow.webp", // clean image fallback
+    coverImage: "/products/sickle-agro.png",
     isPublished: true,
     defaultVariantId: "ko-sickle-12inch"
   }

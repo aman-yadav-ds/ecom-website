@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { exampleProducts, exampleVariants } from '@/lib/details';
 import ComparisonMatrix from '@/components/ComparisonMatrix';
+import CompareBackButton from '@/components/CompareBackButton';
 
 export default async function ComparePage({ searchParams }: { searchParams: Promise<{ ids?: string }> }) {
   const params = await searchParams;
@@ -25,10 +25,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 overflow-x-hidden">
-      <Link href="/products" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-dark-900 transition-colors mb-8">
-        <ArrowLeft className="w-4 h-4" />
-        Back to previous page
-      </Link>
+      <CompareBackButton />
 
       <h1 className="text-3xl font-bold text-dark-900 mb-8">Compare Products</h1>
       
