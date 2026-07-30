@@ -8,40 +8,120 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 interface ProductPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug?: string; id?: string }>;
+}
+
+async function resolveProduct(params: Promise<{ slug?: string; id?: string }> | { slug?: string; id?: string }) {
+  const resolved = params instanceof Promise ? await params : params;
+  const rawParam = resolved?.slug || resolved?.id || "";
+  const decoded = decodeURIComponent(rawParam).trim();
+
+  return {
+    slug: rawParam || decoded,
+    product: exampleProducts.find(
+      (p) =>
+        p.id === rawParam ||
+        p.id === decoded ||
+        p.id.toLowerCase() === decoded.toLowerCase()
+    ),
+  };
 }
 
 // Statically generate routes at build time
 export async function generateStaticParams() {
   return exampleProducts.map((product) => ({
-    id: product.id,
+    slug: product.id,
   }));
 }
 
 // Generate SEO Metadata dynamically based on product details
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { id } = await params;
-  const product = exampleProducts.find((p) => p.id === id);
+  const { slug, product } = await resolveProduct(params);
   if (!product) {
-    return { title: "Product Not Found | KOREVA" };
+    return {
+      title: "Product Not Found | Koreva9",
+      description: "The requested Koreva9 agricultural product could not be found.",
+    };
   }
+
+  const title = `${product.name} | Koreva9 - Agriculture Machinery`;
+  const description = product.description;
+  const ogImage = product.coverImage || "/images/og-koreva9-default.jpg";
+
   return {
-    title: `${product.name} | KOREVA Industrial Equipment`,
-    description: product.description,
+    title,
+    description,
+    alternates: {
+      canonical: `/products/${slug || product.id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://koreva9.com/products/${slug || product.id}`,
+      siteName: "Koreva9",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${product.name} manufactured by Koreva Global LLP`,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
-  const { id } = await params;
+  const { slug, product } = await resolveProduct(params);
 
-  // Fetch product data statically
-  const product = exampleProducts.find((p) => p.id === id);
   if (!product) {
     notFound();
   }
 
+  const targetId = product.id;
+
   // Fetch product variants statically
-  const variants = exampleVariants.filter((v) => v.productId === id);
+  const variants = exampleVariants.filter((v) => v.productId === targetId);
+
+  // Find default variant price for JSON-LD schema & cards
+  const defaultVariant =
+    variants.find((v) => v.id === product.defaultVariantId) || variants[0];
+  const productPrice = defaultVariant ? defaultVariant.price : "0";
+
+  // Product Schema.org JSON-LD
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": [
+      product.coverImage.startsWith("http")
+        ? product.coverImage
+        : `https://koreva9.com${product.coverImage}`,
+    ],
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "Koreva9",
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://koreva9.com/products/${slug}`,
+      "priceCurrency": "INR",
+      "price": productPrice,
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Koreva Global LLP",
+      },
+    },
+  };
 
   // Recommendation engine: find related products via shared tags
   const relatedProducts = exampleProducts
@@ -57,6 +137,13 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
   return (
     <main className="min-h-screen bg-light-200 py-12 px-4 sm:px-6 lg:px-8 font-jost">
+      {/* Product JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productJsonLd),
+        }}
+      />
 
       {/* Breadcrumbs (SEO friendly) */}
       <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto mb-8">

@@ -28,8 +28,9 @@ const Card: React.FC<CardProps> = ({
       <div className="relative w-full aspect-[4/3] mb-2 sm:mb-4 overflow-hidden flex items-center justify-center bg-gray-50/50 rounded-xs">
         <Image
           src={image}
-          alt={title}
+          alt={`Koreva9 ${title} - Heavy Agriculture Machinery`}
           fill
+          loading="lazy"
           className="object-contain transition-transform duration-300 group-hover:scale-105 p-1 sm:p-2"
           sizes="(max-width: 640px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
@@ -43,7 +44,7 @@ const Card: React.FC<CardProps> = ({
           </Link>
         </h3>
         <p className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-1.5 sm:mb-3 font-medium line-clamp-1">{category}</p>
-        
+
         {/* Spacer to push price to bottom if titles vary in height */}
         <div className="flex-grow" />
 
@@ -52,14 +53,14 @@ const Card: React.FC<CardProps> = ({
           <span className="text-xs sm:text-base md:text-xl font-extrabold text-dark-900 mb-2 sm:mb-4">
             {price > 0 ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price) : 'Contact for Price'}
           </span>
-          
+
           <div className="flex justify-between items-center mt-auto border-t border-gray-100 pt-2 sm:pt-4 gap-1">
             {id ? (
               <CompareCheckbox productId={id} />
             ) : (
               <div />
             )}
-            <Link 
+            <Link
               href={href}
               className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 min-w-[32px] min-h-[32px] sm:min-w-[40px] sm:min-h-[40px] bg-brand-red rounded-full flex items-center justify-center text-white hover:bg-brand-red-accent transition-colors shadow-md shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-1"
               aria-label={`View details for ${title}`}

@@ -171,9 +171,9 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
         <div>
           {searchString ? (
             <div className="flex flex-col items-start">
-              <h1 className="text-xl md:text-2xl font-bold text-dark-900 uppercase tracking-wide">
+              <h2 className="text-xl md:text-2xl font-bold text-dark-900 uppercase tracking-wide">
                 SEARCH RESULT FOR &quot;{searchString.toUpperCase()}&quot; ({filteredAndSortedProducts.length})
-              </h1>
+              </h2>
               <div className="w-8 h-1 bg-brand-red mt-2 mb-2"></div>
             </div>
           ) : (

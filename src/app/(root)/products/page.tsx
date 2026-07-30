@@ -5,8 +5,12 @@ import CategoryGridShowcase from "@/components/CategoryGridShowcase";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
 export const metadata: Metadata = {
-  title: "Products & Industrial Equipment | KOREVA",
-  description: "Browse our extensive catalog of tractors, self-propelled machinery, food processing units, lubricants, and garden hand tools.",
+  title: "Agricultural Products & Implements Catalog | Koreva9",
+  description:
+    "Browse Koreva9's complete agricultural machinery catalog including Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, STOU Lubricants, and SK5 Hand Tools.",
+  alternates: {
+    canonical: "/products",
+  },
 };
 
 export default function ProductsPage() {
