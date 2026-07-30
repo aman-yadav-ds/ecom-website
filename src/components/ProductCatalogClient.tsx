@@ -8,7 +8,6 @@ import Filters from "./Filters";
 import Card from "./Card";
 import { parseQueryParams, removeQueryParam, buildQueryString } from "@/lib/utils/query";
 import { Filter as FilterIcon, X } from "lucide-react";
-import { ScrollReveal } from "./ScrollReveal";
 
 import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 
@@ -237,18 +236,17 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
           {/* Grid */}
           {filteredAndSortedProducts.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
-              {filteredAndSortedProducts.map((product, index) => (
-                <ScrollReveal key={product.id} animation="fade" delay={(index % 12) * 50}>
-                  <Card
-                    id={product.id}
-                    title={product.name}
-                    category={product.categoryName}
-                    price={product.price}
-                    image={product.image}
-                    variants={product.variantsCount}
-                    href={`/products/${product.id}`}
-                  />
-                </ScrollReveal>
+              {filteredAndSortedProducts.map((product) => (
+                <Card
+                  key={product.id}
+                  id={product.id}
+                  title={product.name}
+                  category={product.categoryName}
+                  price={product.price}
+                  image={product.image}
+                  variants={product.variantsCount}
+                  href={`/products/${product.id}`}
+                />
               ))}
             </div>
           ) : (
