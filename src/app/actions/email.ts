@@ -184,3 +184,103 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
     };
   }
 }
+
+export interface ContactUsData {
+  fullName: string;
+  email: string;
+  phone: string;
+  inquiryType: string;
+  subject: string;
+  message: string;
+}
+
+/**
+ * Server Action: Sends Contact Us inquiry details to sales.koreva@gmail.com via Resend SDK
+ */
+export async function sendContactUsAction(data: ContactUsData): Promise<ActionResult> {
+  try {
+    const apiKey = process.env.RESEND_API_KEY || "";
+    const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
+
+    if (!data.fullName || !data.email || !data.phone || !data.message) {
+      return { success: false, message: "Please fill in all required fields." };
+    }
+
+    const submissionDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+    if (!apiKey || apiKey.includes("demo")) {
+      console.log("[Server Action - Contact Us (Demo Mode)]", data);
+      return {
+        success: true,
+        message: "Thank you for contacting Koreva Global LLP! Our representative will respond within 24 hours.",
+      };
+    }
+
+    const resend = new Resend(apiKey);
+
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #a80000; border-bottom: 2px solid #a80000; padding-bottom: 10px;">New Contact Us Inquiry</h2>
+        <p style="font-size: 14px; color: #555;">A new contact message was received via the Koreva9 Website.</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold; width: 180px;">Inquiry Type:</td>
+            <td style="padding: 8px 0;">${data.inquiryType}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold;">Full Name:</td>
+            <td style="padding: 8px 0;">${data.fullName}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold;">Email Address:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${data.email}">${data.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold;">Phone Number:</td>
+            <td style="padding: 8px 0;">${data.phone}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold;">Subject:</td>
+            <td style="padding: 8px 0;">${data.subject || "General Inquiry"}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold; vertical-align: top;">Message:</td>
+            <td style="padding: 8px 0; white-space: pre-wrap;">${data.message}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold;">Submitted At:</td>
+            <td style="padding: 8px 0;">${submissionDate}</td>
+          </tr>
+        </table>
+        
+        <hr style="margin-top: 25px; border: none; border-top: 1px solid #eee;" />
+        <p style="font-size: 12px; color: #888;">This is an automated notification from Koreva Global LLP website (Koreva9).</p>
+      </div>
+    `;
+
+    const { error } = await resend.emails.send({
+      from: "Koreva9 Contact <info@mail.koreva9.com>",
+      to: [recipientEmail],
+      replyTo: data.email,
+      subject: `[Contact Form] ${data.inquiryType}: ${data.subject || data.fullName}`,
+      html: htmlContent,
+    });
+
+    if (error) {
+      console.error("[Resend Error - Contact Us]", error);
+      return { success: false, message: "Failed to send your message. Please call our support line." };
+    }
+
+    return {
+      success: true,
+      message: "Thank you for contacting Koreva Global LLP! Our representative will respond within 24 hours.",
+    };
+  } catch (error) {
+    console.error("[Server Action - Contact Us Exception]", error);
+    return {
+      success: false,
+      message: "An unexpected error occurred. Please try again later.",
+    };
+  }
+}
