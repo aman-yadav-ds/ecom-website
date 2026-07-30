@@ -9,15 +9,37 @@ interface DownloadItem {
   type: "Catalogue" | "Manual" | "Safety";
   size: string;
   date: string;
+  fileUrl?: string;
 }
 
 const downloads: DownloadItem[] = [
   { id: "1", title: "KOREVA9 Master Product Catalogue 2026", type: "Catalogue", size: "12.4 MB", date: "Jan 2026" },
   { id: "2", title: "7HP Khet Shakti Power Weeder - User Manual", type: "Manual", size: "4.2 MB", date: "Mar 2026" },
-  { id: "3", title: "Rotavator Attachment Installation Guide", type: "Manual", size: "2.1 MB", date: "Feb 2026" },
+  {
+    id: "3",
+    title: "Rotavator Attachment Installation Guide",
+    type: "Manual",
+    size: "148 KB",
+    date: "Feb 2026",
+    fileUrl: "/downloads/rotavator-installation-guide.pdf",
+  },
   { id: "4", title: "Brush Cutter Pro - Operating Instructions", type: "Manual", size: "3.5 MB", date: "Apr 2026" },
-  { id: "5", title: "E20 Petrol Safety & Carburetor Care", type: "Safety", size: "1.1 MB", date: "May 2026" },
-  { id: "6", title: "Heavy Machinery General Safety Guidelines", type: "Safety", size: "2.8 MB", date: "Jan 2026" },
+  {
+    id: "5",
+    title: "E20 Petrol Safety & Carburetor Care",
+    type: "Safety",
+    size: "135 KB",
+    date: "May 2026",
+    fileUrl: "/downloads/e20-petrol-safety-care.pdf",
+  },
+  {
+    id: "6",
+    title: "Heavy Machinery General Safety Guidelines",
+    type: "Safety",
+    size: "142 KB",
+    date: "Jan 2026",
+    fileUrl: "/downloads/heavy-machinery-safety-guidelines.pdf",
+  },
   { id: "7", title: "Food Processing Units - Mini Rice Mill Specs", type: "Catalogue", size: "5.6 MB", date: "Jun 2026" },
 ];
 
@@ -90,9 +112,24 @@ export default function DownloadsPage() {
                       </div>
                     </div>
                   </div>
-                  <button className="shrink-0 w-full sm:w-auto px-6 py-2.5 border-2 border-brand-red text-brand-red font-bold uppercase text-sm hover:bg-brand-red hover:text-white transition-all flex items-center justify-center gap-2">
-                    <Download className="w-4 h-4" /> Download
-                  </button>
+                  {item.fileUrl ? (
+                    <a
+                      href={item.fileUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 w-full sm:w-auto px-6 py-2.5 bg-brand-red border-2 border-brand-red text-white font-bold uppercase text-sm hover:bg-brand-red-accent transition-all flex items-center justify-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                    >
+                      <Download className="w-4 h-4" /> Download PDF
+                    </a>
+                  ) : (
+                    <button
+                      disabled
+                      className="shrink-0 w-full sm:w-auto px-6 py-2.5 border-2 border-gray-200 text-gray-400 font-bold uppercase text-xs cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      Coming Soon
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
