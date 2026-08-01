@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { X, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,14 +44,6 @@ export default function CookieConsent() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6 md:p-8 pointer-events-none flex flex-col items-center">
       <div className="bg-white shadow-2xl border border-light-300 w-full max-w-4xl p-6 sm:p-8 pointer-events-auto flex flex-col font-jost relative">
-        <button 
-          onClick={() => setIsVisible(false)}
-          className="absolute top-4 right-4 text-gray-400 hover:text-dark-900 transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
-        
         {!showCustomize ? (
           // Main Banner View
           <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center">
@@ -65,16 +57,22 @@ export default function CookieConsent() {
                 Read our Cookie Policy
               </Link>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
+            <div className="flex flex-col sm:flex-row gap-2.5 w-full md:w-auto shrink-0">
+              <button 
+                onClick={() => saveConsent(false, false)}
+                className="px-5 py-2.5 border border-gray-300 text-dark-700 font-bold uppercase text-sm hover:bg-gray-100 transition-colors"
+              >
+                Reject Optional
+              </button>
               <button 
                 onClick={() => setShowCustomize(true)}
-                className="px-6 py-2.5 border border-dark-900 text-dark-900 font-bold uppercase text-sm hover:bg-light-200 transition-colors"
+                className="px-5 py-2.5 border border-dark-900 text-dark-900 font-bold uppercase text-sm hover:bg-light-200 transition-colors"
               >
                 Customize
               </button>
               <button 
                 onClick={handleAcceptAll}
-                className="px-6 py-2.5 bg-brand-red text-white font-bold uppercase text-sm hover:bg-red-700 transition-colors shadow-md"
+                className="px-5 py-2.5 bg-brand-red text-white font-bold uppercase text-sm hover:bg-red-700 transition-colors shadow-md"
               >
                 Accept All
               </button>
