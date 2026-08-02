@@ -117,7 +117,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-black text-white overflow-x-hidden max-w-full">
+      <body className="min-h-full flex flex-col bg-[#fbfbfb] text-[#080808] overflow-x-hidden max-w-full font-jost antialiased">
         {children}
       </body>
     </html>

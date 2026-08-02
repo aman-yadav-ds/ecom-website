@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { ScrollReveal } from "../ScrollReveal";
+import { motion } from "framer-motion";
 import { ShieldCheck, Award, Wrench, MapPin, CheckCircle, Package } from "lucide-react";
 
 const strengths = [
@@ -43,62 +45,67 @@ const strengths = [
 
 export function OurStrength() {
   return (
-    <section className="bg-light-200 py-16 md:py-24 px-4 border-y border-light-300 font-jost">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-[#fbfbfb] py-20 md:py-28 px-4 font-jost border-b border-light-300 overflow-hidden">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-14 gap-4 md:gap-6">
-          <ScrollReveal animation="slide-right" className="w-full md:w-auto">
-            <div className="flex items-center gap-4 mb-2">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full md:w-auto"
+          >
+            <div className="flex items-center gap-3 mb-2">
               <div className="h-[2px] w-8 md:w-12 bg-brand-red"></div>
-              <span className="text-brand-red font-bold tracking-widest text-xs md:text-sm uppercase">
-                Quality & Reliability
+              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
+                Why KOREVA GLOBAL LLP
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-black uppercase">
-              THE KOREVA GLOBAL PROMISE
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-900 uppercase tracking-tight">
+              OUR MANUFACTURING STRENGTH
             </h2>
-          </ScrollReveal>
-          <ScrollReveal animation="slide-left" className="flex-1 flex justify-start md:justify-end">
-            <p className="max-w-md text-brand-dark text-sm md:text-base text-left md:text-right font-medium border-l-4 md:border-l-0 md:border-r-4 border-brand-red pl-4 md:pl-0 md:pr-4">
-              At <strong className="text-dark-900 font-bold">KOREVA GLOBAL LLP</strong>, our commitment to Indian agriculture combines rigorous ISO standards, genuine OEM spare parts, and nationwide dealer accessibility.
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-md"
+          >
+            <p className="text-dark-700 text-sm md:text-base font-medium leading-relaxed">
+              Combining precision engineering with extensive field testing, KOREVA GLOBAL LLP delivers reliable machinery designed specifically for Indian agriculture.
             </p>
-          </ScrollReveal>
+          </motion.div>
         </div>
 
-        {/* 6 Grid items with 200ms transitions */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {strengths.map((strength, index) => (
-            <ScrollReveal key={index} animation="fade" delay={index * 100}>
-              <div 
-                className="group relative h-auto min-h-[220px] md:h-[260px] overflow-hidden rounded-lg border-l-4 border-brand-red/0 hover:border-brand-red transition-all duration-200 shadow-sm hover:shadow-xl flex flex-col justify-center"
-              >
-                {/* Background Image */}
-                <Image
-                  src={strength.image}
-                  alt={`${strength.title} - KOREVA GLOBAL LLP`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-200 group-hover:scale-105"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-black/95 via-brand-black/90 to-brand-black/85 group-hover:from-brand-black/90 group-hover:to-[#3a0000]/90 transition-colors duration-200 z-10" />
-
-                {/* Content */}
-                <div className="relative p-6 md:p-8 z-20">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="p-1.5 bg-brand-red/20 border border-brand-red/40 rounded-sm">
-                      {strength.icon}
+        {/* 6-Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {strengths.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="group rounded-2xl glass-card border border-light-300/80 p-6 md:p-8 h-full flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2.5 rounded-xl bg-brand-red/10 border border-brand-red/20">
+                      {item.icon}
                     </div>
-                    <h3 className="text-light-100 text-base md:text-lg font-bold uppercase tracking-wide">
-                      {strength.title}
+                    <h3 className="text-dark-900 font-extrabold text-sm sm:text-base uppercase tracking-wider group-hover:text-brand-red transition-colors">
+                      {item.title}
                     </h3>
                   </div>
-                  <p className="text-gray-300 text-xs md:text-sm leading-relaxed font-medium border-t border-white/10 pt-3">
-                    {strength.description}
+                  <p className="text-dark-600 text-xs sm:text-sm leading-relaxed font-medium">
+                    {item.description}
                   </p>
                 </div>
               </div>
-            </ScrollReveal>
+            </motion.div>
           ))}
         </div>
       </div>

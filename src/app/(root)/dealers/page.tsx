@@ -1,7 +1,7 @@
 import React from 'react';
 import { exampleDealers } from '@/lib/details/dealers';
 import DealerListView from '@/components/dealers/DealerListView';
-import { Check } from 'lucide-react';
+import { Check, ShieldCheck, Store } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 
 export default async function DealersPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
@@ -11,14 +11,18 @@ export default async function DealersPage(props: { searchParams: Promise<{ [key:
   const defaultCenter = { lat: 30.0668, lng: 79.0193 };
 
   return (
-    <div className="flex flex-col min-h-screen bg-light-100">
+    <div className="flex flex-col min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col">
         <ScrollReveal animation="slide-bottom">
-          <h1 className="font-jost text-heading-2 text-brand-dark tracking-wide uppercase mb-2">
-            Find Your Local Koreva Dealer
-          </h1>
-          <div className="w-16 h-2 bg-brand-dark mb-12"></div>
+          <div className="flex flex-col gap-2 mb-8 border-b border-light-300 pb-4">
+            <span className="text-brand-red font-extrabold text-xs uppercase tracking-widest flex items-center gap-1.5">
+              <Store className="w-4 h-4" /> Authorized Sales & Service Centers
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-dark-900 tracking-tight uppercase">
+              Find Your Local KOREVA Dealer
+            </h1>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal animation="fade" delay={200}>
@@ -27,23 +31,29 @@ export default async function DealersPage(props: { searchParams: Promise<{ [key:
       </main>
 
       {/* Benefits Section */}
-      <div className="bg-light-200 py-16 px-4 md:px-8 mt-12">
-        <ScrollReveal animation="slide-bottom" className="max-w-4xl mx-auto">
-          <h2 className="text-center font-jost text-heading-3 md:text-[32px] text-brand-dark uppercase tracking-wide mb-12">
-            Benefits of a Koreva Authorized Dealer
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+      <div className="py-16 px-4 md:px-8 border-t border-light-300 bg-[#fbfbfb]">
+        <ScrollReveal animation="slide-bottom" className="max-w-5xl mx-auto glass-panel border border-light-300/80 rounded-3xl p-8 sm:p-12 shadow-xs">
+          <div className="text-center mb-10">
+            <span className="text-brand-red font-extrabold text-xs uppercase tracking-widest block mb-1">Pan-India Support</span>
+            <h2 className="font-jost text-2xl md:text-3xl font-extrabold text-dark-900 uppercase tracking-wide">
+              Benefits of a KOREVA Authorized Dealer
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              "Professional advice",
-              "Original spare parts and accessories",
-              "Expert after-sales service",
-              "First-class service",
-              "Full product handover",
-              "Products to try before you buy"
+              "Professional machinery consultation",
+              "Original spare parts & EP-90 lubricants",
+              "Expert field technician after-sales service",
+              "100% genuine warranty registration",
+              "Complete pre-delivery inspection & handover",
+              "Demonstration machines to try before buying"
             ].map((benefit, idx) => (
-              <div key={idx} className="flex items-center gap-3">
-                <Check size={20} className="text-brand-dark shrink-0" strokeWidth={3} />
-                <span className="font-jost text-body text-brand-dark">{benefit}</span>
+              <div key={idx} className="glass-card p-5 rounded-2xl border border-light-300 flex items-center gap-3 shadow-xs">
+                <div className="w-8 h-8 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0">
+                  <Check size={16} strokeWidth={3} />
+                </div>
+                <span className="font-jost text-xs sm:text-sm font-bold text-dark-900 leading-snug">{benefit}</span>
               </div>
             ))}
           </div>

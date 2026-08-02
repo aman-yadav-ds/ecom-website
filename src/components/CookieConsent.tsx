@@ -43,36 +43,30 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6 md:p-8 pointer-events-none flex flex-col items-center">
-      <div className="bg-white shadow-2xl border border-light-300 w-full max-w-4xl p-6 sm:p-8 pointer-events-auto flex flex-col font-jost relative">
+      <div className="glass-panel-elevated backdrop-blur-3xl border border-white/95 shadow-2xl w-full max-w-4xl p-6 sm:p-8 pointer-events-auto flex flex-col font-jost relative rounded-3xl">
         {!showCustomize ? (
           // Main Banner View
           <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center">
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-brand-dark uppercase tracking-wide mb-2">We Value Your Privacy</h2>
-              <p className="text-dark-700 text-sm leading-relaxed mb-2">
+              <h2 className="text-lg md:text-xl font-extrabold text-dark-900 uppercase tracking-wide mb-2">We Value Your Privacy</h2>
+              <p className="text-dark-600 text-xs sm:text-sm leading-relaxed mb-2 font-medium">
                 We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
                 By clicking "Accept All", you consent to our use of cookies. 
               </p>
-              <Link href="/cookies" className="text-brand-red text-sm font-medium hover:underline">
+              <Link href="/cookies" className="text-brand-red text-xs sm:text-sm font-bold hover:underline">
                 Read our Cookie Policy
               </Link>
             </div>
             <div className="flex flex-col sm:flex-row gap-2.5 w-full md:w-auto shrink-0">
               <button 
-                onClick={() => saveConsent(false, false)}
-                className="px-5 py-2.5 border border-gray-300 text-dark-700 font-bold uppercase text-sm hover:bg-gray-100 transition-colors"
-              >
-                Reject Optional
-              </button>
-              <button 
                 onClick={() => setShowCustomize(true)}
-                className="px-5 py-2.5 border border-dark-900 text-dark-900 font-bold uppercase text-sm hover:bg-light-200 transition-colors"
+                className="px-5 py-3 border border-light-300 hover:border-dark-900 text-dark-900 font-bold text-xs uppercase tracking-wider rounded-full transition-colors w-full sm:w-auto text-center"
               >
                 Customize
               </button>
               <button 
                 onClick={handleAcceptAll}
-                className="px-5 py-2.5 bg-brand-red text-white font-bold uppercase text-sm hover:bg-red-700 transition-colors shadow-md"
+                className="px-7 py-3 bg-brand-red hover:bg-brand-red-accent text-white font-extrabold text-xs uppercase tracking-wider rounded-full transition-colors shadow-md w-full sm:w-auto text-center active:scale-95"
               >
                 Accept All
               </button>

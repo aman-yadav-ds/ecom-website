@@ -41,78 +41,78 @@ export default function Search({ isOpen, onClose }: SearchProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-start pt-[15vh] justify-center bg-black/70 backdrop-blur-md transition-all duration-400 ease-out ${
+      className={`fixed inset-0 z-[100] flex items-start pt-[12vh] md:pt-[15vh] justify-center bg-black/40 backdrop-blur-3xl transition-all duration-300 ease-out ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       }`}
     >
       <div
-        className={`relative w-full max-w-4xl mx-4 transform transition-all duration-400 ease-out delay-75 ${
-          isOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-8"
+        className={`relative w-full max-w-4xl mx-4 transform transition-all duration-300 ease-out ${
+          isOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-6"
         }`}
       >
-        <div className="bg-light-100 shadow-2xl overflow-hidden border-2 border-brand-red rounded-xl">
-          <form onSubmit={handleSubmit} className="flex items-center p-3 bg-white">
+        <div className="glass-panel-elevated shadow-2xl overflow-hidden border border-white/95 rounded-3xl">
+          <form onSubmit={handleSubmit} className="flex items-center p-3 bg-white/90 backdrop-blur-xl">
             <SearchIcon className="w-6 h-6 text-brand-red ml-4 shrink-0" />
             <input
               ref={searchInputRef}
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search products, implements, or models..."
-              className="w-full px-4 py-4 text-lg md:text-xl text-dark-900 bg-transparent outline-none placeholder-dark-500 font-medium focus-visible:ring-0"
+              placeholder="Search Power Weeders, Harrows, Rotavators, STOU Lubricants..."
+              className="w-full px-4 py-4 text-base md:text-xl text-dark-900 bg-transparent outline-none placeholder-dark-400 font-medium focus-visible:ring-0"
             />
             <button
               type="button"
               onClick={onClose}
-              className="p-3 bg-brand-black text-light-100 hover:bg-brand-red transition-colors rounded-lg mr-1 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="p-3 bg-light-200 text-dark-900 hover:bg-brand-red hover:text-white transition-all rounded-full mr-1 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red shadow-xs border border-light-300/80"
               aria-label="Close search"
             >
-              <X className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
+              <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
             </button>
           </form>
 
           {/* Quick Links Section */}
-          <div className="p-5 md:p-6 bg-light-200/50 border-t border-light-300 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm md:text-base text-dark-700">
-            <span className="font-bold text-dark-900 tracking-wide text-xs uppercase">Popular Searches</span>
+          <div className="p-5 md:p-6 bg-light-100/80 border-t border-light-300 flex flex-wrap items-center gap-x-3 gap-y-2.5 text-xs md:text-sm font-medium text-dark-700">
+            <span className="font-extrabold text-dark-900 tracking-wider text-xs uppercase mr-1">Popular Searches:</span>
             <button 
               type="button" 
               onClick={() => handleQuickLink('Power Weeder')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               Power Weeder
             </button>
             <button 
               type="button" 
               onClick={() => handleQuickLink('Brush Cutter')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               Brush Cutter
             </button>
             <button 
               type="button" 
               onClick={() => handleQuickLink('Rotavator')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               Rotavator
             </button>
             <button 
               type="button" 
               onClick={() => handleQuickLink('Mini Rice Mill')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               Mini Rice Mill
             </button>
             <button 
               type="button" 
               onClick={() => handleQuickLink('STOU Lubricant')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               STOU Lubricant
             </button>
             <button 
               type="button" 
               onClick={() => handleQuickLink('Pruning Secateur')} 
-              className="hover:text-brand-red transition-colors bg-light-100 px-3 py-1.5 rounded-full border border-light-300 shadow-sm hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="glass-pill px-3.5 py-1.5 rounded-full hover:bg-brand-red hover:text-white transition-all shadow-xs"
             >
               Pruning Secateur
             </button>
@@ -122,4 +122,5 @@ export default function Search({ isOpen, onClose }: SearchProps) {
     </div>
   );
 }
+
 

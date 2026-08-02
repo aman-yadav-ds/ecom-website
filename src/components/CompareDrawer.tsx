@@ -45,7 +45,7 @@ const CompareDrawer = () => {
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="bg-white border-t border-gray-200 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] px-4 py-4 md:px-8">
+      <div className="bg-white/94 backdrop-blur-3xl border-t border-light-300 shadow-2xl px-4 py-4 md:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           
           {/* Selected Products Area */}
@@ -57,7 +57,7 @@ const CompareDrawer = () => {
               return (
                 <div
                   key={index}
-                  className="relative flex items-center justify-center w-24 h-24 md:w-32 md:h-32 bg-gray-50 border border-gray-200 rounded-lg flex-shrink-0"
+                  className="relative flex items-center justify-center w-24 h-24 md:w-32 md:h-32 bg-white/80 border border-light-300 rounded-2xl flex-shrink-0 shadow-xs"
                 >
                   {product ? (
                     <>
@@ -71,20 +71,20 @@ const CompareDrawer = () => {
                             className="object-contain"
                           />
                         </div>
-                        <span className="text-[10px] md:text-xs font-semibold text-center text-dark-900 line-clamp-2 leading-tight">
+                        <span className="text-[10px] md:text-xs font-bold text-center text-dark-900 line-clamp-2 leading-tight">
                           {product.name}
                         </span>
                       </div>
                       <button
                         onClick={() => removeProduct(product.id)}
-                        className="absolute -top-3 -right-3 w-8 h-8 min-w-[32px] min-h-[32px] bg-white border border-gray-300 text-gray-700 hover:text-brand-red hover:border-brand-red rounded-full flex items-center justify-center shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                        className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-white border border-light-300 text-dark-700 hover:text-white hover:bg-brand-red hover:border-brand-red rounded-full flex items-center justify-center shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
                         aria-label="Remove product from comparison"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3.5 h-3.5 group-hover:rotate-90 transition-transform" />
                       </button>
                     </>
                   ) : (
-                    <div className="text-gray-400 text-xs text-center px-2">
+                    <div className="text-dark-400 text-xs font-medium text-center px-2">
                       Add Product
                     </div>
                   )}
@@ -97,13 +97,13 @@ const CompareDrawer = () => {
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto shrink-0">
             <button
               onClick={clearAll}
-              className="text-xs sm:text-sm font-bold text-gray-600 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs min-h-[44px] px-3 py-2"
+              className="text-xs sm:text-sm font-bold text-dark-600 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red min-h-[44px] px-4 py-2 uppercase tracking-wider"
             >
               Clear All
             </button>
             <Link
               href={`/compare${queryStringResult ? `?${queryStringResult}` : ""}`}
-              className="bg-brand-red hover:bg-brand-red-accent text-white px-8 py-3 rounded-lg font-bold shadow-md transition-colors w-full sm:w-auto text-center flex items-center justify-center min-h-[44px] uppercase text-sm tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="bg-brand-red hover:bg-brand-red-accent text-white px-8 py-3.5 rounded-full font-extrabold shadow-md transition-all w-full sm:w-auto text-center flex items-center justify-center min-h-[44px] uppercase text-xs sm:text-sm tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red active:scale-95"
             >
               Compare Products ({selectedProductIds.length})
             </Link>
@@ -113,7 +113,8 @@ const CompareDrawer = () => {
       </div>
     </div>
   );
-};
+}
+;
 
 export default CompareDrawer;
 

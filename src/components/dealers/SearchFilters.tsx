@@ -10,7 +10,7 @@ interface SearchFiltersProps {
   activeRadius: number;
 }
 
-const RADIUS_OPTIONS = [10, 20, 50, 100];
+const RADIUS_OPTIONS = [10, 20, 50, 100, 200, 500];
 
 export default function SearchFilters({
   onSearch,
@@ -31,26 +31,21 @@ export default function SearchFilters({
     
     setIsLocating(true);
     try {
-      // Use Nominatim to geocode the input string
       const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`);
       const data = await res.json();
       
       if (data && data.length > 0) {
-        // Geocode successful: treat as location search
         onLocationChange({
           lat: parseFloat(data[0].lat),
           lng: parseFloat(data[0].lon)
         }, data[0].display_name);
-        // Clear text match in parent so we only use radius logic
         onSearch('');
       } else {
-        // Geocode failed: treat as a direct text search (Dealer Name)
         onLocationChange(null, searchTerm);
         onSearch(searchTerm);
       }
     } catch (err) {
       console.error("Geocoding failed:", err);
-      // Fallback to text search on error
       onLocationChange(null, searchTerm);
       onSearch(searchTerm);
     } finally {
@@ -71,8 +66,8 @@ export default function SearchFilters({
           lat: position.coords.latitude,
           lng: position.coords.longitude
         }, 'Your Location');
-        onSearch(''); // Clear text search
-        setSearchTerm(''); // Clear input box for clarity
+        onSearch('');
+        setSearchTerm('');
       },
       (error) => {
         setIsLocating(false);
@@ -83,24 +78,24 @@ export default function SearchFilters({
   };
 
   return (
-    <div className="flex flex-col gap-8 w-full mb-8">
+    <div className="flex flex-col gap-6 w-full mb-8 font-jost">
       {/* Search Header and Input */}
       <div className="flex flex-col lg:flex-row items-center gap-6">
-        <h2 className="font-jost text-xl lg:text-2xl font-[700] text-brand-dark uppercase tracking-wider shrink-0 w-full lg:w-auto text-center lg:text-left">
-          Search for a dealer
+        <h2 className="text-lg lg:text-xl font-extrabold text-dark-900 uppercase tracking-wider shrink-0 w-full lg:w-auto text-center lg:text-left">
+          Search Dealers
         </h2>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
-          <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full flex items-center border-b-2 border-brand-dark">
+          <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full flex items-center glass-panel-elevated border border-light-300 rounded-full px-4 py-1.5 shadow-xs focus-within:border-brand-red focus-within:ring-1 focus-within:ring-brand-red transition-all">
             <input
               type="text"
-              placeholder="TOWN / POSTCODE / DEALER NAME"
-              className="w-full bg-transparent text-brand-dark placeholder-dark-500 font-jost text-lg lg:text-xl py-3 pl-2 pr-12 focus:outline-none uppercase font-[600]"
+              placeholder="Enter Town, Postcode, or Dealer Name..."
+              className="w-full bg-transparent text-dark-900 placeholder-dark-400 font-jost text-sm md:text-base py-2.5 pl-2 pr-10 focus:outline-none uppercase font-bold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button type="submit" className="absolute right-2 text-brand-dark hover:text-brand-red transition-colors" disabled={isLocating}>
-              <Search size={28} strokeWidth={2.5} className={isLocating ? 'animate-pulse' : ''} />
+            <button type="submit" className="absolute right-3 text-brand-red hover:text-brand-red-accent transition-colors p-1" disabled={isLocating}>
+              <Search size={22} className={isLocating ? 'animate-pulse' : ''} />
             </button>
           </form>
           
@@ -108,33 +103,31 @@ export default function SearchFilters({
             type="button"
             onClick={requestLocation}
             disabled={isLocating}
-            className="flex items-center justify-center gap-2 shrink-0 text-brand-dark hover:text-brand-red transition-colors font-jost text-[16px] font-[600] disabled:opacity-50"
+            className="flex items-center justify-center gap-2 shrink-0 glass-panel border border-light-300 hover:border-brand-red text-dark-900 hover:text-brand-red transition-all font-jost text-xs uppercase tracking-wider font-extrabold px-6 py-3.5 rounded-full shadow-xs disabled:opacity-50 active:scale-95 cursor-pointer"
           >
-            <MapPin size={20} strokeWidth={2.5} />
-            {isLocating ? 'Locating...' : 'Use my location'}
+            <MapPin size={18} className="text-brand-red" />
+            <span>{isLocating ? 'Locating...' : 'Use My Location'}</span>
           </button>
         </div>
       </div>
 
       {/* Filters & Distance */}
-      <div className="flex flex-col gap-2">
-        <label className="font-jost text-sm text-dark-700">Max. distance:</label>
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <select
-              value={activeRadius}
-              onChange={(e) => onRadiusChange(Number(e.target.value))}
-              className="appearance-none bg-light-100 border border-light-300 text-brand-dark font-jost text-sm py-2 pl-4 pr-10 focus:outline-none cursor-pointer min-w-[150px] shadow-sm hover:border-dark-500 transition-colors"
-            >
-              {RADIUS_OPTIONS.map((radius) => (
-                <option key={radius} value={radius}>{radius} km</option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-brand-dark">
-              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-              </svg>
-            </div>
+      <div className="flex items-center gap-3">
+        <label className="font-jost text-xs font-extrabold text-dark-600 uppercase tracking-wider">Max Distance:</label>
+        <div className="relative">
+          <select
+            value={activeRadius}
+            onChange={(e) => onRadiusChange(Number(e.target.value))}
+            className="appearance-none bg-white border border-light-300 text-dark-900 font-jost text-xs font-extrabold uppercase py-2 pl-4 pr-10 rounded-full focus:outline-none cursor-pointer min-w-[130px] shadow-xs hover:border-brand-red transition-colors"
+          >
+            {RADIUS_OPTIONS.map((radius) => (
+              <option key={radius} value={radius}>{radius} km Radius</option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-dark-600">
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            </svg>
           </div>
         </div>
       </div>

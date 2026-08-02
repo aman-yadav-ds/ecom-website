@@ -5,14 +5,14 @@ import dynamic from 'next/dynamic';
 import { Dealer } from '@/lib/types';
 import SearchFilters from './SearchFilters';
 import DealerInfoCard from './DealerInfoCard';
-import { AlertCircle, MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@/store/useModalStore';
 
 // Dynamically import DealerMap with SSR disabled
 const DealerMap = dynamic(() => import('./DealerMap'), {
   ssr: false,
-  loading: () => <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] bg-gray-100 animate-pulse flex items-center justify-center font-jost text-gray-400 uppercase tracking-wider text-xs sm:text-sm">Loading Map Interface...</div>
+  loading: () => <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] glass-panel border border-light-300 rounded-3xl animate-pulse flex items-center justify-center font-jost text-dark-500 uppercase tracking-wider text-xs sm:text-sm font-extrabold">Loading Map Interface...</div>
 });
 
 // Haversine formula to calculate distance between two coordinates in km
@@ -23,8 +23,7 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2)
-    ;
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -79,7 +78,7 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
   const currentCenter = activeLocation || defaultCenter;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full font-jost">
       <SearchFilters
         onSearch={setSearchTerm}
         onRadiusChange={setActiveRadius}
@@ -91,61 +90,65 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
       />
 
       {/* Tabs */}
-      <div className="flex items-end mb-4 border-b border-gray-200">
-        <div className="flex border border-gray-200 border-b-0 overflow-hidden">
+      <div className="flex items-center justify-between mb-6 pb-2 border-b border-light-300">
+        <div className="flex items-center gap-2 p-1 glass-panel border border-light-300 rounded-full shadow-xs">
           <button
             onClick={() => setActiveView('map')}
-            className={`py-3 px-8 font-jost text-sm font-[600] transition-colors ${activeView === 'map' ? 'bg-[#1a1a1a] text-white' : 'bg-white text-[#1a1a1a] hover:bg-gray-50'}`}
+            className={`py-2 px-6 rounded-full font-jost text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+              activeView === 'map' ? 'bg-brand-red text-white shadow-xs' : 'text-dark-700 hover:text-dark-900'
+            }`}
           >
-            Map
+            Map View
           </button>
           <button
             onClick={() => setActiveView('list')}
-            className={`py-3 px-8 font-jost text-sm font-[600] transition-colors border-l border-gray-200 ${activeView === 'list' ? 'bg-[#1a1a1a] text-white' : 'bg-white text-[#1a1a1a] hover:bg-gray-50'}`}
+            className={`py-2 px-6 rounded-full font-jost text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+              activeView === 'list' ? 'bg-brand-red text-white shadow-xs' : 'text-dark-700 hover:text-dark-900'
+            }`}
           >
-            List
+            List View
           </button>
         </div>
-        <div className="ml-6 pb-2 text-sm font-jost text-gray-500 hidden sm:block">
-          {filteredDealers.length} Search result{filteredDealers.length !== 1 ? 's' : ''}
+        <div className="text-xs font-extrabold uppercase tracking-widest text-dark-500 hidden sm:block">
+          {filteredDealers.length} Authorized Dealer{filteredDealers.length !== 1 ? 's' : ''} Found
         </div>
       </div>
 
       <div className="w-full">
         {filteredDealers.length === 0 ? (
-          <div className="w-full flex flex-col items-center justify-center py-24 px-4 text-center gap-6 bg-light-100 rounded-sm border border-light-300 shadow-sm mt-4">
-            <div className="bg-light-200 p-5 rounded-full mb-2">
-              <MapPin className="text-dark-500 w-12 h-12" />
+          <div className="w-full flex flex-col items-center justify-center py-20 px-4 text-center gap-6 glass-panel border border-light-300 rounded-3xl shadow-xs mt-2">
+            <div className="w-16 h-16 bg-brand-red/10 border border-brand-red/20 text-brand-red rounded-2xl flex items-center justify-center shadow-xs">
+              <MapPin className="w-8 h-8" />
             </div>
-            <p className="font-jost text-xl md:text-2xl text-brand-dark font-[600] max-w-2xl leading-relaxed">
-              Sorry, Our network currently hasn't been extended to <br />
+            <p className="font-jost text-lg md:text-xl text-dark-900 font-extrabold max-w-2xl leading-relaxed uppercase">
+              Our dealer network currently hasn't extended to <br />
               <span className="text-brand-red">'{activeLocationName || searchTerm || "this area"}'</span>.
             </p>
 
-            <div className="w-16 h-1 bg-light-300 my-4"></div>
+            <div className="w-16 h-1 bg-light-300 rounded-full my-2"></div>
 
             <div className="flex flex-col items-center gap-4">
-              <p className="font-jost text-lg text-dark-700 font-[500]">
-                Looking to Join Our Network?
+              <p className="font-jost text-sm text-dark-600 font-bold">
+                Looking to Join Our Network as a Regional Dealer?
               </p>
               <button
                 onClick={openJoinModal}
-                className="px-8 py-3.5 rounded-full bg-brand-black text-light-100 font-medium hover:bg-brand-red transition-all shadow-md group flex items-center gap-2 uppercase tracking-wider text-sm"
+                className="px-8 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-accent text-white font-extrabold transition-all shadow-md group flex items-center gap-2 uppercase tracking-wider text-xs active:scale-95 cursor-pointer"
               >
-                Join Us
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <span>Apply for Dealership</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
 
             <button
               onClick={resetCriteria}
-              className="mt-6 font-jost text-sm text-dark-500 hover:text-brand-dark font-[600] underline transition-all"
+              className="mt-4 font-jost text-xs text-dark-500 hover:text-brand-red font-bold uppercase tracking-wider underline transition-all cursor-pointer"
             >
               Clear Search Filters
             </button>
           </div>
         ) : activeView === 'map' ? (
-          <div className="w-full h-[380px] sm:h-[480px] lg:h-[600px] border border-gray-200 relative z-0 bg-gray-100 mt-4 rounded-sm overflow-hidden">
+          <div className="w-full h-[400px] sm:h-[500px] lg:h-[620px] border border-light-300 relative z-0 bg-white rounded-3xl overflow-hidden shadow-md">
             <DealerMap
               dealers={filteredDealers}
               center={currentCenter}
@@ -153,7 +156,7 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
             />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredDealers.map(dealer => {
               let distance: number | undefined = undefined;
               if (activeLocation) {

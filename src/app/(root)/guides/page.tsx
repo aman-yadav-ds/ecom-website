@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Wrench, Sprout } from "lucide-react";
+import { ArrowRight, BookOpen, Wrench, Sprout, BookCheck } from "lucide-react";
 
 interface GuideCard {
   title: string;
@@ -32,7 +32,7 @@ const guides: GuideCard[] = [
   {
     title: "Tillage Farming Basics",
     category: "Farming Tips",
-    excerpt: "Maximize your yield by mastering the basics of soil preparation and secondary tillage using KOREVA9 equipment.",
+    excerpt: "Maximize your yield by mastering the basics of soil preparation and secondary tillage using KOREVA equipment.",
     icon: Sprout,
     image: "/guides/tillage_basics_hero.jpg",
     href: "/guides/tillage-basics"
@@ -51,21 +51,24 @@ export default function GuidesPage() {
   const FeaturedIcon = guides[0].icon;
 
   return (
-    <div className="min-h-screen bg-light-100 py-12 md:py-20 px-4 font-jost">
+    <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-dark uppercase tracking-wide mb-4">
-            Guides & Advice
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-red/20 text-brand-red text-xs font-extrabold uppercase tracking-widest mb-4 shadow-xs">
+            <BookCheck className="w-4 h-4" />
+            <span>KOREVA Knowledge Base</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-900 uppercase tracking-tight mb-4">
+            Guides & Machinery Advice
           </h1>
-          <div className="w-24 h-2 bg-brand-red mx-auto mb-6"></div>
-          <p className="text-lg text-dark-700 max-w-2xl mx-auto">
-            Expert tips on farming techniques, buying decisions, and essential maintenance routines for your KOREVA9 machinery.
+          <p className="text-dark-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+            Expert tips on farming techniques, buying decisions, and essential maintenance routines for your KOREVA machinery.
           </p>
         </div>
 
         {/* Featured Guide: The E20 Warning */}
-        <Link href={guides[0].href} className="bg-white border border-light-300 shadow-sm overflow-hidden flex flex-col md:flex-row mb-12 group cursor-pointer hover:shadow-lg transition-all block">
-          <div className="w-full md:w-1/2 relative min-h-[300px]">
+        <Link href={guides[0].href} className="glass-panel-elevated border border-light-300 shadow-md rounded-3xl overflow-hidden flex flex-col md:flex-row mb-12 group cursor-pointer hover:shadow-xl transition-all block">
+          <div className="w-full md:w-1/2 relative min-h-[280px] sm:min-h-[350px]">
             <Image 
               src={guides[0].image} 
               alt={guides[0].title}
@@ -73,21 +76,22 @@ export default function GuidesPage() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold uppercase px-3 py-1 tracking-wider flex items-center gap-2">
+            <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-extrabold uppercase px-3 py-1.5 rounded-full tracking-wider flex items-center gap-1.5 shadow-xs">
               <FeaturedIcon size={14} />
-              {guides[0].category}
+              <span>{guides[0].category}</span>
             </div>
           </div>
           <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-brand-black mb-4 group-hover:text-brand-red transition-colors">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-dark-900 mb-4 group-hover:text-brand-red transition-colors uppercase leading-tight">
               {guides[0].title}
             </h2>
-            <p className="text-dark-700 leading-relaxed mb-6">
+            <p className="text-dark-700 leading-relaxed mb-6 font-medium text-sm md:text-base">
               {guides[0].excerpt}
             </p>
             <div className="mt-auto">
-              <span className="inline-flex items-center text-brand-red font-bold uppercase text-sm group-hover:underline">
-                Read Full Guide <ArrowRight className="w-4 h-4 ml-2" />
+              <span className="inline-flex items-center text-brand-red font-extrabold uppercase text-xs sm:text-sm tracking-wider group-hover:translate-x-1 transition-transform">
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-4 h-4 ml-1.5" />
               </span>
             </div>
           </div>
@@ -98,7 +102,7 @@ export default function GuidesPage() {
           {guides.slice(1).map((guide, idx) => {
             const Icon = guide.icon;
             return (
-            <Link href={guide.href} key={idx} className="bg-white border border-light-300 shadow-sm group cursor-pointer hover:shadow-lg transition-all flex flex-col h-full overflow-hidden block">
+            <Link href={guide.href} key={idx} className="glass-card border border-light-300/80 shadow-xs group cursor-pointer hover:shadow-md transition-all flex flex-col h-full rounded-3xl overflow-hidden block">
               <div className="w-full relative aspect-[4/3] overflow-hidden">
                 <Image 
                   src={guide.image} 
@@ -107,21 +111,22 @@ export default function GuidesPage() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4 bg-dark-900 text-white text-xs font-bold uppercase px-3 py-1 tracking-wider flex items-center gap-2">
-                  <Icon size={14} />
-                  {guide.category}
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-dark-900 text-[11px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider flex items-center gap-1.5 border border-light-300 shadow-xs">
+                  <Icon size={14} className="text-brand-red" />
+                  <span>{guide.category}</span>
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-brand-black mb-3 group-hover:text-brand-red transition-colors line-clamp-2">
+                <h3 className="text-lg font-extrabold text-dark-900 mb-3 group-hover:text-brand-red transition-colors line-clamp-2 uppercase leading-tight">
                   {guide.title}
                 </h3>
-                <p className="text-dark-700 text-sm leading-relaxed mb-6 line-clamp-3">
+                <p className="text-dark-600 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
                   {guide.excerpt}
                 </p>
                 <div className="mt-auto">
-                  <span className="inline-flex items-center text-brand-red font-bold uppercase text-sm group-hover:underline">
-                    Read Article <ArrowRight className="w-4 h-4 ml-2" />
+                  <span className="inline-flex items-center text-brand-red font-extrabold uppercase text-xs tracking-wider group-hover:translate-x-1 transition-transform">
+                    <span>Read Article</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
                   </span>
                 </div>
               </div>

@@ -15,17 +15,17 @@ export default function NewsPage() {
   const secondaryArticles = newsArticles.slice(1);
 
   return (
-    <div className="min-h-screen bg-light-100 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
+    <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-red">
-            Corporate Communications
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-black uppercase tracking-tight mt-1 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-red/20 text-brand-red text-xs font-extrabold uppercase tracking-widest mb-4 shadow-xs">
+            <Newspaper className="w-4 h-4" />
+            <span>Corporate Communications</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-900 uppercase tracking-tight mb-4">
             News & Press Announcements
           </h1>
-          <div className="w-20 h-1.5 bg-brand-red mx-auto mb-4 rounded-full"></div>
-          <p className="text-base sm:text-lg text-dark-700 max-w-2xl mx-auto font-medium">
+          <p className="text-dark-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
             Stay up to date with the latest agricultural equipment releases, company milestones, and dealer network updates at KOREVA GLOBAL LLP.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function NewsPage() {
         {featuredArticle && (
           <Link
             href={`/news/${featuredArticle.id}`}
-            className="group bg-white border border-light-300 shadow-sm rounded-lg overflow-hidden flex flex-col lg:flex-row mb-12 hover:shadow-xl hover:border-brand-red/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+            className="group glass-panel-elevated border border-light-300 shadow-md rounded-3xl overflow-hidden flex flex-col lg:flex-row mb-12 hover:shadow-xl transition-all duration-300 block"
           >
             <div className="w-full lg:w-[58%] relative min-h-[280px] sm:min-h-[350px] lg:min-h-[420px]">
               <Image
@@ -42,20 +42,20 @@ export default function NewsPage() {
                 alt={featuredArticle.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold uppercase px-3 py-1.5 rounded-xs tracking-wider">
+              <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-extrabold uppercase px-4 py-1.5 rounded-full tracking-wider shadow-xs">
                 {featuredArticle.category}
               </div>
             </div>
-            <div className="w-full lg:w-[42%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white">
+            <div className="w-full lg:w-[42%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white/90 backdrop-blur-xl">
               <div>
-                <div className="flex items-center gap-3 text-xs text-dark-500 font-bold uppercase tracking-wider mb-3">
-                  <span className="flex items-center gap-1"><Calendar size={14} className="text-brand-red" /> {featuredArticle.date}</span>
+                <div className="flex items-center gap-3 text-xs text-dark-600 font-extrabold uppercase tracking-wider mb-3">
+                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-brand-red" /> {featuredArticle.date}</span>
                   <span>•</span>
-                  <span className="flex items-center gap-1"><User size={14} className="text-brand-red" /> {featuredArticle.author}</span>
+                  <span className="flex items-center gap-1.5"><User size={14} className="text-brand-red" /> {featuredArticle.author}</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-black mb-4 group-hover:text-brand-red transition-colors leading-tight uppercase">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-dark-900 mb-4 group-hover:text-brand-red transition-colors leading-tight uppercase">
                   {featuredArticle.title}
                 </h2>
                 <p className="text-dark-700 text-sm sm:text-base leading-relaxed mb-6 font-medium line-clamp-3">
@@ -63,10 +63,11 @@ export default function NewsPage() {
                 </p>
               </div>
               <div className="mt-4 pt-4 border-t border-light-200 flex items-center justify-between">
-                <span className="inline-flex items-center text-brand-red font-extrabold uppercase text-xs sm:text-sm tracking-wider">
-                  Read Full Press Release
+                <span className="inline-flex items-center text-brand-red font-extrabold uppercase text-xs sm:text-sm tracking-wider group-hover:translate-x-1 transition-transform">
+                  <span>Read Full Press Release</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
                 </span>
-                <div className="w-8 h-8 rounded-full bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center transition-colors">
+                <div className="w-8 h-8 rounded-full bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center transition-all shadow-xs">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
@@ -80,33 +81,33 @@ export default function NewsPage() {
             <Link
               key={article.id}
               href={`/news/${article.id}`}
-              className="group bg-white border border-light-300 shadow-sm rounded-lg overflow-hidden flex flex-col h-full hover:shadow-xl hover:border-brand-red/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="group glass-card border border-light-300/80 shadow-xs rounded-3xl overflow-hidden flex flex-col h-full hover:shadow-md transition-all duration-300 block"
             >
-              <div className="w-full relative aspect-[16/9] overflow-hidden bg-gray-100">
+              <div className="w-full relative aspect-[16/9] overflow-hidden bg-white">
                 <Image
                   src={article.image}
                   alt={article.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4 bg-brand-black text-white text-xs font-bold uppercase px-3 py-1 rounded-xs tracking-wider">
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-dark-900 border border-light-300 text-xs font-extrabold uppercase px-3 py-1 rounded-full tracking-wider shadow-xs">
                   {article.category}
                 </div>
               </div>
               <div className="p-6 sm:p-8 flex flex-col flex-1">
-                <div className="flex items-center gap-3 text-xs text-dark-500 font-bold uppercase tracking-wider mb-2">
-                  <span className="flex items-center gap-1"><Calendar size={14} className="text-brand-red" /> {article.date}</span>
+                <div className="flex items-center gap-3 text-xs text-dark-600 font-extrabold uppercase tracking-wider mb-2">
+                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-brand-red" /> {article.date}</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-brand-black mb-3 group-hover:text-brand-red transition-colors uppercase leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-dark-900 mb-3 group-hover:text-brand-red transition-colors uppercase leading-tight">
                   {article.title}
                 </h3>
-                <p className="text-dark-700 text-sm leading-relaxed mb-6 font-medium line-clamp-3">
+                <p className="text-dark-700 text-xs sm:text-sm leading-relaxed mb-6 font-medium line-clamp-3">
                   {article.excerpt}
                 </p>
-                <div className="mt-auto pt-4 border-t border-light-200 flex items-center justify-between text-brand-red font-extrabold uppercase text-xs tracking-wider">
+                <div className="mt-auto pt-4 border-t border-light-200 flex items-center justify-between text-brand-red font-extrabold uppercase text-xs tracking-wider group-hover:translate-x-1 transition-transform">
                   <span>Read Article</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
             </Link>
@@ -114,18 +115,15 @@ export default function NewsPage() {
         </div>
 
         {/* Newsletter Subscription Banner */}
-        <div className="bg-brand-black text-white p-8 md:p-12 rounded-lg shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border-b-4 border-brand-red">
-          <div className="absolute -right-20 -bottom-20 text-white/5 pointer-events-none">
-            <Newspaper size={300} />
-          </div>
+        <div className="glass-panel-elevated border border-light-300 text-dark-900 p-8 md:p-12 rounded-3xl shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 bg-white/90 backdrop-blur-2xl">
           <div className="relative z-10 md:w-1/2">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-1 block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-brand-red mb-1 block">
               Stay Informed
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mb-3">
-              Subscribe to KOREVA GLOBAL News
+            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mb-3 text-dark-900">
+              Subscribe to KOREVA News
             </h2>
-            <p className="text-gray-300 text-sm sm:text-base font-medium">
+            <p className="text-dark-700 text-sm sm:text-base font-medium leading-relaxed">
               Receive instant updates on agricultural machinery releases, technical guides, and authorized dealership openings.
             </p>
           </div>
@@ -133,13 +131,13 @@ export default function NewsPage() {
             <form className="flex flex-col sm:flex-row gap-3" action="#">
               <input
                 type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 bg-white text-dark-900 text-sm font-medium rounded-xs focus:outline-none focus:ring-2 focus:ring-brand-red"
+                placeholder="Enter your email address..."
+                className="flex-1 px-4 py-3.5 bg-white border border-light-300 text-dark-900 placeholder-dark-400 text-sm font-medium rounded-full focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red shadow-xs"
                 required
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-brand-red text-white font-bold uppercase tracking-wider text-xs hover:bg-brand-red-accent transition-colors rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                className="px-8 py-3.5 bg-brand-red text-white font-extrabold uppercase tracking-wider text-xs hover:bg-brand-red-accent transition-all rounded-full shadow-md active:scale-95 cursor-pointer shrink-0"
               >
                 Subscribe
               </button>

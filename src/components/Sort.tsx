@@ -61,7 +61,7 @@ const Sort: React.FC = () => {
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label="Sort product catalog"
-          className={`flex items-center justify-between gap-3 w-full sm:w-auto min-h-[44px] px-4 py-2.5 bg-white border rounded-md shadow-xs transition-all duration-200 text-xs sm:text-sm font-bold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
+          className={`flex items-center justify-between gap-3 w-full sm:w-auto min-h-[44px] px-5 py-2.5 bg-white/90 backdrop-blur-xl border rounded-full shadow-xs transition-all duration-200 text-xs sm:text-sm font-extrabold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
             isOpen
               ? "border-brand-red text-brand-red shadow-md ring-1 ring-brand-red"
               : "border-light-300 text-dark-900 hover:border-brand-red/60 hover:text-brand-red"
@@ -84,9 +84,9 @@ const Sort: React.FC = () => {
         <div
           role="listbox"
           aria-label="Sort options"
-          className="absolute right-0 top-full mt-2 w-full sm:w-60 bg-white border border-light-300 rounded-md shadow-xl z-50 py-1.5 font-jost animate-in fade-in slide-in-from-top-2 duration-150"
+          className="absolute right-0 top-full mt-2 w-full sm:w-60 bg-white/94 backdrop-blur-2xl border border-light-300/80 rounded-2xl shadow-2xl z-50 py-2 font-jost animate-in fade-in slide-in-from-top-2 duration-150"
         >
-          <div className="px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-brand-red border-b border-light-200 mb-1">
+          <div className="px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-brand-red border-b border-light-200 mb-1">
             Sort Options
           </div>
           {SORT_OPTIONS.map((option) => {
@@ -116,3 +116,4 @@ const Sort: React.FC = () => {
 };
 
 export default Sort;
+

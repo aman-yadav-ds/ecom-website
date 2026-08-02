@@ -58,21 +58,21 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
   return (
     <div className="flex flex-col gap-12 font-jost">
       {/* Top Banner: Fluid Category Badge */}
-      <div className="bg-gradient-to-r from-slate-900 via-emerald-950 to-neutral-900 text-white p-4 sm:p-6 rounded-lg shadow-md border-l-4 border-emerald-500 flex flex-wrap items-center justify-between gap-4">
+      <div className="glass-panel border border-emerald-300/60 p-5 sm:p-6 rounded-2xl shadow-xs flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 bg-emerald-500/10 text-emerald-700 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-300">
             <Droplet className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs uppercase tracking-widest text-emerald-400 font-bold">Industrial Fluid & Lubricant Spec</span>
-            <h2 className="text-lg sm:text-xl font-bold">{product.name}</h2>
+            <span className="text-xs uppercase tracking-widest text-emerald-700 font-extrabold">Industrial Fluid & Lubricant Spec</span>
+            <h2 className="text-lg sm:text-xl font-extrabold text-dark-900">{product.name}</h2>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full text-xs font-extrabold uppercase tracking-wider">
+          <span className="px-3 py-1 bg-emerald-500/10 text-emerald-800 border border-emerald-300 rounded-full text-xs font-extrabold uppercase tracking-wider">
             {viscosity} Grade
           </span>
-          <span className="px-3 py-1 bg-white/10 text-gray-200 border border-white/20 rounded-full text-xs font-bold uppercase tracking-wider">
+          <span className="px-3 py-1 bg-light-200 text-dark-900 border border-light-300 rounded-full text-xs font-bold uppercase tracking-wider">
             ISO 9001
           </span>
         </div>
@@ -86,15 +86,15 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
           
           {/* Quick Certifications Bar below gallery */}
           <div className="grid grid-cols-3 gap-3 mt-6">
-            <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-md text-center">
+            <div className="glass-card border border-emerald-200 p-3 rounded-2xl text-center">
               <ShieldCheck className="w-5 h-5 text-emerald-600 mx-auto mb-1" />
               <span className="text-xs font-bold text-dark-900 block">Anti-Wear Formula</span>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-md text-center">
+            <div className="glass-card border border-emerald-200 p-3 rounded-2xl text-center">
               <Droplet className="w-5 h-5 text-emerald-600 mx-auto mb-1" />
               <span className="text-xs font-bold text-dark-900 block">Thermal Stability</span>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-md text-center">
+            <div className="glass-card border border-emerald-200 p-3 rounded-2xl text-center">
               <Truck className="w-5 h-5 text-emerald-600 mx-auto mb-1" />
               <span className="text-xs font-bold text-dark-900 block">Bulk Supply</span>
             </div>
@@ -114,8 +114,8 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
           </div>
 
           {/* Pricing & GST */}
-          <div className="bg-light-100 p-5 rounded-md border border-light-300 flex flex-col gap-1">
-            <span className="text-xs font-bold text-dark-500 uppercase tracking-wider">Estimated Dealer List Price</span>
+          <div className="glass-panel p-6 rounded-2xl border border-light-300 flex flex-col gap-1 shadow-xs">
+            <span className="text-xs font-extrabold text-dark-500 uppercase tracking-wider">Estimated Dealer List Price</span>
             <div className="text-3xl sm:text-4xl font-extrabold text-emerald-700">
               {activeVariant?.price ? priceFormatter.format(Number(activeVariant.price)) : "Quote Required"}
             </div>

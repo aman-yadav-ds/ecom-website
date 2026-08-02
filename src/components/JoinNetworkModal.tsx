@@ -68,37 +68,37 @@ export default function JoinNetworkModal() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-brand-black/75 backdrop-blur-md transition-opacity animate-in fade-in duration-300" 
+        className="fixed inset-0 bg-black/40 backdrop-blur-3xl transition-opacity animate-in fade-in duration-300" 
         onClick={closeJoinModal}
       />
       
       {/* Modal Container */}
-      <div className="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-light-300/80 flex flex-col my-auto z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative glass-panel-elevated w-full max-w-2xl rounded-3xl shadow-2xl border border-white/95 flex flex-col my-auto z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-300">
         
         {/* Top Decorative Gradient Accent Bar */}
-        <div className="h-2 bg-gradient-to-r from-brand-red via-brand-red-accent to-red-600 w-full" />
+        <div className="h-1.5 bg-gradient-to-r from-brand-red via-red-600 to-brand-red w-full" />
 
         {/* Header */}
-        <div className="p-6 md:p-8 border-b border-light-300 bg-white sticky top-0 z-20 flex items-start justify-between gap-4">
+        <div className="p-6 md:p-8 border-b border-light-300 bg-white/90 backdrop-blur-xl sticky top-0 z-20 flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+            <div className="w-12 h-12 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
               <Handshake className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="font-jost text-xl md:text-2xl font-bold text-brand-black uppercase tracking-wide">
+              <h2 className="font-jost text-xl md:text-2xl font-extrabold text-dark-900 uppercase tracking-wide">
                 Join Our Network
               </h2>
-              <p className="font-jost text-xs md:text-sm text-dark-700 mt-1 leading-relaxed">
-                Partner with <span className="font-semibold text-brand-red">KOREVA</span> and expand your business with premium agricultural machinery.
+              <p className="font-jost text-xs md:text-sm text-dark-600 mt-1 leading-relaxed font-medium">
+                Partner with <span className="font-bold text-brand-red">KOREVA</span> and expand your business with premium agricultural machinery.
               </p>
             </div>
           </div>
           <button 
             onClick={closeJoinModal}
-            className="p-2 text-dark-700 hover:text-brand-red hover:bg-light-200 rounded-full transition-all shrink-0 cursor-pointer"
+            className="p-2 text-dark-700 hover:text-white hover:bg-brand-red rounded-full transition-all shrink-0 cursor-pointer shadow-xs border border-light-300/80 group"
             aria-label="Close modal"
           >
-            <X size={20} />
+            <X size={18} className="group-hover:rotate-90 transition-transform" />
           </button>
         </div>
 

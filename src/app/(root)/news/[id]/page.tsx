@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { Calendar, User, ArrowLeft, ArrowRight, Tag, ShieldCheck, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft, ArrowRight, Tag, ShieldCheck, ChevronLeft } from "lucide-react";
 import { newsArticles } from "@/lib/details/newsData";
 
 interface NewsDetailProps {
@@ -111,7 +111,7 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
   };
 
   return (
-    <main className="min-h-screen bg-light-100 py-8 sm:py-12 md:py-16 font-jost">
+    <main className="min-h-screen bg-[#fbfbfb] text-dark-900 py-8 sm:py-12 md:py-16 font-jost">
       {/* JSON-LD Script for Google SEO Crawlers */}
       <script
         type="application/ld+json"
@@ -119,42 +119,42 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Back Link Nav - Mobile-First Touch Target (min-h-44px) */}
-        <div className="mb-4 sm:mb-6">
+        {/* Back Link Nav */}
+        <div className="mb-6">
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 min-h-[44px] px-3 py-2 text-xs sm:text-sm font-bold text-dark-700 hover:text-brand-red uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-panel border border-light-300 text-xs font-extrabold text-dark-700 hover:text-brand-red uppercase tracking-wider transition-colors shadow-xs"
           >
-            <ArrowLeft className="w-4 h-4 text-brand-red" />
-            <span>Back to All News</span>
+            <ChevronLeft className="w-4 h-4 text-brand-red" />
+            <span>Back to Corporate News</span>
           </Link>
         </div>
 
         {/* Main Article Container */}
-        <article className="bg-white border border-light-300 rounded-lg shadow-sm overflow-hidden p-4 sm:p-8 md:p-10">
+        <article className="glass-panel-elevated border border-light-300 rounded-3xl shadow-md overflow-hidden p-6 sm:p-10 md:p-12 bg-white/90 backdrop-blur-2xl">
           {/* Article Category & Meta Header */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4">
-            <span className="bg-brand-red text-white text-[11px] sm:text-xs font-extrabold uppercase px-3 py-1 rounded-xs tracking-wider">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4">
+            <span className="bg-brand-red text-white text-xs font-extrabold uppercase px-3.5 py-1 rounded-full tracking-wider shadow-xs">
               {article.category}
             </span>
-            <div className="flex items-center gap-1.5 text-xs text-dark-500 font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-xs text-dark-600 font-extrabold uppercase tracking-wider">
               <Calendar className="w-3.5 h-3.5 text-brand-red" />
               <span>{article.date}</span>
             </div>
             <span className="text-dark-300 hidden xs:inline">•</span>
-            <div className="flex items-center gap-1.5 text-xs text-dark-500 font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-xs text-dark-600 font-extrabold uppercase tracking-wider">
               <User className="w-3.5 h-3.5 text-brand-red" />
               <span>{article.author}</span>
             </div>
           </div>
 
           {/* Article H1 Title */}
-          <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-dark-900 uppercase tracking-tight leading-snug sm:leading-tight mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-900 uppercase tracking-tight leading-snug sm:leading-tight mb-6">
             {article.title}
           </h1>
 
-          {/* Hero Article Image - Mobile First Aspect Ratio */}
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] mb-6 sm:mb-8 rounded-md overflow-hidden bg-gray-100 border border-light-300">
+          {/* Hero Article Image */}
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] mb-6 sm:mb-8 rounded-2xl overflow-hidden border border-light-200 shadow-xs">
             <Image
               src={article.image}
               alt={`${article.title} - KOREVA GLOBAL LLP`}
@@ -166,7 +166,7 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
           </div>
 
           {/* Lead Excerpt Block */}
-          <div className="p-4 sm:p-6 bg-light-200 border-l-4 border-brand-red rounded-r-md mb-6 sm:mb-8">
+          <div className="p-5 sm:p-6 bg-light-100 border-l-4 border-brand-red rounded-r-2xl mb-6 sm:mb-8">
             <p className="text-sm sm:text-base md:text-lg font-bold text-dark-900 leading-relaxed italic">
               &quot;{article.excerpt}&quot;
             </p>
@@ -181,7 +181,7 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
 
           {/* Related Implements & Products SEO Widget */}
           {article.relatedProducts && article.relatedProducts.length > 0 && (
-            <div className="mt-8 sm:mt-10 p-4 sm:p-6 bg-light-200/80 border border-light-300 rounded-md">
+            <div className="mt-8 sm:mt-10 p-6 glass-panel border border-light-300 rounded-2xl shadow-xs">
               <h3 className="text-xs font-extrabold uppercase tracking-widest text-brand-red mb-3 flex items-center gap-1.5">
                 <Tag className="w-4 h-4 text-brand-red" /> Related Implements & Equipment
               </h3>
@@ -190,9 +190,9 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
                   <Link
                     key={rel.id}
                     href={rel.href}
-                    className="flex items-center justify-between p-3 min-h-[44px] bg-white border border-light-300 rounded-xs hover:border-brand-red group transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                    className="flex items-center justify-between p-3.5 bg-white border border-light-300 rounded-xl hover:border-brand-red group transition-all shadow-xs"
                   >
-                    <span className="text-xs sm:text-sm font-bold text-dark-900 group-hover:text-brand-red transition-colors">
+                    <span className="text-xs sm:text-sm font-bold text-dark-900 group-hover:text-brand-red transition-colors uppercase">
                       {rel.name}
                     </span>
                     <ArrowRight className="w-4 h-4 text-brand-red transition-transform group-hover:translate-x-1 shrink-0 ml-2" />
@@ -203,31 +203,32 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
           )}
 
           {/* Article Footer & Brand Guarantee */}
-          <div className="mt-8 sm:mt-10 pt-6 border-t border-light-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs font-bold text-dark-500 uppercase tracking-wider">
+          <div className="mt-8 sm:mt-10 pt-6 border-t border-light-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs font-extrabold text-dark-600 uppercase tracking-wider">
               <ShieldCheck className="w-4 h-4 text-brand-red" />
-              <span>Official Release by KOREVA GLOBAL LLP</span>
+              <span>Official Press Release by KOREVA GLOBAL LLP</span>
             </div>
             <Link
               href="/news"
-              className="text-xs font-bold text-brand-red hover:underline uppercase tracking-wider min-h-[44px] inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs"
+              className="text-xs font-extrabold text-brand-red hover:underline uppercase tracking-wider flex items-center gap-1"
             >
-              Explore All Corporate News
+              <span>Explore All News</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </article>
 
         {/* Prev / Next Article Navigation Footer */}
-        <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {prevArticle ? (
             <Link
               href={`/news/${prevArticle.id}`}
-              className="p-4 bg-white border border-light-300 rounded-md hover:border-brand-red transition-all group flex flex-col min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="p-5 glass-card border border-light-300 rounded-2xl hover:border-brand-red transition-all group flex flex-col shadow-xs"
             >
-              <span className="text-[11px] font-bold text-dark-500 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <span className="text-[11px] font-extrabold text-dark-500 uppercase tracking-wider mb-1 flex items-center gap-1">
                 <ArrowLeft className="w-3.5 h-3.5 text-brand-red" /> Previous Release
               </span>
-              <span className="text-xs sm:text-sm font-bold text-dark-900 group-hover:text-brand-red transition-colors line-clamp-1">
+              <span className="text-xs sm:text-sm font-extrabold text-dark-900 group-hover:text-brand-red transition-colors line-clamp-1 uppercase">
                 {prevArticle.title}
               </span>
             </Link>
@@ -238,12 +239,12 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
           {nextArticle && (
             <Link
               href={`/news/${nextArticle.id}`}
-              className="p-4 bg-white border border-light-300 rounded-md hover:border-brand-red transition-all group flex flex-col items-start sm:items-end text-left sm:text-right min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="p-5 glass-card border border-light-300 rounded-2xl hover:border-brand-red transition-all group flex flex-col items-start sm:items-end text-left sm:text-right shadow-xs"
             >
-              <span className="text-[11px] font-bold text-dark-500 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <span className="text-[11px] font-extrabold text-dark-500 uppercase tracking-wider mb-1 flex items-center gap-1">
                 Next Release <ArrowRight className="w-3.5 h-3.5 text-brand-red" />
               </span>
-              <span className="text-xs sm:text-sm font-bold text-dark-900 group-hover:text-brand-red transition-colors line-clamp-1">
+              <span className="text-xs sm:text-sm font-extrabold text-dark-900 group-hover:text-brand-red transition-colors line-clamp-1 uppercase">
                 {nextArticle.title}
               </span>
             </Link>
