@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     "Koreva Dealer Contact",
   ],
   alternates: {
-    canonical: "/contact",
+    canonical: "/services-events/contact-us",
   },
   openGraph: {
     title: "Contact Us | Koreva9 - Agricultural Equipment Manufacturer",
     description:
       "Contact Koreva Global LLP (Koreva9) corporate headquarters, sales team, and support hotline in Uttarakhand, India.",
-    url: "https://koreva9.com/contact",
+    url: "https://koreva9.com/services-events/contact-us",
     siteName: "Koreva9",
     images: [
       {
@@ -38,7 +38,7 @@ const contactPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "name": "Contact Koreva Global LLP",
-  "url": "https://koreva9.com/contact",
+  "url": "https://koreva9.com/services-events/contact-us",
   "description": "Corporate contact page for Koreva Global LLP (Koreva9) agricultural machinery manufacturer.",
   "mainEntity": {
     "@type": "Organization",
