@@ -49,64 +49,81 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links Columns */}
+          {/* Direct Navigation Links */}
           <div className="md:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-6">
             <div>
-              <h4 className="text-xs font-bold mb-4 uppercase tracking-widest text-brand-red">
-                Company
-              </h4>
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Equipment</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
-                  <Link href="/about" className="hover:text-brand-red transition-colors py-1 block">
-                    About Us
+                  <Link href="/products/tractor-attachments" className="hover:text-brand-red transition-colors">
+                    Tractor Attachments
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dealers" className="hover:text-brand-red transition-colors py-1 block">
-                    Dealer Network
+                  <Link href="/products/self-propelled-machinery" className="hover:text-brand-red transition-colors">
+                    Self Propelled
                   </Link>
                 </li>
                 <li>
-                </li>
-                <li>
-                  <Link href="/spare-parts" className="hover:text-white transition-colors py-1 block">
-                    Spare Parts
+                  <Link href="/products/food-processing-units" className="hover:text-brand-red transition-colors">
+                    Food Processing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/warranty" className="hover:text-white transition-colors py-1 block">
-                    Warranty Info
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/compare" className="hover:text-white transition-colors py-1 block">
-                    Compare Equipment
+                  <Link href="/products/lubricants" className="hover:text-brand-red transition-colors">
+                    STOU Lubricants
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold mb-4 uppercase tracking-widest text-brand-red">
-                Contact Service
-              </h4>
-              <ul className="space-y-3 text-xs text-gray-400">
-                <li className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  <Link href="/services-events/contact-us" className="hover:text-white transition-colors">
-                    Contact Us
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Support</h3>
+              <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
+                <li>
+                  <Link href="/dealers" className="hover:text-brand-red transition-colors">
+                    Dealer Locator
                   </Link>
                 </li>
-                <li className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  <Link href="/dealers" className="hover:text-white transition-colors">
-                    Find Dealer
+                <li>
+                  <Link href="/spare-parts" className="hover:text-brand-red transition-colors">
+                    Spare Parts
                   </Link>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  <Link href="/services-events/contact-us" className="hover:text-white transition-colors">
-                    Support Line
+                <li>
+                  <Link href="/warranty" className="hover:text-brand-red transition-colors">
+                    Warranty Claims
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/guides" className="hover:text-brand-red transition-colors">
+                    Farming Guides
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Corporate</h3>
+              <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
+                <li>
+                  <Link href="/about" className="hover:text-brand-red transition-colors">
+                    About KOREVA
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/news" className="hover:text-brand-red transition-colors">
+                    News & Events
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services-events/contact-us" className="hover:text-brand-red transition-colors">
+                    Contact Corporate
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy-policy" className="hover:text-brand-red transition-colors">
+                    Privacy Policy
                   </Link>
                 </li>
               </ul>
@@ -120,73 +137,73 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
+                className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="X (Twitter)"
               >
-                <Image
-                  src="/x.svg"
-                  alt="X"
-                  width={16}
-                  height={16}
-                  className="filter invert brightness-0 group-hover:brightness-200 transition-all"
-                />
-              </a>
+              <img
+                src="/x.svg"
+                alt="X"
+                width={16}
+                height={16}
+                className="w-4 h-4 filter group-hover:invert transition-all"
+              />
+            </a>
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
+                className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="Facebook"
               >
-                <Image
-                  src="/facebook.svg"
-                  alt="Facebook"
-                  width={16}
-                  height={16}
-                  className="filter invert brightness-0 group-hover:brightness-200 transition-all"
-                />
-              </a>
+              <img
+                src="/facebook.svg"
+                alt="Facebook"
+                width={16}
+                height={16}
+                className="w-4 h-4 filter group-hover:invert transition-all"
+              />
+            </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
+                className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="Instagram"
               >
-                <Image
-                  src="/instagram.svg"
-                  alt="Instagram"
-                  width={16}
-                  height={16}
-                  className="filter invert brightness-0 group-hover:brightness-200 transition-all"
-                />
-              </a>
+              <img
+                src="/instagram.svg"
+                alt="Instagram"
+                width={16}
+                height={16}
+                className="w-4 h-4 filter group-hover:invert transition-all"
+              />
+            </a>
             </div>
 
-            <div className="text-gray-400 text-left md:text-right max-w-xs text-[11px] leading-relaxed">
+            <div className="text-dark-600 text-left md:text-right max-w-xs text-[11px] leading-relaxed font-medium">
               KOREVA GLOBAL LLP, NH9 KICHHA RUDRAPUR ROAD, KISHANPUR, U.S.NAGAR, UTTARAKHAND, INDIA - 263148
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+        <div className="border-t border-light-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-dark-500 font-medium">
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex items-center gap-2 text-white font-semibold">
+            <div className="flex items-center gap-2 text-dark-900 font-semibold">
               <MapPin className="w-3.5 h-3.5 text-brand-red" />
               <span>India</span>
             </div>
             <span>© 2026 KOREVA GLOBAL LLP. All Rights Reserved</span>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+          <div className="flex gap-6">
+            <Link href="/privacy-policy" className="hover:text-brand-red transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/legal-notice" className="hover:text-white transition-colors">
+            <Link href="/legal-notice" className="hover:text-brand-red transition-colors">
               Legal Notice
             </Link>
-            <Link href="/cookies" className="hover:text-white transition-colors">
+            <Link href="/cookies" className="hover:text-brand-red transition-colors">
               Cookie Settings
             </Link>
           </div>
@@ -197,4 +214,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

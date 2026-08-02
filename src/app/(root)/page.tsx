@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KOREVA GLOBAL LLP | Premium Agricultural Machinery & Equipment",
     description: "Empowering Indian farmers with precision Power Weeders, Harrows, Rotavators, and ISO 9001 certified lubricants.",
-    url: "https://korevaglobal.com",
+    url: "https://koreva9.com",
     siteName: "KOREVA GLOBAL LLP",
     locale: "en_IN",
     type: "website",
@@ -39,29 +39,22 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // JSON-LD Structured Data for Google SEO indexing
+  // JSON-LD WebSite schema with SearchAction for Google Sitelinks Searchbox
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "WebSite",
     "name": "KOREVA GLOBAL LLP",
-    "altName": "KOREVA",
-    "url": "https://korevaglobal.com",
-    "logo": "https://korevaglobal.com/trademark.webp",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+91-7455973188",
-      "contactType": "customer service",
-      "areaServed": "IN",
-      "availableLanguage": ["English", "Hindi"]
-    },
+    "alternateName": "Koreva9",
+    "url": "https://koreva9.com",
     "description": "KOREVA GLOBAL LLP is a leading Indian manufacturer of Power Weeders, tractor Harrows, Rotavators, Power Reapers, STOU Lubricants, and Hand Tools.",
-    "makesOffer": [
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "KOREVA Power Weeder DHURANDHAR" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "KOREVA Harrow RAINO" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "KOREVA Rotavator KOBRA" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "KOREVA STOU 15W-40 Universal Tractor Fluid" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "KOREVA Bypass Pruning Secateur PRO" } }
-    ]
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://koreva9.com/products?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   };
 
   return (

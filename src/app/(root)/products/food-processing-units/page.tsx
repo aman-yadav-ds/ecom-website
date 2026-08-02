@@ -35,9 +35,9 @@ export default function FoodProcessingUnitsPage() {
     });
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
       <CategoryHeader category={category} totalProducts={mappedProducts.length} />
-      <Suspense fallback={<div className="p-8 text-center">Loading food processing units...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading food processing units...</div>}>
         <ProductCatalogClient initialProducts={mappedProducts} initialCategory={category.name} />
       </Suspense>
     </main>

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Farm Equipment India",
   ],
   alternates: {
-    canonical: "./",
+    canonical: "/",
   },
   robots: {
     index: true,
@@ -83,13 +83,31 @@ const organizationJsonLd = {
   "name": "Koreva Global LLP",
   "alternateName": "Koreva9",
   "url": "https://koreva9.com",
-  "logo": "https://koreva9.com/icon.svg",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://koreva9.com/trademark.webp",
+    "width": 280,
+    "height": 56
+  },
+  "foundingDate": "2018",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",
+    "addressLocality": "Kichha",
+    "addressRegion": "Udham Singh Nagar, Uttarakhand",
+    "postalCode": "263148",
+    "addressCountry": "IN"
+  },
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+91-7455973188",
     "contactType": "customer service",
     "areaServed": "IN",
     "availableLanguage": ["en", "hi"],
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "IN"
   },
   "sameAs": [
     "https://facebook.com",

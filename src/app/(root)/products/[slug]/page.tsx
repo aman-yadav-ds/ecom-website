@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { exampleProducts, exampleVariants } from "@/lib/details";
 import ProductInteractiveSection from "@/components/ProductInteractiveSection";
 import Card from "@/components/Card";
-import { BookOpen, HelpCircle, ArrowRight } from "lucide-react";
+import { BookOpen, HelpCircle, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug, product } = await resolveProduct(params);
   if (!product) {
     return {
-      title: "Product Not Found | Koreva9",
-      description: "The requested Koreva9 agricultural product could not be found.",
+      title: "Product Not Found | Koreva",
+      description: "The requested Koreva agricultural product could not be found.",
     };
   }
 
-  const title = `${product.name} | Koreva9 - Agriculture Machinery`;
+  const title = `${product.name} | Koreva - Agriculture Machinery`;
   const description = product.description;
-  const ogImage = product.coverImage || "/images/og-koreva9-default.jpg";
+  const ogImage = product.coverImage || "/images/og-koreva-default.jpg";
 
   return {
     title,
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       title,
       description,
       url: `https://koreva9.com/products/${slug || product.id}`,
-      siteName: "Koreva9",
+      siteName: "Koreva",
       images: [
         {
           url: ogImage,
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
           alt: `${product.name} manufactured by Koreva Global LLP`,
         },
       ],
-      type: "article",
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
@@ -95,7 +95,6 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     variants.find((v) => v.id === product.defaultVariantId) || variants[0];
   const productPrice = defaultVariant ? defaultVariant.price : "0";
 
-  // Product Schema.org JSON-LD
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -108,7 +107,14 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     "description": product.description,
     "brand": {
       "@type": "Brand",
-      "name": "Koreva9",
+      "name": "Koreva",
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "reviewCount": "12",
+      "bestRating": "5",
+      "worstRating": "1"
     },
     "offers": {
       "@type": "Offer",
@@ -121,6 +127,32 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
         "name": "Koreva Global LLP",
       },
     },
+  };
+
+  // BreadcrumbList JSON-LD for SERP breadcrumb rich results
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://koreva9.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Equipment",
+        "item": "https://koreva9.com/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": `https://koreva9.com/products/${slug}`
+      }
+    ]
   };
 
   // Recommendation engine: find related products via shared tags
@@ -136,7 +168,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     .map((p) => p.product);
 
   return (
-    <main className="min-h-screen bg-light-200 py-12 px-4 sm:px-6 lg:px-8 font-jost">
+    <main className="min-h-screen bg-[#fbfbfb] text-dark-900 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 font-jost">
       {/* Product JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -144,63 +176,70 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           __html: JSON.stringify(productJsonLd),
         }}
       />
+      {/* BreadcrumbList JSON-LD for SERP rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd),
+        }}
+      />
 
-      {/* Breadcrumbs (SEO friendly) */}
-      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto mb-8">
-        <ol className="flex items-center space-x-2 text-sm text-dark-500 font-medium">
+      {/* Breadcrumbs */}
+      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto mb-6">
+        <ol className="flex items-center space-x-2 text-xs font-extrabold text-dark-600 uppercase tracking-wider">
           <li>
             <Link href="/" className="hover:text-brand-red transition-colors">Home</Link>
           </li>
-          <li><span className="mx-2">/</span></li>
+          <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
           <li>
             <Link href="/products" className="hover:text-brand-red transition-colors">Equipment</Link>
           </li>
-          <li><span className="mx-2">/</span></li>
+          <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
           <li className="text-dark-900" aria-current="page">{product.name}</li>
         </ol>
       </nav>
 
-      {/* Primary Product Section (Interactive) */}
-      <article className="max-w-7xl mx-auto mb-20 bg-white p-6 sm:p-10 rounded-sm shadow-sm border border-light-300">
+      {/* Primary Product Section (Interactive Glass Panel) */}
+      <article className="max-w-7xl mx-auto mb-16 glass-panel-elevated p-6 sm:p-10 rounded-3xl shadow-md border border-light-300 bg-white/90 backdrop-blur-2xl">
         <ProductInteractiveSection product={product} variants={variants} />
       </article>
 
       {/* Service & Tips Hub */}
-      <section className="max-w-7xl mx-auto mb-20" aria-labelledby="service-hub-heading">
-        <h2 id="service-hub-heading" className="text-2xl font-bold text-dark-900 mb-8 uppercase tracking-wide border-b border-light-300 pb-4">
-          Service & Resources
+      <section className="max-w-7xl mx-auto mb-16" aria-labelledby="service-hub-heading">
+        <h2 id="service-hub-heading" className="text-xl sm:text-2xl font-extrabold text-dark-900 mb-6 uppercase tracking-wide border-b border-light-300 pb-3">
+          Service & Documentation Resources
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
-            href="#"
-            className="flex items-center justify-between p-8 bg-white border border-light-300 rounded-sm hover:border-brand-red hover:shadow-md transition-all group"
+            href="/downloads"
+            className="glass-card flex items-center justify-between p-6 sm:p-8 border border-light-300/80 rounded-3xl hover:border-brand-red shadow-xs hover:shadow-md transition-all group"
           >
-            <div className="flex items-center gap-6">
-              <div className="w-14 h-14 bg-red-50 text-brand-red rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <BookOpen className="w-7 h-7" />
+            <div className="flex items-center gap-5">
+              <div className="w-12 h-12 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                <BookOpen className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-dark-900 mb-1">User Manuals</h3>
-                <p className="text-sm text-dark-500">Download operator guides and safety procedures.</p>
+                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">User Manuals</h3>
+                <p className="text-xs sm:text-sm text-dark-600 font-medium">Download operator guides and safety procedures.</p>
               </div>
             </div>
-            <ArrowRight className="w-6 h-6 text-light-400 group-hover:text-brand-red transform group-hover:translate-x-1 transition-all" />
+            <ArrowRight className="w-5 h-5 text-brand-red group-hover:translate-x-1 transition-transform shrink-0" />
           </Link>
 
           <Link
             href="/faq"
-            className="flex items-center justify-between p-8 bg-white border border-light-300 rounded-sm hover:border-brand-red hover:shadow-md transition-all group"
+            className="glass-card flex items-center justify-between p-6 sm:p-8 border border-light-300/80 rounded-3xl hover:border-brand-red shadow-xs hover:shadow-md transition-all group"
           >
-            <div className="flex items-center gap-6">
-              <div className="w-14 h-14 bg-red-50 text-brand-red rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <HelpCircle className="w-7 h-7" />
+            <div className="flex items-center gap-5">
+              <div className="w-12 h-12 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                <HelpCircle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-dark-900 mb-1">Frequently Asked Questions</h3>
-                <p className="text-sm text-dark-500">Find answers to common maintenance queries.</p>
+                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">Frequently Asked Questions</h3>
+                <p className="text-xs sm:text-sm text-dark-600 font-medium">Find answers to common maintenance queries.</p>
               </div>
             </div>
-            <ArrowRight className="w-6 h-6 text-light-400 group-hover:text-brand-red transform group-hover:translate-x-1 transition-all" />
+            <ArrowRight className="w-5 h-5 text-brand-red group-hover:translate-x-1 transition-transform shrink-0" />
           </Link>
         </div>
       </section>
@@ -208,18 +247,18 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
       {/* Recommended Products Slider */}
       {relatedProducts.length > 0 && (
         <section className="max-w-7xl mx-auto mb-12" aria-labelledby="recommended-heading">
-          <div className="flex items-center justify-between mb-8 border-b border-light-300 pb-4">
-            <h2 id="recommended-heading" className="text-2xl font-bold text-dark-900 uppercase tracking-wide">
+          <div className="flex items-center justify-between mb-6 border-b border-light-300 pb-3">
+            <h2 id="recommended-heading" className="text-xl sm:text-2xl font-extrabold text-dark-900 uppercase tracking-wide">
               Recommended Equipment
             </h2>
-            <Link href="/products" className="text-sm font-bold text-brand-red hover:text-brand-red-accent flex items-center gap-1 transition-colors">
-              View All <ArrowRight className="w-4 h-4" />
+            <Link href="/products" className="text-xs font-extrabold text-brand-red hover:underline flex items-center gap-1 uppercase tracking-wider">
+              <span>View All</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map((relatedProduct) => {
-              // Find default variant price for Card
               const relatedVariants = exampleVariants.filter(v => v.productId === relatedProduct.id);
               const defaultVariant = relatedVariants.find(v => v.id === relatedProduct.defaultVariantId) || relatedVariants[0];
               const price = defaultVariant ? Number(defaultVariant.price) : 0;

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
-import { Wrench, Shield, CheckCircle, Award } from "lucide-react";
+import { Wrench, Shield, Award } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Agricultural & Garden Hand Tools | KOREVA Tools",
@@ -36,52 +36,54 @@ export default function HandToolsPage() {
     });
 
   return (
-    <main className="min-h-screen bg-white font-jost">
+    <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
       <CategoryHeader category={category} totalProducts={mappedProducts.length} />
       
       {/* Category Specific Feature Banner for Hand Tools */}
       <section id="handtools-guide" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="bg-gradient-to-r from-stone-900 to-amber-950 text-white rounded-lg p-6 sm:p-8 shadow-lg border border-amber-800/50">
-          <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-wide mb-3 flex items-center gap-2">
-            <Wrench className="w-6 h-6 text-amber-400" />
-            Forged Steel & Ergonomics Quality Standard
+        <div className="glass-panel-elevated border border-light-300 p-6 sm:p-8 rounded-3xl shadow-md bg-white/90 backdrop-blur-2xl">
+          <h2 className="text-lg sm:text-xl font-extrabold uppercase tracking-wide mb-3 flex items-center gap-2 text-dark-900">
+            <Wrench className="w-5 h-5 text-brand-red" />
+            <span>Forged Steel & Ergonomics Quality Standard</span>
           </h2>
-          <p className="text-sm text-amber-100 mb-6 max-w-3xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-dark-700 mb-6 max-w-3xl leading-relaxed font-medium">
             Every KOREVA hand tool is forged from premium SK5 high-carbon alloy steel or manganese steel, treated with induction edge hardening for maximum sharpness retention.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-amber-900/80 pt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-light-200 pt-6">
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-amber-900/50 rounded-sm text-amber-300">
+              <div className="p-2.5 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 shadow-xs">
                 <Award className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white uppercase">SK5 Alloy Steel</h3>
-                <p className="text-xs text-amber-200 mt-0.5">High-hardness Japanese SK5 carbon steel blades hold an ultra-sharp cutting edge through thousands of prunings.</p>
+                <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">SK5 Alloy Steel</h3>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">High-hardness Japanese SK5 carbon steel blades hold an ultra-sharp cutting edge through thousands of prunings.</p>
               </div>
             </div>
+
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-amber-900/50 rounded-sm text-amber-300">
+              <div className="p-2.5 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 shadow-xs">
                 <Shield className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white uppercase">Anti-Sap & Anti-Rust</h3>
-                <p className="text-xs text-amber-200 mt-0.5">Teflon and titanium protective coatings prevent sap sticking, friction, and environmental corrosion.</p>
+                <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">Induction Hardening</h3>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">Heat-treated teeth and cutting edges prevent deformation when working thick branches.</p>
               </div>
             </div>
+
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-amber-900/50 rounded-sm text-amber-300">
-                <CheckCircle className="w-5 h-5" />
+              <div className="p-2.5 rounded-2xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 shadow-xs">
+                <Wrench className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white uppercase">Ergonomic Comfort</h3>
-                <p className="text-xs text-amber-200 mt-0.5">Non-slip rubberized handles and cushioned shock absorbers reduce hand fatigue during long field work.</p>
+                <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">Ergonomic Rubber Grip</h3>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">Non-slip aluminum handles reduce hand fatigue during long field harvesting sessions.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <Suspense fallback={<div className="p-8 text-center">Loading hand tools...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading hand tools...</div>}>
         <ProductCatalogClient initialProducts={mappedProducts} initialCategory={category.name} />
       </Suspense>
     </main>
