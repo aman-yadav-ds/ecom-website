@@ -14,6 +14,7 @@ export interface Product {
   name: string;
   description: string;
   coverImage: string;
+  coverImageAlt?: string;
   categoryId: string;
   tags: string[];
   isPublished: boolean;
@@ -25,6 +26,7 @@ export interface Variant {
   name: string;
   productId: string;
   images: string[];
+  imagesAlt?: string[];
   price: string;
   applicableGst: string;
   technicalDetails: Record<string, string>;

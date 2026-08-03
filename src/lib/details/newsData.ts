@@ -60,7 +60,7 @@ export const newsArticles: NewsArticle[] = [
     date: "May 15, 2026",
     author: "KOREVA Manufacturing Operations",
     category: "Company Update",
-    image: "/products/harrrow.webp",
+    image: "/products/harrow-8x8.webp",
     content: [
       "KOREVA GLOBAL LLP is proud to report that 95% of all agricultural implement spare parts, including tiller tines, gearbox gears, rotor shafts, and cutting blades, are now produced in-house across our Indian OEM manufacturing facilities.",
       "By localizing key component manufacturing, KOREVA has eliminated reliance on imported replacement parts, ensuring stable pricing and same-day dispatch for dealer orders across India.",

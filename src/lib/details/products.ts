@@ -7,9 +7,10 @@ export const exampleProducts: Product[] = [
     description: "High-quality tractor-mounted harrow for tilling and optimal soil preparation.",
     categoryId: "tractor-attachments",
     tags: ["Harrow", "Tractor Attachment", "Tillage", "Soil Preparation", "Harrows"],
-    coverImage: "/products/harrrow.webp",
+    coverImage: "/products/harrow-8x8.webp",
+    coverImageAlt: "KOREVA Raino Heavy-Duty Tractor Mounted Disc Harrow for efficient soil tilling and seedbed preparation",
     isPublished: true,
-    defaultVariantId: "ko-raino-disc"
+    defaultVariantId: "ko-raino-8x8"
   },
   {
     id: "ko-rotavator",
@@ -17,7 +18,8 @@ export const exampleProducts: Product[] = [
     description: "Reliable tractor-mounted rotavator for efficient seedbed preparation.",
     categoryId: "tractor-attachments",
     tags: ["Rotavator", "Tractor Attachment", "Tillage", "Seedbed", "Rotavator 7ft", "Rotavators", "Rotavator 8ft", "Rotavator 6ft", "7ft", "8ft"],
-    coverImage: "/products/rotavator.png",
+    coverImage: "/products/rotavator-ko-kobra.png",
+    coverImageAlt: "KOREVA KOS-KOBRA Heavy-Duty Tractor Rotavator for superior soil pulverization",
     isPublished: true,
     defaultVariantId: "ko-kobra-6ft"
   },
@@ -28,6 +30,7 @@ export const exampleProducts: Product[] = [
     categoryId: "self-propelled-machinery",
     tags: ["Power Weeder", "Self Propelled", "Weeding", "Tillage"],
     coverImage: "/products/power-weeder-dhurandhar.webp",
+    coverImageAlt: "KOREVA DHURANDHAR 7HP Heavy Duty Self-Propelled Power Weeder for field weeding and cultivation",
     isPublished: true,
     defaultVariantId: "ko-1080"
   },
@@ -37,7 +40,8 @@ export const exampleProducts: Product[] = [
     description: "Powerful self-propelled walk-behind tractor designed for heavy-duty weeding and agricultural tasks.",
     categoryId: "self-propelled-machinery",
     tags: ["Power Weeder", "Self Propelled", "Weeding", "Tillage"],
-    coverImage: "/products/power-weeder-dhurandhar.webp",
+    coverImage: "/products/power-weeder-vijay.webp",
+    coverImageAlt: "KOREVA VIJAY 7.8HP Self-Propelled Power Weeder for intensive inter-crop weeding",
     isPublished: true,
     defaultVariantId: "ko-1110"
   },
@@ -48,6 +52,7 @@ export const exampleProducts: Product[] = [
     categoryId: "self-propelled-machinery",
     tags: ["Power Reaper", "Harvesting", "Self Propelled"],
     coverImage: "/products/power-reaper.webp",
+    coverImageAlt: "KOREVA KHET SHAKTI 7HP Self-Propelled Agricultural Power Reaper for fast crop harvesting",
     isPublished: true,
     defaultVariantId: "ko-1260"
   },
@@ -58,6 +63,7 @@ export const exampleProducts: Product[] = [
     categoryId: "self-propelled-machinery",
     tags: ["Brush Cutter", "Weed Cutting", "Self Propelled"],
     coverImage: "/products/brushcutter.webp",
+    coverImageAlt: "KOREVA JUNGLE PRO 4-Stroke Commercial Brush Cutter for weed and grass clearing",
     isPublished: true,
     defaultVariantId: "ko-bc-jpro-sp"
   },
@@ -68,6 +74,7 @@ export const exampleProducts: Product[] = [
     categoryId: "food-processing-units",
     tags: ["Pulveriser", "Food Processing", "Grinding"],
     coverImage: "/products/Pulverizer.webp",
+    coverImageAlt: "KOREVA GRAH LAXMI 3HP Commercial Food Processing Pulveriser for grain and spice grinding",
     isPublished: true,
     defaultVariantId: "ko-pulv-1170"
   },
@@ -78,6 +85,7 @@ export const exampleProducts: Product[] = [
     categoryId: "food-processing-units",
     tags: ["Rice Mill", "Food Processing", "Milling"],
     coverImage: "/products/mini-rice-mill.png",
+    coverImageAlt: "KOREVA DHAN LAXMI MINI Commercial Rice Mill for rice processing and hulling",
     isPublished: true,
     defaultVariantId: "ko-ricemill-1080"
   },
@@ -89,6 +97,7 @@ export const exampleProducts: Product[] = [
     categoryId: "lubricants",
     tags: ["Tractor Fluid", "Engine Oil", "Hydraulic Oil", "STOU", "Lubricant", "15W-40"],
     coverImage: "/products/stou-lubricant.png",
+    coverImageAlt: "KOREVA STOU 15W-40 Super Tractor Universal Lubricant Oil container",
     isPublished: true,
     defaultVariantId: "ko-stou-5l"
   },
@@ -99,6 +108,7 @@ export const exampleProducts: Product[] = [
     categoryId: "lubricants",
     tags: ["4T Oil", "Engine Oil", "Weeder Oil", "20W-50", "Lubricants"],
     coverImage: "/products/4t-agro-lubricant.png",
+    coverImageAlt: "KOREVA 4T Agro 20W-50 Heavy Duty Engine Oil bottle for power machinery",
     isPublished: true,
     defaultVariantId: "ko-4t-3-5l"
   },
@@ -110,6 +120,7 @@ export const exampleProducts: Product[] = [
     categoryId: "hand-tools",
     tags: ["Secateur", "Pruning Shears", "Garden Tools", "Hand Tools", "SK5 Steel"],
     coverImage: "/products/secateur-pro.png",
+    coverImageAlt: "KOREVA PRO PRUNER SK5 Steel Professional Garden Bypass Pruning Shears Secateur",
     isPublished: true,
     defaultVariantId: "ko-secateur-8inch"
   },
@@ -120,6 +131,7 @@ export const exampleProducts: Product[] = [
     categoryId: "hand-tools",
     tags: ["Sickle", "Harvesting Tool", "Hand Tools", "Weed Cutting"],
     coverImage: "/products/sickle-agro.png",
+    coverImageAlt: "KOREVA AGRO CUT High-Carbon Steel Serrated Harvesting Sickle with Wooden Handle",
     isPublished: true,
     defaultVariantId: "ko-sickle-12inch"
   }

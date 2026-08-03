@@ -131,7 +131,7 @@ export function FeaturedProducts() {
                       </div>
                       <Image
                         src={product.coverImage}
-                        alt={`${product.name} - KOREVA GLOBAL LLP Agricultural Equipment`}
+                        alt={product.coverImageAlt || `${product.name} - KOREVA GLOBAL LLP Agricultural Equipment`}
                         width={280}
                         height={280}
                         className="object-contain transition-transform duration-500 group-hover:scale-108 w-full h-full"

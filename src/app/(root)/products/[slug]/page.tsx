@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${product.name} manufactured by Koreva Global LLP`,
+          alt: product.coverImageAlt || `${product.name} manufactured by Koreva Global LLP`,
         },
       ],
       type: "website",
@@ -270,6 +270,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   category={relatedProduct.categoryId}
                   price={price}
                   image={relatedProduct.coverImage}
+                  imageAlt={relatedProduct.coverImageAlt}
                   href={`/products/${relatedProduct.id}`}
                 />
               );

@@ -29,6 +29,7 @@ export default function TractorAttachmentsPage() {
         tags: product.tags,
         price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
         image: product.coverImage || (defaultVariant?.images?.[0]) || "/placeholder.png",
+        imageAlt: product.coverImageAlt || (defaultVariant?.imagesAlt?.[0]) || product.name,
         variantsCount: productVariants.length,
         technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
       };

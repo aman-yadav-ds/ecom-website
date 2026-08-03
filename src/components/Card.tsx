@@ -10,6 +10,7 @@ interface CardProps {
   category: string;
   price: number;
   image: string;
+  imageAlt?: string;
   variants?: number;
   href?: string;
 }
@@ -20,6 +21,7 @@ const Card: React.FC<CardProps> = ({
   category,
   price,
   image,
+  imageAlt,
   href = "#",
 }) => {
   return (
@@ -28,7 +30,7 @@ const Card: React.FC<CardProps> = ({
       <div className="relative w-full aspect-[4/3] mb-3 sm:mb-4 overflow-hidden flex items-center justify-center bg-white rounded-xl border border-light-200 p-2">
         <Image
           src={image}
-          alt={`KOREVA ${title} - Heavy Agriculture Machinery`}
+          alt={imageAlt || `KOREVA ${title} - Heavy Agriculture Machinery`}
           fill
           loading="lazy"
           className="object-contain transition-transform duration-500 group-hover:scale-108 p-1 sm:p-2"

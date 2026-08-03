@@ -3,15 +3,40 @@ import { Variant } from "../types";
 export const exampleVariants: Variant[] = [
   // Harrow
   {
-    id: "ko-raino-disc",
-    name: "KO-RAINO",
+    id: "ko-raino-7x7",
+    name: "KO-RAINO (7*7 Discs)",
     productId: "ko-harrow-raino",
-    images: ["/products/harrrow.webp"],
+    images: ["/products/harrow-7x7.png"],
+    imagesAlt: ["KOREVA Raino Heavy-Duty Tractor Disc Harrow 7x7 Discs Model"],
+    price: "78000.00",
+    applicableGst: "5",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Model": "KO-RAINO 7x7",
+      "Disc Size (Diameter)": "24 Inches",
+      "Concavity": "100 mm to 300 mm",
+      "Disc Weight": "9 Kg",
+      "Angle Frame Use": "90*90*10 mm",
+      "Support Angle Frame Use": "90*90*10 mm",
+      "Machine Weight": "410 Kg",
+      "Bearing Size (3 side)": "539 number",
+      "Bearing Size (1 side)": "6310 number",
+      "Spacer spool weight": "4 kg",
+      "Number of Discs": "7*7",
+      "Center Tube": "2\" C Class Pipe"
+    }
+  },
+  {
+    id: "ko-raino-8x8",
+    name: "KO-RAINO (8*8 Discs)",
+    productId: "ko-harrow-raino",
+    images: ["/products/harrow-8x8.webp"],
+    imagesAlt: ["KOREVA Raino Heavy-Duty Tractor Disc Harrow 8x8 Discs Model"],
     price: "85000.00",
     applicableGst: "5",
     technicalDetails: {
       "Brand": "Koreva",
-      "Model": "KO-RAINO",
+      "Model": "KO-RAINO 8x8",
       "Disc Size (Diameter)": "24 Inches",
       "Concavity": "100 mm to 300 mm",
       "Disc Weight": "9 Kg",
@@ -21,7 +46,55 @@ export const exampleVariants: Variant[] = [
       "Bearing Size (3 side)": "539 number",
       "Bearing Size (1 side)": "6310 number",
       "Spacer spool weight": "4 kg",
-      "Number of Discs": "7*7, 8*8, 9*9 & 10*10",
+      "Number of Discs": "8*8",
+      "Center Tube": "2\" C Class Pipe"
+    }
+  },
+  {
+    id: "ko-raino-9x9",
+    name: "KO-RAINO (9*9 Discs)",
+    productId: "ko-harrow-raino",
+    images: ["/products/harrow-9x9.png"],
+    imagesAlt: ["KOREVA Raino Heavy-Duty Tractor Disc Harrow 9x9 Discs Model"],
+    price: "92000.00",
+    applicableGst: "5",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Model": "KO-RAINO 9x9",
+      "Disc Size (Diameter)": "24 Inches",
+      "Concavity": "100 mm to 300 mm",
+      "Disc Weight": "9 Kg",
+      "Angle Frame Use": "90*90*10 mm",
+      "Support Angle Frame Use": "90*90*10 mm",
+      "Machine Weight": "515 Kg",
+      "Bearing Size (3 side)": "539 number",
+      "Bearing Size (1 side)": "6310 number",
+      "Spacer spool weight": "4 kg",
+      "Number of Discs": "9*9",
+      "Center Tube": "2\" C Class Pipe"
+    }
+  },
+  {
+    id: "ko-raino-10x10",
+    name: "KO-RAINO (10*10 Discs)",
+    productId: "ko-harrow-raino",
+    images: ["/products/harrow-10x10.png"],
+    imagesAlt: ["KOREVA Raino Heavy-Duty Tractor Disc Harrow 10x10 Discs Model"],
+    price: "99000.00",
+    applicableGst: "5",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Model": "KO-RAINO 10x10",
+      "Disc Size (Diameter)": "24 Inches",
+      "Concavity": "100 mm to 300 mm",
+      "Disc Weight": "9 Kg",
+      "Angle Frame Use": "90*90*10 mm",
+      "Support Angle Frame Use": "90*90*10 mm",
+      "Machine Weight": "560 Kg",
+      "Bearing Size (3 side)": "539 number",
+      "Bearing Size (1 side)": "6310 number",
+      "Spacer spool weight": "4 kg",
+      "Number of Discs": "10*10",
       "Center Tube": "2\" C Class Pipe"
     }
   },
@@ -30,7 +103,8 @@ export const exampleVariants: Variant[] = [
     id: "ko-kobra-6ft",
     name: "KOS-KOBRA 6 FT",
     productId: "ko-rotavator",
-    images: ["/products/rotavator.png"],
+    images: ["/products/rotavator-ko-kobra.png"],
+    imagesAlt: ["KOREVA KOS-KOBRA 6 FT Heavy Duty Tractor Rotavator"],
     price: "115000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -51,7 +125,8 @@ export const exampleVariants: Variant[] = [
     id: "ko-chitah-7ft",
     name: "KOP-CHITAH 7 FT",
     productId: "ko-rotavator",
-    images: ["/products/rotavator.png"],
+    images: ["/products/rotavator-ko-chitah.png"],
+    imagesAlt: ["KOREVA KOP-CHITAH 7 FT Heavy Duty Tractor Rotavator"],
     price: "125000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -74,6 +149,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1080 DHURANDHAR",
     productId: "ko-weeeder-dhurandhar",
     images: ["/products/power-weeder-dhurandhar.webp"],
+    imagesAlt: ["KOREVA KO-1080 DHURANDHAR 7HP Gasoline Power Weeder"],
     price: "45000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -100,6 +176,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1110 VIJAY",
     productId: "ko-weeder-vijay",
     images: ["/products/power-weeder-vijay.webp"],
+    imagesAlt: ["KOREVA KO-1110 VIJAY 7.8HP Self-Propelled Power Weeder"],
     price: "48000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -127,6 +204,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1260 KHET SHAKTI",
     productId: "ko-pr-khetshakti",
     images: ["/products/power-reaper.webp"],
+    imagesAlt: ["KOREVA KO-1260 KHET SHAKTI Self-Propelled Agricultural Power Reaper"],
     price: "120000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -151,6 +229,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1350 JUGLE PRO (Side Pack)",
     productId: "ko-bc-jpro",
     images: ["/products/brushcutter.webp"],
+    imagesAlt: ["KOREVA KO-1350 JUNGLE PRO Side Pack Brush Cutter"],
     price: "15000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -175,6 +254,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1350 BP JUNGLE PRO (Back Pack)",
     productId: "ko-bc-jpro",
     images: ["/products/brushcutter.webp"],
+    imagesAlt: ["KOREVA KO-1350 BP JUNGLE PRO Back Pack Brush Cutter"],
     price: "16000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -200,6 +280,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1170 GRAH LAXMI",
     productId: "ko-pulveriser",
     images: ["/products/Pulverizer.webp"],
+    imagesAlt: ["KOREVA KO-1170 GRAH LAXMI 3HP Commercial Pulveriser"],
     price: "25000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -220,6 +301,7 @@ export const exampleVariants: Variant[] = [
     name: "KO-1080 DHAN LAXMI",
     productId: "ko-ricemill",
     images: ["/products/mini-rice-mill.png"],
+    imagesAlt: ["KOREVA KO-1080 DHAN LAXMI MINI Rice Mill Machine"],
     price: "35000.00",
     applicableGst: "5",
     technicalDetails: {
@@ -240,6 +322,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA STOU 15W-40 (5L Can)",
     productId: "ko-stou-15w40",
     images: ["/products/stou-lubricant.png"],
+    imagesAlt: ["KOREVA STOU 15W-40 Super Tractor Universal Lubricant Oil 5 Litre Can"],
     price: "2450.00",
     applicableGst: "18",
     technicalDetails: {
@@ -258,6 +341,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA STOU 15W-40 (20L Bucket)",
     productId: "ko-stou-15w40",
     images: ["/products/stou-lubricant.png"],
+    imagesAlt: ["KOREVA STOU 15W-40 Super Tractor Universal Lubricant Oil 20 Litre Bucket"],
     price: "8900.00",
     applicableGst: "18",
     technicalDetails: {
@@ -276,6 +360,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA STOU 15W-40 (210L Drum)",
     productId: "ko-stou-15w40",
     images: ["/products/stou-lubricant.png"],
+    imagesAlt: ["KOREVA STOU 15W-40 Super Tractor Universal Lubricant Oil 210 Litre Commercial Drum"],
     price: "82000.00",
     applicableGst: "18",
     technicalDetails: {
@@ -295,6 +380,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA 4T AGRO 20W-50 (1L Bottle)",
     productId: "ko-4t-agro-20w50",
     images: ["/products/4t-agro-lubricant.png"],
+    imagesAlt: ["KOREVA 4T AGRO 20W-50 Heavy Duty Engine Oil 1 Litre Bottle"],
     price: "420.00",
     applicableGst: "18",
     technicalDetails: {
@@ -312,6 +398,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA 4T AGRO 20W-50 (3.5L Can)",
     productId: "ko-4t-agro-20w50",
     images: ["/products/4t-agro-lubricant.png"],
+    imagesAlt: ["KOREVA 4T AGRO 20W-50 Heavy Duty Engine Oil 3.5 Litre Can"],
     price: "1350.00",
     applicableGst: "18",
     technicalDetails: {
@@ -330,6 +417,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA PRO PRUNER 8-Inch",
     productId: "ko-secateur-pro",
     images: ["/products/secateur-pro.png"],
+    imagesAlt: ["KOREVA PRO PRUNER 8-Inch SK5 High Carbon Steel Bypass Pruning Shears"],
     price: "850.00",
     applicableGst: "12",
     technicalDetails: {
@@ -347,6 +435,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA PRO PRUNER 9-Inch Heavy Duty",
     productId: "ko-secateur-pro",
     images: ["/products/secateur-pro.png"],
+    imagesAlt: ["KOREVA PRO PRUNER 9-Inch Heavy Duty Titanium Coated Pruning Shears"],
     price: "1150.00",
     applicableGst: "12",
     technicalDetails: {
@@ -365,6 +454,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA AGRO CUT Sickle 12-Inch (Serrated)",
     productId: "ko-sickle-agro",
     images: ["/products/sickle-agro.png"],
+    imagesAlt: ["KOREVA AGRO CUT 12-Inch Serrated High-Carbon Steel Harvesting Sickle"],
     price: "380.00",
     applicableGst: "12",
     technicalDetails: {
@@ -382,6 +472,7 @@ export const exampleVariants: Variant[] = [
     name: "KOREVA AGRO CUT Sickle 14-Inch (Smooth Edge)",
     productId: "ko-sickle-agro",
     images: ["/products/sickle-agro.png"],
+    imagesAlt: ["KOREVA AGRO CUT 14-Inch Smooth Edge Paddy Harvesting Sickle"],
     price: "450.00",
     applicableGst: "12",
     technicalDetails: {

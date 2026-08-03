@@ -20,6 +20,7 @@ export interface ProductListingItem {
   tags: string[];
   price: number;
   image: string;
+  imageAlt?: string;
   variantsCount: number;
   technicalDetails: Record<string, string>;
 }
@@ -244,6 +245,7 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
                   category={product.categoryName}
                   price={product.price}
                   image={product.image}
+                  imageAlt={product.imageAlt}
                   variants={product.variantsCount}
                   href={`/products/${product.id}`}
                 />

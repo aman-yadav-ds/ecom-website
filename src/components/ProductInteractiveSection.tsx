@@ -50,6 +50,9 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
   const images = activeVariant?.images?.length
     ? activeVariant.images
     : [product.coverImage];
+  const imagesAlt = activeVariant?.imagesAlt?.length
+    ? activeVariant.imagesAlt
+    : [product.coverImageAlt || `${product.name} agricultural equipment`];
 
   const priceFormatter = new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -64,7 +67,7 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
         
         {/* Left Column: Gallery */}
         <div className="w-full">
-          <ProductGallery images={images} productName={activeVariant?.name || product.name} />
+          <ProductGallery images={images} imagesAlt={imagesAlt} productName={activeVariant?.name || product.name} />
         </div>
 
         {/* Right Column: Metadata, Selectors, Actions */}

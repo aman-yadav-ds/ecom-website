@@ -44,6 +44,9 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
 
   const activeVariant = variants.find((v) => v.id === activeVariantId) || variants[0];
   const images = activeVariant?.images?.length ? activeVariant.images : [product.coverImage];
+  const imagesAlt = activeVariant?.imagesAlt?.length
+    ? activeVariant.imagesAlt
+    : [product.coverImageAlt || `${product.name} agricultural hand tool`];
 
   const priceFormatter = new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -82,7 +85,7 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16">
         {/* Left Column: Gallery */}
         <div className="w-full">
-          <ProductGallery images={images} productName={activeVariant?.name || product.name} />
+          <ProductGallery images={images} imagesAlt={imagesAlt} productName={activeVariant?.name || product.name} />
 
           {/* Quick Quality Indicators */}
           <div className="grid grid-cols-3 gap-3 mt-6">
