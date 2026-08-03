@@ -134,7 +134,7 @@ const Footer = () => {
           <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between gap-4">
             <div className="flex gap-3">
               <a
-                href="https://twitter.com"
+                href="https://x.com/koreva9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
@@ -149,7 +149,7 @@ const Footer = () => {
               />
             </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61592533542061"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
@@ -164,7 +164,7 @@ const Footer = () => {
               />
             </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/koreva_global/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"

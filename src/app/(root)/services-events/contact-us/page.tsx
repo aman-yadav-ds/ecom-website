@@ -48,6 +48,11 @@ const contactPageJsonLd = {
     "logo": "https://koreva9.com/icon.svg",
     "telephone": "+91-7455973188",
     "email": "info@koreva.com",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61592533542061",
+      "https://www.instagram.com/koreva_global/",
+      "https://x.com/koreva9"
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",

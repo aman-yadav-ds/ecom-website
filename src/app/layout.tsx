@@ -65,6 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@koreva9",
+    creator: "@koreva9",
     title: "Koreva9 | Heavy Agriculture Implements & Farm Equipment Manufacturer",
     description:
       "Koreva Global LLP (Koreva9) manufactures high-performance Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, Lubricants, and Hand Tools.",
@@ -110,9 +112,9 @@ const organizationJsonLd = {
     "name": "IN"
   },
   "sameAs": [
-    "https://facebook.com",
-    "https://twitter.com",
-    "https://instagram.com",
+    "https://www.facebook.com/profile.php?id=61592533542061",
+    "https://www.instagram.com/koreva_global/",
+    "https://x.com/koreva9"
   ],
 };
 
