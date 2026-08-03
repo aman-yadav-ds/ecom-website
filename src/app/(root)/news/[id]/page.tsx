@@ -161,6 +161,7 @@ export default async function NewsDetailPage({ params }: NewsDetailProps) {
               fill
               className="object-cover"
               priority
+              loading="eager"
               sizes="(max-width: 768px) 100vw, 896px"
             />
           </div>

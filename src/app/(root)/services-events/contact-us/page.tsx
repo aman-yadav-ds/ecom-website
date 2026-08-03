@@ -45,7 +45,7 @@ const contactPageJsonLd = {
     "name": "Koreva Global LLP",
     "alternateName": "Koreva9",
     "url": "https://koreva9.com",
-    "logo": "https://koreva9.com/icon.svg",
+    "logo": "https://koreva9.com/icon.png",
     "telephone": "+91-7455973188",
     "email": "info@koreva.com",
     "sameAs": [

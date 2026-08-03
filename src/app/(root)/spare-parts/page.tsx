@@ -17,6 +17,8 @@ export default function SparePartsPage() {
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
+              priority
+              loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/30 to-transparent flex items-end p-6 sm:p-8">
               <div>

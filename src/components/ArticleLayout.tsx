@@ -31,6 +31,7 @@ export default function ArticleLayout({
           sizes="100vw"
           className="object-cover opacity-60"
           priority
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent flex flex-col justify-end">
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-10 md:pb-16">

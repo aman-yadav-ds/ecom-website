@@ -75,6 +75,8 @@ export default function GuidesPage() {
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
+              priority
+              loading="eager"
             />
             <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-extrabold uppercase px-3 py-1.5 rounded-full tracking-wider flex items-center gap-1.5 shadow-xs">
               <FeaturedIcon size={14} />

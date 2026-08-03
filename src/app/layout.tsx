@@ -73,9 +73,9 @@ export const metadata: Metadata = {
     images: ["/images/og-koreva9-default.jpg"],
   },
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
