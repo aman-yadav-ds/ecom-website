@@ -176,7 +176,7 @@ export default function ContactUsClient() {
             </div>
             <div className="mt-6 pt-4 border-t border-light-200">
               <a
-                href="https://maps.google.com/?q=NH+9+Kichha+Rudrapur+Road+Kishanpur+Uttarakhand+263148"
+                href="https://maps.app.goo.gl/NyPHE3a5nzvR4YJAA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-extrabold uppercase tracking-wider text-brand-red flex items-center gap-1 hover:underline"
@@ -203,11 +203,10 @@ export default function ContactUsClient() {
 
             {resultMessage && (
               <div
-                className={`p-4 rounded-2xl mb-6 flex items-start gap-3 border text-sm font-bold ${
-                  resultMessage.type === "success"
-                    ? "bg-green-50 border-green-300 text-green-900"
-                    : "bg-red-50 border-red-300 text-red-900"
-                }`}
+                className={`p-4 rounded-2xl mb-6 flex items-start gap-3 border text-sm font-bold ${resultMessage.type === "success"
+                  ? "bg-green-50 border-green-300 text-green-900"
+                  : "bg-red-50 border-red-300 text-red-900"
+                  }`}
               >
                 {resultMessage.type === "success" ? (
                   <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
