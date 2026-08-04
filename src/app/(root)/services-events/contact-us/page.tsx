@@ -3,13 +3,16 @@ import { Metadata } from "next";
 import ContactUsClient from "@/components/ContactUsClient";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Koreva9 - Agricultural Equipment Manufacturer",
+  title: "Contact Us | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
   description:
-    "Contact Koreva Global LLP (Koreva9) for Power Weeders, Laser Land Levellers, Disc Harrows, STOU Lubricants, Hand Tools, and Dealership opportunities in India.",
+    "Contact Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) for Power Weeders, Laser Land Levellers, Disc Harrows, STOU Lubricants, Hand Tools, and Dealership inquiries.",
   keywords: [
     "Contact Koreva9",
+    "Koreva Agriculture Contact",
+    "Koreva Machines Phone",
     "Koreva Global LLP Address",
     "Koreva Phone Number",
+    "Koreva Global",
     "Agricultural Machinery Manufacturer Contact",
     "Koreva Dealer Contact",
   ],
@@ -17,11 +20,11 @@ export const metadata: Metadata = {
     canonical: "/services-events/contact-us",
   },
   openGraph: {
-    title: "Contact Us | Koreva9 - Agricultural Equipment Manufacturer",
+    title: "Contact Us | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
     description:
-      "Contact Koreva Global LLP (Koreva9) corporate headquarters, sales team, and support hotline in Uttarakhand, India.",
+      "Contact Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) corporate headquarters, sales team, and support hotline in Uttarakhand, India.",
     url: "https://koreva9.com/services-events/contact-us",
-    siteName: "Koreva9",
+    siteName: "Koreva Agriculture & Machines",
     images: [
       {
         url: "/contact_address.webp",
@@ -39,11 +42,17 @@ const contactPageJsonLd = {
   "@type": "ContactPage",
   "name": "Contact Koreva Global LLP",
   "url": "https://koreva9.com/services-events/contact-us",
-  "description": "Corporate contact page for Koreva Global LLP (Koreva9) agricultural machinery manufacturer.",
+  "description": "Corporate contact page for Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) agricultural machinery manufacturer.",
   "mainEntity": {
     "@type": "Organization",
     "name": "Koreva Global LLP",
-    "alternateName": "Koreva9",
+    "alternateName": [
+      "Koreva",
+      "Koreva9",
+      "Koreva Agriculture",
+      "Koreva Machines",
+      "Koreva Global"
+    ],
     "url": "https://koreva9.com",
     "logo": "https://koreva9.com/icon.png",
     "telephone": "+91-7455973188",

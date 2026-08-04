@@ -56,7 +56,6 @@ export default function NavbarClient() {
   // ─── Scroll-Driven Motion Values ────────────────────────────────────────────
   const { scrollY } = useScroll();
 
-  // FIX: Use NUMERIC heights (px) only — Framer cannot interpolate "auto"→"0px"
   // Contact strip is ~28px tall; utility bar is ~38px tall.
   const BANNER_RANGE = [0, 50];
   const NAV_RANGE    = [0, 80];
@@ -70,18 +69,17 @@ export default function NavbarClient() {
   const blurAmount      = useTransform(scrollY, NAV_RANGE, [16, 48]);
   const navHeight       = useTransform(scrollY, NAV_RANGE, [72, 60]);
   const outerPaddingX   = useTransform(scrollY, NAV_RANGE, [0, 16]);
-  const outerPaddingTop = useTransform(scrollY, NAV_RANGE, [0, 10]);
-  const borderRadius    = useTransform(scrollY, NAV_RANGE, [0, 9999]);
+  const outerPaddingTop = useTransform(scrollY, NAV_RANGE, [0, 8]);
+  const borderRadius    = useTransform(scrollY, NAV_RANGE, [0, 24]);
   const shadowOpacity   = useTransform(scrollY, NAV_RANGE, [0, 0.15]);
   const borderOpacity   = useTransform(scrollY, NAV_RANGE, [0.08, 0.18]);
-  const barPaddingY     = useTransform(scrollY, NAV_RANGE, [0, 5]);
+  const barPaddingY     = useTransform(scrollY, NAV_RANGE, [0, 4]);
 
   // useMotionTemplate builds a MotionValue<string> — reactive & correctly typed
   const bgColor        = useMotionTemplate`rgba(255,255,255,${bgOpacity})`;
   const backdropFilter = useMotionTemplate`blur(${blurAmount}px)`;
   const boxShadow      = useMotionTemplate`0 4px 32px rgba(0,0,0,${shadowOpacity}), 0 1px 6px rgba(0,0,0,${shadowOpacity})`;
   const borderValue    = useMotionTemplate`1px solid rgba(0,0,0,${borderOpacity})`;
-
 
   // Drive the isScrolled boolean (used for conditional elements only)
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -127,87 +125,85 @@ export default function NavbarClient() {
         onClose={() => setIsSearchOpen(false)}
       />
 
-      {/* ── Contact Strip: height + opacity both animate to 0 ── */}
-      <motion.div
-        style={{ height: bannerHeight, opacity: bannerOpacity, overflow: "hidden" }}
-        className="w-full bg-gradient-to-r from-brand-red via-red-700 to-brand-red text-white text-center text-xs font-bold uppercase tracking-widest shadow-inner"
-      >
-        <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-white/90 animate-pulse" />
-          <span>Support Hotline: +91 7455 973 188</span>
-        </div>
-      </motion.div>
-
-      {/* ── Top Utility Bar: height + opacity both animate to 0 ── */}
-      <motion.div
-        style={{ height: utilityHeight, opacity: bannerOpacity, overflow: "hidden" }}
-        className="w-full bg-white/80 backdrop-blur-xl border-b border-light-200/80 font-jost"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-xs text-dark-900 font-bold">
-          <Link
-            href="/dealers"
-            className="flex items-center space-x-1.5 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
-          >
-            <MapPin className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
-            <span className="tracking-tight uppercase">Find a Dealer</span>
-          </Link>
-          <div className="flex items-center space-x-4 sm:space-x-6">
-            <Link
-              href="/services-events/contact-us"
-              aria-label="Contact Us"
-              className="flex items-center hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
-            >
-              <Mail className="w-3.5 h-3.5" />
-            </Link>
-            <button
-              type="button"
-              className="flex items-center space-x-1.5 hover:text-brand-red transition-colors bg-transparent border-0 font-extrabold uppercase cursor-pointer focus-visible:outline-none"
-              onClick={() => setIsSearchOpen(true)}
-            >
-              <Search className="w-3.5 h-3.5 text-brand-red" />
-              <span>Product search</span>
-            </button>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── Main Sticky Header ─────────────────────────────────────── */}
-      {/*
-          FIX: The pill/floating effect is achieved by animating paddingLeft and
-          paddingRight on the sticky HEADER itself — not by adding margins to an
-          inner div with w-full (which causes width overflow). The inner pill div
-          naturally fills (100% - 2×padding) of its parent, creating the correct
-          shrinking/floating pill appearance without any overflow.
-      */}
-      <motion.header
+      {/* ── Outer Unified Sticky Container ────────────────────────────── */}
+      <header
         ref={dropdownRef}
         onClick={handleLinkClick}
         className="sticky top-0 z-50 w-full font-jost"
-        style={{
-          paddingTop: outerPaddingTop,
-          paddingLeft: outerPaddingX,
-          paddingRight: outerPaddingX,
-        }}
       >
-        {/* Inner pill wrapper — fills (100% - 2×outerPaddingX) */}
+        {/* ── Contact Strip: height + opacity both animate to 0 ── */}
+        <motion.div
+          style={{ height: bannerHeight, opacity: bannerOpacity, overflow: "hidden" }}
+          className="w-full bg-gradient-to-r from-brand-red via-red-700 to-brand-red text-white text-center text-xs font-bold uppercase tracking-widest shadow-inner"
+        >
+          <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-white/90 animate-pulse" />
+            <span>Support Hotline: +91 7455 973 188</span>
+          </div>
+        </motion.div>
+
+        {/* ── Top Utility Bar: height + opacity both animate to 0 ── */}
+        <motion.div
+          style={{ height: utilityHeight, opacity: bannerOpacity, overflow: "hidden" }}
+          className="w-full bg-white/80 backdrop-blur-xl border-b border-light-200/80 font-jost"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-xs text-dark-900 font-bold">
+            <Link
+              href="/dealers"
+              className="flex items-center space-x-1.5 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
+            >
+              <MapPin className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
+              <span className="tracking-tight uppercase">Find a Dealer</span>
+            </Link>
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <Link
+                href="/services-events/contact-us"
+                aria-label="Contact Us"
+                className="flex items-center hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              >
+                <Mail className="w-3.5 h-3.5" />
+              </Link>
+              <button
+                type="button"
+                className="flex items-center space-x-1.5 hover:text-brand-red transition-colors bg-transparent border-0 font-extrabold uppercase cursor-pointer focus-visible:outline-none"
+                onClick={() => setIsSearchOpen(true)}
+              >
+                <Search className="w-3.5 h-3.5 text-brand-red" />
+                <span>Product search</span>
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Main Navigation Floating Pill Wrapper ───────────────────── */}
         <motion.div
           style={{
-            borderRadius,
-            boxShadow,
-            border: borderValue,
+            paddingTop: outerPaddingTop,
+            paddingLeft: outerPaddingX,
+            paddingRight: outerPaddingX,
           }}
-          className="relative transition-all duration-300"
+          className="w-full"
         >
-          {/* Glass background layer — clips background blur/color without clipping dropdowns */}
+          {/* Inner pill wrapper — fills (100% - 2×outerPaddingX) */}
           <motion.div
             style={{
               borderRadius,
-              backgroundColor: bgColor,
-              backdropFilter,
-              WebkitBackdropFilter: backdropFilter,
+              boxShadow,
+              border: borderValue,
             }}
-            className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-          />
+            className="relative"
+          >
+            {/* Glass background layer — clips background blur/color without clipping dropdowns */}
+            <motion.div
+              style={{
+                borderRadius,
+                backgroundColor: bgColor,
+                backdropFilter,
+                WebkitBackdropFilter: backdropFilter,
+              }}
+              className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+            />
+
 
           {/* Vertical padding wrapper */}
           <motion.div
@@ -699,7 +695,10 @@ export default function NavbarClient() {
             </div>
           </motion.div>
         </motion.div>
-      </motion.header>
+      </motion.div>
+    </header>
+
+
 
       {/* ── Mobile Sidebar ──────────────────────────────────────────── */}
       <AnimatePresence>

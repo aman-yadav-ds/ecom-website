@@ -13,6 +13,7 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-RAINO 7x7",
+      "Tractor HP": "35 HP - 50 HP",
       "Disc Size (Diameter)": "24 Inches",
       "Concavity": "100 mm to 300 mm",
       "Disc Weight": "9 Kg",
@@ -37,6 +38,7 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-RAINO 8x8",
+      "Tractor HP": "40 HP - 55 HP",
       "Disc Size (Diameter)": "24 Inches",
       "Concavity": "100 mm to 300 mm",
       "Disc Weight": "9 Kg",
@@ -61,6 +63,7 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-RAINO 9x9",
+      "Tractor HP": "50 HP - 65 HP",
       "Disc Size (Diameter)": "24 Inches",
       "Concavity": "100 mm to 300 mm",
       "Disc Weight": "9 Kg",
@@ -85,6 +88,7 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-RAINO 10x10",
+      "Tractor HP": "55 HP - 75 HP",
       "Disc Size (Diameter)": "24 Inches",
       "Concavity": "100 mm to 300 mm",
       "Disc Weight": "9 Kg",
@@ -141,6 +145,50 @@ export const exampleVariants: Variant[] = [
       "Blades Type": "L Type",
       "Number of Blades": "48L / 66L / 78J Type",
       "PTO Input": "540 RPM"
+    }
+  },
+  // Laser Land Leveller
+  {
+    id: "ko-laser-leveller-7ft",
+    name: "KOREVA SMART LEVEL (7 Ft)",
+    productId: "ko-laser-land-leveller",
+    images: ["/products/laser-land-leveller-7ft.png"],
+    imagesAlt: ["KOREVA SMART LEVEL 7 Ft Heavy-Duty Tractor Laser Land Leveller for precision field leveling"],
+    price: "345000.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Model": "SMART LEVEL 7 FT",
+      "Working Width": "7 Feet (2.13 Meters)",
+      "Tractor HP": "45 HP - 60 HP",
+      "Bucket Sheet Thickness": "8 mm Heavy Duty Steel",
+      "Laser Control Receiver": "High-Precision Dual Mast Digital Laser System",
+      "Hydraulic Cylinder": "Double-Acting Heavy Duty Cylinder",
+      "Mast Assembly": "8 Feet Manual & Electric Foldable Mast",
+      "Machine Weight": "780 Kg",
+      "Tire Size": "6.00-16 Dual Agricultural Tires"
+    }
+  },
+  // Straw Reaper
+  {
+    id: "ko-straw-reaper-56",
+    name: "KOREVA BHUSA KING (56\")",
+    productId: "ko-straw-reaper",
+    images: ["/products/straw-reaper-56inch.png"],
+    imagesAlt: ["KOREVA BHUSA KING 56 Inch Heavy-Duty Tractor Straw Reaper Machine for efficient bhusa making"],
+    price: "325000.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Model": "BHUSA KING 56\"",
+      "Basket / Drum Size": "56 Inches (1420 mm)",
+      "Tractor HP": "50 HP - 75 HP",
+      "Cutter Bar Width": "7 Feet",
+      "Threshing Blades": "Heat-Treated Special Alloy Steel Blades",
+      "Blower System": "Heavy Duty Double Blower Fan with Adjustable Chute",
+      "PTO Input Speed": "540 RPM",
+      "Machine Weight": "1850 Kg",
+      "Tire Size": "7.50-16 Heavy-Duty Farm Tires"
     }
   },
   // Power Weeder
@@ -1133,8 +1181,142 @@ export const exampleVariants: Variant[] = [
       "Finish": "Corrosion Resistant Powder Coating",
       "Weight": "4.8 KG"
     }
+  },
+  // Digging Fork Variant
+  {
+    id: "ko-digging-fork-std",
+    name: "KOREVA FORK MASTER Digging Fork (Standard)",
+    productId: "ko-digging-fork",
+    images: ["/products/digging-fork.png"],
+    imagesAlt: ["KOREVA FORK MASTER 4-Tine Heavy Duty Forged Steel Agricultural Digging Fork"],
+    price: "750.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Tines": "4 Heavy Duty Oval Tines",
+      "Tine Material": "Drop-Forged High Carbon Steel",
+      "Handle Material": "Seasoned Ash Hardwood with Metal D-Grip",
+      "Finish / Coating": "Anti-Rust Black Enamel",
+      "Head Width": "190 mm",
+      "Weight": "1850 Grams"
+    }
+  },
+  // Hand Cultivator Variant
+  {
+    id: "ko-hand-cultivator-3prong",
+    name: "KOREVA CLAW PRO Hand Cultivator (3 Prong)",
+    productId: "ko-hand-cultivator",
+    images: ["/products/hand-cultivator-3prong.png"],
+    imagesAlt: ["KOREVA CLAW PRO 3-Prong Forged Steel Soil Tilling Hand Cultivator Claw"],
+    price: "240.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Prongs": "3 Curved Claw Prongs",
+      "Prong Material": "Heat-Treated Manganese Steel",
+      "Handle Material": "Ergonomic Rubber Grip Hardwood",
+      "Finish / Coating": "Black Electro-Phoretic Rust Protection",
+      "Working Width": "110 mm",
+      "Weight": "320 Grams"
+    }
+  },
+  // Seed Treatment Drum Variant
+  {
+    id: "ko-seed-treatment-drum-std",
+    name: "KOREVA SEED COATER Seed Treatment Drum (Standard)",
+    productId: "ko-seed-treatment-drum",
+    images: ["/products/seed-treatment-drum.png"],
+    imagesAlt: ["KOREVA SEED COATER Heavy Duty Manual Rotating Seed Treatment Drum Machine"],
+    price: "3200.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Drum Capacity": "20 KG Seed Batch Capacity",
+      "Drum Material": "Heavy-Gauge Galvanized Sheet Metal",
+      "Operation": "Manual Smooth Hand-Crank Shaft",
+      "Stand Frame": "Angle Iron Heavy Duty Steel Stand",
+      "Application": "Chemical & Bio-Fungicide Seed Dressing",
+      "Weight": "14.5 KG"
+    }
+  },
+  // Wheel Barrow Variant
+  {
+    id: "ko-wheel-barrow-std",
+    name: "KOREVA CARGO BARROW Wheel Barrow (Standard)",
+    productId: "ko-wheel-barrow",
+    images: ["/products/wheel-barrow.png"],
+    imagesAlt: ["KOREVA CARGO BARROW Heavy Duty Steel Agricultural Wheelbarrow"],
+    price: "3400.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tray Capacity": "85 Liter Heavy Duty Sheet Metal Tray",
+      "Tray Material": "Seamless Pressed Galvanized Steel",
+      "Wheel Type": "Pneumatic Heavy Rubber Tire (3.50-8)",
+      "Frame Structure": "32mm Heavy Duty Tubular Steel Chassis",
+      "Max Load Capacity": "150 KG",
+      "Weight": "12.8 KG"
+    }
+  },
+  // Hand Soil Tiller Variant
+  {
+    id: "ko-hand-soil-tiller-std",
+    name: "KOREVA TILLER PRO Hand Soil Tiller (Standard)",
+    productId: "ko-hand-soil-tiller",
+    images: ["/products/hand-soil-tiller.png"],
+    imagesAlt: ["KOREVA TILLER PRO Rotary Blade Manual Agricultural Hand Soil Tiller"],
+    price: "890.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Rotary Blades": "6 Star-Shaped Forged Tiller Wheels",
+      "Blade Material": "High-Hardness Manganese Alloy Steel",
+      "Handle Material": "Ergonomic Long Tubular Handle",
+      "Working Width": "160 mm",
+      "Application": "Seedbed Tilling & Weeding",
+      "Weight": "1.9 KG"
+    }
+  },
+  // Hand Ridger Variant
+  {
+    id: "ko-hand-ridger-std",
+    name: "KOREVA RIDGER KING Hand Ridger (Standard)",
+    productId: "ko-hand-ridger",
+    images: ["/products/hand-ridger.png"],
+    imagesAlt: ["KOREVA RIDGER KING Dual Wing Manual Steel Agricultural Hand Ridger"],
+    price: "1750.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Plow Head Type": "Dual Adjustable Moldboard Wings",
+      "Blade Material": "High-Carbon Steel Wing Plates",
+      "Frame Structure": "Heavy Steel Drawbar & Handles",
+      "Ridge Width Range": "200 mm - 350 mm Adjustable",
+      "Application": "Planting Furrows & Crop Earth-Up",
+      "Weight": "6.2 KG"
+    }
+  },
+  // Weight Lifter Variant
+  {
+    id: "ko-weight-lifter-basket",
+    name: "KOREVA LIFT MASTER Weight Lifter (Basket)",
+    productId: "ko-weight-lifter",
+    images: ["/products/weight-lifter-basket.png"],
+    imagesAlt: ["KOREVA LIFT MASTER Agricultural Basket Weight Lifter Trolley"],
+    price: "2600.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Lifting Mechanism": "Leverage Arm Basket Hooks",
+      "Frame Material": "Powder-Coated Tubular Steel Frame",
+      "Wheels": "Heavy Duty Solid Rubber Wheels",
+      "Compatibility": "Fits Standard Farm Harvesting Baskets & Crates",
+      "Max Load Capacity": "100 KG",
+      "Weight": "8.5 KG"
+    }
   }
 ];
+
 
 
 

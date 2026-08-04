@@ -36,7 +36,7 @@ const Footer = () => {
               <div className="p-2 rounded-xl bg-white border border-light-300 shadow-xs inline-block">
                 <Image
                   src="/trademark.webp"
-                  alt="KOREVA GLOBAL"
+                  alt="Koreva Agriculture & Farm Machines - Koreva Global LLP (Koreva9)"
                   height={24}
                   width={140}
                   className="object-contain"
@@ -45,7 +45,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="mt-4 text-xs text-dark-600 leading-relaxed max-w-sm font-medium">
-              KOREVA GLOBAL LLP is a premier Indian manufacturer of heavy-duty Power Weeders, Rotavators, Disc Harrows, Reapers, STOU Lubricants, and SK5 Hand Tools. Built tough for Indian fields.
+              Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) is a premier Indian manufacturer of heavy-duty Power Weeders, Rotavators, Disc Harrows, Reapers, STOU Lubricants, and SK5 Hand Tools. Built tough for Indian fields.
             </p>
           </div>
 

@@ -1,8 +1,22 @@
 import React from 'react';
+import { Metadata } from "next";
 import { exampleDealers } from '@/lib/details/dealers';
 import DealerListView from '@/components/dealers/DealerListView';
 import { Check, ShieldCheck, Store } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
+
+export const metadata: Metadata = {
+  title: "Authorized Dealers & Service Outlets | Koreva Agriculture & Machines (Koreva9)",
+  description: "Find authorized Koreva Agriculture and Koreva Machines dealer outlets across India by Koreva Global LLP (Koreva9) for power weeders, spare parts, and warranty service.",
+  keywords: [
+    "Koreva Dealer",
+    "Koreva Agriculture Dealers",
+    "Koreva Machines Service Center",
+    "Koreva Global LLP Outlet",
+    "Koreva9 Dealer Locator",
+    "Power Weeder Dealer India"
+  ],
+};
 
 export default async function DealersPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const searchParams = await props.searchParams;

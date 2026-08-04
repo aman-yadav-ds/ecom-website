@@ -6,8 +6,19 @@ import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
 export const metadata: Metadata = {
-  title: "Tractor Attachments | KOREVA Industrial Equipment",
-  description: "Browse heavy-duty tractor attachments including disc harrows and rotavators for optimal soil preparation.",
+  title: "Tractor Attachments | Koreva Machines - Koreva Agriculture by Koreva Global LLP (Koreva9)",
+  description: "Browse heavy-duty Koreva Machines tractor attachments by Koreva Global LLP (Koreva Agriculture / Koreva9) including disc harrows and rotavators for optimal soil preparation.",
+  keywords: [
+    "Koreva Machines",
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "Tractor Attachments",
+    "Disc Harrow",
+    "Rotavator"
+  ],
 };
 
 export default function TractorAttachmentsPage() {

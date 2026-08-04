@@ -4,9 +4,16 @@ import { HelpCircle } from "lucide-react";
 import { FaqAccordionClient } from "@/components/FaqAccordionClient";
 
 export const metadata: Metadata = {
-  title: "FAQ | KOREVA9 - Frequently Asked Questions",
+  title: "FAQ | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
   description:
-    "Find answers to common questions about KOREVA agricultural machinery, E20 petrol maintenance tips, warranty coverage, and our national authorized dealer network.",
+    "Find answers to common questions about Koreva Agriculture, Koreva Machines, E20 petrol maintenance tips, warranty coverage, and our national authorized dealer network by Koreva Global LLP (Koreva9).",
+  keywords: [
+    "Koreva FAQ",
+    "Koreva Agriculture Questions",
+    "Koreva Machines Support",
+    "Koreva Global LLP FAQ",
+    "Koreva9 Help Center"
+  ],
   alternates: { canonical: "/faq" },
 };
 

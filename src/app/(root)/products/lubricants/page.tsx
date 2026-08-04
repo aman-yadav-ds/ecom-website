@@ -7,8 +7,18 @@ import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/detai
 import { Droplet, ShieldCheck, FileCheck, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Lubricants & Engine Oils | KOREVA Industrial Supplies",
-  description: "Explore ISO 9001 certified STOU universal tractor oil and 4T heavy-duty engine oils for optimal thermal stability and wear protection.",
+  title: "STOU Lubricants & Engine Oils | Koreva Agriculture by Koreva Global LLP (Koreva9)",
+  description: "Explore ISO 9001 certified STOU universal tractor oil and 4T heavy-duty engine oils formulated by Koreva Global LLP (Koreva Agriculture / Koreva9).",
+  keywords: [
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "STOU Lubricants",
+    "Tractor Oil",
+    "Engine Oils"
+  ],
 };
 
 export default function LubricantsPage() {

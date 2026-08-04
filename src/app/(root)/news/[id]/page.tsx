@@ -27,15 +27,19 @@ export async function generateMetadata({ params }: NewsDetailProps): Promise<Met
     };
   }
 
-  const siteUrl = "https://korevaglobal.com";
+  const siteUrl = "https://koreva9.com";
   const articleUrl = `${siteUrl}/news/${article.id}`;
 
   return {
-    title: `${article.title} | KOREVA GLOBAL News`,
-    description: article.excerpt,
+    title: `${article.title} | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)`,
+    description: `${article.excerpt} Read official news from Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).`,
     keywords: [
       article.category,
-      "KOREVA GLOBAL LLP",
+      "Koreva Agriculture",
+      "Koreva Machines",
+      "Koreva Global LLP",
+      "Koreva9",
+      "Koreva Global",
       "Power Weeder",
       "Agricultural Implements India",
       "Tractor Machinery",

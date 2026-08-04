@@ -1,8 +1,33 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { ArrowRight, Leaf, ShieldCheck, TrendingUp, Users, Award, Building2, CheckCircle2 } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+
+export const metadata: Metadata = {
+  title: "About Koreva Agriculture & Koreva Machines | Koreva Global LLP (Koreva9)",
+  description: "Discover Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9), a premier Indian manufacturer of heavy-duty Power Weeders, Rotavators, Disc Harrows, Reapers, and ISO 9001:2015 certified lubricants.",
+  keywords: [
+    "Koreva Agriculture",
+    "Koreva Machines",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "Agricultural Machinery Manufacturer",
+    "Farm Equipment India",
+    "Power Weeder Manufacturer"
+  ],
+  openGraph: {
+    title: "About Koreva Agriculture & Koreva Machines | Koreva Global LLP (Koreva9)",
+    description: "Discover Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9), a premier Indian manufacturer of high-performance agricultural machinery and ISO certified lubricants.",
+    url: "https://koreva9.com/about",
+    siteName: "Koreva Agriculture & Machines",
+    locale: "en_IN",
+    type: "website",
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -15,7 +40,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 z-0">
             <Image
               src="/images/about_factory_1784013199832.jpg"
-              alt="KOREVA GLOBAL LLP Agricultural Machinery Manufacturing Facility"
+              alt="Koreva Agriculture & Koreva Machines Manufacturing Facility - Koreva Global LLP (Koreva9)"
               fill
               sizes="100vw"
               className="object-cover scale-105 filter brightness-95 opacity-25"
@@ -29,13 +54,13 @@ export default function AboutPage() {
           <ScrollReveal animation="slide-bottom" className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center gap-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-red/20 text-brand-red text-xs sm:text-sm font-extrabold uppercase tracking-widest shadow-xs">
               <Building2 className="w-4 h-4" />
-              <span>ABOUT KOREVA GLOBAL LLP</span>
+              <span>ABOUT KOREVA GLOBAL LLP (KOREVA AGRICULTURE & MACHINES)</span>
             </div>
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-dark-900 uppercase tracking-tight leading-tight">
-              A LEGACY IN THE MAKING
+              A LEGACY IN AGRICULTURAL INNOVATION
             </h1>
             <p className="text-dark-700 text-sm sm:text-base md:text-lg font-medium max-w-2xl leading-relaxed">
-              Empowering Indian farmers with state-of-the-art agricultural machinery, precision hand tools, and ISO 9001:2015 certified lubricants.
+              Empowering Indian farmers with state-of-the-art Koreva Machines, precision hand tools, and ISO 9001:2015 certified lubricants by Koreva Global LLP (Koreva9).
             </p>
           </ScrollReveal>
         </section>
@@ -48,10 +73,10 @@ export default function AboutPage() {
                 Who We Are
               </h2>
               <p className="text-dark-700 text-base md:text-lg leading-relaxed mb-6 font-medium">
-                Welcome to <strong className="text-dark-900 font-extrabold">KOREVA</strong>, a proud brand of <strong className="text-brand-red font-extrabold">KOREVA GLOBAL LLP</strong>. We are a passionate, emerging force in the Indian agricultural sector, dedicated to empowering farmers with heavy-duty Power Weeders, Disc Harrows, Rotavators, Reapers, robust garden tools, and high-performance lubricants.
+                Welcome to <strong className="text-dark-900 font-extrabold">Koreva Agriculture</strong> & <strong className="text-dark-900 font-extrabold">Koreva Machines</strong>, flagship divisions of <strong className="text-brand-red font-extrabold">Koreva Global LLP</strong> (widely known as <strong className="text-dark-900 font-extrabold">Koreva9</strong> / <strong className="text-dark-900 font-extrabold">Koreva Global</strong>). We are a leading force in the Indian agricultural sector, dedicated to empowering farmers with heavy-duty Power Weeders, Disc Harrows, Rotavators, Reapers, robust garden tools, and high-performance lubricants.
               </p>
               <p className="text-dark-700 text-base md:text-lg leading-relaxed font-medium max-w-3xl mx-auto">
-                Based in Uttarakhand, India, our mission is straightforward: to provide high-quality, affordable, and sustainable farming solutions engineered specifically for the unique demands of Indian soils and terrain.
+                Based in Uttarakhand, India, our mission at Koreva Global is straightforward: to provide high-quality, affordable, and sustainable farming machinery engineered specifically for the unique demands of Indian soils and terrain.
               </p>
             </ScrollReveal>
           </div>

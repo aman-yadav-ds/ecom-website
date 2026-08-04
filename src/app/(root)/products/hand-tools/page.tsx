@@ -7,8 +7,18 @@ import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/detai
 import { Wrench, Shield, Award } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Agricultural & Garden Hand Tools | KOREVA Tools",
-  description: "Explore drop-forged SK5 alloy steel secateurs, pruners, and high-carbon manganese steel harvesting sickles with ergonomic handles.",
+  title: "Agricultural & Garden Hand Tools | Koreva Agriculture by Koreva Global LLP (Koreva9)",
+  description: "Explore drop-forged SK5 alloy steel secateurs, pruners, and harvesting sickles manufactured by Koreva Global LLP (Koreva Agriculture / Koreva Tools / Koreva9).",
+  keywords: [
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "SK5 Hand Tools",
+    "Pruning Secateurs",
+    "Garden Tools"
+  ],
 };
 
 export default function HandToolsPage() {

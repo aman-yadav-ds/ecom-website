@@ -6,9 +6,20 @@ import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/detai
 import { Tractor } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Agricultural Products & Implements Catalog | Koreva",
+  title: "Koreva Machines & Agricultural Products Catalog | Koreva Global LLP (Koreva9)",
   description:
-    "Browse Koreva's complete agricultural machinery catalog including Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, STOU Lubricants, and SK5 Hand Tools.",
+    "Browse the full lineup of Koreva Machines and Koreva Agriculture farm equipment by Koreva Global LLP (Koreva9), including Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, STOU Lubricants, and Hand Tools.",
+  keywords: [
+    "Koreva Machines",
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "Power Weeder Catalog",
+    "Disc Harrow Catalog",
+    "Agricultural Machinery India"
+  ],
   alternates: {
     canonical: "/products",
   },

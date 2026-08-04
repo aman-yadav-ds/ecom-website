@@ -6,8 +6,15 @@ import { Calendar, User, Newspaper, ArrowRight } from "lucide-react";
 import { newsArticles } from "@/lib/details/newsData";
 
 export const metadata: Metadata = {
-  title: "News & Press Releases | KOREVA GLOBAL LLP",
-  description: "Stay updated with product launches, dealer network expansions, and manufacturing insights from KOREVA GLOBAL LLP.",
+  title: "News & Press Releases | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
+  description: "Stay updated with product launches, dealer network expansions, and manufacturing insights from Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
+  keywords: [
+    "Koreva News",
+    "Koreva Agriculture Press Releases",
+    "Koreva Machines Updates",
+    "Koreva Global LLP News",
+    "Koreva9 Announcements"
+  ],
 };
 
 export default function NewsPage() {

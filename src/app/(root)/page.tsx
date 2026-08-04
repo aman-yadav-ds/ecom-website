@@ -10,11 +10,15 @@ import { AboutUsPreview } from "@/components/home/AboutUsPreview";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 
 export const metadata: Metadata = {
-  title: "KOREVA GLOBAL LLP | Power Weeders, Harrows & Agricultural Machinery India",
-  description: "KOREVA GLOBAL LLP manufactures heavy-duty Power Weeders, Rotavators, Harrows, Power Reapers, Brush Cutters, Rice Mills, STOU Lubricants, and SK5 Hand Tools for Indian agriculture.",
+  title: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
+  description: "Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) manufactures heavy-duty Power Weeders, Rotavators, Disc Harrows, Power Reapers, STOU Lubricants, and SK5 Hand Tools for Indian agriculture.",
   keywords: [
-    "KOREVA",
-    "KOREVA GLOBAL LLP",
+    "Koreva",
+    "Koreva9",
+    "Koreva Agriculture",
+    "Koreva Machines",
+    "Koreva Global",
+    "Koreva Global LLP",
     "Power Weeder",
     "Harrow",
     "Rotavator",
@@ -29,10 +33,10 @@ export const metadata: Metadata = {
     "Pruning Secateur"
   ],
   openGraph: {
-    title: "KOREVA GLOBAL LLP | Premium Agricultural Machinery & Equipment",
-    description: "Empowering Indian farmers with precision Power Weeders, Harrows, Rotavators, and ISO 9001 certified lubricants.",
+    title: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
+    description: "Empowering Indian farmers with precision Koreva Machines, Power Weeders, Harrows, Rotavators, and ISO 9001 certified lubricants by Koreva Global LLP.",
     url: "https://koreva9.com",
-    siteName: "KOREVA GLOBAL LLP",
+    siteName: "Koreva Agriculture & Machines",
     locale: "en_IN",
     type: "website",
   },
@@ -43,10 +47,17 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "KOREVA GLOBAL LLP",
-    "alternateName": "Koreva9",
+    "name": "Koreva Agriculture & Machines",
+    "alternateName": [
+      "Koreva9",
+      "Koreva",
+      "Koreva Agriculture",
+      "Koreva Machines",
+      "Koreva Global",
+      "Koreva Global LLP"
+    ],
     "url": "https://koreva9.com",
-    "description": "KOREVA GLOBAL LLP is a leading Indian manufacturer of Power Weeders, tractor Harrows, Rotavators, Power Reapers, STOU Lubricants, and Hand Tools.",
+    "description": "Koreva Global (Koreva Agriculture / Koreva Machines / Koreva9) is a leading Indian manufacturer of Power Weeders, tractor Harrows, Rotavators, Power Reapers, STOU Lubricants, and Hand Tools.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {

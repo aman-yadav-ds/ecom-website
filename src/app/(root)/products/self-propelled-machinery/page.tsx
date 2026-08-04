@@ -6,8 +6,19 @@ import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
 export const metadata: Metadata = {
-  title: "Self Propelled Machinery | KOREVA Industrial Equipment",
-  description: "Explore walk-behind power weeders, power reapers, and brush cutters for efficient agricultural field operations.",
+  title: "Self Propelled Machinery | Koreva Machines - Koreva Agriculture by Koreva Global LLP (Koreva9)",
+  description: "Explore walk-behind power weeders, power reapers, and brush cutters engineered by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
+  keywords: [
+    "Koreva Machines",
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "Power Weeder",
+    "Power Reaper",
+    "Self Propelled Machinery"
+  ],
 };
 
 export default function SelfPropelledMachineryPage() {

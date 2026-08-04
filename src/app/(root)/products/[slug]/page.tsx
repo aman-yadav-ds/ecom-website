@@ -39,18 +39,28 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug, product } = await resolveProduct(params);
   if (!product) {
     return {
-      title: "Product Not Found | Koreva",
+      title: "Product Not Found | Koreva Agriculture & Machines",
       description: "The requested Koreva agricultural product could not be found.",
     };
   }
 
-  const title = `${product.name} | Koreva - Agriculture Machinery`;
-  const description = product.description;
+  const title = `${product.name} - Koreva Machines | Koreva Agriculture - Koreva Global LLP (Koreva9)`;
+  const description = `${product.name} manufactured by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9). ${product.description}`;
   const ogImage = product.coverImage || "/images/og-koreva-default.jpg";
 
   return {
     title,
     description,
+    keywords: [
+      product.name,
+      "Koreva Machines",
+      "Koreva Agriculture",
+      "Koreva Global LLP",
+      "Koreva9",
+      "Koreva Global",
+      "Koreva",
+      ...product.tags
+    ],
     alternates: {
       canonical: `/products/${slug || product.id}`,
     },
@@ -58,13 +68,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       title,
       description,
       url: `https://koreva9.com/products/${slug || product.id}`,
-      siteName: "Koreva",
+      siteName: "Koreva Agriculture & Machines",
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: product.coverImageAlt || `${product.name} manufactured by Koreva Global LLP`,
+          alt: product.coverImageAlt || `${product.name} manufactured by Koreva Global LLP (Koreva9)`,
         },
       ],
       type: "website",
@@ -107,7 +117,13 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     "description": product.description,
     "brand": {
       "@type": "Brand",
-      "name": "Koreva",
+      "name": "Koreva9",
+      "alternateName": ["Koreva Machines", "Koreva Agriculture", "Koreva", "Koreva Global"]
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Koreva Global LLP",
+      "alternateName": ["Koreva9", "Koreva Agriculture", "Koreva Machines"]
     },
     "aggregateRating": {
       "@type": "AggregateRating",

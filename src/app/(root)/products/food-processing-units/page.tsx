@@ -6,8 +6,19 @@ import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
 export const metadata: Metadata = {
-  title: "Food Processing Units | KOREVA Equipment",
-  description: "Commercial stainless steel pulverisers, rice mills, and food processing machinery engineered for maximum output.",
+  title: "Food Processing Units | Koreva Machines - Koreva Agriculture by Koreva Global LLP (Koreva9)",
+  description: "Commercial stainless steel pulverisers, rice mills, and food processing machinery engineered by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
+  keywords: [
+    "Koreva Machines",
+    "Koreva Agriculture",
+    "Koreva Global LLP",
+    "Koreva9",
+    "Koreva Global",
+    "Koreva",
+    "Food Processing Machinery",
+    "Rice Mill",
+    "Pulveriser"
+  ],
 };
 
 export default function FoodProcessingUnitsPage() {

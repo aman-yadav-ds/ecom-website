@@ -4,9 +4,16 @@ import { FileCheck2 } from "lucide-react";
 import { DownloadsClient } from "@/components/DownloadsClient";
 
 export const metadata: Metadata = {
-  title: "Downloads & Technical Manuals | KOREVA9",
+  title: "Downloads & Manuals | Koreva Agriculture & Machines (Koreva9)",
   description:
-    "Download KOREVA product catalogues, user manuals, and safety guides for Power Weeders, Rotavators, Lubricants, and all agricultural machinery.",
+    "Download product catalogues, user manuals, and safety guides for Koreva Machines and Koreva Agriculture equipment by Koreva Global LLP (Koreva9).",
+  keywords: [
+    "Koreva Manuals",
+    "Koreva Agriculture Catalog",
+    "Koreva Machines Downloads",
+    "Koreva Global LLP Manuals",
+    "Koreva9 User Guides"
+  ],
   alternates: { canonical: "/downloads" },
 };
 

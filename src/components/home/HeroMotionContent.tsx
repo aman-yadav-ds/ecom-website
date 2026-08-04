@@ -16,7 +16,7 @@ export function HeroMotionContent() {
       >
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-brand-red/20 text-dark-900 text-xs font-extrabold uppercase tracking-widest shadow-xs">
           <span className="w-2 h-2 rounded-full bg-brand-red animate-ping" />
-          <span>KOREVA GLOBAL — Precision Agricultural Equipment</span>
+          <span>KOREVA AGRICULTURE & MACHINES — KOREVA GLOBAL (KOREVA9)</span>
         </div>
       </motion.div>
 
@@ -28,11 +28,10 @@ export function HeroMotionContent() {
         className="max-w-3xl"
       >
         <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-dark-900 leading-[1.1]">
-          SELF PROPELLED MACHINERY & <span className="text-brand-red">TRACTOR ATTACHMENTS</span>
+          KOREVA MACHINES & <span className="text-brand-red">TRACTOR ATTACHMENTS</span>
         </h1>
         <p className="mt-3 sm:mt-4 text-dark-800 text-xs sm:text-sm md:text-base max-w-xl mx-auto font-medium leading-relaxed">
-          Engineered for durability and high field productivity. Premier Indian manufacturer of
-          ISO 9001 certified farm equipment, rotavators, lubricants, and SK5 Hand tools.
+          Engineered for durability and high field productivity. Koreva Global (Koreva9) is a premier Indian manufacturer of ISO 9001 certified farm equipment, rotavators, power weeders, lubricants, and SK5 Hand tools.
         </p>
       </motion.div>
 

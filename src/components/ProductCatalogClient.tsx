@@ -39,6 +39,17 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
   const availableFilters = useMemo(() => {
     const filters: Record<string, Set<string>> = {};
     const activeCategoryParam = searchParams.get('category') || initialCategory;
+    const isMainProductsPage = !activeCategoryParam || activeCategoryParam === 'All';
+
+    if (isMainProductsPage) {
+      const categorySet = new Set<string>();
+      initialProducts.forEach(p => {
+        if (p.categoryName) categorySet.add(p.categoryName);
+      });
+      if (categorySet.size > 1) {
+        filters['Category'] = categorySet;
+      }
+    }
     
     // Determine allowed keys based on category
     const allowedKeys = (activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam])
@@ -61,10 +72,13 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
       });
     });
 
-    // Convert Sets to Arrays and sort them
+    // Convert Sets to Arrays and sort them; omit groups with <= 1 option to keep sidebar clean
     const result: Record<string, string[]> = {};
     Object.keys(filters).forEach(key => {
-      result[key] = Array.from(filters[key]).sort();
+      const sortedValues = Array.from(filters[key]).sort();
+      if (sortedValues.length > 1) {
+        result[key] = sortedValues;
+      }
     });
     
     return result;
@@ -100,7 +114,7 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
       for (const [filterKey, selectedValues] of Object.entries(activeFilters)) {
         if (selectedValues.length === 0) continue;
         
-        if (filterKey === 'category') {
+        if (filterKey.toLowerCase() === 'category') {
           if (!selectedValues.includes(product.categoryName)) {
             return false;
           }

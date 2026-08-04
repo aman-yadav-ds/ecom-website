@@ -44,9 +44,9 @@ export function AnimatedAboutContent() {
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <p className="text-dark-700 text-sm sm:text-base md:text-lg leading-relaxed font-medium">
-          <strong className="text-dark-900 font-extrabold">KOREVA GLOBAL LLP</strong> is a
-          premier Indian manufacturer and exporter dedicated to empowering agricultural
-          productivity. We engineer an advanced lineup of{" "}
+          <strong className="text-dark-900 font-extrabold">KOREVA GLOBAL LLP</strong> (operating as{" "}
+          <strong className="text-dark-900 font-bold">Koreva Agriculture</strong> &{" "}
+          <strong className="text-dark-900 font-bold">Koreva Machines / Koreva9</strong>) is a premier Indian manufacturer and exporter dedicated to empowering agricultural productivity. We engineer an advanced lineup of{" "}
           <strong className="text-dark-900 font-bold">Power Weeders</strong>, tractor-mounted{" "}
           <strong className="text-dark-900 font-bold">Harrows</strong>,{" "}
           <strong className="text-dark-900 font-bold">Rotavators</strong>, ISO 9001 certified{" "}
@@ -62,10 +62,7 @@ export function AnimatedAboutContent() {
         transition={{ duration: 0.6, delay: 0.3 }}
       >
         <p className="text-dark-600 text-xs sm:text-sm md:text-base leading-relaxed max-w-3xl mx-auto font-medium">
-          Driven by innovation, OEM quality assurance, and a nationwide network of authorized
-          dealer hubs, <strong className="text-dark-900 font-bold">KOREVA GLOBAL LLP</strong>{" "}
-          ensures every product delivers long-lasting field reliability and exceptional return
-          on investment for Indian farmers.
+          Driven by innovation, OEM quality assurance, and a nationwide network of authorized dealer hubs, <strong className="text-dark-900 font-bold">Koreva Agriculture</strong> ensures every machine delivers long-lasting field reliability and exceptional return on investment for Indian farmers.
         </p>
       </motion.div>
 
