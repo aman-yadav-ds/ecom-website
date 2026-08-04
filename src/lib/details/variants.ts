@@ -966,7 +966,175 @@ export const exampleVariants: Variant[] = [
       "Overall Length": "900 mm",
       "Weight": "680 Grams"
     }
+  },
+  // Hand Sprinkler Variants
+  {
+    id: "ko-sprinkler-plastic",
+    name: "KOREVA TURBO SPRINKLER Hand Sprinkler (Plastic)",
+    productId: "ko-hand-sprinkler",
+    images: ["/products/hand-sprinkler-plastic.png"],
+    imagesAlt: ["KOREVA TURBO SPRINKLER Heavy Duty Adjustable Multi-Pattern Plastic Hand Lawn Sprinkler"],
+    price: "290.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Body Material": "High-Impact ABS / Polypropylene Plastic",
+      "Spray Settings": "8 Multi-Spray Nozzle Modes",
+      "Connection Size": "1/2 Inch Quick Hose Connector",
+      "Water Pressure Range": "2.0 - 4.5 Bar",
+      "Coverage Radius": "Up to 8 Meters"
+    }
+  },
+  {
+    id: "ko-sprinkler-brass",
+    name: "KOREVA TURBO SPRINKLER Hand Sprinkler (Brass)",
+    productId: "ko-hand-sprinkler",
+    images: ["/products/hand-sprinkler-brass.png"],
+    imagesAlt: ["KOREVA TURBO SPRINKLER Premium Solid Brass Heavy Duty Rotating Garden Lawn Sprinkler"],
+    price: "580.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Body Material": "Heavy-Duty Solid Brass Alloys",
+      "Spray Settings": "Adjustable Stream to Fine Mist",
+      "Connection Size": "3/4 Inch Threaded Brass Inlet",
+      "Water Pressure Range": "2.5 - 6.0 Bar",
+      "Coverage Radius": "Up to 12 Meters"
+    }
+  },
+  // Hand Wheel Hoe Variants
+  {
+    id: "ko-wheel-hoe-1tine",
+    name: "KOREVA WHEEL CULTI Hand Wheel Hoe (1 Tine)",
+    productId: "ko-hand-wheel-hoe",
+    images: ["/products/wheel-hoe-1tine.png"],
+    imagesAlt: ["KOREVA WHEEL CULTI Single Tine Manual Wheel Hoe Weeder Cultivator"],
+    price: "1850.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tine Count": "1 Heavy Duty Spring Steel Tine",
+      "Wheel Diameter": "300 mm Heavy Steel Rim",
+      "Frame Material": "Powder-Coated Tubular Carbon Steel",
+      "Working Depth": "50 mm - 100 mm Adjustable",
+      "Application": "Single Row Weeding & Line Trenching",
+      "Weight": "4.2 KG"
+    }
+  },
+  {
+    id: "ko-wheel-hoe-3tine",
+    name: "KOREVA WHEEL CULTI Hand Wheel Hoe (3 Tine)",
+    productId: "ko-hand-wheel-hoe",
+    images: ["/products/wheel-hoe-3tine.png"],
+    imagesAlt: ["KOREVA WHEEL CULTI 3-Tine Manual Agricultural Wheel Hoe Soil Cultivator"],
+    price: "2200.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tine Count": "3 Multi-Depth Reversible Tines",
+      "Wheel Diameter": "300 mm Heavy Steel Rim",
+      "Frame Material": "Powder-Coated Tubular Carbon Steel",
+      "Working Width": "250 mm Inter-Row Tilling",
+      "Application": "Wide Soil Aeration & Inter-Crop Weeding",
+      "Weight": "5.1 KG"
+    }
+  },
+  // Garden Spade Variant
+  {
+    id: "ko-garden-spade-std",
+    name: "KOREVA SPADE KING Garden Spade (Standard)",
+    productId: "ko-garden-spade",
+    images: ["/products/garden-spade.png"],
+    imagesAlt: ["KOREVA SPADE KING Forged Steel Heavy Duty Agricultural Garden Spade"],
+    price: "620.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Shape": "Flat Straight Edge Border Spade",
+      "Blade Material": "Drop-Forged High Carbon Steel",
+      "Handle Style": "Ash Hardwood T-Handle",
+      "Finish / Coating": "Anti-Rust Black Lacquer Finish",
+      "Blade Size": "180 mm x 280 mm",
+      "Weight": "1650 Grams"
+    }
+  },
+  // Manual Seed Fertilizer Broadcaster Variant
+  {
+    id: "ko-broadcaster-std",
+    name: "KOREVA AGRO BROADCASTER Manual Seed Fertilizer (Broadcaster)",
+    productId: "ko-seed-fertilizer-broadcaster",
+    images: ["/products/seed-fertilizer-broadcaster.png"],
+    imagesAlt: ["KOREVA AGRO BROADCASTER Portable Manual Backpack Seed and Fertilizer Spreader"],
+    price: "1450.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Container Capacity": "10 Liter Heavy Duty Hopper",
+      "Drive System": "Smooth Manual Hand-Crank Gear System",
+      "Broadcast Width": "3 to 6 Meters Adjustable Spread",
+      "Strap System": "Dual Padded Shoulder Straps",
+      "Application": "Granular Fertilizer, Wheat, Rice & Grass Seed Spreading",
+      "Weight": "1.8 KG (Empty)"
+    }
+  },
+  // Maize Sheller Variant
+  {
+    id: "ko-maize-sheller-std",
+    name: "KOREVA CORN PRO Maize Sheller (Standard)",
+    productId: "ko-maize-sheller",
+    images: ["/products/maize-sheller.png"],
+    imagesAlt: ["KOREVA CORN PRO Cast Iron Manual Hand Crank Maize Corn Sheller Machine"],
+    price: "850.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Body Material": "Heavy Duty Cast Iron",
+      "Operation Mode": "Manual Hand Crank Wheel",
+      "Mounting Type": "Wooden Box / Bench Mountable Bracket",
+      "Processing Capacity": "50-80 KG Corn per Hour",
+      "Finish": "Durable Red Enamel Paint",
+      "Weight": "5.5 KG"
+    }
+  },
+  // Garden Gloves Variant
+  {
+    id: "ko-gloves-red-black",
+    name: "KOREVA GRIP SHIELD Garden Gloves (Red and Black)",
+    productId: "ko-garden-gloves",
+    images: ["/products/garden-gloves-red-black.png"],
+    imagesAlt: ["KOREVA GRIP SHIELD Red and Black Nitrile Coated Puncture Resistant Garden Gloves"],
+    price: "180.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Coating Material": "Micro-Foam Nitrile Grip Coating",
+      "Liner Material": "13-Gauge Seamless Breathable Nylon/Polyester",
+      "Color": "Red Body with Black Textured Palm Grip",
+      "Cuff Style": "Elasticized Snug Wrist Cuff",
+      "Protection Level": "Thorn Proof & Puncture Resistant",
+      "Size": "Universal Standard Adult Fit"
+    }
+  },
+  // Post Hole Digger Variant
+  {
+    id: "ko-post-hole-digger-std",
+    name: "KOREVA HOLE DIGGER PRO Post Hole Digger (Standard)",
+    productId: "ko-post-hole-digger",
+    images: ["/products/post-hole-digger.png"],
+    imagesAlt: ["KOREVA HOLE DIGGER PRO Dual Blade Steel Manual Post Hole Digger"],
+    price: "1650.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Material": "Hardened Alloy Steel Clam Shell Blades",
+      "Handle Material": "Seasoned Hardwood Handles (1.2m)",
+      "Digging Diameter": "150 mm (6 Inch) Standard Hole Size",
+      "Max Hole Depth": "Up to 1.1 Meters",
+      "Finish": "Corrosion Resistant Powder Coating",
+      "Weight": "4.8 KG"
+    }
   }
 ];
+
 
 

@@ -266,7 +266,85 @@ export const exampleProducts: Product[] = [
     coverImageAlt: "KOREVA SWORD CUT High Manganese Steel Dual Edged Agricultural Grass Sword",
     isPublished: true,
     defaultVariantId: "ko-grass-sword-std"
+  },
+  {
+    id: "ko-hand-sprinkler",
+    name: "KOREVA - Agricultural Hand Sprinkler (TURBO SPRINKLER)",
+    description: "High-efficiency adjustable lawn and crop hand sprinkler featuring multi-pattern spray nozzles for targeted irrigation and garden watering.",
+    categoryId: "hand-tools",
+    tags: ["Hand Sprinkler", "Sprinkler", "Garden Sprinkler", "Irrigation", "Hand Tools", "Plastic Sprinkler", "Brass Sprinkler"],
+    coverImage: "/products/hand-sprinkler-plastic.png",
+    coverImageAlt: "KOREVA TURBO SPRINKLER High Efficiency Agricultural Hand Lawn Sprinkler",
+    isPublished: true,
+    defaultVariantId: "ko-sprinkler-plastic"
+  },
+  {
+    id: "ko-hand-wheel-hoe",
+    name: "KOREVA - Manual Hand Wheel Hoe (WHEEL CULTI)",
+    description: "Ergonomic manual push wheel hoe cultivator engineered for fast inter-crop weeding, ridge making, and soil loosening with minimal operator effort.",
+    categoryId: "hand-tools",
+    tags: ["Hand Wheel Hoe", "Wheel Hoe", "Cultivator", "Weeding Tool", "Hand Tools", "1 Tine", "3 Tine"],
+    coverImage: "/products/wheel-hoe-3tine.png",
+    coverImageAlt: "KOREVA WHEEL CULTI Manual Push Wheel Hoe Agricultural Cultivator",
+    isPublished: true,
+    defaultVariantId: "ko-wheel-hoe-3tine"
+  },
+  {
+    id: "ko-garden-spade",
+    name: "KOREVA - Heavy Duty Garden Spade (SPADE KING)",
+    description: "Drop-forged carbon steel flat spade with reinforced blade collar and ergonomic hardwood handle for border edging, trenching, and soil turning.",
+    categoryId: "hand-tools",
+    tags: ["Garden Spade", "Spade", "Border Spade", "Digging Tool", "Hand Tools", "Forged Steel"],
+    coverImage: "/products/garden-spade.png",
+    coverImageAlt: "KOREVA SPADE KING Heavy Duty Forged Steel Agricultural Garden Spade",
+    isPublished: true,
+    defaultVariantId: "ko-garden-spade-std"
+  },
+  {
+    id: "ko-seed-fertilizer-broadcaster",
+    name: "KOREVA - Manual Seed & Fertilizer Broadcaster (AGRO BROADCASTER)",
+    description: "Ergonomic backpack manual broadcast spreader designed for even distribution of granular fertilizers, seeds, and soil conditioners across crops.",
+    categoryId: "hand-tools",
+    tags: ["Seed Broadcaster", "Fertilizer Spreader", "Manual Broadcaster", "Agricultural Tools", "Hand Tools"],
+    coverImage: "/products/seed-fertilizer-broadcaster.png",
+    coverImageAlt: "KOREVA AGRO BROADCASTER Portable Manual Seed and Fertilizer Broadcast Spreader",
+    isPublished: true,
+    defaultVariantId: "ko-broadcaster-std"
+  },
+  {
+    id: "ko-maize-sheller",
+    name: "KOREVA - Manual Maize Sheller (CORN PRO)",
+    description: "Heavy-duty cast iron hand-crank corn sheller for efficient, grain-preserving de-husking and kernel shelling of maize crops.",
+    categoryId: "hand-tools",
+    tags: ["Maize Sheller", "Corn Sheller", "Hand Sheller", "Harvesting Tool", "Hand Tools"],
+    coverImage: "/products/maize-sheller.png",
+    coverImageAlt: "KOREVA CORN PRO Cast Iron Manual Hand Crank Maize Corn Sheller Machine",
+    isPublished: true,
+    defaultVariantId: "ko-maize-sheller-std"
+  },
+  {
+    id: "ko-garden-gloves",
+    name: "KOREVA - Protective Heavy Duty Garden Gloves (GRIP SHIELD)",
+    description: "Puncture-resistant, breathable nitrile-coated agricultural work gloves providing superior grip and hand protection against thorns and rough soil.",
+    categoryId: "hand-tools",
+    tags: ["Garden Gloves", "Work Gloves", "Protective Gear", "Hand Tools", "Nitrile Gloves"],
+    coverImage: "/products/garden-gloves-red-black.png",
+    coverImageAlt: "KOREVA GRIP SHIELD Nitrile Coated Heavy Duty Red and Black Garden Work Gloves",
+    isPublished: true,
+    defaultVariantId: "ko-gloves-red-black"
+  },
+  {
+    id: "ko-post-hole-digger",
+    name: "KOREVA - Heavy Duty Post Hole Digger (HOLE DIGGER PRO)",
+    description: "Dual-blade high-carbon steel manual post hole digger with dual shock-absorbing handles for easy deep hole excavation for fencing and saplings.",
+    categoryId: "hand-tools",
+    tags: ["Post Hole Digger", "Hole Digger", "Digging Tool", "Fence Tool", "Hand Tools"],
+    coverImage: "/products/post-hole-digger.png",
+    coverImageAlt: "KOREVA HOLE DIGGER PRO Dual Blade Steel Manual Post Hole Digger",
+    isPublished: true,
+    defaultVariantId: "ko-post-hole-digger-std"
   }
 ];
+
 
 
