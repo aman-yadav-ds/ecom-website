@@ -3,19 +3,18 @@ import { Metadata } from "next";
 import { FileCheck2 } from "lucide-react";
 import { DownloadsClient } from "@/components/DownloadsClient";
 
-export const metadata: Metadata = {
-  title: "Downloads & Manuals | Koreva Agriculture & Machines (Koreva9)",
-  description:
-    "Download product catalogues, user manuals, and safety guides for Koreva Machines and Koreva Agriculture equipment by Koreva Global LLP (Koreva9).",
-  keywords: [
-    "Koreva Manuals",
-    "Koreva Agriculture Catalog",
-    "Koreva Machines Downloads",
-    "Koreva Global LLP Manuals",
-    "Koreva9 User Guides"
-  ],
-  alternates: { canonical: "/downloads" },
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Product Manuals & Downloads"),
+  description: formatPageSeoDescription("Download product catalogues, operator user manuals, and safety guides for Koreva9 machinery by Koreva Global LLP."),
+  canonicalUrl: "/downloads",
+  keywords: ["Koreva Manuals", "Koreva9 Catalog", "Power Weeder User Guide"],
+});
 
 // Static download data lives in the Server Component.
 // The page h1, description, and download titles are pre-rendered in the HTML.

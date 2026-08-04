@@ -6,20 +6,18 @@ import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 import { Wrench, Shield, Award } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Agricultural & Garden Hand Tools | Koreva Agriculture by Koreva Global LLP (Koreva9)",
-  description: "Explore drop-forged SK5 alloy steel secateurs, pruners, and harvesting sickles manufactured by Koreva Global LLP (Koreva Agriculture / Koreva Tools / Koreva9).",
-  keywords: [
-    "Koreva Agriculture",
-    "Koreva Global LLP",
-    "Koreva9",
-    "Koreva Global",
-    "Koreva",
-    "SK5 Hand Tools",
-    "Pruning Secateurs",
-    "Garden Tools"
-  ],
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Agricultural Hand Tools & Equipment"),
+  description: formatPageSeoDescription("Explore drop-forged SK5 alloy steel secateurs, pruners, garden hoes, and harvesting sickles manufactured by official brand Koreva9."),
+  canonicalUrl: "/products/hand-tools",
+  keywords: ["Hand Tools", "SK5 Pruning Secateur", "Harvesting Sickle", "Garden Tools"],
+});
 
 export default function HandToolsPage() {
   const category = exampleCategories.find((c) => c.slug === "hand-tools");

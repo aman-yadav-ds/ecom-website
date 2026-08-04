@@ -5,18 +5,18 @@ import DealerListView from '@/components/dealers/DealerListView';
 import { Check, ShieldCheck, Store } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 
-export const metadata: Metadata = {
-  title: "Authorized Dealers & Service Outlets | Koreva Agriculture & Machines (Koreva9)",
-  description: "Find authorized Koreva Agriculture and Koreva Machines dealer outlets across India by Koreva Global LLP (Koreva9) for power weeders, spare parts, and warranty service.",
-  keywords: [
-    "Koreva Dealer",
-    "Koreva Agriculture Dealers",
-    "Koreva Machines Service Center",
-    "Koreva Global LLP Outlet",
-    "Koreva9 Dealer Locator",
-    "Power Weeder Dealer India"
-  ],
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Authorized Dealers & Service Outlets"),
+  description: formatPageSeoDescription("Find authorized Koreva9 dealer outlets across India by Koreva Global LLP for power weeders, genuine spare parts, and warranty service."),
+  canonicalUrl: "/dealers",
+  keywords: ["Koreva Dealer", "Koreva9 Service Center", "Power Weeder Dealer India"],
+});
 
 export default async function DealersPage(props: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const searchParams = await props.searchParams;

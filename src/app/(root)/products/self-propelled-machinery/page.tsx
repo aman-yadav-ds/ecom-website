@@ -5,21 +5,18 @@ import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
-export const metadata: Metadata = {
-  title: "Self Propelled Machinery | Koreva Machines - Koreva Agriculture by Koreva Global LLP (Koreva9)",
-  description: "Explore walk-behind power weeders, power reapers, and brush cutters engineered by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
-  keywords: [
-    "Koreva Machines",
-    "Koreva Agriculture",
-    "Koreva Global LLP",
-    "Koreva9",
-    "Koreva Global",
-    "Koreva",
-    "Power Weeder",
-    "Power Reaper",
-    "Self Propelled Machinery"
-  ],
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Self-Propelled Farm Machinery"),
+  description: formatPageSeoDescription("Explore self-propelled Power Weeders, Power Reapers, and Brush Cutters engineered by Koreva9 (Koreva Global LLP) for heavy-duty farming."),
+  canonicalUrl: "/products/self-propelled-machinery",
+  keywords: ["Power Weeder", "Power Reaper", "Self Propelled Machinery", "Brush Cutter"],
+});
 
 export default function SelfPropelledMachineryPage() {
   const category = exampleCategories.find((c) => c.slug === "self-propelled-machinery");

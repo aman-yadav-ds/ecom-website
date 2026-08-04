@@ -5,17 +5,18 @@ import { Metadata } from "next";
 import { Calendar, User, Newspaper, ArrowRight } from "lucide-react";
 import { newsArticles } from "@/lib/details/newsData";
 
-export const metadata: Metadata = {
-  title: "News & Press Releases | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
-  description: "Stay updated with product launches, dealer network expansions, and manufacturing insights from Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
-  keywords: [
-    "Koreva News",
-    "Koreva Agriculture Press Releases",
-    "Koreva Machines Updates",
-    "Koreva Global LLP News",
-    "Koreva9 Announcements"
-  ],
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Official News & Press Releases"),
+  description: formatPageSeoDescription("Stay updated with product launches, dealer expansions, and agricultural machinery insights from official manufacturer Koreva9."),
+  canonicalUrl: "/news",
+  keywords: ["Koreva News", "Koreva9 Press Releases", "Agricultural Machinery News"],
+});
 
 export default function NewsPage() {
   const featuredArticle = newsArticles[0];

@@ -58,6 +58,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images, imagesAlt, prod
             className="object-contain p-4 mix-blend-multiply"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
+            loading="eager"
             onError={() => setHasError(true)}
           />
         )}

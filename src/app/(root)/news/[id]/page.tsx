@@ -17,62 +17,36 @@ export async function generateStaticParams() {
   }));
 }
 
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
 // Dynamic SEO Metadata Generation for Search Engines
 export async function generateMetadata({ params }: NewsDetailProps): Promise<Metadata> {
   const resolvedParams = await params;
   const article = newsArticles.find((a) => a.id === resolvedParams.id);
   if (!article) {
-    return {
-      title: "Article Not Found | KOREVA GLOBAL LLP",
-    };
+    return buildProductMetadata({
+      title: formatPageSeoTitle("Article Not Found"),
+      description: formatPageSeoDescription("The requested news article could not be found on Koreva9."),
+      canonicalUrl: "/news",
+    });
   }
 
-  const siteUrl = "https://koreva9.com";
-  const articleUrl = `${siteUrl}/news/${article.id}`;
+  const title = formatPageSeoTitle(article.title);
+  const description = formatPageSeoDescription(article.excerpt);
+  const articleUrl = `/news/${article.id}`;
 
-  return {
-    title: `${article.title} | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)`,
-    description: `${article.excerpt} Read official news from Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).`,
-    keywords: [
-      article.category,
-      "Koreva Agriculture",
-      "Koreva Machines",
-      "Koreva Global LLP",
-      "Koreva9",
-      "Koreva Global",
-      "Power Weeder",
-      "Agricultural Implements India",
-      "Tractor Machinery",
-      "Farm Equipment News"
-    ],
-    alternates: {
-      canonical: articleUrl,
-    },
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      url: articleUrl,
-      siteName: "KOREVA GLOBAL LLP",
-      locale: "en_IN",
-      type: "article",
-      publishedTime: article.date,
-      authors: [article.author],
-      images: [
-        {
-          url: `${siteUrl}${article.image}`,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
-      images: [`${siteUrl}${article.image}`],
-    },
-  };
+  return buildProductMetadata({
+    title,
+    description,
+    canonicalUrl: articleUrl,
+    imageUrl: article.image,
+    imageAlt: article.title,
+    keywords: [article.category, "Agricultural Machinery News"],
+  });
 }
 
 export default async function NewsDetailPage({ params }: NewsDetailProps) {

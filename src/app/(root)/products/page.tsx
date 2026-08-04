@@ -5,25 +5,26 @@ import CategoryGridShowcase from "@/components/CategoryGridShowcase";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 import { Tractor } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Koreva Machines & Agricultural Products Catalog | Koreva Global LLP (Koreva9)",
-  description:
-    "Browse the full lineup of Koreva Machines and Koreva Agriculture farm equipment by Koreva Global LLP (Koreva9), including Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, STOU Lubricants, and Hand Tools.",
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Agricultural Products & Farm Machinery"),
+  description: formatPageSeoDescription("Browse the complete Koreva9 farm equipment lineup including Power Weeders, Rotavators, Laser Land Levellers, STOU Lubricants, and Hand Tools."),
+  canonicalUrl: "/products",
   keywords: [
     "Koreva Machines",
     "Koreva Agriculture",
     "Koreva Global LLP",
     "Koreva9",
-    "Koreva Global",
-    "Koreva",
     "Power Weeder Catalog",
     "Disc Harrow Catalog",
-    "Agricultural Machinery India"
+    "Agricultural Machinery India",
   ],
-  alternates: {
-    canonical: "/products",
-  },
-};
+});
 
 export default function ProductsPage() {
   // Pre-render logic: map relational static data into a flat array for the client

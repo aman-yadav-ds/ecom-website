@@ -2,32 +2,22 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowRight, Leaf, ShieldCheck, TrendingUp, Users, Award, Building2, CheckCircle2 } from "lucide-react";
+import { BecomePartnerButton } from "@/components/BecomePartnerButton";
+import { Building2, Users, ShieldCheck, TrendingUp, Leaf, CheckCircle2, Award } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: "About Koreva Agriculture & Koreva Machines | Koreva Global LLP (Koreva9)",
-  description: "Discover Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9), a premier Indian manufacturer of heavy-duty Power Weeders, Rotavators, Disc Harrows, Reapers, and ISO 9001:2015 certified lubricants.",
-  keywords: [
-    "Koreva Agriculture",
-    "Koreva Machines",
-    "Koreva Global LLP",
-    "Koreva9",
-    "Koreva Global",
-    "Koreva",
-    "Agricultural Machinery Manufacturer",
-    "Farm Equipment India",
-    "Power Weeder Manufacturer"
-  ],
-  openGraph: {
-    title: "About Koreva Agriculture & Koreva Machines | Koreva Global LLP (Koreva9)",
-    description: "Discover Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9), a premier Indian manufacturer of high-performance agricultural machinery and ISO certified lubricants.",
-    url: "https://koreva9.com/about",
-    siteName: "Koreva Agriculture & Machines",
-    locale: "en_IN",
-    type: "website",
-  },
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("About Koreva Global LLP & Machinery"),
+  description: formatPageSeoDescription("Learn about Koreva Global LLP (Koreva9), a premier Indian manufacturer of heavy-duty Power Weeders, Rotavators, Disc Harrows, and ISO certified lubricants."),
+  canonicalUrl: "/about",
+  keywords: ["About Koreva Global LLP", "Koreva9 Manufacturer", "Agricultural Machinery Manufacturer"],
+});
 
 export default function AboutPage() {
   return (
@@ -185,13 +175,7 @@ export default function AboutPage() {
               We are actively expanding our dealer network across India. Partner with KOREVA GLOBAL LLP and be a part of the agricultural revolution.
             </p>
             <div>
-              <Link
-                href="/dealers"
-                className="bg-brand-red hover:bg-brand-red-accent text-white font-extrabold py-4 px-10 rounded-full transition-all duration-300 inline-flex items-center justify-center uppercase tracking-wider text-xs sm:text-sm gap-2.5 shadow-lg hover:shadow-brand-red/30 active:scale-95"
-              >
-                <span>Become a Partnered Dealer</span>
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
+              <BecomePartnerButton />
             </div>
           </ScrollReveal>
         </section>

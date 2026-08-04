@@ -9,9 +9,19 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { AboutUsPreview } from "@/components/home/AboutUsPreview";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 
-export const metadata: Metadata = {
-  title: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
-  description: "Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) manufactures heavy-duty Power Weeders, Rotavators, Disc Harrows, Power Reapers, STOU Lubricants, and SK5 Hand Tools for Indian agriculture.",
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+const pageTitle = formatPageSeoTitle("Koreva Agriculture & Farm Machinery");
+const pageDescription = formatPageSeoDescription("Official store of Koreva Global LLP. High-performance Power Weeders, Rotavators, Disc Harrows, STOU Lubricants, and Hand Tools.");
+
+export const metadata: Metadata = buildProductMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  canonicalUrl: "/",
   keywords: [
     "Koreva",
     "Koreva9",
@@ -27,20 +37,8 @@ export const metadata: Metadata = {
     "STOU Lubricants",
     "Hand Tools",
     "Agricultural Machinery India",
-    "Laser Land Leveller",
-    "Rice Mill",
-    "Pulveriser",
-    "Pruning Secateur"
   ],
-  openGraph: {
-    title: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
-    description: "Empowering Indian farmers with precision Koreva Machines, Power Weeders, Harrows, Rotavators, and ISO 9001 certified lubricants by Koreva Global LLP.",
-    url: "https://koreva9.com",
-    siteName: "Koreva Agriculture & Machines",
-    locale: "en_IN",
-    type: "website",
-  },
-};
+});
 
 export default function Home() {
   // JSON-LD WebSite schema with SearchAction for Google Sitelinks Searchbox

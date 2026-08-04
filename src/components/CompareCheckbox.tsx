@@ -41,7 +41,7 @@ const CompareCheckbox: React.FC<CompareCheckboxProps> = ({ productId }) => {
         onChange={handleChange}
         disabled={disabled}
       />
-      <span className="text-xs md:text-sm text-gray-700 font-bold leading-none">Compare</span>
+      <span className="text-[10px] sm:text-xs md:text-sm text-gray-700 font-bold leading-none">Compare</span>
     </label>
   );
 };

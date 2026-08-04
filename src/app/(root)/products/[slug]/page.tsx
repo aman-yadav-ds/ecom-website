@@ -1,11 +1,17 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { exampleProducts, exampleVariants } from "@/lib/details";
+import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 import ProductInteractiveSection from "@/components/ProductInteractiveSection";
 import Card from "@/components/Card";
 import { BookOpen, HelpCircle, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
+import {
+  formatSeoTitle,
+  formatSeoDescription,
+  buildProductMetadata,
+  generateProductJsonLd,
+} from "@/lib/seo";
 
 interface ProductPageProps {
   params: Promise<{ slug?: string; id?: string }>;
@@ -38,54 +44,27 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug, product } = await resolveProduct(params);
   if (!product) {
-    return {
-      title: "Product Not Found | Koreva Agriculture & Machines",
-      description: "The requested Koreva agricultural product could not be found.",
-    };
+    return buildProductMetadata({
+      title: formatSeoTitle("Product Not Found"),
+      description: formatSeoDescription("Product Not Found", "The requested agricultural product or machinery could not be found on Koreva9."),
+      canonicalUrl: "/products",
+    });
   }
 
-  const title = `${product.name} - Koreva Machines | Koreva Agriculture - Koreva Global LLP (Koreva9)`;
-  const description = `${product.name} manufactured by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9). ${product.description}`;
-  const ogImage = product.coverImage || "/images/og-koreva-default.jpg";
+  const category = exampleCategories.find((c) => c.id === product.categoryId);
 
-  return {
+  const title = formatSeoTitle(product.name, category?.name);
+  const description = formatSeoDescription(product.name, product.description);
+  const canonicalUrl = `/products/${slug || product.id}`;
+
+  return buildProductMetadata({
     title,
     description,
-    keywords: [
-      product.name,
-      "Koreva Machines",
-      "Koreva Agriculture",
-      "Koreva Global LLP",
-      "Koreva9",
-      "Koreva Global",
-      "Koreva",
-      ...product.tags
-    ],
-    alternates: {
-      canonical: `/products/${slug || product.id}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://koreva9.com/products/${slug || product.id}`,
-      siteName: "Koreva Agriculture & Machines",
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: product.coverImageAlt || `${product.name} manufactured by Koreva Global LLP (Koreva9)`,
-        },
-      ],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
+    canonicalUrl,
+    imageUrl: product.coverImage,
+    imageAlt: product.coverImageAlt || `${product.name} by Koreva9`,
+    keywords: product.tags,
+  });
 }
 
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
@@ -105,45 +84,11 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     variants.find((v) => v.id === product.defaultVariantId) || variants[0];
   const productPrice = defaultVariant ? defaultVariant.price : "0";
 
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": product.name,
-    "image": [
-      product.coverImage.startsWith("http")
-        ? product.coverImage
-        : `https://koreva9.com${product.coverImage}`,
-    ],
-    "description": product.description,
-    "brand": {
-      "@type": "Brand",
-      "name": "Koreva9",
-      "alternateName": ["Koreva Machines", "Koreva Agriculture", "Koreva", "Koreva Global"]
-    },
-    "manufacturer": {
-      "@type": "Organization",
-      "name": "Koreva Global LLP",
-      "alternateName": ["Koreva9", "Koreva Agriculture", "Koreva Machines"]
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.5",
-      "reviewCount": "12",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": `https://koreva9.com/products/${slug}`,
-      "priceCurrency": "INR",
-      "price": productPrice,
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Koreva Global LLP",
-      },
-    },
-  };
+  const productJsonLd = generateProductJsonLd({
+    product,
+    productPrice,
+    slug: slug || product.id,
+  });
 
   // BreadcrumbList JSON-LD for SERP breadcrumb rich results
   const breadcrumbJsonLd = {
@@ -273,7 +218,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
             {relatedProducts.map((relatedProduct) => {
               const relatedVariants = exampleVariants.filter(v => v.productId === relatedProduct.id);
               const defaultVariant = relatedVariants.find(v => v.id === relatedProduct.defaultVariantId) || relatedVariants[0];
@@ -282,6 +227,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
               return (
                 <Card
                   key={relatedProduct.id}
+                  id={relatedProduct.id}
                   title={relatedProduct.name}
                   category={relatedProduct.categoryId}
                   price={price}

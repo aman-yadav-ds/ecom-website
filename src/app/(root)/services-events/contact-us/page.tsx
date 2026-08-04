@@ -1,41 +1,18 @@
 import React from "react";
 import { Metadata } from "next";
 import ContactUsClient from "@/components/ContactUsClient";
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
-  description:
-    "Contact Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) for Power Weeders, Laser Land Levellers, Disc Harrows, STOU Lubricants, Hand Tools, and Dealership inquiries.",
-  keywords: [
-    "Contact Koreva9",
-    "Koreva Agriculture Contact",
-    "Koreva Machines Phone",
-    "Koreva Global LLP Address",
-    "Koreva Phone Number",
-    "Koreva Global",
-    "Agricultural Machinery Manufacturer Contact",
-    "Koreva Dealer Contact",
-  ],
-  alternates: {
-    canonical: "/services-events/contact-us",
-  },
-  openGraph: {
-    title: "Contact Us | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
-    description:
-      "Contact Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) corporate headquarters, sales team, and support hotline in Uttarakhand, India.",
-    url: "https://koreva9.com/services-events/contact-us",
-    siteName: "Koreva Agriculture & Machines",
-    images: [
-      {
-        url: "/contact_address.webp",
-        width: 1200,
-        height: 630,
-        alt: "Koreva Global LLP Corporate Headquarters in Uttarakhand",
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Contact Us - Sales & Support"),
+  description: formatPageSeoDescription("Contact official manufacturer Koreva9 (Koreva Global LLP) for Power Weeders, farm machinery inquiries, and dealership opportunities."),
+  canonicalUrl: "/services-events/contact-us",
+  keywords: ["Contact Koreva9", "Koreva Global LLP Phone", "Koreva Dealership Inquiry"],
+});
 
 const contactPageJsonLd = {
   "@context": "https://schema.org",

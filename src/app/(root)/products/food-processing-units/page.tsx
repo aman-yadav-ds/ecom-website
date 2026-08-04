@@ -5,21 +5,18 @@ import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
 import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 
-export const metadata: Metadata = {
-  title: "Food Processing Units | Koreva Machines - Koreva Agriculture by Koreva Global LLP (Koreva9)",
-  description: "Commercial stainless steel pulverisers, rice mills, and food processing machinery engineered by Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9).",
-  keywords: [
-    "Koreva Machines",
-    "Koreva Agriculture",
-    "Koreva Global LLP",
-    "Koreva9",
-    "Koreva Global",
-    "Koreva",
-    "Food Processing Machinery",
-    "Rice Mill",
-    "Pulveriser"
-  ],
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Food Processing Machinery & Units"),
+  description: formatPageSeoDescription("Commercial stainless steel pulverisers, mini rice mills, and food processing machinery engineered by official manufacturer Koreva9."),
+  canonicalUrl: "/products/food-processing-units",
+  keywords: ["Food Processing Machinery", "Mini Rice Mill", "Grain Pulveriser", "Agro Processing"],
+});
 
 export default function FoodProcessingUnitsPage() {
   const category = exampleCategories.find((c) => c.slug === "food-processing-units");

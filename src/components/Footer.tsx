@@ -140,9 +140,9 @@ const Footer = () => {
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="X (Twitter)"
               >
-              <img
+              <Image
                 src="/x.svg"
-                alt="X"
+                alt="X (Twitter) - Koreva Global LLP"
                 width={16}
                 height={16}
                 className="w-4 h-4 filter group-hover:invert transition-all"
@@ -155,9 +155,9 @@ const Footer = () => {
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="Facebook"
               >
-              <img
+              <Image
                 src="/facebook.svg"
-                alt="Facebook"
+                alt="Facebook - Koreva Global LLP"
                 width={16}
                 height={16}
                 className="w-4 h-4 filter group-hover:invert transition-all"
@@ -170,9 +170,9 @@ const Footer = () => {
                 className="w-10 h-10 rounded-full bg-light-200 border border-light-300 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all group"
                 aria-label="Instagram"
               >
-              <img
+              <Image
                 src="/instagram.svg"
-                alt="Instagram"
+                alt="Instagram - Koreva Global LLP"
                 width={16}
                 height={16}
                 className="w-4 h-4 filter group-hover:invert transition-all"

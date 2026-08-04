@@ -3,19 +3,18 @@ import { Metadata } from "next";
 import { HelpCircle } from "lucide-react";
 import { FaqAccordionClient } from "@/components/FaqAccordionClient";
 
-export const metadata: Metadata = {
-  title: "FAQ | Koreva Agriculture & Machines - Koreva Global LLP (Koreva9)",
-  description:
-    "Find answers to common questions about Koreva Agriculture, Koreva Machines, E20 petrol maintenance tips, warranty coverage, and our national authorized dealer network by Koreva Global LLP (Koreva9).",
-  keywords: [
-    "Koreva FAQ",
-    "Koreva Agriculture Questions",
-    "Koreva Machines Support",
-    "Koreva Global LLP FAQ",
-    "Koreva9 Help Center"
-  ],
-  alternates: { canonical: "/faq" },
-};
+import {
+  formatPageSeoTitle,
+  formatPageSeoDescription,
+  buildProductMetadata,
+} from "@/lib/seo";
+
+export const metadata: Metadata = buildProductMetadata({
+  title: formatPageSeoTitle("Frequently Asked Questions (FAQ)"),
+  description: formatPageSeoDescription("Find answers to common questions about Koreva9 farm machinery, E20 petrol care, warranty coverage, and authorized dealers."),
+  canonicalUrl: "/faq",
+  keywords: ["Koreva FAQ", "Koreva9 Support", "Power Weeder Warranty FAQ"],
+});
 
 // Static FAQ data lives here in the Server Component.
 // All question text is pre-rendered into the HTML — fully crawlable and indexable.
@@ -102,8 +101,39 @@ const faqs: {
 // Server Component — no "use client" needed. The h1, p, and all FAQ
 // question text are pre-rendered in the HTML stream for maximum SEO value.
 export default function FAQPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.flatMap((cat) =>
+      cat.items.map((item) => {
+        let answerText = "";
+        if (typeof item.answer === "string") {
+          answerText = item.answer;
+        } else {
+          answerText =
+            "Due to 20% Ethanol blend (E20) in petrol, do not leave fuel sitting in the carburetor during long storage. Always turn off the fuel valve and run the engine until it stops to completely empty the carburetor.";
+        }
+        return {
+          "@type": "Question",
+          "name": item.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answerText,
+          },
+        };
+      })
+    ),
+  };
+
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
+      {/* FAQPage JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd),
+        }}
+      />
       <div className="max-w-4xl mx-auto">
         {/* Page header — server-rendered; h1 and description are immediately
             available to crawlers without waiting for JS */}

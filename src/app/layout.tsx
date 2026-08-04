@@ -17,11 +17,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://koreva9.com"),
   title: {
-    default: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
-    template: "%s | Koreva Agriculture & Machines - Koreva9",
+    default: "Koreva Agriculture & Farm Machines | Koreva9",
+    template: "%s",
   },
   description:
-    "Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) is a leading Indian manufacturer of high-performance agricultural machinery, including Power Weeders, Laser Land Levellers, Disc Harrows, Agricultural Reapers, ISO Lubricants, and Hand Tools.",
+    "Buy high-performance Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, ISO Lubricants, and Hand Tools directly from official manufacturer Koreva9 (Koreva Global LLP).",
   keywords: [
     "Koreva9",
     "Koreva",
@@ -51,11 +51,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Koreva Agriculture & Farm Machines | Koreva Global LLP (Koreva9)",
+    title: "Koreva Agriculture & Farm Machines | Koreva9",
     description:
-      "Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) manufactures high-performance Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, Lubricants, and Hand Tools.",
+      "Buy high-performance Power Weeders, Laser Land Levellers, Disc Harrows, Reapers, ISO Lubricants, and Hand Tools directly from official manufacturer Koreva9.",
     url: "https://koreva9.com",
-    siteName: "Koreva Agriculture & Machines",
+    siteName: "Koreva9",
     images: [
       {
         url: "/images/og-koreva9-default.jpg",
