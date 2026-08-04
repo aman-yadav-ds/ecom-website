@@ -24,7 +24,9 @@ export const exampleVariants: Variant[] = [
       "Bearing Size (1 side)": "6310 number",
       "Spacer spool weight": "4 kg",
       "Number of Discs": "7*7",
-      "Center Tube": "2\" C Class Pipe"
+      "Center Tube": "2\" C Class Pipe",
+      "Attachment Type": "Disc Harrow",
+      "PTO Input": "Ground Wheel Drive"
     }
   },
   {
@@ -49,7 +51,9 @@ export const exampleVariants: Variant[] = [
       "Bearing Size (1 side)": "6310 number",
       "Spacer spool weight": "4 kg",
       "Number of Discs": "8*8",
-      "Center Tube": "2\" C Class Pipe"
+      "Center Tube": "2\" C Class Pipe",
+      "Attachment Type": "Disc Harrow",
+      "PTO Input": "Ground Wheel Drive"
     }
   },
   {
@@ -74,7 +78,9 @@ export const exampleVariants: Variant[] = [
       "Bearing Size (1 side)": "6310 number",
       "Spacer spool weight": "4 kg",
       "Number of Discs": "9*9",
-      "Center Tube": "2\" C Class Pipe"
+      "Center Tube": "2\" C Class Pipe",
+      "Attachment Type": "Disc Harrow",
+      "PTO Input": "Ground Wheel Drive"
     }
   },
   {
@@ -99,7 +105,9 @@ export const exampleVariants: Variant[] = [
       "Bearing Size (1 side)": "6310 number",
       "Spacer spool weight": "4 kg",
       "Number of Discs": "10*10",
-      "Center Tube": "2\" C Class Pipe"
+      "Center Tube": "2\" C Class Pipe",
+      "Attachment Type": "Disc Harrow",
+      "PTO Input": "Ground Wheel Drive"
     }
   },
   // Rotavator
@@ -116,13 +124,14 @@ export const exampleVariants: Variant[] = [
       "Model": "KOS-KOBRA 6 FT",
       "Change Gear": "19-17",
       "Rotor RPM": "224 RPM",
-      "Tractor HP": "40+",
+      "Tractor HP": "40 HP - 50 HP",
       "Total Width": "204 CM or 80 Inches",
-      "Working Width": "188 CM or 74 Inches",
+      "Working Width": "6 Feet (188 CM)",
       "Machine Weight": "405 Kgs",
       "Blades Type": "L Type",
       "Number of Blades": "42L / 54L / 72J Type",
-      "PTO Input": "540 RPM"
+      "PTO Input": "540 RPM PTO",
+      "Attachment Type": "Rotary Tiller"
     }
   },
   {
@@ -138,13 +147,14 @@ export const exampleVariants: Variant[] = [
       "Model": "KOP-CHITAH 7 FT",
       "Change Gear": "19-17",
       "Rotor RPM": "224 RPM",
-      "Tractor HP": "55+",
+      "Tractor HP": "55 HP+",
       "Total Width": "225 CM or 88 Inches",
-      "Working Width": "210 CM or 83 Inches",
+      "Working Width": "7 Feet (210 CM)",
       "Machine Weight": "458 Kgs",
       "Blades Type": "L Type",
       "Number of Blades": "48L / 66L / 78J Type",
-      "PTO Input": "540 RPM"
+      "PTO Input": "540 RPM PTO",
+      "Attachment Type": "Rotary Tiller"
     }
   },
   // Laser Land Leveller
@@ -166,7 +176,9 @@ export const exampleVariants: Variant[] = [
       "Hydraulic Cylinder": "Double-Acting Heavy Duty Cylinder",
       "Mast Assembly": "8 Feet Manual & Electric Foldable Mast",
       "Machine Weight": "780 Kg",
-      "Tire Size": "6.00-16 Dual Agricultural Tires"
+      "Tire Size": "6.00-16 Dual Agricultural Tires",
+      "Attachment Type": "Laser Land Leveller",
+      "PTO Input": "Tractor Hydraulics"
     }
   },
   // Straw Reaper
@@ -184,11 +196,13 @@ export const exampleVariants: Variant[] = [
       "Basket / Drum Size": "56 Inches (1420 mm)",
       "Tractor HP": "50 HP - 75 HP",
       "Cutter Bar Width": "7 Feet",
+      "Working Width": "7 Feet (Cutter Bar)",
       "Threshing Blades": "Heat-Treated Special Alloy Steel Blades",
       "Blower System": "Heavy Duty Double Blower Fan with Adjustable Chute",
-      "PTO Input Speed": "540 RPM",
+      "PTO Input": "540 RPM PTO",
       "Machine Weight": "1850 Kg",
-      "Tire Size": "7.50-16 Heavy-Duty Farm Tires"
+      "Tire Size": "7.50-16 Heavy-Duty Farm Tires",
+      "Attachment Type": "Straw Reaper"
     }
   },
   // Power Weeder
@@ -210,6 +224,8 @@ export const exampleVariants: Variant[] = [
       "Starting System": "Manual / Recoil Start",
       "Machine Weight": "90 Kg",
       "Transmission Type": "Gear Driven",
+      "Drive System": "Heavy Duty Gear Drive",
+      "Machinery Type": "Walk-Behind Power Weeder",
       "Number of Blades": "32 Blades",
       "No. of Gears": "2F+1R",
       "Tyre Size": "4.00-8 Tube Less",
@@ -237,6 +253,8 @@ export const exampleVariants: Variant[] = [
       "Starting System": "Manual / Recoil Start",
       "Machine Weight": "102 Kg",
       "Transmission Type": "Gear Driven",
+      "Drive System": "Dual PTO Gear Drive",
+      "Machinery Type": "Heavy Duty Power Tiller",
       "Number of Blades": "32 Blades",
       "No. of Gears": "2F+1R",
       "Tyre Size": "4.00-8 Tube Less",
@@ -268,7 +286,9 @@ export const exampleVariants: Variant[] = [
       "Cutting Width": "1200 mm",
       "Plant Height": "50-150 mm",
       "Stubble Height": "<50 mm",
-      "Machine Weight": "170 Kg"
+      "Machine Weight": "170 Kg",
+      "Drive System": "Side Conveyor Belt Drive",
+      "Machinery Type": "Self-Propelled Crop Reaper"
     }
   },
   // Brush Cutter
@@ -286,7 +306,7 @@ export const exampleVariants: Variant[] = [
       "Engine Type": "Single Cylinder, Four Stroke, Air Cooled",
       "Engine Model": "JX35",
       "Displacement": "35.8 CC",
-      "Engine Power": "1.0 Kw / 7000 rpm",
+      "Engine Power": "1.35 HP (1.0 Kw)",
       "Carburator": "Diafragm-type",
       "Fuel Tank Capacity": "630 ml",
       "Engine Oil Capacity": "80 ml",
@@ -294,7 +314,10 @@ export const exampleVariants: Variant[] = [
       "Shaft Type": "Aluminium Tube",
       "Shaft Pipe Diameter": "28 mm",
       "Shaft Pipe Thickness": "2 mm",
-      "Shaft Teeth": "9 teeth"
+      "Shaft Teeth": "9 teeth",
+      "Drive System": "Direct Shaft Drive",
+      "Machinery Type": "Brush Cutter & Weed Trimmer",
+      "Machine Weight": "8.5 Kg"
     }
   },
   {
@@ -311,7 +334,7 @@ export const exampleVariants: Variant[] = [
       "Engine Type": "Single Cylinder, Four Stroke, Air Cooled",
       "Engine Model": "JX35",
       "Displacement": "35.8 CC",
-      "Engine Power": "1.0 Kw / 7000 rpm",
+      "Engine Power": "1.35 HP (1.0 Kw)",
       "Carburator": "Diafragm-type",
       "Fuel Tank Capacity": "630 ml",
       "Engine Oil Capacity": "80 ml",
@@ -319,7 +342,10 @@ export const exampleVariants: Variant[] = [
       "Shaft Type": "Aluminium Tube",
       "Shaft Pipe Diameter": "28 mm",
       "Shaft Pipe Thickness": "2 mm",
-      "Shaft Teeth": "9 teeth"
+      "Shaft Teeth": "9 teeth",
+      "Drive System": "Direct Shaft Drive",
+      "Machinery Type": "Brush Cutter & Weed Trimmer",
+      "Machine Weight": "9.2 Kg"
     }
   },
   // Pulveriser
@@ -334,13 +360,17 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-1170 GRAH LAXMI",
-      "Motor Power": "3 HP (Electric)",
+      "Motor Power": "3 HP Heavy Duty Electric",
       "Grinding Capacity": "25 - 35 Kg Per hour",
+      "Capacity": "25 - 35 Kg/hr",
       "Electricity": "220V & Single Phase",
+      "Power Source": "Single Phase (220V)",
       "Power Use": "2 - 2.5 Units per hour",
-      "Speed": "1140 RPM or 2800 RPM",
+      "Speed": "2800 RPM",
+      "Operation Speed": "2800 RPM High Speed",
       "Machine Weight": "90 Kg",
-      "Material": "SS or MS"
+      "Material": "SS or MS",
+      "Processing Type": "Dry Grinding & Pulverizing"
     }
   },
   // MINI Rice Mill
@@ -355,11 +385,14 @@ export const exampleVariants: Variant[] = [
     technicalDetails: {
       "Brand": "Koreva",
       "Model": "KO-1080 DHAN LAXMI",
-      "Motor Power": "3 HP",
-      "Production Capacity": "100-120 Kg",
+      "Motor Power": "3 HP Commercial Grade",
+      "Production Capacity": "100 - 120 Kg",
+      "Capacity": "100 - 120 Kg/hr",
       "Electricity": "220V & Single Phase",
+      "Power Source": "Single Phase (220V)",
       "Power Use": "2 - 2.5 Units per hour",
-      "Speed": "1140 RPM or 2800 RPM",
+      "Speed": "1140 RPM",
+      "Operation Speed": "1140 RPM Standard Speed",
       "Machine Weight": "60 Kg",
       "Material": "SS or MS"
     }

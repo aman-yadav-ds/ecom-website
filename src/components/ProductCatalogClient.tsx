@@ -23,6 +23,7 @@ export interface ProductListingItem {
   imageAlt?: string;
   variantsCount: number;
   technicalDetails: Record<string, string>;
+  allVariantsTechnicalDetails?: Record<string, string>[];
 }
 
 interface ProductCatalogClientProps {
@@ -35,7 +36,7 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
   const router = useRouter();
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
-  // Dynamically extract all available filters from technicalDetails
+  // Dynamically extract all available filters from technicalDetails across all variants
   const availableFilters = useMemo(() => {
     const filters: Record<string, Set<string>> = {};
     const activeCategoryParam = searchParams.get('category') || initialCategory;
@@ -54,21 +55,36 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
     // Determine allowed keys based on category
     const allowedKeys = (activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam])
       ? CATEGORY_FILTERS[activeCategoryParam]
+      : (initialCategory && CATEGORY_FILTERS[initialCategory])
+      ? CATEGORY_FILTERS[initialCategory]
       : ALLOWED_FILTERS;
     
     initialProducts.forEach(product => {
       // If a category is selected, only process products from that category to generate filters
-      if (activeCategoryParam && activeCategoryParam !== 'All' && product.categoryName !== activeCategoryParam) return;
+      if (
+        activeCategoryParam &&
+        activeCategoryParam !== 'All' &&
+        product.categoryName !== activeCategoryParam &&
+        product.categoryId !== activeCategoryParam &&
+        product.categoryName?.toLowerCase() !== activeCategoryParam.toLowerCase() &&
+        product.categoryId?.toLowerCase() !== activeCategoryParam.toLowerCase()
+      ) return;
 
-      Object.entries(product.technicalDetails).forEach(([key, value]) => {
-        if (!value) return;
-        // Only include keys that are in the allowed filters list
-        if (!allowedKeys.includes(key)) return;
-        
-        if (!filters[key]) {
-          filters[key] = new Set();
-        }
-        filters[key].add(value);
+      const variantsTech = product.allVariantsTechnicalDetails && product.allVariantsTechnicalDetails.length > 0
+        ? product.allVariantsTechnicalDetails
+        : [product.technicalDetails];
+
+      variantsTech.forEach(tech => {
+        Object.entries(tech || {}).forEach(([key, value]) => {
+          if (!value) return;
+          // Only include keys that are in the allowed filters list
+          if (!allowedKeys.includes(key)) return;
+          
+          if (!filters[key]) {
+            filters[key] = new Set();
+          }
+          filters[key].add(value);
+        });
       });
     });
 
@@ -110,7 +126,7 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
         }
       }
 
-      // Checkbox filters matching
+      // Checkbox filters matching - match if ANY variant satisfies the selected criteria
       for (const [filterKey, selectedValues] of Object.entries(activeFilters)) {
         if (selectedValues.length === 0) continue;
         
@@ -119,8 +135,16 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
             return false;
           }
         } else {
-          const productDetailValue = product.technicalDetails[filterKey];
-          if (!productDetailValue || !selectedValues.includes(productDetailValue)) {
+          const variantsTech = product.allVariantsTechnicalDetails && product.allVariantsTechnicalDetails.length > 0
+            ? product.allVariantsTechnicalDetails
+            : [product.technicalDetails];
+
+          const matchesFilter = variantsTech.some(tech => {
+            const productDetailValue = tech[filterKey];
+            return productDetailValue && selectedValues.includes(productDetailValue);
+          });
+
+          if (!matchesFilter) {
             return false;
           }
         }

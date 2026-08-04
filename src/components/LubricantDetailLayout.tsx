@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import Link from "next/link";
-import { MapPin, Droplet, ShieldCheck, Download, Check, Truck, Info, PhoneCall } from "lucide-react";
+import { MapPin, Droplet, ShieldCheck, Download, Check, Truck, Info, PhoneCall, RefreshCw } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
 
 interface LubricantDetailLayoutProps {
@@ -216,6 +216,29 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
           </div>
         </div>
       </div>
+
+      {/* Recommended Fluid Maintenance Protocol */}
+      <section className="bg-emerald-50/60 border border-emerald-200 rounded-sm p-6 sm:p-8">
+        <h3 className="text-lg font-bold text-dark-900 uppercase tracking-wide mb-4 flex items-center gap-2">
+          <RefreshCw className="w-5 h-5 text-emerald-600" />
+          Handling & Storage Guidelines
+        </h3>
+        <ul className="space-y-2 text-sm text-dark-700">
+          {(product.maintenanceTips && product.maintenanceTips.length > 0
+            ? product.maintenanceTips
+            : [
+                "Store lubricant containers in a dry, covered area away from direct sunlight.",
+                "Thoroughly clean fill necks and funnels before topping up oil sumps.",
+                "Follow OEM equipment maintenance intervals for full fluid drainage and filter replacement."
+              ]
+          ).map((tip, idx) => (
+            <li key={idx} className="flex items-start gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <span>{tip}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* Technical Specifications Grid for Lubricants */}
       <section aria-labelledby="fluid-specs-heading" className="bg-white border border-light-300 rounded-sm p-6 sm:p-8 shadow-sm">

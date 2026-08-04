@@ -8,6 +8,9 @@ import DetailTabsSection from "./DetailTabsSection";
 import CollapsibleFeature from "./CollapsibleFeature";
 import LubricantDetailLayout from "./LubricantDetailLayout";
 import HandToolDetailLayout from "./HandToolDetailLayout";
+import TractorAttachmentDetailLayout from "./TractorAttachmentDetailLayout";
+import SelfPropelledDetailLayout from "./SelfPropelledDetailLayout";
+import FoodProcessingDetailLayout from "./FoodProcessingDetailLayout";
 import Link from "next/link";
 import { MapPin, Wrench, Shield } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
@@ -174,6 +177,18 @@ export default function ProductInteractiveSection({
 
   if (product.categoryId === "hand-tools") {
     return <HandToolDetailLayout product={product} variants={variants} />;
+  }
+
+  if (product.categoryId === "tractor-attachments") {
+    return <TractorAttachmentDetailLayout product={product} variants={variants} />;
+  }
+
+  if (product.categoryId === "self-propelled-machinery") {
+    return <SelfPropelledDetailLayout product={product} variants={variants} />;
+  }
+
+  if (product.categoryId === "food-processing-units") {
+    return <FoodProcessingDetailLayout product={product} variants={variants} />;
   }
 
   return <EquipmentDetailLayout product={product} variants={variants} />;

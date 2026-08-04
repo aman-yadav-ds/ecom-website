@@ -10,7 +10,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/harrow-8x8.webp",
     coverImageAlt: "KOREVA Raino Heavy-Duty Tractor Mounted Disc Harrow for efficient soil tilling and seedbed preparation",
     isPublished: true,
-    defaultVariantId: "ko-raino-8x8"
+    defaultVariantId: "ko-raino-8x8",
+    maintenanceTips: [
+      "Grease triple-sealed bearings and disc gang axle spools every 20 hours of field operation.",
+      "Inspect 24-inch disc concavity and torque gang tie-rod bolts prior to heavy soil tilling.",
+      "Genuine replacement high-carbon steel discs and bearing housings are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-rotavator",
@@ -21,7 +26,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/rotavator-ko-kobra.png",
     coverImageAlt: "KOREVA KOS-KOBRA Heavy-Duty Tractor Rotavator for superior soil pulverization",
     isPublished: true,
-    defaultVariantId: "ko-kobra-6ft"
+    defaultVariantId: "ko-kobra-6ft",
+    maintenanceTips: [
+      "Check multi-speed gearbox oil level (STOU 15W-40) and side gear drive lubrication weekly.",
+      "Inspect Boron steel L-blades for wear and replace worn blades in balanced opposite pairs.",
+      "Genuine replacement L-blades, flange bolts, and gear seals are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-laser-land-leveller",
@@ -32,7 +42,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/laser-land-leveller-7ft.png",
     coverImageAlt: "KOREVA SMART LEVEL 7 Ft Heavy-Duty Tractor Laser Land Leveller for precision field leveling and water conservation",
     isPublished: true,
-    defaultVariantId: "ko-laser-leveller-7ft"
+    defaultVariantId: "ko-laser-leveller-7ft",
+    maintenanceTips: [
+      "Inspect double-acting hydraulic hoses and cylinder seals for leak-free fluid pressure.",
+      "Calibrate high-precision digital laser receiver mast and transmitter before field leveling operations.",
+      "Genuine replacement bucket blade cutting edges, hydraulic control valves, and sensors are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-straw-reaper",
@@ -43,7 +58,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/straw-reaper-56inch.png",
     coverImageAlt: "KOREVA BHUSA KING 56 Inch Heavy-Duty Tractor Straw Reaper Machine for efficient straw harvesting and bhusa making",
     isPublished: true,
-    defaultVariantId: "ko-straw-reaper-56"
+    defaultVariantId: "ko-straw-reaper-56",
+    maintenanceTips: [
+      "Clean stone trap tray and clear straw residue from double blower fan housing after each harvesting shift.",
+      "Inspect heat-treated threshing drum blades and cutter bar teeth for sharpness and alignment.",
+      "Genuine replacement threshing blades, blower fan impellers, and V-belts are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-weeeder-dhurandhar",
@@ -54,7 +74,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/power-weeder-dhurandhar.webp",
     coverImageAlt: "KOREVA DHURANDHAR 7HP Heavy Duty Self-Propelled Power Weeder for field weeding and cultivation",
     isPublished: true,
-    defaultVariantId: "ko-1080"
+    defaultVariantId: "ko-1080",
+    maintenanceTips: [
+      "Check 7HP 4-stroke engine oil level (KOREVA 4T 20W-50) and clean foam air filter element every 25 operating hours.",
+      "Inspect rotary tilling blades and gear-drive transmission oil prior to field weeding.",
+      "Genuine replacement rotary tines, clutch cables, and carburetor service kits are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-weeder-vijay",
@@ -65,7 +90,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/power-weeder-vijay.webp",
     coverImageAlt: "KOREVA VIJAY 7.8HP Self-Propelled Power Weeder for intensive inter-crop weeding",
     isPublished: true,
-    defaultVariantId: "ko-1110"
+    defaultVariantId: "ko-1110",
+    maintenanceTips: [
+      "Check 7.8HP engine oil and dual PTO shaft engagement before heavy inter-row tilling.",
+      "Clean air filter assembly and tighten handle bar damper bolts every 20 hours of operation.",
+      "Genuine replacement tilling blades, PTO couplers, and engine gaskets are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-pr-khetshakti",
@@ -76,7 +106,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/power-reaper.webp",
     coverImageAlt: "KOREVA KHET SHAKTI 7HP Self-Propelled Agricultural Power Reaper for fast crop harvesting",
     isPublished: true,
-    defaultVariantId: "ko-1260"
+    defaultVariantId: "ko-1260",
+    maintenanceTips: [
+      "Clean cutter bar guide teeth and lubricate conveyor belt drive gears daily during harvesting season.",
+      "Inspect engine oil level and side conveyor belt tension prior to grain field cutting.",
+      "Genuine replacement cutter bar blades, star wheels, and conveyor belting are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-bc-jpro",
@@ -87,7 +122,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/brushcutter.webp",
     coverImageAlt: "KOREVA JUNGLE PRO 4-Stroke Commercial Brush Cutter for weed and grass clearing",
     isPublished: true,
-    defaultVariantId: "ko-bc-jpro-sp"
+    defaultVariantId: "ko-bc-jpro-sp",
+    maintenanceTips: [
+      "Clean air filter sponge and check 4-stroke engine oil level before trimming heavy brush.",
+      "Grease gear head bevel gearbox every 10 hours using high-temperature lithium grease.",
+      "Genuine replacement 3-tooth metal blades, carbide tip saws, and nylon spool heads are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-pulveriser",
@@ -98,7 +138,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/Pulverizer.webp",
     coverImageAlt: "KOREVA GRAH LAXMI 3HP Commercial Food Processing Pulveriser for grain and spice grinding",
     isPublished: true,
-    defaultVariantId: "ko-pulv-1170"
+    defaultVariantId: "ko-pulv-1170",
+    maintenanceTips: [
+      "Clean grinding chamber and mesh sieves after each processing batch to avoid cross-contamination.",
+      "Inspect 3HP electric motor V-belt tension and lubricate pillow block bearings monthly.",
+      "Genuine replacement stainless steel mesh sieves, beater hammers, and hopper clamps are available through certified KOREVA dealers."
+    ]
   },
   {
     id: "ko-ricemill",
@@ -109,7 +154,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/mini-rice-mill.png",
     coverImageAlt: "KOREVA DHAN LAXMI MINI Commercial Rice Mill for rice processing and hulling",
     isPublished: true,
-    defaultVariantId: "ko-ricemill-1080"
+    defaultVariantId: "ko-ricemill-1080",
+    maintenanceTips: [
+      "Clean hulling chamber and bran separator cyclone daily to maintain peak milling efficiency.",
+      "Inspect rubber huller rollers for uniform wear and adjust hulling gap according to paddy grain variety.",
+      "Genuine replacement rubber rollers, emery stone rollers, and sifter screens are available through certified KOREVA dealers."
+    ]
   },
   // Lubricants
   {
@@ -121,7 +171,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/stou-lubricant.png",
     coverImageAlt: "KOREVA STOU 15W-40 Super Tractor Universal Lubricant Oil container",
     isPublished: true,
-    defaultVariantId: "ko-stou-5l"
+    defaultVariantId: "ko-stou-5l",
+    maintenanceTips: [
+      "Store oil containers in a dry, covered area away from direct sunlight and moisture contamination.",
+      "Ensure fill neck and funnel are thoroughly cleaned before pouring oil into tractor hydraulic or engine sumps.",
+      "Follow tractor OEM fluid replacement intervals (typically every 250–500 operating hours)."
+    ]
   },
   {
     id: "ko-4t-agro-20w50",
@@ -132,7 +187,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/4t-agro-lubricant.png",
     coverImageAlt: "KOREVA 4T Agro 20W-50 Heavy Duty Engine Oil bottle for power machinery",
     isPublished: true,
-    defaultVariantId: "ko-4t-3-5l"
+    defaultVariantId: "ko-4t-3-5l",
+    maintenanceTips: [
+      "Check engine dipstick level before starting air-cooled power weeders, reapers, or brush cutters.",
+      "Change engine oil after the first 5 hours of new machinery break-in, then every 50 operating hours thereafter.",
+      "Dispose of used engine oil responsibly at authorized recycling centers or equipment dealers."
+    ]
   },
   // Hand Tools
   {
@@ -144,7 +204,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/secateur-pro.png",
     coverImageAlt: "KOREVA PRO PRUNER SK5 Steel Professional Garden Bypass Pruning Shears Secateur",
     isPublished: true,
-    defaultVariantId: "ko-secateur-8inch"
+    defaultVariantId: "ko-secateur-8inch",
+    maintenanceTips: [
+      "Wipe SK5 steel blades with a mineral oil cloth after pruning to remove plant sap and prevent rust.",
+      "Apply light machine oil to the central spring and pivot pin monthly for effortless tension rebound.",
+      "Hone only the bevel edge using a fine diamond stone file at a 20° angle when blade dulls."
+    ]
   },
   {
     id: "ko-sickle-agro",
@@ -155,7 +220,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/sickle-agro.png",
     coverImageAlt: "KOREVA AGRO CUT High-Carbon Steel Serrated Harvesting Sickle with Wooden Handle",
     isPublished: true,
-    defaultVariantId: "ko-sickle-12inch"
+    defaultVariantId: "ko-sickle-12inch",
+    maintenanceTips: [
+      "Clean crop residue and field dirt from micro-serrated teeth using a stiff bristle brush after use.",
+      "Apply anti-rust protective oil to the manganese steel blade surface before off-season storage.",
+      "Inspect wooden handle wedge pin tightness prior to heavy field harvesting."
+    ]
   },
   {
     id: "ko-hand-sprayer",
@@ -166,7 +236,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hand-sprayer-1.5l.png",
     coverImageAlt: "KOREVA TURBO SPRAY High Pressure Agricultural Hand Sprayer with Adjustable Brass Spray Nozzle",
     isPublished: true,
-    defaultVariantId: "ko-sprayer-1-5l"
+    defaultVariantId: "ko-sprayer-1-5l",
+    maintenanceTips: [
+      "Flush HDPE tank and brass nozzle with clean water after spraying pesticides or chemical solutions.",
+      "Lubricate pump rod O-ring seal with silicone grease every 3 months to maintain pressure efficiency.",
+      "Depressurize container using safety relief valve before opening or storing."
+    ]
   },
   {
     id: "ko-sledge-hammer",
@@ -177,7 +252,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hammer-6kg.png",
     coverImageAlt: "KOREVA IRON CLAW Drop Forged Carbon Steel Sledge Hammer with Fiberglass Handle",
     isPublished: true,
-    defaultVariantId: "ko-hammer-6kg"
+    defaultVariantId: "ko-hammer-6kg",
+    maintenanceTips: [
+      "Inspect steel head chamfer faces for metal burrs or mushrooming and file smooth if necessary.",
+      "Check fiberglass handle bond to steel eye socket before heavy post driving or stone breaking.",
+      "Store in a dry tool rack to prevent moisture buildup on carbon steel striking faces."
+    ]
   },
   {
     id: "ko-bill-hook",
@@ -188,7 +268,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/bill-hook-wooden.png",
     coverImageAlt: "KOREVA MACHETE CUT High-Carbon Steel Agricultural Harvesting Bill Hook",
     isPublished: true,
-    defaultVariantId: "ko-billhook-wooden"
+    defaultVariantId: "ko-billhook-wooden",
+    maintenanceTips: [
+      "Sharpen curved manganese steel blade using a coarse whetstone following original blade bevel angle.",
+      "Wipe sap off cutting edge and coat with protective oil after clearing brush or harvesting cane.",
+      "Check handle rivets and non-slip rubber grip for secure hand holding during heavy lopping."
+    ]
   },
   {
     id: "ko-sickle-pro",
@@ -199,7 +284,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/sickle-crescent.png",
     coverImageAlt: "KOREVA PRO CUT High-Carbon Manganese Steel Agricultural Harvesting Sickle",
     isPublished: true,
-    defaultVariantId: "ko-sickle-crescent"
+    defaultVariantId: "ko-sickle-crescent",
+    maintenanceTips: [
+      "Clean crop moisture and soil particles off blade edge before sheathing or storing.",
+      "Hone curved cutting edge periodically using a round sharpening steel for razor-sharp crop slicing.",
+      "Store hanging in a dry area to prevent accidental blade edge contact and corrosion."
+    ]
   },
   {
     id: "ko-khurpa",
@@ -210,7 +300,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/khurpa-3inch.png",
     coverImageAlt: "KOREVA SOIL KING Heavy-Duty Hand Forged Garden Khurpa Tilling Tool",
     isPublished: true,
-    defaultVariantId: "ko-khurpa-3inch"
+    defaultVariantId: "ko-khurpa-3inch",
+    maintenanceTips: [
+      "Wash off mud and damp garden soil after bed weeding or seedling transplanting.",
+      "Sharpen front flat blade edge with a metal file for effortless root slicing.",
+      "Treat wooden handle with linseed oil annually to preserve hardwood durability."
+    ]
   },
   {
     id: "ko-agrihorti-ladder",
@@ -221,7 +316,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/agrihorti-ladder.png",
     coverImageAlt: "KOREVA HIGH REACH Heavy-Duty Aluminum Tripod Orchard and Horticulture Ladder",
     isPublished: true,
-    defaultVariantId: "ko-agrihorti-ladder-std"
+    defaultVariantId: "ko-agrihorti-ladder-std",
+    maintenanceTips: [
+      "Inspect aluminum rungs and tripod rear support leg lock pins before ascending.",
+      "Clean orchard mud from non-slip rubber feet to ensure maximum ground traction.",
+      "Store indoors or under shade cover to prevent accidental mechanical damage."
+    ]
   },
   {
     id: "ko-pahadi-kudal",
@@ -232,7 +332,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/pahadi-kudal-medium.png",
     coverImageAlt: "KOREVA MOUNTAIN DIGGER Forged Manganese Steel Pahadi Kudal Digging Tool",
     isPublished: true,
-    defaultVariantId: "ko-pahadi-kudal-medium"
+    defaultVariantId: "ko-pahadi-kudal-medium",
+    maintenanceTips: [
+      "Inspect pick and mattock blade tips for burrs after digging in rocky mountain terrain.",
+      "Ensure handle eye wedge is tight and securely fitted before heavy trench excavation.",
+      "Coat manganese steel head with anti-rust oil prior to seasonal storage."
+    ]
   },
   {
     id: "ko-garden-hoe",
@@ -243,7 +348,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/garden-hoe-single.png",
     coverImageAlt: "KOREVA CULTI HOE Dual-Action Forged Steel Agricultural Garden Hoe",
     isPublished: true,
-    defaultVariantId: "ko-garden-hoe-single"
+    defaultVariantId: "ko-garden-hoe-single",
+    maintenanceTips: [
+      "Scrape off compacted soil and weeds from blade and cultivator prongs after garden use.",
+      "File hoe cutting edge flat to maintain quick weed-slice performance in nursery beds.",
+      "Keep handle smooth and dry to avoid splintering or wood degradation."
+    ]
   },
   {
     id: "ko-garden-rake",
@@ -254,7 +364,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/garden-rake-8teeth.png",
     coverImageAlt: "KOREVA RAKE KING Heavy Duty Forged Steel Agricultural Garden Rake",
     isPublished: true,
-    defaultVariantId: "ko-rake-8teeth"
+    defaultVariantId: "ko-rake-8teeth",
+    maintenanceTips: [
+      "Rinse away field debris and gravel dust from steel tines after bed leveling.",
+      "Check tine alignment and straighten bent teeth using a soft mallet if needed.",
+      "Store hanging vertically to prevent tine bending or handle stress."
+    ]
   },
   {
     id: "ko-plastic-leaf-rake",
@@ -265,7 +380,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/plastic-leaf-rake-22teeth.png",
     coverImageAlt: "KOREVA LEAF PRO 22 Teeth Heavy Duty Flexible Plastic Lawn and Leaf Rake",
     isPublished: true,
-    defaultVariantId: "ko-leaf-rake-22teeth"
+    defaultVariantId: "ko-leaf-rake-22teeth",
+    maintenanceTips: [
+      "Remove trapped leaves and damp grass clippings from plastic fan tines after lawn raking.",
+      "Avoid storing under direct sunlight for prolonged periods to preserve polypropylene flexibility.",
+      "Inspect tubular handle bolt attachment before seasonal autumn leaf clearing."
+    ]
   },
   {
     id: "ko-garden-shovel",
@@ -276,7 +396,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/garden-shovel-round-nose.png",
     coverImageAlt: "KOREVA SHOVEL MASTER Heavy Duty Agricultural Digging Garden Shovel",
     isPublished: true,
-    defaultVariantId: "ko-shovel-round-nose"
+    defaultVariantId: "ko-shovel-round-nose",
+    maintenanceTips: [
+      "Clean wet soil and clay from shovel blade socket after excavation.",
+      "Touch up powder-coated blade edge with protective paint if scratched during rock digging.",
+      "Check D-grip handle rivets to ensure rigid leverage during heavy material scooping."
+    ]
   },
   {
     id: "ko-grass-sword",
@@ -287,7 +412,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/grass-sword.png",
     coverImageAlt: "KOREVA SWORD CUT High Manganese Steel Dual Edged Agricultural Grass Sword",
     isPublished: true,
-    defaultVariantId: "ko-grass-sword-std"
+    defaultVariantId: "ko-grass-sword-std",
+    maintenanceTips: [
+      "Wipe dual-edged blade clean of green grass sap and moisture after pasture clearing.",
+      "Hone both cutting edges with a hand file following the factory bevel angle.",
+      "Store inside protective blade sleeve to prevent rust and edge damage."
+    ]
   },
   {
     id: "ko-hand-sprinkler",
@@ -298,7 +428,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hand-sprinkler-plastic.png",
     coverImageAlt: "KOREVA TURBO SPRINKLER High Efficiency Agricultural Hand Lawn Sprinkler",
     isPublished: true,
-    defaultVariantId: "ko-sprinkler-plastic"
+    defaultVariantId: "ko-sprinkler-plastic",
+    maintenanceTips: [
+      "Clear fine sand particles from sprinkler nozzle holes using water back-flush.",
+      "Inspect quick-connect hose washer O-ring for leak-tight water connection.",
+      "Drain water completely before storing during freezing winter months."
+    ]
   },
   {
     id: "ko-hand-wheel-hoe",
@@ -309,7 +444,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/wheel-hoe-3tine.png",
     coverImageAlt: "KOREVA WHEEL CULTI Manual Push Wheel Hoe Agricultural Cultivator",
     isPublished: true,
-    defaultVariantId: "ko-wheel-hoe-3tine"
+    defaultVariantId: "ko-wheel-hoe-3tine",
+    maintenanceTips: [
+      "Oil wheel axle hub bearings monthly for smooth push operation in row crops.",
+      "Scrape mud off 3-tine cultivator prongs after field weeding.",
+      "Tighten attachment mounting bolts before working in tough dry soil."
+    ]
   },
   {
     id: "ko-garden-spade",
@@ -320,7 +460,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/garden-spade.png",
     coverImageAlt: "KOREVA SPADE KING Heavy Duty Forged Steel Agricultural Garden Spade",
     isPublished: true,
-    defaultVariantId: "ko-garden-spade-std"
+    defaultVariantId: "ko-garden-spade-std",
+    maintenanceTips: [
+      "Wash off mud and root debris from flat steel blade after trenching.",
+      "Sharpen straight bottom cutting edge with a file for clean root cutting.",
+      "Keep wooden T-handle clean and oil occasionally with boiled linseed oil."
+    ]
   },
   {
     id: "ko-seed-fertilizer-broadcaster",
@@ -331,7 +476,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/seed-fertilizer-broadcaster.png",
     coverImageAlt: "KOREVA AGRO BROADCASTER Portable Manual Seed and Fertilizer Broadcast Spreader",
     isPublished: true,
-    defaultVariantId: "ko-broadcaster-std"
+    defaultVariantId: "ko-broadcaster-std",
+    maintenanceTips: [
+      "Wash out 10-liter hopper with clean water after spreading chemical fertilizers to prevent corrosion.",
+      "Oil hand-crank gear drive mechanism every 50 hours of broadcast operation.",
+      "Check shoulder strap buckles and flow rate shutter gate adjustment before seeding."
+    ]
   },
   {
     id: "ko-maize-sheller",
@@ -342,7 +492,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/maize-sheller.png",
     coverImageAlt: "KOREVA CORN PRO Cast Iron Manual Hand Crank Maize Corn Sheller Machine",
     isPublished: true,
-    defaultVariantId: "ko-maize-sheller-std"
+    defaultVariantId: "ko-maize-sheller-std",
+    maintenanceTips: [
+      "Brush out corn chaff and kernel residue from cast iron teeth after shelling.",
+      "Apply light grease to hand crank flywheel gears for smooth manual turning.",
+      "Adjust cob tension spring clamp according to dry corn cob diameter."
+    ]
   },
   {
     id: "ko-garden-gloves",
@@ -353,7 +508,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/garden-gloves-red-black.png",
     coverImageAlt: "KOREVA GRIP SHIELD Nitrile Coated Heavy Duty Red and Black Garden Work Gloves",
     isPublished: true,
-    defaultVariantId: "ko-gloves-red-black"
+    defaultVariantId: "ko-gloves-red-black",
+    maintenanceTips: [
+      "Hand wash in cool water with mild soap to remove dirt and garden soil.",
+      "Air dry flat away from direct heat sources to preserve micro-foam nitrile grip.",
+      "Store in a cool dry tool bag away from sharp metal points."
+    ]
   },
   {
     id: "ko-post-hole-digger",
@@ -364,7 +524,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/post-hole-digger.png",
     coverImageAlt: "KOREVA HOLE DIGGER PRO Dual Blade Steel Manual Post Hole Digger",
     isPublished: true,
-    defaultVariantId: "ko-post-hole-digger-std"
+    defaultVariantId: "ko-post-hole-digger-std",
+    maintenanceTips: [
+      "Clean mud and stones from dual clam-shell steel blades after hole excavation.",
+      "Oil center pivot pin to ensure smooth scissor clamping action in clay soil.",
+      "Inspect hardwood handle bolts for tight secure alignment."
+    ]
   },
   {
     id: "ko-digging-fork",
@@ -375,7 +540,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/digging-fork.png",
     coverImageAlt: "KOREVA FORK MASTER Heavy Duty Forged Steel Agricultural Digging Fork",
     isPublished: true,
-    defaultVariantId: "ko-digging-fork-std"
+    defaultVariantId: "ko-digging-fork-std",
+    maintenanceTips: [
+      "Wash soil and compost off 4 drop-forged steel oval tines after use.",
+      "Inspect tines for alignment and avoid prying against heavy subterranean boulders.",
+      "Store hanging vertically in a dry farm shed."
+    ]
   },
   {
     id: "ko-hand-cultivator",
@@ -386,7 +556,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hand-cultivator-3prong.png",
     coverImageAlt: "KOREVA CLAW PRO 3-Prong Forged Steel Agricultural Hand Cultivator",
     isPublished: true,
-    defaultVariantId: "ko-hand-cultivator-3prong"
+    defaultVariantId: "ko-hand-cultivator-3prong",
+    maintenanceTips: [
+      "Rinse away damp garden soil from 3 manganese steel claw tines.",
+      "Wipe tines dry and apply light oil film to preserve electro-phoretic finish.",
+      "Ensure rubber handle grip is clean and dry."
+    ]
   },
   {
     id: "ko-seed-treatment-drum",
@@ -397,7 +572,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/seed-treatment-drum.png",
     coverImageAlt: "KOREVA SEED COATER Heavy Duty Manual Rotating Seed Treatment Drum Machine",
     isPublished: true,
-    defaultVariantId: "ko-seed-treatment-drum-std"
+    defaultVariantId: "ko-seed-treatment-drum-std",
+    maintenanceTips: [
+      "Clean inside 20 kg drum with water after dressing seeds with chemical fungicides or bio-fertilizers.",
+      "Grease rotating drum axle bearings and angle iron frame pivot points before seeding season.",
+      "Inspect drum lid clamp gasket to ensure 100% chemical-tight sealing."
+    ]
   },
   {
     id: "ko-wheel-barrow",
@@ -408,7 +588,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/wheel-barrow.png",
     coverImageAlt: "KOREVA CARGO BARROW Heavy Duty Steel Agricultural Wheelbarrow",
     isPublished: true,
-    defaultVariantId: "ko-wheel-barrow-std"
+    defaultVariantId: "ko-wheel-barrow-std",
+    maintenanceTips: [
+      "Check pneumatic tire pressure (3.50-8) before hauling heavy farm loads.",
+      "Clean manure and wet soil from 85-liter pressed steel tray to prevent tray corrosion.",
+      "Grease wheel axle bearings every 3 months for smooth pushing."
+    ]
   },
   {
     id: "ko-hand-soil-tiller",
@@ -419,7 +604,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hand-soil-tiller.png",
     coverImageAlt: "KOREVA TILLER PRO Rotary Blade Manual Agricultural Hand Soil Tiller",
     isPublished: true,
-    defaultVariantId: "ko-hand-soil-tiller-std"
+    defaultVariantId: "ko-hand-soil-tiller-std",
+    maintenanceTips: [
+      "Remove weed roots and soil crust buildup from 6 rotary star blades after tilling.",
+      "Oil rotary blade axle pins for smooth rolling in nursery soil.",
+      "Store indoors away from moisture."
+    ]
   },
   {
     id: "ko-hand-ridger",
@@ -430,7 +620,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/hand-ridger.png",
     coverImageAlt: "KOREVA RIDGER KING Dual Wing Manual Steel Agricultural Hand Ridger",
     isPublished: true,
-    defaultVariantId: "ko-hand-ridger-std"
+    defaultVariantId: "ko-hand-ridger-std",
+    maintenanceTips: [
+      "Clean soil from dual moldboard steel wings after furrow creation.",
+      "Grease wing adjustment slot pins before earthing up crop rows.",
+      "Sharpen front plow point for easy soil penetration."
+    ]
   },
   {
     id: "ko-weight-lifter",
@@ -441,7 +636,12 @@ export const exampleProducts: Product[] = [
     coverImage: "/products/weight-lifter-basket.png",
     coverImageAlt: "KOREVA LIFT MASTER Agricultural Basket Weight Lifter Trolley",
     isPublished: true,
-    defaultVariantId: "ko-weight-lifter-basket"
+    defaultVariantId: "ko-weight-lifter-basket",
+    maintenanceTips: [
+      "Check solid rubber wheel axle pins for smooth rolling over farm soil.",
+      "Inspect leverage arm hooks and tubular frame weld joints before lifting 100kg harvest crates.",
+      "Store in a dry tool shed to protect steel frame coating."
+    ]
   }
 ];
 

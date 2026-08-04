@@ -19,6 +19,7 @@ export interface Product {
   tags: string[];
   isPublished: boolean;
   defaultVariantId: string | null;
+  maintenanceTips?: string[];
 }
 
 export interface Variant {

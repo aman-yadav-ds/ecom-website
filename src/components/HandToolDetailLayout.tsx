@@ -219,21 +219,22 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
       <section className="bg-amber-50/60 border border-amber-200 rounded-sm p-6 sm:p-8">
         <h3 className="text-lg font-bold text-dark-900 uppercase tracking-wide mb-4 flex items-center gap-2">
           <RefreshCw className="w-5 h-5 text-amber-700" />
-          Tool Care & Sharpening Instructions
+          Tool Care & Maintenance Instructions
         </h3>
         <ul className="space-y-2 text-sm text-dark-700">
-          <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-            Clean blade with a light solvent after each cut to remove plant sap and moisture.
-          </li>
-          <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-            Apply a thin film of KOREVA 4T lubricant on pivot screws monthly for smooth spring rebound.
-          </li>
-          <li className="flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-            Sharpen only the bevel side of the blade using a fine diamond whetstone at a 20° angle.
-          </li>
+          {(product.maintenanceTips && product.maintenanceTips.length > 0
+            ? product.maintenanceTips
+            : [
+                "Clean tool steel with a dry cloth after use to remove moisture and plant sap.",
+                "Apply a thin film of protective oil to metal surfaces before off-season storage.",
+                "Sharpen cutting edges with a fine diamond stone or file following original bevel angles."
+              ]
+          ).map((tip, idx) => (
+            <li key={idx} className="flex items-start gap-2">
+              <CheckCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+              <span>{tip}</span>
+            </li>
+          ))}
         </ul>
       </section>
     </div>

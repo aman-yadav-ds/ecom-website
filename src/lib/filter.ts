@@ -1,52 +1,75 @@
+const tractorAttachmentFilters = [
+  "Tractor HP",
+  "Attachment Type",
+  "Working Width",
+  "Machine Weight",
+  "PTO Input",
+  "Blades Type",
+  "Number of Discs"
+];
+
+const selfPropelledFilters = [
+  "Engine Power",
+  "Machinery Type",
+  "Displacement",
+  "Machine Weight",
+  "Drive System",
+  "Engine Type",
+  "Transmission Type"
+];
+
+const foodProcessingFilters = [
+  "Processing Type",
+  "Capacity",
+  "Motor Power",
+  "Operation Speed",
+  "Machine Weight",
+  "Power Source"
+];
+
+const lubricantFilters = [
+  "Viscosity Grade",
+  "Fluid Type",
+  "Container Volume",
+  "Application",
+  "API Rating"
+];
+
+const handToolFilters = [
+  "Tool Type",
+  "Blade Steel",
+  "Handle Material",
+  "Cutting Capacity",
+  "Finish / Coating"
+];
+
 export const CATEGORY_FILTERS: Record<string, string[]> = {
-  "Tractor Attachments": [
-    "Tractor HP",
-    "Working Width",
-    "Blades Type",
-    "Number of Blades",
-    "Number of Discs",
-    "Bucket Sheet Thickness",
-    "Basket / Drum Size",
-    "PTO Input",
-    "PTO Input Speed"
-  ],
-  "Self Propelled Machinery": [
-    "Engine Power",
-    "Engine Type",
-    "Starting System",
-    "Transmission Type",
-    "Number of Blades"
-  ],
-  "Food Processing Units": [
-    "Motor Power",
-    "Material",
-    "Electricity"
-  ],
-  "Lubricants": [
-    "Viscosity Grade",
-    "API Rating",
-    "Container Volume",
-    "Application"
-  ],
-  "Hand Tools": [
-    "Blade Steel",
-    "Handle Material",
-    "Cutting Capacity",
-    "Tank Capacity",
-    "Head Weight",
-    "Finish / Coating"
-  ],
+  "Tractor Attachments": tractorAttachmentFilters,
+  "tractor-attachments": tractorAttachmentFilters,
+  "Self Propelled Machinery": selfPropelledFilters,
+  "self-propelled-machinery": selfPropelledFilters,
+  "Food Processing Units": foodProcessingFilters,
+  "food-processing-units": foodProcessingFilters,
+  "Lubricants": lubricantFilters,
+  "lubricants": lubricantFilters,
+  "Hand Tools": handToolFilters,
+  "hand-tools": handToolFilters,
 };
 
 export const ALLOWED_FILTERS = [
   "Tractor HP",
+  "Attachment Type",
   "Working Width",
   "Engine Power",
+  "Machinery Type",
+  "Displacement",
+  "Processing Type",
+  "Capacity",
   "Motor Power",
-  "Material",
   "Viscosity Grade",
+  "Fluid Type",
   "Container Volume",
-  "Blade Steel"
+  "Tool Type",
+  "Blade Steel",
+  "Machine Weight"
 ];
-
-

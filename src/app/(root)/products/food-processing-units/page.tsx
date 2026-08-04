@@ -43,6 +43,7 @@ export default function FoodProcessingUnitsPage() {
         imageAlt: product.coverImageAlt || (defaultVariant?.imagesAlt?.[0]) || product.name,
         variantsCount: productVariants.length,
         technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
+        allVariantsTechnicalDetails: productVariants.map((v) => v.technicalDetails),
       };
     });
 
