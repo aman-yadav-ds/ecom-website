@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { exampleProducts } from "@/lib/details";
+import { exampleProducts, exampleCategories } from "@/lib/details";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
@@ -97,12 +97,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const productRoutes: MetadataRoute.Sitemap = exampleProducts.map((product) => ({
-    url: `${baseUrl}/products/${product.id}`,
+  const categoryRoutes: MetadataRoute.Sitemap = exampleCategories.map((category) => ({
+    url: `${baseUrl}/products/${category.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: 0.8,
+    priority: 0.85,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  const productRoutes: MetadataRoute.Sitemap = exampleProducts
+    .filter((product) => product.isPublished)
+    .map((product) => ({
+      url: `${baseUrl}/products/${product.id}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
+
+  return [...staticRoutes, ...categoryRoutes, ...productRoutes];
 }

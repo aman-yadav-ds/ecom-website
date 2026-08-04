@@ -18,6 +18,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
       id: product.id,
       name: product.name,
       image: product.coverImage || defaultVariant?.images?.[0] || "/placeholder.png",
+      imageAlt: product.coverImageAlt || defaultVariant?.imagesAlt?.[0] || product.name,
       price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
       technicalDetails: defaultVariant?.technicalDetails || {},
     };

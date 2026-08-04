@@ -484,6 +484,321 @@ export const exampleVariants: Variant[] = [
       "Blade Type": "Smooth Razor Edge",
       "Weight": "340 Grams"
     }
+  },
+  // Hand Sprayer
+  {
+    id: "ko-sprayer-1l",
+    name: "KOREVA TURBO SPRAY (1 Litre)",
+    productId: "ko-hand-sprayer",
+    images: ["/products/hand-sprayer-1l.png"],
+    imagesAlt: ["KOREVA TURBO SPRAY 1 Litre Manual Pressure Garden Hand Sprayer"],
+    price: "350.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tank Capacity": "1 Litre",
+      "Material": "Heavy-Duty HDPE Polymer",
+      "Nozzle Type": "Adjustable Brass Mist & Stream Nozzle",
+      "Working Pressure": "2.0 - 3.0 Bar",
+      "Application": "Garden Plants, Pesticides & Sanitization",
+      "Weight": "320 Grams"
+    }
+  },
+  {
+    id: "ko-sprayer-1-5l",
+    name: "KOREVA TURBO SPRAY (1.5 Litre)",
+    productId: "ko-hand-sprayer",
+    images: ["/products/hand-sprayer-1.5l.png"],
+    imagesAlt: ["KOREVA TURBO SPRAY 1.5 Litre High-Pressure Farm & Garden Hand Sprayer"],
+    price: "450.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tank Capacity": "1.5 Litre",
+      "Material": "Heavy-Duty HDPE Polymer",
+      "Nozzle Type": "Adjustable Brass Mist & Stream Nozzle",
+      "Working Pressure": "2.5 - 3.5 Bar",
+      "Application": "Farm Crop Foliage & Greenhouse Spraying",
+      "Weight": "410 Grams"
+    }
+  },
+  {
+    id: "ko-sprayer-2l",
+    name: "KOREVA TURBO SPRAY (2 Litre)",
+    productId: "ko-hand-sprayer",
+    images: ["/products/hand-sprayer-2l.png"],
+    imagesAlt: ["KOREVA TURBO SPRAY 2 Litre Heavy-Duty Chemical & Crop Pressure Hand Sprayer"],
+    price: "550.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Tank Capacity": "2 Litre",
+      "Material": "Heavy-Duty HDPE Polymer",
+      "Nozzle Type": "Adjustable Brass Mist & Stream Nozzle",
+      "Working Pressure": "3.0 - 4.0 Bar",
+      "Application": "High-Volume Crop & Farm Chemical Spraying",
+      "Weight": "480 Grams"
+    }
+  },
+  // Sledge Hammer
+  {
+    id: "ko-hammer-3kg",
+    name: "KOREVA IRON CLAW 3 KG Sledge Hammer",
+    productId: "ko-sledge-hammer",
+    images: ["/products/hammer-3kg.png"],
+    imagesAlt: ["KOREVA IRON CLAW 3 KG Drop Forged Carbon Steel Sledge Hammer with Ergonomic Grip"],
+    price: "1250.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Weight": "3 KG",
+      "Handle Material": "Fiberglass Shock-Absorbing Rubber Grip",
+      "Head Material": "Drop-Forged High Carbon Steel",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Application": "Light Demolition & Farm Staking",
+      "Overall Length": "400 mm"
+    }
+  },
+  {
+    id: "ko-hammer-6kg",
+    name: "KOREVA IRON CLAW 6 KG Sledge Hammer",
+    productId: "ko-sledge-hammer",
+    images: ["/products/hammer-6kg.png"],
+    imagesAlt: ["KOREVA IRON CLAW 6 KG Heavy Duty Demolition Sledge Hammer with Shock Absorption"],
+    price: "2100.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Weight": "6 KG",
+      "Handle Material": "Fiberglass Shock-Absorbing Rubber Grip",
+      "Head Material": "Drop-Forged High Carbon Steel",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Application": "Heavy Demolition & Soil Compacting",
+      "Overall Length": "750 mm"
+    }
+  },
+  {
+    id: "ko-hammer-10kg",
+    name: "KOREVA IRON CLAW 10 KG Industrial Sledge Hammer",
+    productId: "ko-sledge-hammer",
+    images: ["/products/hammer-10kg.png"],
+    imagesAlt: ["KOREVA IRON CLAW 10 KG Industrial Heavy Sledge Hammer with Anti-Slip Grip"],
+    price: "3400.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Weight": "10 KG",
+      "Handle Material": "Heavy Duty Reinforced Fiberglass Rubber Grip",
+      "Head Material": "Drop-Forged High Carbon Alloy Steel",
+      "Finish / Coating": "Industrial Powder Coating",
+      "Application": "Industrial Breaking & Heavy Construction",
+      "Overall Length": "900 mm"
+    }
+  },
+  // Bill Hook
+  {
+    id: "ko-billhook-plastic",
+    name: "KOREVA MACHETE CUT Bill Hook (Plastic Grip)",
+    productId: "ko-bill-hook",
+    images: ["/products/bill-hook-plastic.png"],
+    imagesAlt: ["KOREVA MACHETE CUT High-Carbon Manganese Steel Bill Hook with Non-Slip Plastic Grip"],
+    price: "580.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Non-Slip Ergonomic Rubberized Plastic",
+      "Cutting Capacity": "Heavy Bush & Branch Clearing",
+      "Finish / Coating": "Black Oxide Corrosion Barrier",
+      "Blade Length": "250 mm",
+      "Overall Weight": "450 Grams"
+    }
+  },
+  {
+    id: "ko-billhook-wooden",
+    name: "KOREVA MACHETE CUT Bill Hook (Wooden Grip)",
+    productId: "ko-bill-hook",
+    images: ["/products/bill-hook-wooden.png"],
+    imagesAlt: ["KOREVA MACHETE CUT Traditional Steel Bill Hook with Seasoned Wooden Handle"],
+    price: "640.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Seasoned Hardwood with Brass Rivets",
+      "Cutting Capacity": "Heavy Bush & Branch Clearing",
+      "Finish / Coating": "Rust-Resistant Protective Oil",
+      "Blade Length": "270 mm",
+      "Overall Weight": "510 Grams"
+    }
+  },
+  // Sickle PRO CUT
+  {
+    id: "ko-sickle-crescent",
+    name: "KOREVA PRO CUT Crescent Sickle",
+    productId: "ko-sickle-pro",
+    images: ["/products/sickle-crescent.png"],
+    imagesAlt: ["KOREVA PRO CUT High-Carbon Steel Curved Crescent Crop Harvesting Sickle"],
+    price: "420.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Seasoned Ash Wood",
+      "Cutting Capacity": "Paddy & Wheat Crop Harvesting",
+      "Finish / Coating": "Black Oxide Anti-Corrosion",
+      "Blade Type": "Curved Crescent Edge",
+      "Weight": "310 Grams"
+    }
+  },
+  {
+    id: "ko-sickle-pruning",
+    name: "KOREVA PRO CUT Pruning & Grass Sickle",
+    productId: "ko-sickle-pro",
+    images: ["/products/sickle-pruning.png"],
+    imagesAlt: ["KOREVA PRO CUT Serrated Edge Pruning & Grass Cutting Agricultural Sickle"],
+    price: "480.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Steel": "High Carbon Manganese Steel",
+      "Handle Material": "Ergonomic Hardwood Handle",
+      "Cutting Capacity": "Grass Trimming & Orchard Pruning",
+      "Finish / Coating": "Electrophoretic Anti-Rust Coating",
+      "Blade Type": "Micro-Serrated Edge",
+      "Weight": "330 Grams"
+    }
+  },
+  // Khurpa Variants
+  {
+    id: "ko-khurpa-3inch",
+    name: "KOREVA SOIL KING Khurpa (3 Inch)",
+    productId: "ko-khurpa",
+    images: ["/products/khurpa-3inch.png"],
+    imagesAlt: ["KOREVA SOIL KING 3-Inch High Carbon Steel Garden Khurpa"],
+    price: "180.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Width": "3 Inch",
+      "Blade Material": "Drop-Forged High Carbon Steel",
+      "Handle Material": "Seasoned Ash Hardwood / Rubber Grip",
+      "Finish / Coating": "Rust-Resistant Black Powder Coating",
+      "Application": "Precision Weeding & Nursery Pot Tilling",
+      "Weight": "250 Grams"
+    }
+  },
+  {
+    id: "ko-khurpa-4inch",
+    name: "KOREVA SOIL KING Khurpa (4 Inch)",
+    productId: "ko-khurpa",
+    images: ["/products/khurpa-4inch.png"],
+    imagesAlt: ["KOREVA SOIL KING 4-Inch Heavy-Duty Forged Steel Garden Khurpa"],
+    price: "220.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Width": "4 Inch",
+      "Blade Material": "Drop-Forged High Carbon Steel",
+      "Handle Material": "Seasoned Ash Hardwood / Rubber Grip",
+      "Finish / Coating": "Rust-Resistant Black Powder Coating",
+      "Application": "Farm Bed Tilling & Root Digging",
+      "Weight": "310 Grams"
+    }
+  },
+  // AgriHorti Ladder Variant
+  {
+    id: "ko-agrihorti-ladder-std",
+    name: "KOREVA HIGH REACH AgriHorti Orchard Ladder",
+    productId: "ko-agrihorti-ladder",
+    images: ["/products/agrihorti-ladder.png"],
+    imagesAlt: ["KOREVA HIGH REACH Heavy Duty Aluminum Tripod Orchard & Horticulture Ladder"],
+    price: "6800.00",
+    applicableGst: "18",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Material": "High-Tensile Aircraft-Grade Aluminum Alloy",
+      "Structure": "Adjustable Third Leg Tripod Design",
+      "Height": "10 Feet",
+      "Load Capacity": "150 KG",
+      "Finish / Coating": "Anodized Anti-Corrosion Finish",
+      "Application": "Fruit Harvesting, Orchard Pruning & Tree Care",
+      "Weight": "8.5 KG"
+    }
+  },
+  // Pahadi Kudal Variants
+  {
+    id: "ko-pahadi-kudal-medium",
+    name: "KOREVA MOUNTAIN DIGGER Pahadi Kudal (Medium)",
+    productId: "ko-pahadi-kudal",
+    images: ["/products/pahadi-kudal-medium.png"],
+    imagesAlt: ["KOREVA MOUNTAIN DIGGER Medium Forged Manganese Steel Pahadi Kudal"],
+    price: "750.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Weight": "1.8 KG",
+      "Blade Material": "Drop-Forged High Manganese Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Black Anti-Rust Oxide Coating",
+      "Application": "Hill Soil Digging & Trenching",
+      "Overall Length": "600 mm"
+    }
+  },
+  {
+    id: "ko-pahadi-kudal-large",
+    name: "KOREVA MOUNTAIN DIGGER Pahadi Kudal (Large)",
+    productId: "ko-pahadi-kudal",
+    images: ["/products/pahadi-kudal-large.png"],
+    imagesAlt: ["KOREVA MOUNTAIN DIGGER Large Heavy-Duty Forged Steel Pahadi Kudal"],
+    price: "950.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Weight": "2.5 KG",
+      "Blade Material": "Drop-Forged High Manganese Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Black Anti-Rust Oxide Coating",
+      "Application": "Rocky Terrain Excavation & Heavy Root Removal",
+      "Overall Length": "750 mm"
+    }
+  },
+  // Garden Hoe Variants
+  {
+    id: "ko-garden-hoe-single",
+    name: "KOREVA CULTI HOE Garden Hoe (Single Prong)",
+    productId: "ko-garden-hoe",
+    images: ["/products/garden-hoe-single.png"],
+    imagesAlt: ["KOREVA CULTI HOE Single Prong Steel Agricultural Garden Hoe"],
+    price: "380.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Type": "Single Blade Hoe",
+      "Blade Material": "High-Carbon Spring Steel",
+      "Handle Material": "Ergonomic Hardwood",
+      "Finish / Coating": "Electrophoretic Anti-Rust Black",
+      "Application": "Weeding & Soil Flat Scraping",
+      "Weight": "420 Grams"
+    }
+  },
+  {
+    id: "ko-garden-hoe-double",
+    name: "KOREVA CULTI HOE Garden Hoe (Double Prong)",
+    productId: "ko-garden-hoe",
+    images: ["/products/garden-hoe-double.png"],
+    imagesAlt: ["KOREVA CULTI HOE Double Prong Cultivator Hoe Combination Tool"],
+    price: "450.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Head Type": "Dual-Prong Hoe & Cultivator Combo",
+      "Blade Material": "High-Carbon Spring Steel",
+      "Handle Material": "Ergonomic Hardwood",
+      "Finish / Coating": "Electrophoretic Anti-Rust Black",
+      "Application": "Soil Aeration & Multi-Tooth Cultivating",
+      "Weight": "480 Grams"
+    }
   }
 ];
 

@@ -32,8 +32,9 @@ const CompareDrawer = () => {
       id,
       name: product.name,
       image,
+      imageAlt: product.coverImageAlt || defaultVariant?.imagesAlt?.[0] || product.name,
     };
-  }).filter(Boolean) as { id: string; name: string; image: string }[];
+  }).filter(Boolean) as { id: string; name: string; image: string; imageAlt?: string }[];
 
   const queryStringResult = selectedProductIds.length > 0
     ? buildQueryString({ ids: selectedProductIds.join(",") })
@@ -65,7 +66,7 @@ const CompareDrawer = () => {
                         <div className="relative w-12 h-12 md:w-16 md:h-16 mb-1">
                           <Image
                             src={product.image}
-                            alt={product.name}
+                            alt={product.imageAlt || `${product.name} - Koreva Agriculture Equipment`}
                             fill
                             sizes="(max-width: 768px) 48px, 64px"
                             className="object-contain"

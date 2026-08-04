@@ -11,6 +11,7 @@ export interface CompareProduct {
   id: string;
   name: string;
   image: string;
+  imageAlt?: string;
   price: number;
   technicalDetails: Record<string, string>;
 }
@@ -64,7 +65,7 @@ const ComparisonMatrix: React.FC<ComparisonMatrixProps> = ({ products }) => {
                     <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-4 bg-white border border-light-200 rounded-2xl p-2 shadow-xs">
                       <Image
                         src={product.image}
-                        alt={product.name}
+                        alt={product.imageAlt || `${product.name} - Koreva Agriculture Equipment`}
                         fill
                         sizes="(max-width: 768px) 96px, 128px"
                         className="object-contain"

@@ -134,6 +134,94 @@ export const exampleProducts: Product[] = [
     coverImageAlt: "KOREVA AGRO CUT High-Carbon Steel Serrated Harvesting Sickle with Wooden Handle",
     isPublished: true,
     defaultVariantId: "ko-sickle-12inch"
+  },
+  {
+    id: "ko-hand-sprayer",
+    name: "KOREVA - Pressure Hand Sprayer (TURBO SPRAY)",
+    description: "Ergonomic high-pressure agricultural and garden hand sprayer featuring a durable HDPE chemical tank, adjustable brass nozzle, and smooth pump mechanism.",
+    categoryId: "hand-tools",
+    tags: ["Hand Sprayer", "Garden Sprayer", "Agricultural Tools", "Hand Tools", "Chemical Sprayer", "Pressure Sprayer"],
+    coverImage: "/products/hand-sprayer-1.5l.png",
+    coverImageAlt: "KOREVA TURBO SPRAY High Pressure Agricultural Hand Sprayer with Adjustable Brass Spray Nozzle",
+    isPublished: true,
+    defaultVariantId: "ko-sprayer-1-5l"
+  },
+  {
+    id: "ko-sledge-hammer",
+    name: "KOREVA - Heavy Duty Sledge Hammer (IRON CLAW)",
+    description: "Drop-forged carbon steel head sledge hammer with unbreakable shock-absorbing fiberglass handle for tough agricultural, construction, and demolition tasks.",
+    categoryId: "hand-tools",
+    tags: ["Sledge Hammer", "Demolition Hammer", "Hand Tools", "Carbon Steel", "Fiberglass Handle"],
+    coverImage: "/products/hammer-6kg.png",
+    coverImageAlt: "KOREVA IRON CLAW Drop Forged Carbon Steel Sledge Hammer with Fiberglass Handle",
+    isPublished: true,
+    defaultVariantId: "ko-hammer-6kg"
+  },
+  {
+    id: "ko-bill-hook",
+    name: "KOREVA - Heavy Duty Bill Hook (MACHETE CUT)",
+    description: "Curved high-carbon manganese steel billhook blade designed for heavy bush clearing, branch pruning, and agricultural harvesting.",
+    categoryId: "hand-tools",
+    tags: ["Bill Hook", "Machete", "Hand Tools", "Bush Clearing", "Harvesting Tool"],
+    coverImage: "/products/bill-hook-wooden.png",
+    coverImageAlt: "KOREVA MACHETE CUT High-Carbon Steel Agricultural Harvesting Bill Hook",
+    isPublished: true,
+    defaultVariantId: "ko-billhook-wooden"
+  },
+  {
+    id: "ko-sickle-pro",
+    name: "KOREVA - Agricultural Harvesting Sickle (PRO CUT)",
+    description: "Precision-forged manganese steel harvesting sickle designed for crop cutting, grass trimming, and orchard pruning with specialized blade options.",
+    categoryId: "hand-tools",
+    tags: ["Sickle", "Harvesting Tool", "Hand Tools", "Crescent Sickle", "Pruning Sickle"],
+    coverImage: "/products/sickle-crescent.png",
+    coverImageAlt: "KOREVA PRO CUT High-Carbon Manganese Steel Agricultural Harvesting Sickle",
+    isPublished: true,
+    defaultVariantId: "ko-sickle-crescent"
+  },
+  {
+    id: "ko-khurpa",
+    name: "KOREVA - Heavy Duty Garden Khurpa (SOIL KING)",
+    description: "Ergonomic hand-forged steel khurpa designed for soil tilling, weeding, and garden bed preparation with heavy-duty hardwood handle.",
+    categoryId: "hand-tools",
+    tags: ["Khurpa", "Hand Tools", "Garden Tools", "Weeding Tool", "Tilling", "Forged Steel"],
+    coverImage: "/products/khurpa-3inch.png",
+    coverImageAlt: "KOREVA SOIL KING Heavy-Duty Hand Forged Garden Khurpa Tilling Tool",
+    isPublished: true,
+    defaultVariantId: "ko-khurpa-3inch"
+  },
+  {
+    id: "ko-agrihorti-ladder",
+    name: "KOREVA - Heavy Duty AgriHorti Orchard Ladder (HIGH REACH)",
+    description: "Commercial grade tripod aluminum orchard and horticulture ladder engineered for stable fruit picking, tree pruning, and high branch maintenance.",
+    categoryId: "hand-tools",
+    tags: ["AgriHorti Ladder", "Orchard Ladder", "Tripod Ladder", "Pruning Ladder", "Hand Tools", "Aluminum Ladder"],
+    coverImage: "/products/agrihorti-ladder.png",
+    coverImageAlt: "KOREVA HIGH REACH Heavy-Duty Aluminum Tripod Orchard and Horticulture Ladder",
+    isPublished: true,
+    defaultVariantId: "ko-agrihorti-ladder-std"
+  },
+  {
+    id: "ko-pahadi-kudal",
+    name: "KOREVA - Heavy Duty Pahadi Kudal (MOUNTAIN DIGGER)",
+    description: "Forged high-manganese steel specialized hill terrain kudal designed for rocky soil digging, terraced farming, and heavy root cutting.",
+    categoryId: "hand-tools",
+    tags: ["Pahadi Kudal", "Kudal", "Mattock", "Digging Tool", "Hand Tools", "Terraced Farming"],
+    coverImage: "/products/pahadi-kudal-medium.png",
+    coverImageAlt: "KOREVA MOUNTAIN DIGGER Forged Manganese Steel Pahadi Kudal Digging Tool",
+    isPublished: true,
+    defaultVariantId: "ko-pahadi-kudal-medium"
+  },
+  {
+    id: "ko-garden-hoe",
+    name: "KOREVA - Ergonomic Garden Hoe (CULTI HOE)",
+    description: "Dual-action forged steel garden hoe for soil aeration, bed weeding, and furrow creation with durable weather-resistant handle.",
+    categoryId: "hand-tools",
+    tags: ["Garden Hoe", "Hoe", "Cultivator", "Hand Tools", "Weeding Hoe", "Garden Tools"],
+    coverImage: "/products/garden-hoe-single.png",
+    coverImageAlt: "KOREVA CULTI HOE Dual-Action Forged Steel Agricultural Garden Hoe",
+    isPublished: true,
+    defaultVariantId: "ko-garden-hoe-single"
   }
 ];
 
