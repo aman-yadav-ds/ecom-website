@@ -799,6 +799,174 @@ export const exampleVariants: Variant[] = [
       "Application": "Soil Aeration & Multi-Tooth Cultivating",
       "Weight": "480 Grams"
     }
+  },
+  // Garden Rake Variants
+  {
+    id: "ko-rake-8teeth",
+    name: "KOREVA RAKE KING Garden Rake (8 Teeth)",
+    productId: "ko-garden-rake",
+    images: ["/products/garden-rake-8teeth.png"],
+    imagesAlt: ["KOREVA RAKE KING 8-Teeth Forged Carbon Steel Soil Tilling Garden Rake"],
+    price: "450.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Teeth": "8 Teeth",
+      "Head Material": "Drop-Forged Carbon Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Working Width": "200 mm",
+      "Weight": "650 Grams"
+    }
+  },
+  {
+    id: "ko-rake-12teeth",
+    name: "KOREVA RAKE KING Garden Rake (12 Teeth)",
+    productId: "ko-garden-rake",
+    images: ["/products/garden-rake-12teeth.png"],
+    imagesAlt: ["KOREVA RAKE KING 12-Teeth Heavy Duty Agricultural Soil Leveling Rake"],
+    price: "550.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Teeth": "12 Teeth",
+      "Head Material": "Drop-Forged Carbon Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Working Width": "300 mm",
+      "Weight": "820 Grams"
+    }
+  },
+  {
+    id: "ko-rake-14teeth",
+    name: "KOREVA RAKE KING Garden Rake (14 Teeth)",
+    productId: "ko-garden-rake",
+    images: ["/products/garden-rake-14teeth.png"],
+    imagesAlt: ["KOREVA RAKE KING 14-Teeth Farm and Field Soil Tilling Steel Rake"],
+    price: "620.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Teeth": "14 Teeth",
+      "Head Material": "Drop-Forged Carbon Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Working Width": "350 mm",
+      "Weight": "910 Grams"
+    }
+  },
+  {
+    id: "ko-rake-16teeth",
+    name: "KOREVA RAKE KING Garden Rake (16 Teeth)",
+    productId: "ko-garden-rake",
+    images: ["/products/garden-rake-16teeth.png"],
+    imagesAlt: ["KOREVA RAKE KING 16-Teeth Wide Commercial Heavy Duty Agricultural Rake"],
+    price: "700.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Teeth": "16 Teeth",
+      "Head Material": "Drop-Forged Carbon Steel",
+      "Handle Material": "Reinforced Seasoned Hardwood",
+      "Finish / Coating": "Anti-Rust Black Powder Coating",
+      "Working Width": "400 mm",
+      "Weight": "1050 Grams"
+    }
+  },
+  // Plastic Leaf Rake Variant
+  {
+    id: "ko-leaf-rake-22teeth",
+    name: "KOREVA LEAF PRO Plastic Leaf Rake (22 Teeth)",
+    productId: "ko-plastic-leaf-rake",
+    images: ["/products/plastic-leaf-rake-22teeth.png"],
+    imagesAlt: ["KOREVA LEAF PRO 22-Teeth Flexible Polypropylene Plastic Lawn and Leaf Rake"],
+    price: "480.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Number of Teeth": "22 Teeth",
+      "Head Material": "High-Density Polypropylene Plastic",
+      "Handle Material": "Lightweight Anodized Aluminum / Wood",
+      "Fan Width": "480 mm",
+      "Application": "Lawn Leaf Gathering & Grass Cleaning",
+      "Weight": "380 Grams"
+    }
+  },
+  // Garden Shovel Variants
+  {
+    id: "ko-shovel-baby",
+    name: "KOREVA SHOVEL MASTER Garden Shovel (BABY)",
+    productId: "ko-garden-shovel",
+    images: ["/products/garden-shovel-baby.png"],
+    imagesAlt: ["KOREVA SHOVEL MASTER Compact Baby Digging Hand Shovel Trowel"],
+    price: "350.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Shovel Style": "Baby Compact Trowel Shovel",
+      "Blade Material": "Forged Carbon Steel",
+      "Handle Material": "Ergonomic Rubber Grip Hardwood",
+      "Finish / Coating": "Black Electro-Coated Anti-Corrosion",
+      "Blade Length": "180 mm",
+      "Weight": "410 Grams"
+    }
+  },
+  {
+    id: "ko-shovel-round-nose",
+    name: "KOREVA SHOVEL MASTER Garden Shovel (ROUND NOSE)",
+    productId: "ko-garden-shovel",
+    images: ["/products/garden-shovel-round-nose.png"],
+    imagesAlt: ["KOREVA SHOVEL MASTER Round Nose Heavy Duty Steel Agricultural Digging Shovel"],
+    price: "650.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Shovel Style": "Round Nose Excavation Shovel",
+      "Blade Material": "High Carbon Pressed Steel",
+      "Handle Material": "Heavy Duty Wooden D-Grip",
+      "Finish / Coating": "Powder Coated Rust Proof",
+      "Blade Dimensions": "230 mm x 300 mm",
+      "Weight": "1450 Grams"
+    }
+  },
+  {
+    id: "ko-shovel-square-mouth",
+    name: "KOREVA SHOVEL MASTER Garden Shovel (SQUARE MOUTH)",
+    productId: "ko-garden-shovel",
+    images: ["/products/garden-shovel-square-mouth.png"],
+    imagesAlt: ["KOREVA SHOVEL MASTER Square Mouth Heavy Duty Material Scooping Steel Shovel"],
+    price: "680.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Shovel Style": "Square Mouth Flat Scooping Shovel",
+      "Blade Material": "High Carbon Pressed Steel",
+      "Handle Material": "Heavy Duty Wooden D-Grip",
+      "Finish / Coating": "Powder Coated Rust Proof",
+      "Blade Dimensions": "240 mm x 300 mm",
+      "Weight": "1520 Grams"
+    }
+  },
+  // Garden/Grass Sword Variant
+  {
+    id: "ko-grass-sword-std",
+    name: "KOREVA SWORD CUT Grass Sword (Standard)",
+    productId: "ko-grass-sword",
+    images: ["/products/grass-sword.png"],
+    imagesAlt: ["KOREVA SWORD CUT High Manganese Steel Dual Edge Grass & Weed Cutting Sword"],
+    price: "520.00",
+    applicableGst: "12",
+    technicalDetails: {
+      "Brand": "Koreva",
+      "Blade Type": "Dual-Edged Slicing Blade",
+      "Blade Material": "Forged High-Manganese Steel",
+      "Handle Material": "Ergonomic Long Wooden Shaft",
+      "Edge Type": "Induction-Hardened Razor Edge",
+      "Blade Length": "350 mm",
+      "Overall Length": "900 mm",
+      "Weight": "680 Grams"
+    }
   }
 ];
+
 

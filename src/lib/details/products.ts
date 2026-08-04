@@ -222,6 +222,51 @@ export const exampleProducts: Product[] = [
     coverImageAlt: "KOREVA CULTI HOE Dual-Action Forged Steel Agricultural Garden Hoe",
     isPublished: true,
     defaultVariantId: "ko-garden-hoe-single"
+  },
+  {
+    id: "ko-garden-rake",
+    name: "KOREVA - Heavy Duty Garden Rake (RAKE KING)",
+    description: "Commercial forged carbon steel garden rake with hardened tines designed for soil tilling, leveling, debris collection, and garden bed preparation.",
+    categoryId: "hand-tools",
+    tags: ["Garden Rake", "Rake", "Hand Tools", "Garden Tools", "Soil Tilling", "Forged Steel"],
+    coverImage: "/products/garden-rake-8teeth.png",
+    coverImageAlt: "KOREVA RAKE KING Heavy Duty Forged Steel Agricultural Garden Rake",
+    isPublished: true,
+    defaultVariantId: "ko-rake-8teeth"
+  },
+  {
+    id: "ko-plastic-leaf-rake",
+    name: "KOREVA - Heavy Duty Plastic Leaf Rake (LEAF PRO)",
+    description: "Flexible high-density polypropylene 22-teeth fan rake engineered for efficient lawn cleaning, leaf gathering, and grass clipping removal.",
+    categoryId: "hand-tools",
+    tags: ["Leaf Rake", "Plastic Rake", "Lawn Rake", "Hand Tools", "Garden Tools", "22 Teeth"],
+    coverImage: "/products/plastic-leaf-rake-22teeth.png",
+    coverImageAlt: "KOREVA LEAF PRO 22 Teeth Heavy Duty Flexible Plastic Lawn and Leaf Rake",
+    isPublished: true,
+    defaultVariantId: "ko-leaf-rake-22teeth"
+  },
+  {
+    id: "ko-garden-shovel",
+    name: "KOREVA - Heavy Duty Garden Shovel (SHOVEL MASTER)",
+    description: "Forged carbon steel heavy-duty agricultural digging and scooping shovel with reinforced socket and ergonomic handle options for farming and excavation.",
+    categoryId: "hand-tools",
+    tags: ["Garden Shovel", "Shovel", "Digging Tool", "Hand Tools", "Square Mouth", "Round Nose", "Baby Shovel"],
+    coverImage: "/products/garden-shovel-round-nose.png",
+    coverImageAlt: "KOREVA SHOVEL MASTER Heavy Duty Agricultural Digging Garden Shovel",
+    isPublished: true,
+    defaultVariantId: "ko-shovel-round-nose"
+  },
+  {
+    id: "ko-grass-sword",
+    name: "KOREVA - Heavy Duty Grass Sword (SWORD CUT)",
+    description: "High-manganese steel dual-edged grass sword cutter designed for effortless weed slicing, high grass clearing, and field border trimming.",
+    categoryId: "hand-tools",
+    tags: ["Grass Sword", "Garden Sword", "Weed Cutter", "Hand Tools", "Grass Cutting", "Manganese Steel"],
+    coverImage: "/products/grass-sword.png",
+    coverImageAlt: "KOREVA SWORD CUT High Manganese Steel Dual Edged Agricultural Grass Sword",
+    isPublished: true,
+    defaultVariantId: "ko-grass-sword-std"
   }
 ];
+
 
