@@ -2,7 +2,9 @@ import React from "react";
 import Link from "next/link";
 import ComparisonMatrix from "@/components/ComparisonMatrix";
 import CompareBackButton from "@/components/CompareBackButton";
-import { getCachedPublishedProducts } from "@/lib/cached-queries";
+import { getCachedProductById } from "@/lib/cached-queries";
+
+export const revalidate = 60;
 
 export default async function ComparePage({
   searchParams,
@@ -10,7 +12,7 @@ export default async function ComparePage({
   searchParams: Promise<{ ids?: string }>;
 }) {
   const params = await searchParams;
-  const ids = params?.ids ? params.ids.split(",").filter(Boolean) : [];
+  const ids = params?.ids ? params.ids.split(",").filter(Boolean).slice(0, 3) : [];
 
   interface CompareProductItem {
     id: string;
@@ -24,18 +26,10 @@ export default async function ComparePage({
   let productsData: CompareProductItem[] = [];
 
   if (ids.length > 0) {
-    const idSet = new Set(ids);
-    const allProducts = await getCachedPublishedProducts();
-    const productMap = new Map<string, typeof allProducts[0]>();
-    for (let i = 0; i < allProducts.length; i++) {
-      if (idSet.has(allProducts[i].id)) {
-        productMap.set(allProducts[i].id, allProducts[i]);
-      }
-    }
-
-    productsData = ids
-      .map((id) => {
-        const product = productMap.get(id);
+    const fetched = await Promise.all(ids.map((id) => getCachedProductById(id)));
+    productsData = fetched
+      .filter(Boolean)
+      .map((product) => {
         if (!product) return null;
         const variants = product.variants || [];
         const defaultVariant =

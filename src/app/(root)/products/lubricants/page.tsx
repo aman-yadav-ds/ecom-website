@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCatalogData } from "@/lib/catalog";
 import { getCachedCategories } from "@/lib/cached-queries";
 import { Droplet, ShieldCheck, FileCheck, Truck } from "lucide-react";
 
@@ -22,20 +22,15 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["STOU Lubricants", "Tractor Oil", "4T Engine Oil", "Agro Lubricants"],
 });
 
-interface PageProps {
-  searchParams?: Promise<CatalogQueryParams>;
-}
-
 export const revalidate = 60;
 
-export default async function LubricantsPage({ searchParams }: PageProps) {
+export default async function LubricantsPage() {
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "lubricants");
 
   if (!category) notFound();
 
-  const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams, "lubricants", category);
+  const catalogData = await getCatalogData({}, "lubricants", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

@@ -210,7 +210,7 @@ export async function getCatalogData(
     filtered.sort((a, b) => b.price - a.price);
   }
 
-  const pageSize = Number(queryParams.limit) || 12;
+  const pageSize = Math.min(Math.max(1, Number(queryParams.limit) || 12), 12);
   const totalProducts = filtered.length;
   const totalPages = Math.max(1, Math.ceil(totalProducts / pageSize));
 

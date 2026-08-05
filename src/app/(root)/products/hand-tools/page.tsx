@@ -3,7 +3,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCatalogData } from "@/lib/catalog";
+import { getCachedCategories } from "@/lib/cached-queries";
 import { Wrench, Shield, Award } from "lucide-react";
 
 import {
@@ -21,22 +22,15 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Hand Tools", "SK5 Pruning Secateur", "Harvesting Sickle", "Garden Tools"],
 });
 
-interface PageProps {
-  searchParams?: Promise<CatalogQueryParams>;
-}
-
-import { getCachedCategories } from "@/lib/cached-queries";
-
 export const revalidate = 60;
 
-export default async function HandToolsPage({ searchParams }: PageProps) {
+export default async function HandToolsPage() {
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "hand-tools");
 
   if (!category) notFound();
 
-  const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams, "hand-tools", category);
+  const catalogData = await getCatalogData({}, "hand-tools", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

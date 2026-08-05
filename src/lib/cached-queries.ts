@@ -1,6 +1,6 @@
 import { getDb } from "@/db";
 import { unstable_cache } from "next/cache";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import {
   categories,
   products,
@@ -23,19 +23,29 @@ const globalForCache = globalThis as unknown as {
 
 /**
  * Cached fetch for published products with category and variants.
+ * Strict pagination enforced with limit and offset.
  * Revalidates every 1 hour (3600s) or when 'products' tag is revalidated.
- * Uses promise deduplication to prevent concurrent miniflare D1 query collisions during build.
  */
 export const getCachedPublishedProducts = unstable_cache(
-  async (): Promise<ProductWithRelations[]> => {
-    if (globalForCache.__productsFetchPromise) {
+  async (limit: number = 50, offset: number = 0, categoryId?: string): Promise<ProductWithRelations[]> => {
+    if (globalForCache.__productsFetchPromise && limit === 50 && offset === 0 && !categoryId) {
       return globalForCache.__productsFetchPromise;
     }
 
-    globalForCache.__productsFetchPromise = (async () => {
+    const fetchTask = (async () => {
       try {
         const db = await getDb();
-        const productsList = await db.select().from(products).where(eq(products.isPublished, true));
+        const whereClause = categoryId
+          ? and(eq(products.isPublished, true), eq(products.categoryId, categoryId))
+          : eq(products.isPublished, true);
+
+        const productsList = await db
+          .select()
+          .from(products)
+          .where(whereClause)
+          .limit(limit)
+          .offset(offset);
+
         const categoriesList = await db.select().from(categories);
         const variantsList = await db.select().from(variants);
 
@@ -57,15 +67,29 @@ export const getCachedPublishedProducts = unstable_cache(
           variants: variantsByProduct.get(p.id) || [],
         }));
       } finally {
-        globalForCache.__productsFetchPromise = undefined;
+        if (limit === 50 && offset === 0 && !categoryId) {
+          globalForCache.__productsFetchPromise = undefined;
+        }
       }
     })();
 
-    return globalForCache.__productsFetchPromise;
+    if (limit === 50 && offset === 0 && !categoryId) {
+      globalForCache.__productsFetchPromise = fetchTask;
+    }
+
+    return fetchTask;
   },
   ["cached-published-products-key"],
   { revalidate: 3600, tags: ["products"] }
 );
+
+/**
+ * Single product lookup by ID using cached products pool.
+ */
+export const getCachedProductById = async (id: string): Promise<ProductWithRelations | null> => {
+  const all = await getCachedPublishedProducts();
+  return all.find((p) => p.id === id) || null;
+};
 
 /**
  * Cached fetch for all categories.
@@ -79,7 +103,7 @@ export const getCachedCategories = unstable_cache(
     globalForCache.__categoriesFetchPromise = (async () => {
       try {
         const db = await getDb();
-        return await db.select().from(categories);
+        return await db.select().from(categories).limit(20);
       } finally {
         globalForCache.__categoriesFetchPromise = undefined;
       }
@@ -92,48 +116,60 @@ export const getCachedCategories = unstable_cache(
 );
 
 /**
- * Cached fetch for all news articles.
+ * Cached fetch for news articles with strict limit.
  */
 export const getCachedNewsArticles = unstable_cache(
-  async (): Promise<NewsArticle[]> => {
-    if (globalForCache.__newsFetchPromise) {
+  async (limit: number = 20, offset: number = 0): Promise<NewsArticle[]> => {
+    if (globalForCache.__newsFetchPromise && limit === 20 && offset === 0) {
       return globalForCache.__newsFetchPromise;
     }
 
-    globalForCache.__newsFetchPromise = (async () => {
+    const fetchTask = (async () => {
       try {
         const db = await getDb();
-        return await db.select().from(newsArticles);
+        return await db.select().from(newsArticles).limit(limit).offset(offset);
       } finally {
-        globalForCache.__newsFetchPromise = undefined;
+        if (limit === 20 && offset === 0) {
+          globalForCache.__newsFetchPromise = undefined;
+        }
       }
     })();
 
-    return globalForCache.__newsFetchPromise;
+    if (limit === 20 && offset === 0) {
+      globalForCache.__newsFetchPromise = fetchTask;
+    }
+
+    return fetchTask;
   },
   ["cached-news-articles-key"],
   { revalidate: 3600, tags: ["news"] }
 );
 
 /**
- * Cached fetch for all authorized dealers.
+ * Cached fetch for authorized dealers with strict limit.
  */
 export const getCachedDealers = unstable_cache(
-  async (): Promise<Dealer[]> => {
-    if (globalForCache.__dealersFetchPromise) {
+  async (limit: number = 50, offset: number = 0): Promise<Dealer[]> => {
+    if (globalForCache.__dealersFetchPromise && limit === 50 && offset === 0) {
       return globalForCache.__dealersFetchPromise;
     }
 
-    globalForCache.__dealersFetchPromise = (async () => {
+    const fetchTask = (async () => {
       try {
         const db = await getDb();
-        return await db.select().from(dealers);
+        return await db.select().from(dealers).limit(limit).offset(offset);
       } finally {
-        globalForCache.__dealersFetchPromise = undefined;
+        if (limit === 50 && offset === 0) {
+          globalForCache.__dealersFetchPromise = undefined;
+        }
       }
     })();
 
-    return globalForCache.__dealersFetchPromise;
+    if (limit === 50 && offset === 0) {
+      globalForCache.__dealersFetchPromise = fetchTask;
+    }
+
+    return fetchTask;
   },
   ["cached-dealers-key"],
   { revalidate: 3600, tags: ["dealers"] }

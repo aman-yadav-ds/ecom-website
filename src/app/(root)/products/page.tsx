@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryGridShowcase from "@/components/CategoryGridShowcase";
-import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCatalogData } from "@/lib/catalog";
 import { Tractor } from "lucide-react";
 
 import {
@@ -28,15 +28,10 @@ export const metadata: Metadata = buildProductMetadata({
   ],
 });
 
-interface PageProps {
-  searchParams?: Promise<CatalogQueryParams>;
-}
-
 export const revalidate = 60;
 
-export default async function ProductsPage({ searchParams }: PageProps) {
-  const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams);
+export default async function ProductsPage() {
+  const catalogData = await getCatalogData({});
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

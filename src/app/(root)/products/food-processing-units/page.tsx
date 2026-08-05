@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCatalogData } from "@/lib/catalog";
+import { getCachedCategories } from "@/lib/cached-queries";
 
 import {
   formatPageSeoTitle,
@@ -20,22 +21,15 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Food Processing Machinery", "Mini Rice Mill", "Grain Pulveriser", "Agro Processing"],
 });
 
-interface PageProps {
-  searchParams?: Promise<CatalogQueryParams>;
-}
-
-import { getCachedCategories } from "@/lib/cached-queries";
-
 export const revalidate = 60;
 
-export default async function FoodProcessingUnitsPage({ searchParams }: PageProps) {
+export default async function FoodProcessingUnitsPage() {
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "food-processing-units");
 
   if (!category) notFound();
 
-  const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams, "food-processing-units", category);
+  const catalogData = await getCatalogData({}, "food-processing-units", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

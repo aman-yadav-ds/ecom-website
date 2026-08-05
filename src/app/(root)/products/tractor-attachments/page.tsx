@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCatalogData } from "@/lib/catalog";
 import { getCachedCategories } from "@/lib/cached-queries";
 
 import {
@@ -21,20 +21,15 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Tractor Attachments", "Disc Harrow", "Rotavator", "Laser Leveller"],
 });
 
-interface PageProps {
-  searchParams?: Promise<CatalogQueryParams>;
-}
-
 export const revalidate = 60;
 
-export default async function TractorAttachmentsPage({ searchParams }: PageProps) {
+export default async function TractorAttachmentsPage() {
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "tractor-attachments");
 
   if (!category) notFound();
 
-  const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams, "tractor-attachments", category);
+  const catalogData = await getCatalogData({}, "tractor-attachments", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

@@ -16,7 +16,7 @@ interface ProductPageProps {
   params: Promise<{ slug?: string; id?: string }>;
 }
 
-import { getCachedPublishedProducts } from "@/lib/cached-queries";
+import { getCachedPublishedProducts, getCachedProductById } from "@/lib/cached-queries";
 
 const resolveProduct = cache(
   async (
@@ -26,8 +26,7 @@ const resolveProduct = cache(
     const rawParam = resolved?.slug || resolved?.id || "";
     const decoded = decodeURIComponent(rawParam).trim();
 
-    const all = await getCachedPublishedProducts();
-    const product = all.find((p) => p.id === rawParam || p.id === decoded) || null;
+    const product = (await getCachedProductById(decoded || rawParam)) || (await getCachedProductById(rawParam));
 
     return {
       slug: rawParam || decoded,
