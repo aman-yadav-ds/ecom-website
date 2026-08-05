@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getDb } from "@/db";
 import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
+import { getCachedCategories } from "@/lib/cached-queries";
 import { Droplet, ShieldCheck, FileCheck, Truck } from "lucide-react";
 
 import {
@@ -26,13 +26,11 @@ interface PageProps {
   searchParams?: Promise<CatalogQueryParams>;
 }
 
-export const revalidate = 86400;
+export const revalidate = 60;
 
 export default async function LubricantsPage({ searchParams }: PageProps) {
-  const db = await getDb();
-  const category = await db.query.categories.findFirst({
-    where: (c, { eq }) => eq(c.slug, "lubricants"),
-  });
+  const categoriesList = await getCachedCategories();
+  const category = categoriesList.find((c) => c.slug === "lubricants");
 
   if (!category) notFound();
 

@@ -6,11 +6,13 @@ const eslintConfig = defineConfig([
   {
     ignores: [
       ".next/**",
+      ".open-next/**",
       "out/**",
       "build/**",
       ".wrangler/**",
       "node_modules/**",
       "next-env.d.ts",
+      "cloudflare-env.d.ts",
     ],
   },
   ...nextVitals,

@@ -5,14 +5,14 @@ export interface D1DatabaseLike {
     all<T = Record<string, unknown>>(): Promise<{ results: T[] }>;
     run(): Promise<{ success: boolean }>;
   };
-  batch<T = unknown>(statements: unknown[]): Promise<T[]>;
+  batch(statements: unknown[]): Promise<unknown[]>;
   exec(query: string): Promise<{ count: number; duration: number }>;
 }
 
 let initPromise: Promise<void> | null = null;
 let isInitialized = false;
 
-export async function ensureTablesAndSeed(d1: any): Promise<void> {
+export async function ensureTablesAndSeed(d1: D1DatabaseLike): Promise<void> {
   if (isInitialized) {
     return;
   }

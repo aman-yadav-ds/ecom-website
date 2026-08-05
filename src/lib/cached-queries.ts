@@ -1,6 +1,18 @@
 import { getDb } from "@/db";
 import { unstable_cache } from "next/cache";
-import type { Category, ProductWithRelations, NewsArticle, Dealer, Variant } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import {
+  categories,
+  products,
+  variants,
+  newsArticles,
+  dealers,
+  type Category,
+  type ProductWithRelations,
+  type NewsArticle,
+  type Dealer,
+  type Variant,
+} from "@/db/schema";
 
 const globalForCache = globalThis as unknown as {
   __productsFetchPromise?: Promise<ProductWithRelations[]>;
@@ -23,11 +35,9 @@ export const getCachedPublishedProducts = unstable_cache(
     globalForCache.__productsFetchPromise = (async () => {
       try {
         const db = await getDb();
-        const productsList = await db.query.products.findMany({
-          where: (products, { eq }) => eq(products.isPublished, true),
-        });
-        const categoriesList = await db.query.categories.findMany();
-        const variantsList = await db.query.variants.findMany();
+        const productsList = await db.select().from(products).where(eq(products.isPublished, true));
+        const categoriesList = await db.select().from(categories);
+        const variantsList = await db.select().from(variants);
 
         const categoryMap = new Map<string, Category>(categoriesList.map((c) => [c.id, c]));
         const variantsByProduct = new Map<string, Variant[]>();
@@ -69,7 +79,7 @@ export const getCachedCategories = unstable_cache(
     globalForCache.__categoriesFetchPromise = (async () => {
       try {
         const db = await getDb();
-        return await db.query.categories.findMany();
+        return await db.select().from(categories);
       } finally {
         globalForCache.__categoriesFetchPromise = undefined;
       }
@@ -93,7 +103,7 @@ export const getCachedNewsArticles = unstable_cache(
     globalForCache.__newsFetchPromise = (async () => {
       try {
         const db = await getDb();
-        return await db.query.newsArticles.findMany();
+        return await db.select().from(newsArticles);
       } finally {
         globalForCache.__newsFetchPromise = undefined;
       }
@@ -117,7 +127,7 @@ export const getCachedDealers = unstable_cache(
     globalForCache.__dealersFetchPromise = (async () => {
       try {
         const db = await getDb();
-        return await db.query.dealers.findMany();
+        return await db.select().from(dealers);
       } finally {
         globalForCache.__dealersFetchPromise = undefined;
       }

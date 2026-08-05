@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { getDb } from "@/db";
 import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
 import { Wrench, Shield, Award } from "lucide-react";
 
@@ -26,13 +25,13 @@ interface PageProps {
   searchParams?: Promise<CatalogQueryParams>;
 }
 
-export const revalidate = 86400;
+import { getCachedCategories } from "@/lib/cached-queries";
+
+export const revalidate = 60;
 
 export default async function HandToolsPage({ searchParams }: PageProps) {
-  const db = await getDb();
-  const category = await db.query.categories.findFirst({
-    where: (c, { eq }) => eq(c.slug, "hand-tools"),
-  });
+  const categoriesList = await getCachedCategories();
+  const category = categoriesList.find((c) => c.slug === "hand-tools");
 
   if (!category) notFound();
 
