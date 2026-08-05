@@ -1,6 +1,25 @@
 import { getDb } from "@/db";
 import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 import { ProductListingItem } from "@/components/ProductCatalogClient";
+import { unstable_cache } from "next/cache";
+
+const getCachedRawProducts = unstable_cache(
+  async (categoryIdFilter?: string) => {
+    const db = await getDb();
+    return db.query.products.findMany({
+      where: (products, { eq, and }) =>
+        categoryIdFilter
+          ? and(eq(products.isPublished, true), eq(products.categoryId, categoryIdFilter))
+          : eq(products.isPublished, true),
+      with: {
+        category: true,
+        variants: true,
+      },
+    });
+  },
+  ["catalog-raw-products-key"],
+  { revalidate: 3600, tags: ["products"] }
+);
 
 export interface CatalogQueryParams {
   search?: string;
@@ -43,17 +62,8 @@ export async function getCatalogData(
     }
   }
 
-  // 2. Fetch published products with category and variant details from D1
-  const rawProducts = await db.query.products.findMany({
-    where: (products, { eq, and }) =>
-      categoryIdFilter
-        ? and(eq(products.isPublished, true), eq(products.categoryId, categoryIdFilter))
-        : eq(products.isPublished, true),
-    with: {
-      category: true,
-      variants: true,
-    },
-  });
+  // 2. Fetch published products with category and variant details from D1 (cached for 1 hour)
+  const rawProducts = await getCachedRawProducts(categoryIdFilter);
 
   const allProductsMapped: ProductListingItem[] = rawProducts.map((product) => {
     const category = product.category;

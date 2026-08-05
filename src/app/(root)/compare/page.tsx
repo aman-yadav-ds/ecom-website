@@ -2,9 +2,7 @@ import React from "react";
 import Link from "next/link";
 import ComparisonMatrix from "@/components/ComparisonMatrix";
 import CompareBackButton from "@/components/CompareBackButton";
-import { getDb } from "@/db";
-import { inArray } from "drizzle-orm";
-import { products as productsTable } from "@/db/schema";
+import { getCachedPublishedProducts } from "@/lib/cached-queries";
 
 export default async function ComparePage({
   searchParams,
@@ -17,13 +15,8 @@ export default async function ComparePage({
   let productsData: any[] = [];
 
   if (ids.length > 0) {
-    const db = await getDb();
-    const fetchedProducts = await db.query.products.findMany({
-      where: inArray(productsTable.id, ids),
-      with: {
-        variants: true,
-      },
-    });
+    const allProducts = await getCachedPublishedProducts();
+    const fetchedProducts = allProducts.filter((p) => ids.includes(p.id));
 
     productsData = ids
       .map((id) => {

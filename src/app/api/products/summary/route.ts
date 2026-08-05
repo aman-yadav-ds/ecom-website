@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDb } from "@/db";
-import { inArray } from "drizzle-orm";
-import { products as productsTable } from "@/db/schema";
+import { getCachedPublishedProducts } from "@/lib/cached-queries";
 
 export async function GET(request: Request) {
   try {
@@ -16,13 +14,8 @@ export async function GET(request: Request) {
       return NextResponse.json([]) as any;
     }
 
-    const db = await getDb();
-    const fetchedProducts = await db.query.products.findMany({
-      where: inArray(productsTable.id, ids),
-      with: {
-        variants: true,
-      },
-    });
+    const allProducts = await getCachedPublishedProducts();
+    const fetchedProducts = allProducts.filter((p) => ids.includes(p.id));
 
     const mapped = ids
       .map((id) => {

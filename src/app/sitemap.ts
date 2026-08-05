@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getDb } from "@/db";
+import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
@@ -101,12 +101,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let productRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    const db = await getDb();
     const [categoriesList, productsList] = await Promise.all([
-      db.query.categories.findMany(),
-      db.query.products.findMany({
-        where: (products, { eq }) => eq(products.isPublished, true),
-      }),
+      getCachedCategories(),
+      getCachedPublishedProducts(),
     ]);
 
     categoryRoutes = categoriesList.map((category) => ({

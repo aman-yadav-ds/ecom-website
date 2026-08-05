@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Calendar, User, ArrowLeft, ArrowRight, Tag, ShieldCheck, ChevronLeft } from "lucide-react";
-import { getDb } from "@/db";
+import { getCachedNewsArticles } from "@/lib/cached-queries";
 
 import {
   formatPageSeoTitle,
@@ -17,8 +17,7 @@ interface NewsDetailProps {
 }
 
 export async function generateStaticParams() {
-  const db = await getDb();
-  const newsArticlesList = await db.query.newsArticles.findMany();
+  const newsArticlesList = await getCachedNewsArticles();
   return newsArticlesList.map((article) => ({
     id: article.id,
   }));
@@ -26,10 +25,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: NewsDetailProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const db = await getDb();
-  const article = await db.query.newsArticles.findFirst({
-    where: (a, { eq }) => eq(a.id, resolvedParams.id),
-  });
+  const newsArticlesList = await getCachedNewsArticles();
+  const article = newsArticlesList.find((a) => a.id === resolvedParams.id);
 
   if (!article) {
     return buildProductMetadata({
@@ -55,9 +52,7 @@ export async function generateMetadata({ params }: NewsDetailProps): Promise<Met
 
 export default async function NewsDetailPage({ params }: NewsDetailProps) {
   const resolvedParams = await params;
-  const db = await getDb();
-
-  const newsArticlesList = await db.query.newsArticles.findMany();
+  const newsArticlesList = await getCachedNewsArticles();
   const article = newsArticlesList.find((a) => a.id === resolvedParams.id);
 
   if (!article) {

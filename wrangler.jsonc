@@ -29,8 +29,7 @@
 			"binding": "DB",
 			"database_name": "ecom-db",
 			"database_id": "662b2d42-e4b3-4a8f-8f8e-4e3be7934f7b",
-			"migrations_dir": "drizzle/migrations",
-			"remote": true
+			"migrations_dir": "drizzle/migrations"
 		}
 	]
 }

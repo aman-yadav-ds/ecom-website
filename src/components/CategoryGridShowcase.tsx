@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Zap, Award, ShieldCheck, Droplet, Wrench, ArrowRight } from "lucide-react";
-import { getDb } from "@/db";
+import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
 
 const CATEGORY_META: Record<
   string,
@@ -40,13 +40,9 @@ const CATEGORY_META: Record<
 };
 
 export default async function CategoryGridShowcase() {
-  const db = await getDb();
-
   const [categoriesList, productsList] = await Promise.all([
-    db.query.categories.findMany(),
-    db.query.products.findMany({
-      where: (products, { eq }) => eq(products.isPublished, true),
-    }),
+    getCachedCategories(),
+    getCachedPublishedProducts(),
   ]);
 
   return (

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { Calendar, User, Newspaper, ArrowRight } from "lucide-react";
-import { getDb } from "@/db";
+import { getCachedNewsArticles } from "@/lib/cached-queries";
 
 import {
   formatPageSeoTitle,
@@ -21,8 +21,7 @@ export const metadata: Metadata = buildProductMetadata({
 });
 
 export default async function NewsPage() {
-  const db = await getDb();
-  const newsArticlesList = await db.query.newsArticles.findMany();
+  const newsArticlesList = await getCachedNewsArticles();
 
   const featuredArticle = newsArticlesList[0];
   const secondaryArticles = newsArticlesList.slice(1);

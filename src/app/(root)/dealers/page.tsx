@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import DealerListView from "@/components/dealers/DealerListView";
 import { Check, Store } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { getDb } from "@/db";
+import { getCachedDealers } from "@/lib/cached-queries";
 
 import {
   formatPageSeoTitle,
@@ -24,9 +24,7 @@ export default async function DealersPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   await props.searchParams;
-
-  const db = await getDb();
-  const dealersList = await db.query.dealers.findMany();
+  const dealersList = await getCachedDealers();
 
   // Default center is Uttarakhand
   const defaultCenter = { lat: 30.0668, lng: 79.0193 };

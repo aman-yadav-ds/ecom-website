@@ -3,11 +3,10 @@ import { notFound } from "next/navigation";
 import { MapPin, Phone, Mail, Navigation, ShieldCheck, CheckCircle2, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import DealerMapWrapper from "@/components/dealers/DealerMapWrapper";
-import { getDb } from "@/db";
+import { getCachedDealers } from "@/lib/cached-queries";
 
 export async function generateStaticParams() {
-  const db = await getDb();
-  const dealersList = await db.query.dealers.findMany();
+  const dealersList = await getCachedDealers();
   return dealersList.map((dealer) => ({
     id: dealer.id,
   }));
@@ -15,11 +14,9 @@ export async function generateStaticParams() {
 
 export default async function DealerDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const db = await getDb();
+  const dealersList = await getCachedDealers();
 
-  const dealer = await db.query.dealers.findFirst({
-    where: (d, { eq }) => eq(d.id, params.id),
-  });
+  const dealer = dealersList.find((d) => d.id === params.id);
 
   if (!dealer) {
     notFound();
