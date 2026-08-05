@@ -318,6 +318,7 @@ export interface ProductJsonLdInput {
     name: string;
     description: string;
     coverImage: string;
+    coverImageAlt?: string;
   };
   productPrice: string;
   slug: string;

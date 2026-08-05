@@ -3,7 +3,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
+import { getDb } from "@/db";
+import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
 
 import {
   formatPageSeoTitle,
@@ -13,42 +14,53 @@ import {
 
 export const metadata: Metadata = buildProductMetadata({
   title: formatPageSeoTitle("Food Processing Machinery & Units"),
-  description: formatPageSeoDescription("Commercial stainless steel pulverisers, mini rice mills, and food processing machinery engineered by official manufacturer Koreva9."),
+  description: formatPageSeoDescription(
+    "Commercial stainless steel pulverisers, mini rice mills, and food processing machinery engineered by official manufacturer Koreva9."
+  ),
   canonicalUrl: "/products/food-processing-units",
   keywords: ["Food Processing Machinery", "Mini Rice Mill", "Grain Pulveriser", "Agro Processing"],
 });
 
-export default function FoodProcessingUnitsPage() {
-  const category = exampleCategories.find((c) => c.slug === "food-processing-units");
+interface PageProps {
+  searchParams?: Promise<CatalogQueryParams>;
+}
+
+export default async function FoodProcessingUnitsPage({ searchParams }: PageProps) {
+  const db = await getDb();
+  const category = await db.query.categories.findFirst({
+    where: (c, { eq }) => eq(c.slug, "food-processing-units"),
+  });
+
   if (!category) notFound();
 
-  const mappedProducts = exampleProducts
-    .filter((product) => product.isPublished && product.categoryId === category.id)
-    .map((product) => {
-      const productVariants = exampleVariants.filter((v) => v.productId === product.id);
-      const defaultVariant = productVariants.find((v) => v.id === product.defaultVariantId) || productVariants[0];
-
-      return {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        categoryId: product.categoryId,
-        categoryName: category.name,
-        tags: product.tags,
-        price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
-        image: product.coverImage || (defaultVariant?.images?.[0]) || "/placeholder.png",
-        imageAlt: product.coverImageAlt || (defaultVariant?.imagesAlt?.[0]) || product.name,
-        variantsCount: productVariants.length,
-        technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
-        allVariantsTechnicalDetails: productVariants.map((v) => v.technicalDetails),
-      };
-    });
+  const resolvedSearchParams = (await searchParams) || {};
+  const catalogData = await getCatalogData(resolvedSearchParams, "food-processing-units");
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
-      <CategoryHeader category={category} totalProducts={mappedProducts.length} />
+      <CategoryHeader
+        category={{
+          id: category.id,
+          name: category.name,
+          slug: category.slug,
+          parentId: category.parentId,
+          description: category.description || undefined,
+          tagline: category.tagline || undefined,
+          badge: category.badge || undefined,
+          highlights: category.highlights || undefined,
+        }}
+        totalProducts={catalogData.totalProducts}
+      />
       <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading food processing units...</div>}>
-        <ProductCatalogClient initialProducts={mappedProducts} initialCategory={category.name} />
+        <ProductCatalogClient
+          products={catalogData.products}
+          totalProducts={catalogData.totalProducts}
+          currentPage={catalogData.currentPage}
+          totalPages={catalogData.totalPages}
+          pageSize={catalogData.pageSize}
+          availableFilters={catalogData.availableFilters}
+          initialCategory={category.name}
+        />
       </Suspense>
     </main>
   );

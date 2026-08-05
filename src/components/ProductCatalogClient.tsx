@@ -2,14 +2,12 @@
 
 import React, { useState, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import Sort from "./Sort";
 import Filters from "./Filters";
 import Card from "./Card";
+import Pagination from "./Pagination";
 import { parseQueryParams, removeQueryParam, buildQueryString } from "@/lib/utils/query";
 import { Filter as FilterIcon, X } from "lucide-react";
-
-import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 
 export interface ProductListingItem {
   id: string;
@@ -27,141 +25,27 @@ export interface ProductListingItem {
 }
 
 interface ProductCatalogClientProps {
-  initialProducts: ProductListingItem[];
+  products: ProductListingItem[];
+  totalProducts: number;
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  availableFilters: Record<string, string[]>;
   initialCategory?: string;
 }
 
-export default function ProductCatalogClient({ initialProducts, initialCategory }: ProductCatalogClientProps) {
+export default function ProductCatalogClient({
+  products,
+  totalProducts,
+  currentPage,
+  totalPages,
+  pageSize,
+  availableFilters,
+  initialCategory,
+}: ProductCatalogClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-
-  // Dynamically extract all available filters from technicalDetails across all variants
-  const availableFilters = useMemo(() => {
-    const filters: Record<string, Set<string>> = {};
-    const activeCategoryParam = searchParams.get('category') || initialCategory;
-    const isMainProductsPage = !activeCategoryParam || activeCategoryParam === 'All';
-
-    if (isMainProductsPage) {
-      const categorySet = new Set<string>();
-      initialProducts.forEach(p => {
-        if (p.categoryName) categorySet.add(p.categoryName);
-      });
-      if (categorySet.size > 1) {
-        filters['Category'] = categorySet;
-      }
-    }
-    
-    // Determine allowed keys based on category
-    const allowedKeys = (activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam])
-      ? CATEGORY_FILTERS[activeCategoryParam]
-      : (initialCategory && CATEGORY_FILTERS[initialCategory])
-      ? CATEGORY_FILTERS[initialCategory]
-      : ALLOWED_FILTERS;
-    
-    initialProducts.forEach(product => {
-      // If a category is selected, only process products from that category to generate filters
-      if (
-        activeCategoryParam &&
-        activeCategoryParam !== 'All' &&
-        product.categoryName !== activeCategoryParam &&
-        product.categoryId !== activeCategoryParam &&
-        product.categoryName?.toLowerCase() !== activeCategoryParam.toLowerCase() &&
-        product.categoryId?.toLowerCase() !== activeCategoryParam.toLowerCase()
-      ) return;
-
-      const variantsTech = product.allVariantsTechnicalDetails && product.allVariantsTechnicalDetails.length > 0
-        ? product.allVariantsTechnicalDetails
-        : [product.technicalDetails];
-
-      variantsTech.forEach(tech => {
-        Object.entries(tech || {}).forEach(([key, value]) => {
-          if (!value) return;
-          // Only include keys that are in the allowed filters list
-          if (!allowedKeys.includes(key)) return;
-          
-          if (!filters[key]) {
-            filters[key] = new Set();
-          }
-          filters[key].add(value);
-        });
-      });
-    });
-
-    // Convert Sets to Arrays and sort them; omit groups with <= 1 option to keep sidebar clean
-    const result: Record<string, string[]> = {};
-    Object.keys(filters).forEach(key => {
-      const sortedValues = Array.from(filters[key]).sort();
-      if (sortedValues.length > 1) {
-        result[key] = sortedValues;
-      }
-    });
-    
-    return result;
-  }, [initialProducts, searchParams, initialCategory]);
-
-  // Client-side filtering and sorting engine
-  const filteredAndSortedProducts = useMemo(() => {
-    const params = parseQueryParams(searchParams.toString());
-    const searchQuery = typeof params.search === 'string' ? params.search.toLowerCase() : '';
-    const sortMode = typeof params.sort === 'string' ? params.sort : 'featured';
-    
-    // Extract active technical filters (anything that isn't search or sort)
-    const activeFilters: Record<string, string[]> = {};
-    Object.keys(params).forEach(key => {
-      if (key !== 'search' && key !== 'sort') {
-        const val = params[key];
-        activeFilters[key] = Array.isArray(val) ? (val as string[]) : [val as string];
-      }
-    });
-
-    // Filter Array
-    let result = initialProducts.filter(product => {
-      // Search matching
-      if (searchQuery) {
-        const nameMatch = product.name.toLowerCase().includes(searchQuery);
-        const tagMatch = product.tags.some(tag => tag.toLowerCase().includes(searchQuery));
-        if (!nameMatch && !tagMatch) {
-          return false;
-        }
-      }
-
-      // Checkbox filters matching - match if ANY variant satisfies the selected criteria
-      for (const [filterKey, selectedValues] of Object.entries(activeFilters)) {
-        if (selectedValues.length === 0) continue;
-        
-        if (filterKey.toLowerCase() === 'category') {
-          if (!selectedValues.includes(product.categoryName)) {
-            return false;
-          }
-        } else {
-          const variantsTech = product.allVariantsTechnicalDetails && product.allVariantsTechnicalDetails.length > 0
-            ? product.allVariantsTechnicalDetails
-            : [product.technicalDetails];
-
-          const matchesFilter = variantsTech.some(tech => {
-            const productDetailValue = tech[filterKey];
-            return productDetailValue && selectedValues.includes(productDetailValue);
-          });
-
-          if (!matchesFilter) {
-            return false;
-          }
-        }
-      }
-
-      return true;
-    });
-
-    // Sort Array
-    if (sortMode === 'price_asc') {
-      result = [...result].sort((a, b) => a.price - b.price);
-    } else if (sortMode === 'price_desc') {
-      result = [...result].sort((a, b) => b.price - a.price);
-    }
-
-    return result;
-  }, [initialProducts, searchParams]);
 
   // Derive active filters list for chip rendering
   const activeFilterChips = useMemo(() => {
@@ -169,18 +53,26 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
     const chips: { key: string; value: string; label: string }[] = [];
 
     Object.entries(params).forEach(([key, val]) => {
-      if (key === 'sort') return;
+      if (key === "sort" || key === "page" || key === "limit") return;
       if (Array.isArray(val)) {
         val.forEach((v) => {
-          if (typeof v === 'string') {
-            chips.push({ key, value: v, label: `${key.replace(/([A-Z])/g, ' $1').trim()}: ${v}` });
+          if (typeof v === "string") {
+            chips.push({
+              key,
+              value: v,
+              label: `${key.replace(/([A-Z])/g, " $1").trim()}: ${v}`,
+            });
           }
         });
-      } else if (typeof val === 'string') {
-        if (key === 'search') {
+      } else if (typeof val === "string") {
+        if (key === "search") {
           chips.push({ key, value: val, label: `Search: "${val}"` });
         } else {
-          chips.push({ key, value: val, label: `${key.replace(/([A-Z])/g, ' $1').trim()}: ${val}` });
+          chips.push({
+            key,
+            value: val,
+            label: `${key.replace(/([A-Z])/g, " $1").trim()}: ${val}`,
+          });
         }
       }
     });
@@ -189,7 +81,11 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
   }, [searchParams]);
 
   const handleRemoveChip = (key: string, value: string) => {
-    const newQueryString = removeQueryParam(searchParams.toString(), key, value);
+    let newQueryString = removeQueryParam(searchParams.toString(), key, value);
+    // Reset page to 1 when removing a filter
+    const parsed = parseQueryParams(newQueryString);
+    delete parsed.page;
+    newQueryString = buildQueryString(parsed);
     router.push(`?${newQueryString}`, { scroll: false });
   };
 
@@ -201,25 +97,29 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
     router.push(`?${q}`, { scroll: false });
   };
 
-  const searchString = (searchParams.get('search') || '') as string;
+  const searchString = (searchParams.get("search") || "") as string;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 font-jost">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 font-jost scroll-mt-24" id="product-catalog-section">
       {/* Top Header & Search Summary */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           {searchString ? (
             <div className="flex flex-col items-start">
               <h2 className="text-xl md:text-2xl font-bold text-dark-900 uppercase tracking-wide">
-                SEARCH RESULT FOR &quot;{searchString.toUpperCase()}&quot; ({filteredAndSortedProducts.length})
+                SEARCH RESULT FOR &quot;{searchString.toUpperCase()}&quot; ({totalProducts})
               </h2>
               <div className="w-8 h-1 bg-brand-red mt-2 mb-2"></div>
             </div>
           ) : (
             <div>
-              <h2 className="text-2xl font-bold text-dark-900 uppercase tracking-wide">Equipment & Supplies</h2>
+              <h2 className="text-2xl font-bold text-dark-900 uppercase tracking-wide">
+                Equipment & Supplies
+              </h2>
               <p className="text-sm text-gray-500 mt-1 font-medium">
-                Showing {filteredAndSortedProducts.length} items
+                {totalProducts > 0
+                  ? `Showing ${totalProducts} matching items`
+                  : "No products available"}
               </p>
             </div>
           )}
@@ -229,7 +129,9 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
       {/* Active Filter Chips / Pills */}
       {activeFilterChips.length > 0 && (
         <div className="mb-6 flex flex-wrap items-center gap-2 p-3 bg-light-200/80 rounded-md border border-light-300">
-          <span className="text-xs font-bold text-dark-900 uppercase tracking-wider mr-1">Active Filters:</span>
+          <span className="text-xs font-bold text-dark-900 uppercase tracking-wider mr-1">
+            Active Filters:
+          </span>
           {activeFilterChips.map((chip, idx) => (
             <button
               key={`${chip.key}-${chip.value}-${idx}`}
@@ -252,7 +154,7 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
       {/* Main Content Area */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Filters Sidebar/Drawer */}
-        <Filters 
+        <Filters
           availableFilters={availableFilters}
           isOpen={isMobileFiltersOpen}
           onClose={() => setIsMobileFiltersOpen(false)}
@@ -273,25 +175,37 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
           </div>
 
           {/* Grid */}
-          {filteredAndSortedProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
-              {filteredAndSortedProducts.map((product) => (
-                <Card
-                  key={product.id}
-                  id={product.id}
-                  title={product.name}
-                  category={product.categoryName}
-                  price={product.price}
-                  image={product.image}
-                  imageAlt={product.imageAlt}
-                  variants={product.variantsCount}
-                  href={`/products/${product.id}`}
-                />
-              ))}
-            </div>
+          {products.length > 0 ? (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
+                {products.map((product) => (
+                  <Card
+                    key={product.id}
+                    id={product.id}
+                    title={product.name}
+                    category={product.categoryName}
+                    price={product.price}
+                    image={product.image}
+                    imageAlt={product.imageAlt}
+                    variants={product.variantsCount}
+                    href={`/products/${product.id}`}
+                  />
+                ))}
+              </div>
+
+              {/* Pagination controls */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalProducts={totalProducts}
+                pageSize={pageSize}
+              />
+            </>
           ) : (
             <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded-2xl border border-dashed border-gray-300 text-center">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No matching products found</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                No matching products found
+              </h3>
               <p className="text-gray-500 mb-6 max-w-md">
                 We couldn&apos;t find any products matching your current search and filter combination.
               </p>
@@ -308,3 +222,4 @@ export default function ProductCatalogClient({ initialProducts, initialCategory 
     </div>
   );
 }
+

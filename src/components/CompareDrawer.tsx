@@ -5,40 +5,61 @@ import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
-import { exampleProducts, exampleVariants } from "@/lib/details";
 import { buildQueryString } from "@/lib/utils/query";
+
+interface ProductSummaryItem {
+  id: string;
+  name: string;
+  image: string;
+  imageAlt?: string;
+}
 
 const CompareDrawer = () => {
   const { selectedProductIds, removeProduct, clearAll } = useCompareStore();
   const [mounted, setMounted] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<ProductSummaryItem[]>([]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (selectedProductIds.length === 0) {
+      setSelectedProducts([]);
+      return;
+    }
+
+    let isMounted = true;
+    const fetchSummary = async () => {
+      try {
+        const res = await fetch(
+          `/api/products/summary?ids=${encodeURIComponent(selectedProductIds.join(","))}`
+        );
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && Array.isArray(data)) {
+            setSelectedProducts(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch compare drawer products", err);
+      }
+    };
+
+    fetchSummary();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedProductIds]);
+
   if (!mounted) return null;
 
   const isVisible = selectedProductIds.length > 0;
 
-  // Derive product details for the drawer
-  const selectedProducts = selectedProductIds.map(id => {
-    const product = exampleProducts.find(p => p.id === id);
-    if (!product) return null;
-    const variants = exampleVariants.filter(v => v.productId === id);
-    const defaultVariant = variants.find(v => v.id === product.defaultVariantId) || variants[0];
-    const image = product.coverImage || defaultVariant?.images?.[0] || "/placeholder.png";
-
-    return {
-      id,
-      name: product.name,
-      image,
-      imageAlt: product.coverImageAlt || defaultVariant?.imagesAlt?.[0] || product.name,
-    };
-  }).filter(Boolean) as { id: string; name: string; image: string; imageAlt?: string }[];
-
-  const queryStringResult = selectedProductIds.length > 0
-    ? buildQueryString({ ids: selectedProductIds.join(",") })
-    : "";
+  const queryStringResult =
+    selectedProductIds.length > 0
+      ? buildQueryString({ ids: selectedProductIds.join(",") })
+      : "";
 
   return (
     <div
@@ -48,7 +69,6 @@ const CompareDrawer = () => {
     >
       <div className="bg-white/94 backdrop-blur-3xl border-t border-light-300 shadow-2xl px-4 py-4 md:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          
           {/* Selected Products Area */}
           <div className="flex-1 flex items-center justify-center md:justify-start gap-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
             {/* Render 3 slots */}
@@ -109,13 +129,10 @@ const CompareDrawer = () => {
               Compare Products ({selectedProductIds.length})
             </Link>
           </div>
-
         </div>
       </div>
     </div>
   );
-}
-;
+};
 
 export default CompareDrawer;
-

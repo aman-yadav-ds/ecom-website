@@ -4,18 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Calendar, User, ArrowLeft, ArrowRight, Tag, ShieldCheck, ChevronLeft } from "lucide-react";
-import { newsArticles } from "@/lib/details/newsData";
-
-interface NewsDetailProps {
-  params: Promise<{ id: string }>;
-}
-
-// SSG Prerendering for maximum server-side performance & SEO indexing
-export async function generateStaticParams() {
-  return newsArticles.map((article) => ({
-    id: article.id,
-  }));
-}
+import { getDb } from "@/db";
 
 import {
   formatPageSeoTitle,
@@ -23,10 +12,25 @@ import {
   buildProductMetadata,
 } from "@/lib/seo";
 
-// Dynamic SEO Metadata Generation for Search Engines
+interface NewsDetailProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const db = await getDb();
+  const newsArticlesList = await db.query.newsArticles.findMany();
+  return newsArticlesList.map((article) => ({
+    id: article.id,
+  }));
+}
+
 export async function generateMetadata({ params }: NewsDetailProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const article = newsArticles.find((a) => a.id === resolvedParams.id);
+  const db = await getDb();
+  const article = await db.query.newsArticles.findFirst({
+    where: (a, { eq }) => eq(a.id, resolvedParams.id),
+  });
+
   if (!article) {
     return buildProductMetadata({
       title: formatPageSeoTitle("Article Not Found"),
@@ -51,41 +55,43 @@ export async function generateMetadata({ params }: NewsDetailProps): Promise<Met
 
 export default async function NewsDetailPage({ params }: NewsDetailProps) {
   const resolvedParams = await params;
-  const article = newsArticles.find((a) => a.id === resolvedParams.id);
+  const db = await getDb();
+
+  const newsArticlesList = await db.query.newsArticles.findMany();
+  const article = newsArticlesList.find((a) => a.id === resolvedParams.id);
 
   if (!article) {
     notFound();
   }
 
-  const currentIndex = newsArticles.findIndex((a) => a.id === article.id);
-  const prevArticle = currentIndex > 0 ? newsArticles[currentIndex - 1] : null;
-  const nextArticle = currentIndex < newsArticles.length - 1 ? newsArticles[currentIndex + 1] : null;
+  const currentIndex = newsArticlesList.findIndex((a) => a.id === article.id);
+  const prevArticle = currentIndex > 0 ? newsArticlesList[currentIndex - 1] : null;
+  const nextArticle = currentIndex < newsArticlesList.length - 1 ? newsArticlesList[currentIndex + 1] : null;
 
-  // JSON-LD NewsArticle Structured Data for Google SEO indexing
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": article.title,
-    "description": article.excerpt,
-    "image": [`https://korevaglobal.com${article.image}`],
-    "datePublished": article.date,
-    "author": {
+    headline: article.title,
+    description: article.excerpt,
+    image: [`https://korevaglobal.com${article.image}`],
+    datePublished: article.date,
+    author: {
       "@type": "Organization",
-      "name": article.author,
-      "url": "https://korevaglobal.com"
+      name: article.author,
+      url: "https://korevaglobal.com",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "KOREVA GLOBAL LLP",
-      "logo": {
+      name: "KOREVA GLOBAL LLP",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://korevaglobal.com/trademark.webp"
-      }
+        url: "https://korevaglobal.com/trademark.webp",
+      },
     },
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://korevaglobal.com/news/${article.id}`
-    }
+      "@id": `https://korevaglobal.com/news/${article.id}`,
+    },
   };
 
   return (

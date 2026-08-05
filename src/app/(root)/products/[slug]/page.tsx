@@ -1,11 +1,11 @@
-import React from "react";
+import React, { cache } from "react";
 import { notFound } from "next/navigation";
-import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
 import ProductInteractiveSection from "@/components/ProductInteractiveSection";
 import Card from "@/components/Card";
 import { BookOpen, HelpCircle, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { getDb } from "@/db";
 import {
   formatSeoTitle,
   formatSeoDescription,
@@ -17,41 +17,57 @@ interface ProductPageProps {
   params: Promise<{ slug?: string; id?: string }>;
 }
 
-async function resolveProduct(params: Promise<{ slug?: string; id?: string }> | { slug?: string; id?: string }) {
-  const resolved = params instanceof Promise ? await params : params;
-  const rawParam = resolved?.slug || resolved?.id || "";
-  const decoded = decodeURIComponent(rawParam).trim();
+const resolveProduct = cache(
+  async (
+    params: Promise<{ slug?: string; id?: string }> | { slug?: string; id?: string }
+  ) => {
+    const resolved = params instanceof Promise ? await params : params;
+    const rawParam = resolved?.slug || resolved?.id || "";
+    const decoded = decodeURIComponent(rawParam).trim();
 
-  return {
-    slug: rawParam || decoded,
-    product: exampleProducts.find(
-      (p) =>
-        p.id === rawParam ||
-        p.id === decoded ||
-        p.id.toLowerCase() === decoded.toLowerCase()
-    ),
-  };
-}
+    const db = await getDb();
 
-// Statically generate routes at build time
+    const product = await db.query.products.findFirst({
+      where: (p, { eq, or }) =>
+        or(
+          eq(p.id, rawParam),
+          eq(p.id, decoded)
+        ),
+      with: {
+        category: true,
+        variants: true,
+      },
+    });
+
+    return {
+      slug: rawParam || decoded,
+      product,
+    };
+  }
+);
+
 export async function generateStaticParams() {
-  return exampleProducts.map((product) => ({
+  const db = await getDb();
+  const allProducts = await db.query.products.findMany();
+  return allProducts.map((product) => ({
     slug: product.id,
   }));
 }
 
-// Generate SEO Metadata dynamically based on product details
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug, product } = await resolveProduct(params);
   if (!product) {
     return buildProductMetadata({
       title: formatSeoTitle("Product Not Found"),
-      description: formatSeoDescription("Product Not Found", "The requested agricultural product or machinery could not be found on Koreva9."),
+      description: formatSeoDescription(
+        "Product Not Found",
+        "The requested agricultural product or machinery could not be found on Koreva9."
+      ),
       canonicalUrl: "/products",
     });
   }
 
-  const category = exampleCategories.find((c) => c.id === product.categoryId);
+  const category = product.category;
 
   const title = formatSeoTitle(product.name, category?.name);
   const description = formatSeoDescription(product.name, product.description);
@@ -74,56 +90,88 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const targetId = product.id;
+  const db = await getDb();
+  const variants = product.variants || [];
 
-  // Fetch product variants statically
-  const variants = exampleVariants.filter((v) => v.productId === targetId);
-
-  // Find default variant price for JSON-LD schema & cards
   const defaultVariant =
     variants.find((v) => v.id === product.defaultVariantId) || variants[0];
   const productPrice = defaultVariant ? defaultVariant.price : "0";
 
   const productJsonLd = generateProductJsonLd({
-    product,
+    product: {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      coverImage: product.coverImage,
+      coverImageAlt: product.coverImageAlt || undefined,
+    },
     productPrice,
     slug: slug || product.id,
   });
 
-  // BreadcrumbList JSON-LD for SERP breadcrumb rich results
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://koreva9.com"
+        position: 1,
+        name: "Home",
+        item: "https://koreva9.com",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Equipment",
-        "item": "https://koreva9.com/products"
+        position: 2,
+        name: "Equipment",
+        item: "https://koreva9.com/products",
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": product.name,
-        "item": `https://koreva9.com/products/${slug}`
-      }
-    ]
+        position: 3,
+        name: product.name,
+        item: `https://koreva9.com/products/${slug}`,
+      },
+    ],
   };
 
-  // Recommendation engine: find related products via shared tags
-  const relatedProducts = exampleProducts
-    .filter((p) => p.id !== product.id)
+  // Fetch candidate related products from D1 (limit query size instead of scanning full DB)
+  let candidateProducts = await db.query.products.findMany({
+    where: (p, { ne, eq, and }) =>
+      and(
+        ne(p.id, product.id),
+        eq(p.categoryId, product.categoryId),
+        eq(p.isPublished, true)
+      ),
+    limit: 4,
+    with: {
+      variants: true,
+    },
+  });
+
+  if (candidateProducts.length < 4) {
+    const extraProducts = await db.query.products.findMany({
+      where: (p, { ne, eq, and }) =>
+        and(ne(p.id, product.id), eq(p.isPublished, true)),
+      limit: 6,
+      with: {
+        variants: true,
+      },
+    });
+    const combined = [...candidateProducts];
+    for (const p of extraProducts) {
+      if (p.id !== product.id && !combined.some((c) => c.id === p.id)) {
+        combined.push(p);
+      }
+      if (combined.length >= 4) break;
+    }
+    candidateProducts = combined;
+  }
+
+  const relatedProducts = candidateProducts
     .map((p) => {
       const sharedTagsCount = p.tags.filter((t) => product.tags.includes(t)).length;
       return { product: p, score: sharedTagsCount };
     })
-    .filter((p) => p.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 4)
     .map((p) => p.product);
@@ -149,25 +197,61 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
       <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto mb-6">
         <ol className="flex items-center space-x-2 text-xs font-extrabold text-dark-600 uppercase tracking-wider">
           <li>
-            <Link href="/" className="hover:text-brand-red transition-colors">Home</Link>
+            <Link href="/" className="hover:text-brand-red transition-colors">
+              Home
+            </Link>
           </li>
-          <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
           <li>
-            <Link href="/products" className="hover:text-brand-red transition-colors">Equipment</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-dark-400" />
           </li>
-          <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
-          <li className="text-dark-900" aria-current="page">{product.name}</li>
+          <li>
+            <Link href="/products" className="hover:text-brand-red transition-colors">
+              Equipment
+            </Link>
+          </li>
+          <li>
+            <ChevronRight className="w-3.5 h-3.5 text-dark-400" />
+          </li>
+          <li className="text-dark-900" aria-current="page">
+            {product.name}
+          </li>
         </ol>
       </nav>
 
       {/* Primary Product Section (Interactive Glass Panel) */}
       <article className="max-w-7xl mx-auto mb-16 glass-panel-elevated p-6 sm:p-10 rounded-3xl shadow-md border border-light-300 bg-white/90 backdrop-blur-2xl">
-        <ProductInteractiveSection product={product} variants={variants} />
+        <ProductInteractiveSection
+          product={{
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            coverImage: product.coverImage,
+            coverImageAlt: product.coverImageAlt || undefined,
+            categoryId: product.categoryId,
+            tags: product.tags,
+            isPublished: product.isPublished,
+            defaultVariantId: product.defaultVariantId || null,
+            maintenanceTips: product.maintenanceTips || undefined,
+          }}
+          variants={variants.map((v) => ({
+            id: v.id,
+            name: v.name,
+            productId: v.productId,
+            images: v.images,
+            imagesAlt: v.imagesAlt || undefined,
+            price: v.price,
+            applicableGst: v.applicableGst,
+            technicalDetails: v.technicalDetails,
+          }))}
+        />
       </article>
 
       {/* Service & Tips Hub */}
       <section className="max-w-7xl mx-auto mb-16" aria-labelledby="service-hub-heading">
-        <h2 id="service-hub-heading" className="text-xl sm:text-2xl font-extrabold text-dark-900 mb-6 uppercase tracking-wide border-b border-light-300 pb-3">
+        <h2
+          id="service-hub-heading"
+          className="text-xl sm:text-2xl font-extrabold text-dark-900 mb-6 uppercase tracking-wide border-b border-light-300 pb-3"
+        >
           Service & Documentation Resources
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -180,8 +264,12 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 <BookOpen className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">User Manuals</h3>
-                <p className="text-xs sm:text-sm text-dark-600 font-medium">Download operator guides and safety procedures.</p>
+                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">
+                  User Manuals
+                </h3>
+                <p className="text-xs sm:text-sm text-dark-600 font-medium">
+                  Download operator guides and safety procedures.
+                </p>
               </div>
             </div>
             <ArrowRight className="w-5 h-5 text-brand-red group-hover:translate-x-1 transition-transform shrink-0" />
@@ -196,8 +284,12 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 <HelpCircle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">Frequently Asked Questions</h3>
-                <p className="text-xs sm:text-sm text-dark-600 font-medium">Find answers to common maintenance queries.</p>
+                <h3 className="text-lg font-extrabold text-dark-900 mb-1 group-hover:text-brand-red transition-colors uppercase">
+                  Frequently Asked Questions
+                </h3>
+                <p className="text-xs sm:text-sm text-dark-600 font-medium">
+                  Find answers to common maintenance queries.
+                </p>
               </div>
             </div>
             <ArrowRight className="w-5 h-5 text-brand-red group-hover:translate-x-1 transition-transform shrink-0" />
@@ -212,7 +304,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             <h2 id="recommended-heading" className="text-xl sm:text-2xl font-extrabold text-dark-900 uppercase tracking-wide">
               Recommended Equipment
             </h2>
-            <Link href="/products" className="text-xs font-extrabold text-brand-red hover:underline flex items-center gap-1 uppercase tracking-wider">
+            <Link
+              href="/products"
+              className="text-xs font-extrabold text-brand-red hover:underline flex items-center gap-1 uppercase tracking-wider"
+            >
               <span>View All</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -220,8 +315,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
             {relatedProducts.map((relatedProduct) => {
-              const relatedVariants = exampleVariants.filter(v => v.productId === relatedProduct.id);
-              const defaultVariant = relatedVariants.find(v => v.id === relatedProduct.defaultVariantId) || relatedVariants[0];
+              const relatedVariants = relatedProduct.variants || [];
+              const defaultVariant =
+                relatedVariants.find((v) => v.id === relatedProduct.defaultVariantId) ||
+                relatedVariants[0];
               const price = defaultVariant ? Number(defaultVariant.price) : 0;
 
               return (
@@ -232,7 +329,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   category={relatedProduct.categoryId}
                   price={price}
                   image={relatedProduct.coverImage}
-                  imageAlt={relatedProduct.coverImageAlt}
+                  imageAlt={relatedProduct.coverImageAlt || undefined}
                   href={`/products/${relatedProduct.id}`}
                 />
               );

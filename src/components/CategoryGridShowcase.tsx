@@ -1,9 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { exampleCategories, exampleProducts } from "@/lib/details";
 import { Zap, Award, ShieldCheck, Droplet, Wrench, ArrowRight } from "lucide-react";
+import { getDb } from "@/db";
 
-const CATEGORY_META: Record<string, { icon: React.ReactNode; color: string; hoverBorder: string; gradient: string }> = {
+const CATEGORY_META: Record<
+  string,
+  { icon: React.ReactNode; color: string; hoverBorder: string; gradient: string }
+> = {
   "tractor-attachments": {
     icon: <Zap className="w-5 h-5 text-brand-red" />,
     color: "text-brand-red",
@@ -22,7 +25,7 @@ const CATEGORY_META: Record<string, { icon: React.ReactNode; color: string; hove
     hoverBorder: "hover:border-cyan-500/50",
     gradient: "from-cyan-500/10 via-transparent to-transparent",
   },
-  "lubricants": {
+  lubricants: {
     icon: <Droplet className="w-5 h-5 text-emerald-600" />,
     color: "text-emerald-600",
     hoverBorder: "hover:border-emerald-500/50",
@@ -36,7 +39,16 @@ const CATEGORY_META: Record<string, { icon: React.ReactNode; color: string; hove
   },
 };
 
-export default function CategoryGridShowcase() {
+export default async function CategoryGridShowcase() {
+  const db = await getDb();
+
+  const [categoriesList, productsList] = await Promise.all([
+    db.query.categories.findMany(),
+    db.query.products.findMany({
+      where: (products, { eq }) => eq(products.isPublished, true),
+    }),
+  ]);
+
   return (
     <section className="glass-panel border-y border-light-300 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 mb-6 sm:mb-10 font-jost">
       <div className="max-w-7xl mx-auto">
@@ -61,10 +73,10 @@ export default function CategoryGridShowcase() {
 
         {/* Mobile View: Compact Horizontal Scroll Slider (sm:hidden) */}
         <div className="sm:hidden flex overflow-x-auto gap-3 pb-3 pt-1 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-          {exampleCategories.map((category) => {
+          {categoriesList.map((category) => {
             const meta = CATEGORY_META[category.slug] || CATEGORY_META["tractor-attachments"];
-            const productCount = exampleProducts.filter(
-              (p) => p.isPublished && p.categoryId === category.id
+            const productCount = productsList.filter(
+              (p) => p.categoryId === category.id
             ).length;
 
             return (
@@ -103,10 +115,10 @@ export default function CategoryGridShowcase() {
 
         {/* Desktop View: Full Grid (hidden sm:grid) */}
         <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {exampleCategories.map((category) => {
+          {categoriesList.map((category) => {
             const meta = CATEGORY_META[category.slug] || CATEGORY_META["tractor-attachments"];
-            const productCount = exampleProducts.filter(
-              (p) => p.isPublished && p.categoryId === category.id
+            const productCount = productsList.filter(
+              (p) => p.categoryId === category.id
             ).length;
 
             return (

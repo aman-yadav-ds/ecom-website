@@ -8,6 +8,7 @@ import { Sustainability } from "@/components/home/Sustainability";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { AboutUsPreview } from "@/components/home/AboutUsPreview";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { getDb } from "@/db";
 
 import {
   formatPageSeoTitle,
@@ -40,7 +41,15 @@ export const metadata: Metadata = buildProductMetadata({
   ],
 });
 
-export default function Home() {
+export default async function Home() {
+  const db = await getDb();
+  const productsList = await db.query.products.findMany({
+    where: (products, { eq }) => eq(products.isPublished, true),
+    with: {
+      variants: true,
+    },
+  });
+
   // JSON-LD WebSite schema with SearchAction for Google Sitelinks Searchbox
   const jsonLd = {
     "@context": "https://schema.org",
@@ -76,7 +85,7 @@ export default function Home() {
       <main className="flex-grow">
         <NewHero />
         <StatsSection />
-        <FeaturedProducts />
+        <FeaturedProducts products={productsList} />
         <OurSolutions />
         <OurStrength />
         <Sustainability />

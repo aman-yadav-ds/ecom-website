@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { exampleProducts, exampleCategories } from "@/lib/details";
+import { getDb } from "@/db";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
@@ -97,21 +97,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const categoryRoutes: MetadataRoute.Sitemap = exampleCategories.map((category) => ({
-    url: `${baseUrl}/products/${category.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.85,
-  }));
+  let categoryRoutes: MetadataRoute.Sitemap = [];
+  let productRoutes: MetadataRoute.Sitemap = [];
 
-  const productRoutes: MetadataRoute.Sitemap = exampleProducts
-    .filter((product) => product.isPublished)
-    .map((product) => ({
+  try {
+    const db = await getDb();
+    const [categoriesList, productsList] = await Promise.all([
+      db.query.categories.findMany(),
+      db.query.products.findMany({
+        where: (products, { eq }) => eq(products.isPublished, true),
+      }),
+    ]);
+
+    categoryRoutes = categoriesList.map((category) => ({
+      url: `${baseUrl}/products/${category.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    }));
+
+    productRoutes = productsList.map((product) => ({
       url: `${baseUrl}/products/${product.id}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     }));
+  } catch (error) {
+    console.error("[Sitemap Generation Error]", error);
+  }
 
   return [...staticRoutes, ...categoryRoutes, ...productRoutes];
 }

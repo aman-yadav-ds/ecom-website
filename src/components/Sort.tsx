@@ -41,7 +41,7 @@ const Sort: React.FC = () => {
   const handleSelectOption = (value: string) => {
     const currentParams = parseQueryParams(searchParams.toString());
     const sortValue = value === "featured" ? null : value;
-    const newQueryString = updateQueryParams(currentParams, { sort: sortValue });
+    const newQueryString = updateQueryParams(currentParams, { sort: sortValue, page: 1 });
     
     setIsOpen(false);
     router.push(`?${newQueryString}`, { scroll: false });

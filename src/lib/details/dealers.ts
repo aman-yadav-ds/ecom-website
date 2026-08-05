@@ -3,7 +3,7 @@ import { Dealer } from "../types";
 export const exampleDealers: Dealer[] = [
   {
     id: "ko-d-0001",
-    name: "Shivhshakti Agri Products and General Suppliers",
+    name: "Shivhshakti Agri Products and General ",
     addressLine1: "Pamsyari Road, Didihat",
     addressLine2: "District - Pithoragarh",
     addressLine3: "Uttarakhand, India, 262551",

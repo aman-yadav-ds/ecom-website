@@ -3,7 +3,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryHeader from "@/components/CategoryHeader";
-import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
+import { getDb } from "@/db";
+import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
 import { Wrench, Shield, Award } from "lucide-react";
 
 import {
@@ -14,41 +15,44 @@ import {
 
 export const metadata: Metadata = buildProductMetadata({
   title: formatPageSeoTitle("Agricultural Hand Tools & Equipment"),
-  description: formatPageSeoDescription("Explore drop-forged SK5 alloy steel secateurs, pruners, garden hoes, and harvesting sickles manufactured by official brand Koreva9."),
+  description: formatPageSeoDescription(
+    "Explore drop-forged SK5 alloy steel secateurs, pruners, garden hoes, and harvesting sickles manufactured by official brand Koreva9."
+  ),
   canonicalUrl: "/products/hand-tools",
   keywords: ["Hand Tools", "SK5 Pruning Secateur", "Harvesting Sickle", "Garden Tools"],
 });
 
-export default function HandToolsPage() {
-  const category = exampleCategories.find((c) => c.slug === "hand-tools");
+interface PageProps {
+  searchParams?: Promise<CatalogQueryParams>;
+}
+
+export default async function HandToolsPage({ searchParams }: PageProps) {
+  const db = await getDb();
+  const category = await db.query.categories.findFirst({
+    where: (c, { eq }) => eq(c.slug, "hand-tools"),
+  });
+
   if (!category) notFound();
 
-  const mappedProducts = exampleProducts
-    .filter((product) => product.isPublished && product.categoryId === category.id)
-    .map((product) => {
-      const productVariants = exampleVariants.filter((v) => v.productId === product.id);
-      const defaultVariant = productVariants.find((v) => v.id === product.defaultVariantId) || productVariants[0];
-
-      return {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        categoryId: product.categoryId,
-        categoryName: category.name,
-        tags: product.tags,
-        price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
-        image: product.coverImage || (defaultVariant?.images?.[0]) || "/placeholder.png",
-        imageAlt: product.coverImageAlt || (defaultVariant?.imagesAlt?.[0]) || product.name,
-        variantsCount: productVariants.length,
-        technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
-        allVariantsTechnicalDetails: productVariants.map((v) => v.technicalDetails),
-      };
-    });
+  const resolvedSearchParams = (await searchParams) || {};
+  const catalogData = await getCatalogData(resolvedSearchParams, "hand-tools");
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
-      <CategoryHeader category={category} totalProducts={mappedProducts.length} />
-      
+      <CategoryHeader
+        category={{
+          id: category.id,
+          name: category.name,
+          slug: category.slug,
+          parentId: category.parentId,
+          description: category.description || undefined,
+          tagline: category.tagline || undefined,
+          badge: category.badge || undefined,
+          highlights: category.highlights || undefined,
+        }}
+        totalProducts={catalogData.totalProducts}
+      />
+
       {/* Category Specific Feature Banner for Hand Tools */}
       <section id="handtools-guide" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="glass-panel-elevated border border-light-300 p-6 sm:p-8 rounded-3xl shadow-md bg-white/90 backdrop-blur-2xl">
@@ -66,7 +70,9 @@ export default function HandToolsPage() {
               </div>
               <div>
                 <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">SK5 Alloy Steel</h3>
-                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">High-hardness Japanese SK5 carbon steel blades hold an ultra-sharp cutting edge through thousands of prunings.</p>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">
+                  High-hardness Japanese SK5 carbon steel blades hold an ultra-sharp cutting edge through thousands of prunings.
+                </p>
               </div>
             </div>
 
@@ -76,7 +82,9 @@ export default function HandToolsPage() {
               </div>
               <div>
                 <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">Induction Hardening</h3>
-                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">Heat-treated teeth and cutting edges prevent deformation when working thick branches.</p>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">
+                  Heat-treated teeth and cutting edges prevent deformation when working thick branches.
+                </p>
               </div>
             </div>
 
@@ -86,7 +94,9 @@ export default function HandToolsPage() {
               </div>
               <div>
                 <h3 className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase">Ergonomic Rubber Grip</h3>
-                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">Non-slip aluminum handles reduce hand fatigue during long field harvesting sessions.</p>
+                <p className="text-xs text-dark-600 mt-0.5 font-medium leading-relaxed">
+                  Non-slip aluminum handles reduce hand fatigue during long field harvesting sessions.
+                </p>
               </div>
             </div>
           </div>
@@ -94,7 +104,15 @@ export default function HandToolsPage() {
       </section>
 
       <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading hand tools...</div>}>
-        <ProductCatalogClient initialProducts={mappedProducts} initialCategory={category.name} />
+        <ProductCatalogClient
+          products={catalogData.products}
+          totalProducts={catalogData.totalProducts}
+          currentPage={catalogData.currentPage}
+          totalPages={catalogData.totalPages}
+          pageSize={catalogData.pageSize}
+          availableFilters={catalogData.availableFilters}
+          initialCategory={category.name}
+        />
       </Suspense>
     </main>
   );

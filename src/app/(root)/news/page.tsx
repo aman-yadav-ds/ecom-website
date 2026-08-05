@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { Calendar, User, Newspaper, ArrowRight } from "lucide-react";
-import { newsArticles } from "@/lib/details/newsData";
+import { getDb } from "@/db";
 
 import {
   formatPageSeoTitle,
@@ -13,14 +13,19 @@ import {
 
 export const metadata: Metadata = buildProductMetadata({
   title: formatPageSeoTitle("Official News & Press Releases"),
-  description: formatPageSeoDescription("Stay updated with product launches, dealer expansions, and agricultural machinery insights from official manufacturer Koreva9."),
+  description: formatPageSeoDescription(
+    "Stay updated with product launches, dealer expansions, and agricultural machinery insights from official manufacturer Koreva9."
+  ),
   canonicalUrl: "/news",
   keywords: ["Koreva News", "Koreva9 Press Releases", "Agricultural Machinery News"],
 });
 
-export default function NewsPage() {
-  const featuredArticle = newsArticles[0];
-  const secondaryArticles = newsArticles.slice(1);
+export default async function NewsPage() {
+  const db = await getDb();
+  const newsArticlesList = await db.query.newsArticles.findMany();
+
+  const featuredArticle = newsArticlesList[0];
+  const secondaryArticles = newsArticlesList.slice(1);
 
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
@@ -61,9 +66,13 @@ export default function NewsPage() {
             <div className="w-full lg:w-[42%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white/90 backdrop-blur-xl">
               <div>
                 <div className="flex items-center gap-3 text-xs text-dark-600 font-extrabold uppercase tracking-wider mb-3">
-                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-brand-red" /> {featuredArticle.date}</span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={14} className="text-brand-red" /> {featuredArticle.date}
+                  </span>
                   <span>•</span>
-                  <span className="flex items-center gap-1.5"><User size={14} className="text-brand-red" /> {featuredArticle.author}</span>
+                  <span className="flex items-center gap-1.5">
+                    <User size={14} className="text-brand-red" /> {featuredArticle.author}
+                  </span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-dark-900 mb-4 group-hover:text-brand-red transition-colors leading-tight uppercase">
                   {featuredArticle.title}
@@ -107,7 +116,9 @@ export default function NewsPage() {
               </div>
               <div className="p-6 sm:p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-3 text-xs text-dark-600 font-extrabold uppercase tracking-wider mb-2">
-                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-brand-red" /> {article.date}</span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={14} className="text-brand-red" /> {article.date}
+                  </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-dark-900 mb-3 group-hover:text-brand-red transition-colors uppercase leading-tight">
                   {article.title}
@@ -154,7 +165,6 @@ export default function NewsPage() {
             </form>
           </div>
         </div>
-
       </div>
     </div>
   );

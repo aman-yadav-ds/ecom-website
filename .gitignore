@@ -49,3 +49,6 @@ next-env.d.ts
 !.dev.vars.example
 .vscode/mcp.json
 .vscode
+
+# db files
+scripts/

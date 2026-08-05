@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
 import CategoryGridShowcase from "@/components/CategoryGridShowcase";
-import { exampleProducts, exampleCategories, exampleVariants } from "@/lib/details";
+import { getCatalogData, CatalogQueryParams } from "@/lib/catalog";
 import { Tractor } from "lucide-react";
 
 import {
@@ -13,7 +13,9 @@ import {
 
 export const metadata: Metadata = buildProductMetadata({
   title: formatPageSeoTitle("Agricultural Products & Farm Machinery"),
-  description: formatPageSeoDescription("Browse the complete Koreva9 farm equipment lineup including Power Weeders, Rotavators, Laser Land Levellers, STOU Lubricants, and Hand Tools."),
+  description: formatPageSeoDescription(
+    "Browse the complete Koreva9 farm equipment lineup including Power Weeders, Rotavators, Laser Land Levellers, STOU Lubricants, and Hand Tools."
+  ),
   canonicalUrl: "/products",
   keywords: [
     "Koreva Machines",
@@ -26,30 +28,13 @@ export const metadata: Metadata = buildProductMetadata({
   ],
 });
 
-export default function ProductsPage() {
-  // Pre-render logic: map relational static data into a flat array for the client
-  const mappedProducts = exampleProducts
-    .filter((product) => product.isPublished)
-    .map((product) => {
-      const category = exampleCategories.find((c) => c.id === product.categoryId);
-      const productVariants = exampleVariants.filter((v) => v.productId === product.id);
-      const defaultVariant = productVariants.find((v) => v.id === product.defaultVariantId) || productVariants[0];
+interface PageProps {
+  searchParams?: Promise<CatalogQueryParams>;
+}
 
-      return {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        categoryId: product.categoryId,
-        categoryName: category?.name || "Uncategorized",
-        tags: product.tags,
-        price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
-        image: product.coverImage || (defaultVariant?.images?.[0]) || "/placeholder.png",
-        imageAlt: product.coverImageAlt || (defaultVariant?.imagesAlt?.[0]) || product.name,
-        variantsCount: productVariants.length,
-        technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
-        allVariantsTechnicalDetails: productVariants.map((v) => v.technicalDetails),
-      };
-    });
+export default async function ProductsPage({ searchParams }: PageProps) {
+  const resolvedSearchParams = (await searchParams) || {};
+  const catalogData = await getCatalogData(resolvedSearchParams);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
@@ -76,7 +61,14 @@ export default function ProductsPage() {
 
       {/* Main Product Catalog */}
       <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading catalog...</div>}>
-        <ProductCatalogClient initialProducts={mappedProducts} />
+        <ProductCatalogClient
+          products={catalogData.products}
+          totalProducts={catalogData.totalProducts}
+          currentPage={catalogData.currentPage}
+          totalPages={catalogData.totalPages}
+          pageSize={catalogData.pageSize}
+          availableFilters={catalogData.availableFilters}
+        />
       </Suspense>
     </main>
   );

@@ -40,16 +40,19 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
 
     let newQueryString = "";
     if (checked) {
-      newQueryString = updateQueryParams(currentParams, { [group]: [...valuesArray, value] });
+      newQueryString = updateQueryParams(currentParams, { [group]: [...valuesArray, value], page: 1 });
     } else {
       newQueryString = removeQueryParam(currentParams, group, value);
+      const parsed = parseQueryParams(newQueryString);
+      delete parsed.page;
+      newQueryString = updateQueryParams(parsed, {});
     }
     
     router.push(`?${newQueryString}`, { scroll: false });
   };
 
   const handleClearAll = () => {
-    // Keep 'search' and 'sort' params but remove all filters
+    // Keep 'search' and 'sort' params but remove all filters and page
     const currentParams = parseQueryParams(searchParams.toString());
     const newParams: Record<string, unknown> = {};
     if (currentParams.search) newParams.search = currentParams.search;

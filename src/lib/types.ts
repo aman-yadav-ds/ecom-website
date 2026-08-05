@@ -46,7 +46,7 @@ export interface Dealer {
     lat: number;
     lng: number;
   };
-  website?: string;
+  website?: string | null;
   assortment: string[];
   services: string[];
   isPremiumHub: boolean;

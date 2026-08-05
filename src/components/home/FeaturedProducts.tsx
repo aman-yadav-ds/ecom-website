@@ -5,9 +5,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
-import { exampleProducts, exampleVariants } from "@/lib/details";
 
-export function FeaturedProducts() {
+export interface FeaturedVariant {
+  id: string;
+  productId: string;
+  price: string;
+  images: string[];
+  imagesAlt?: string[] | null;
+}
+
+export interface FeaturedProductItem {
+  id: string;
+  name: string;
+  description: string;
+  categoryId: string;
+  tags: string[];
+  coverImage: string;
+  coverImageAlt?: string | null;
+  defaultVariantId?: string | null;
+  isPublished: boolean;
+  variants: FeaturedVariant[];
+}
+
+interface FeaturedProductsProps {
+  products: FeaturedProductItem[];
+}
+
+export function FeaturedProducts({ products }: FeaturedProductsProps) {
   const [activeCategoryFilter, setActiveCategoryFilter] = useState("All");
 
   const categoriesList = [
@@ -18,7 +42,7 @@ export function FeaturedProducts() {
     { label: "SK5 Hand Tools", value: "hand-tools" },
   ];
 
-  const displayedProducts = exampleProducts
+  const displayedProducts = (products || [])
     .filter((product) => {
       if (!product.isPublished) return false;
       if (activeCategoryFilter === "All") return true;
@@ -107,8 +131,10 @@ export function FeaturedProducts() {
         >
           <AnimatePresence mode="popLayout">
             {displayedProducts.map((product) => {
-              const productVariants = exampleVariants.filter((v) => v.productId === product.id);
-              const defaultVariant = productVariants.find((v) => v.id === product.defaultVariantId) || productVariants[0];
+              const productVariants = product.variants || [];
+              const defaultVariant =
+                productVariants.find((v) => v.id === product.defaultVariantId) ||
+                productVariants[0];
               const price = defaultVariant ? Number(defaultVariant.price) : 0;
 
               return (
@@ -180,5 +206,3 @@ export function FeaturedProducts() {
     </section>
   );
 }
-
-
