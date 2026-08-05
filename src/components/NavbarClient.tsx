@@ -228,8 +228,7 @@ export default function NavbarClient() {
                         alt="KOREVA"
                         width={84}
                         height={22}
-                        className="object-contain"
-                        style={{ height: "auto", width: "auto" }}
+                        className="h-5.5 sm:h-6 w-auto object-contain"
                         priority
                       />
                     </div>
@@ -723,7 +722,7 @@ export default function NavbarClient() {
               <div className="p-5 border-b border-light-300 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-10">
                 <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
                   <div className="p-1.5 rounded-xl bg-white border border-light-300 shadow-xs">
-                    <Image src="/trademark.webp" alt="KOREVA" width={80} height={20} className="object-contain" priority />
+                    <Image src="/trademark.webp" alt="KOREVA" width={80} height={20} className="h-5 w-auto object-contain" priority />
                   </div>
                 </Link>
                 <button

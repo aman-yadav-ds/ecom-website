@@ -39,8 +39,7 @@ const Footer = () => {
                   alt="Koreva Agriculture & Farm Machines - Koreva Global LLP (Koreva9)"
                   height={24}
                   width={140}
-                  className="object-contain"
-                  style={{ height: "auto", width: "auto" }}
+                  className="h-6 w-auto object-contain"
                 />
               </div>
             </Link>
