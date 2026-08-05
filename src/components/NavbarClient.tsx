@@ -10,7 +10,6 @@ import {
   useTransform,
   useMotionValueEvent,
   useMotionTemplate,
-  MotionValue,
 } from "framer-motion";
 import {
   MapPin,
@@ -81,9 +80,10 @@ export default function NavbarClient() {
   const boxShadow      = useMotionTemplate`0 4px 32px rgba(0,0,0,${shadowOpacity}), 0 1px 6px rgba(0,0,0,${shadowOpacity})`;
   const borderValue    = useMotionTemplate`1px solid rgba(0,0,0,${borderOpacity})`;
 
-  // Drive the isScrolled boolean (used for conditional elements only)
+  // Drive the isScrolled boolean (only update state on actual threshold cross)
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 40);
+    const shouldBeScrolled = latest > 40;
+    setIsScrolled((prev) => (prev !== shouldBeScrolled ? shouldBeScrolled : prev));
   });
 
   // Close dropdown on outside click

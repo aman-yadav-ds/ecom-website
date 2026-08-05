@@ -1,6 +1,9 @@
 import React from "react";
 import ArticleLayout from "@/components/ArticleLayout";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function E20PetrolGuide() {
   return (
     <ArticleLayout
@@ -23,7 +26,7 @@ export default function E20PetrolGuide() {
       </p>
 
       <blockquote>
-        "Leaving E20 fuel in your power weeder's carburetor for more than 15 days of inactivity is the #1 cause of starting failures and expensive replacements."
+        &quot;Leaving E20 fuel in your power weeder&apos;s carburetor for more than 15 days of inactivity is the #1 cause of starting failures and expensive replacements.&quot;
       </blockquote>
 
       <h2>The Solution: The 60-Second Fuel Drain Protocol</h2>
@@ -34,7 +37,7 @@ export default function E20PetrolGuide() {
       <div className="bg-light-200 border-l-4 border-brand-red p-6 my-8 rounded-r-lg">
         <h3 className="!mt-0 !mb-4">Step-by-Step Carburetor Drain</h3>
         <ol className="mb-0">
-          <li><strong>Turn off the fuel valve:</strong> Locate the fuel shut-off valve beneath the petrol tank and turn it to the 'OFF' position.</li>
+          <li><strong>Turn off the fuel valve:</strong> Locate the fuel shut-off valve beneath the petrol tank and turn it to the &apos;OFF&apos; position.</li>
           <li><strong>Start the engine:</strong> With the valve off, pull the recoil starter and start the machine.</li>
           <li><strong>Let it run dry:</strong> Allow the engine to idle. It will run for about 1 to 2 minutes on the fuel remaining in the fuel line and carburetor bowl.</li>
           <li><strong>Wait for it to stall:</strong> The engine will begin to surge and eventually stall out completely. </li>

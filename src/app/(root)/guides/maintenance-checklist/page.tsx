@@ -2,6 +2,9 @@ import React from "react";
 import ArticleLayout from "@/components/ArticleLayout";
 import { CheckCircle } from "lucide-react";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function MaintenanceChecklistGuide() {
   return (
     <ArticleLayout

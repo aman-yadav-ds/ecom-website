@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import Link from "next/link";
-import { MapPin, Zap, Shield, Check, Flame, Gauge, Award, Wrench, RefreshCw, Cpu } from "lucide-react";
+import { MapPin, Zap, Shield, Check, Flame, Award, Wrench, RefreshCw, Cpu } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
 
 interface SelfPropelledDetailLayoutProps {

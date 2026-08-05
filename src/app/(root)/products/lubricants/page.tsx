@@ -26,6 +26,8 @@ interface PageProps {
   searchParams?: Promise<CatalogQueryParams>;
 }
 
+export const revalidate = 86400;
+
 export default async function LubricantsPage({ searchParams }: PageProps) {
   const db = await getDb();
   const category = await db.query.categories.findFirst({
@@ -35,7 +37,7 @@ export default async function LubricantsPage({ searchParams }: PageProps) {
   if (!category) notFound();
 
   const resolvedSearchParams = (await searchParams) || {};
-  const catalogData = await getCatalogData(resolvedSearchParams, "lubricants");
+  const catalogData = await getCatalogData(resolvedSearchParams, "lubricants", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

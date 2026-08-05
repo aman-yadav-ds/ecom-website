@@ -2,6 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { ShieldCheck, Settings, AlertTriangle, CheckCircle, ArrowRight } from "lucide-react";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function WarrantyPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
@@ -72,7 +75,7 @@ export default function WarrantyPage() {
               </div>
               <div className="text-dark-700 text-xs sm:text-sm leading-relaxed space-y-4 font-medium">
                 <p>
-                  To make a warranty claim, the product must be delivered, at the owner's expense, to an authorized KOREVA Dealer. Proof of purchase (original sales receipt) must accompany the claim. 
+                  To make a warranty claim, the product must be delivered, at the owner&apos;s expense, to an authorized KOREVA Dealer. Proof of purchase (original sales receipt) must accompany the claim. 
                 </p>
                 <p>
                   The authorized dealer will evaluate the claim. If the failure is determined to be due to a defect in materials or workmanship, KOREVA will repair or replace the defective part without charge for parts or labor.

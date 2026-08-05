@@ -1,7 +1,4 @@
 import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { AnimatedSolutionsGrid } from "./AnimatedSolutionsGrid";
 
 // Static data in Server Component — pre-rendered into HTML, fully SEO-visible

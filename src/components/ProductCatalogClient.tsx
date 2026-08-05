@@ -41,7 +41,6 @@ export default function ProductCatalogClient({
   totalPages,
   pageSize,
   availableFilters,
-  initialCategory,
 }: ProductCatalogClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();

@@ -75,6 +75,9 @@ const downloads = [
 
 // Server Component — Metadata export is now possible.
 // h1 and page description are pre-rendered for SEO.
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function DownloadsPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">

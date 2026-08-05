@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Zap, Award, ShieldCheck, Droplet, Wrench, ArrowRight } from "lucide-react";
 import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
+import type { Category, ProductWithRelations } from "@/db/schema";
 
 const CATEGORY_META: Record<
   string,
@@ -69,10 +70,10 @@ export default async function CategoryGridShowcase() {
 
         {/* Mobile View: Compact Horizontal Scroll Slider (sm:hidden) */}
         <div className="sm:hidden flex overflow-x-auto gap-3 pb-3 pt-1 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-          {categoriesList.map((category) => {
+          {categoriesList.map((category: Category) => {
             const meta = CATEGORY_META[category.slug] || CATEGORY_META["tractor-attachments"];
             const productCount = productsList.filter(
-              (p) => p.categoryId === category.id
+              (p: ProductWithRelations) => p.categoryId === category.id
             ).length;
 
             return (
@@ -111,10 +112,10 @@ export default async function CategoryGridShowcase() {
 
         {/* Desktop View: Full Grid (hidden sm:grid) */}
         <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {categoriesList.map((category) => {
+          {categoriesList.map((category: Category) => {
             const meta = CATEGORY_META[category.slug] || CATEGORY_META["tractor-attachments"];
             const productCount = productsList.filter(
-              (p) => p.categoryId === category.id
+              (p: ProductWithRelations) => p.categoryId === category.id
             ).length;
 
             return (

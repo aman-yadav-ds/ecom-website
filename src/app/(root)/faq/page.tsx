@@ -100,6 +100,9 @@ const faqs: {
 
 // Server Component — no "use client" needed. The h1, p, and all FAQ
 // question text are pre-rendered in the HTML stream for maximum SEO value.
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function FAQPage() {
   const faqJsonLd = {
     "@context": "https://schema.org",

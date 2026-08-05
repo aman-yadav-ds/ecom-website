@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Wrench, CheckCircle, PackageSearch, Truck, ArrowRight, ShieldCheck } from "lucide-react";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function SparePartsPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">

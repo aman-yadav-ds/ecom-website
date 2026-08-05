@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,12 +8,14 @@ import { Dealer } from '@/lib/types';
 import DealerInfoCard from './DealerInfoCard';
 
 // Fix Leaflet default icon issues in Next.js
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: '/marker-icon-2x.png',
   iconUrl: '/marker-icon.png',
   shadowUrl: '/marker-shadow.png',
 });
+
+const emptySubscribe = () => () => {};
 
 // Map Updater Component to change center when active location changes
 function MapUpdater({ center }: { center: [number, number] }) {
@@ -46,11 +48,11 @@ interface DealerMapProps {
 }
 
 export default function DealerMap({ dealers, center, zoom = 7, userLocation }: DealerMapProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   // Custom Icon Creation - Black Teardrop with 'K'
   const createCustomIcon = () => {

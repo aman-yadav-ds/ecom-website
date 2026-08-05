@@ -1,9 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Metadata } from "next";
 import { BecomePartnerButton } from "@/components/BecomePartnerButton";
-import { Building2, Users, ShieldCheck, TrendingUp, Leaf, CheckCircle2, Award } from "lucide-react";
+import { Building2, Users, ShieldCheck, TrendingUp, Leaf } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 import {
@@ -18,6 +17,9 @@ export const metadata: Metadata = buildProductMetadata({
   canonicalUrl: "/about",
   keywords: ["About Koreva Global LLP", "Koreva9 Manufacturer", "Agricultural Machinery Manufacturer"],
 });
+
+export const dynamic = 'force-static';
+export const revalidate = 86400;
 
 export default function AboutPage() {
   return (
@@ -92,7 +94,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-lg font-extrabold text-dark-900 uppercase mb-3 tracking-wide">FARMER FIRST</h3>
                   <p className="text-dark-600 text-sm leading-relaxed font-medium">
-                    Every machine we manufacture under KOREVA is engineered with the farmer's profitability, comfort, and success at heart.
+                    Every machine we manufacture under KOREVA is engineered with the farmer&apos;s profitability, comfort, and success at heart.
                   </p>
                 </div>
               </ScrollReveal>

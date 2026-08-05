@@ -14,18 +14,19 @@ interface ProductSummaryItem {
   imageAlt?: string;
 }
 
+const emptySubscribe = () => () => {};
+
 const CompareDrawer = () => {
   const { selectedProductIds, removeProduct, clearAll } = useCompareStore();
-  const [mounted, setMounted] = useState(false);
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
   const [selectedProducts, setSelectedProducts] = useState<ProductSummaryItem[]>([]);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     if (selectedProductIds.length === 0) {
-      setSelectedProducts([]);
       return;
     }
 
@@ -55,6 +56,7 @@ const CompareDrawer = () => {
   if (!mounted) return null;
 
   const isVisible = selectedProductIds.length > 0;
+  const activeProducts = isVisible ? selectedProducts : [];
 
   const queryStringResult =
     selectedProductIds.length > 0
@@ -73,7 +75,7 @@ const CompareDrawer = () => {
           <div className="flex-1 flex items-center justify-center md:justify-start gap-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
             {/* Render 3 slots */}
             {[0, 1, 2].map((index) => {
-              const product = selectedProducts[index];
+              const product = activeProducts[index];
 
               return (
                 <div

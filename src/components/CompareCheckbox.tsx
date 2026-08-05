@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useCompareStore } from "@/store/useCompareStore";
 
 interface CompareCheckboxProps {
   productId: string;
 }
 
+const emptySubscribe = () => () => {};
+
 const CompareCheckbox: React.FC<CompareCheckboxProps> = ({ productId }) => {
   const { selectedProductIds, toggleProduct } = useCompareStore();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   if (!mounted) return null; // Avoid hydration mismatch
 

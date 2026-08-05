@@ -41,6 +41,9 @@ export const metadata: Metadata = buildProductMetadata({
   ],
 });
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default async function Home() {
   const productsList = await getCachedPublishedProducts();
 

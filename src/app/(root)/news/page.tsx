@@ -20,6 +20,9 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Koreva News", "Koreva9 Press Releases", "Agricultural Machinery News"],
 });
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
 export default async function NewsPage() {
   const newsArticlesList = await getCachedNewsArticles();
 

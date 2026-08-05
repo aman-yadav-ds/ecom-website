@@ -12,15 +12,30 @@ export default async function ComparePage({
   const params = await searchParams;
   const ids = params?.ids ? params.ids.split(",").filter(Boolean) : [];
 
-  let productsData: any[] = [];
+  interface CompareProductItem {
+    id: string;
+    name: string;
+    image: string;
+    imageAlt: string;
+    price: number;
+    technicalDetails: Record<string, string>;
+  }
+
+  let productsData: CompareProductItem[] = [];
 
   if (ids.length > 0) {
+    const idSet = new Set(ids);
     const allProducts = await getCachedPublishedProducts();
-    const fetchedProducts = allProducts.filter((p) => ids.includes(p.id));
+    const productMap = new Map<string, typeof allProducts[0]>();
+    for (let i = 0; i < allProducts.length; i++) {
+      if (idSet.has(allProducts[i].id)) {
+        productMap.set(allProducts[i].id, allProducts[i]);
+      }
+    }
 
     productsData = ids
       .map((id) => {
-        const product = fetchedProducts.find((p) => p.id === id);
+        const product = productMap.get(id);
         if (!product) return null;
         const variants = product.variants || [];
         const defaultVariant =
@@ -35,7 +50,7 @@ export default async function ComparePage({
           technicalDetails: defaultVariant?.technicalDetails || {},
         };
       })
-      .filter(Boolean);
+      .filter(Boolean) as CompareProductItem[];
   }
 
   return (
@@ -60,7 +75,7 @@ export default async function ComparePage({
         </div>
 
         {productsData.length > 0 ? (
-          <ComparisonMatrix products={productsData as any} />
+          <ComparisonMatrix products={productsData} />
         ) : (
           <div className="text-center py-20 px-6 glass-panel border border-light-300 rounded-3xl shadow-xs max-w-2xl mx-auto my-8">
             <h3 className="text-xl font-extrabold text-dark-900 uppercase mb-2">

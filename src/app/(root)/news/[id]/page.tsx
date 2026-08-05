@@ -16,9 +16,11 @@ interface NewsDetailProps {
   params: Promise<{ id: string }>;
 }
 
+import type { NewsArticle } from "@/db/schema";
+
 export async function generateStaticParams() {
   const newsArticlesList = await getCachedNewsArticles();
-  return newsArticlesList.map((article) => ({
+  return newsArticlesList.map((article: NewsArticle) => ({
     id: article.id,
   }));
 }
@@ -26,7 +28,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: NewsDetailProps): Promise<Metadata> {
   const resolvedParams = await params;
   const newsArticlesList = await getCachedNewsArticles();
-  const article = newsArticlesList.find((a) => a.id === resolvedParams.id);
+  const article = newsArticlesList.find((a: NewsArticle) => a.id === resolvedParams.id);
 
   if (!article) {
     return buildProductMetadata({
@@ -50,16 +52,18 @@ export async function generateMetadata({ params }: NewsDetailProps): Promise<Met
   });
 }
 
+export const revalidate = 86400;
+
 export default async function NewsDetailPage({ params }: NewsDetailProps) {
   const resolvedParams = await params;
   const newsArticlesList = await getCachedNewsArticles();
-  const article = newsArticlesList.find((a) => a.id === resolvedParams.id);
+  const article = newsArticlesList.find((a: NewsArticle) => a.id === resolvedParams.id);
 
   if (!article) {
     notFound();
   }
 
-  const currentIndex = newsArticlesList.findIndex((a) => a.id === article.id);
+  const currentIndex = newsArticlesList.findIndex((a: NewsArticle) => a.id === article.id);
   const prevArticle = currentIndex > 0 ? newsArticlesList[currentIndex - 1] : null;
   const nextArticle = currentIndex < newsArticlesList.length - 1 ? newsArticlesList[currentIndex + 1] : null;
 

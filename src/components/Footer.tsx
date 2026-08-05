@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageSquare, MapPin, Mail, ShieldCheck, Award } from "lucide-react";
+import { MapPin, ShieldCheck, Award } from "lucide-react";
 
 const Footer = () => {
   return (

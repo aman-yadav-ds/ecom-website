@@ -4,19 +4,22 @@ import { MapPin, Phone, Mail, Navigation, ShieldCheck, CheckCircle2, ChevronLeft
 import Link from "next/link";
 import DealerMapWrapper from "@/components/dealers/DealerMapWrapper";
 import { getCachedDealers } from "@/lib/cached-queries";
+import type { Dealer } from "@/db/schema";
 
 export async function generateStaticParams() {
   const dealersList = await getCachedDealers();
-  return dealersList.map((dealer) => ({
+  return dealersList.map((dealer: Dealer) => ({
     id: dealer.id,
   }));
 }
+
+export const revalidate = 86400;
 
 export default async function DealerDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const dealersList = await getCachedDealers();
 
-  const dealer = dealersList.find((d) => d.id === params.id);
+  const dealer = dealersList.find((d: Dealer) => d.id === params.id);
 
   if (!dealer) {
     notFound();
@@ -119,7 +122,7 @@ export default async function DealerDetailPage(props: { params: Promise<{ id: st
                 <span>Authorized Equipment Assortment</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {dealer.assortment.map((item, idx) => (
+                {dealer.assortment.map((item: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl glass-panel border border-light-300 shadow-xs">
                     <CheckCircle2 size={18} className="text-brand-red shrink-0" />
                     <span className="text-xs sm:text-sm font-bold text-dark-900">{item}</span>
@@ -134,7 +137,7 @@ export default async function DealerDetailPage(props: { params: Promise<{ id: st
                 <span>On-Site Support Solutions</span>
               </h3>
               <div className="grid grid-cols-1 gap-3">
-                {dealer.services.map((item, idx) => (
+                {dealer.services.map((item: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl glass-panel border border-light-300 shadow-xs">
                     <CheckCircle2 size={18} className="text-brand-red shrink-0" />
                     <span className="text-xs sm:text-sm font-bold text-dark-900">{item}</span>

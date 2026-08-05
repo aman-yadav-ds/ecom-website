@@ -5,7 +5,6 @@ import Card from "@/components/Card";
 import { BookOpen, HelpCircle, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { getDb } from "@/db";
 import {
   formatSeoTitle,
   formatSeoDescription,
@@ -17,6 +16,8 @@ interface ProductPageProps {
   params: Promise<{ slug?: string; id?: string }>;
 }
 
+import { getCachedPublishedProducts } from "@/lib/cached-queries";
+
 const resolveProduct = cache(
   async (
     params: Promise<{ slug?: string; id?: string }> | { slug?: string; id?: string }
@@ -25,19 +26,8 @@ const resolveProduct = cache(
     const rawParam = resolved?.slug || resolved?.id || "";
     const decoded = decodeURIComponent(rawParam).trim();
 
-    const db = await getDb();
-
-    const product = await db.query.products.findFirst({
-      where: (p, { eq, or }) =>
-        or(
-          eq(p.id, rawParam),
-          eq(p.id, decoded)
-        ),
-      with: {
-        category: true,
-        variants: true,
-      },
-    });
+    const all = await getCachedPublishedProducts();
+    const product = all.find((p) => p.id === rawParam || p.id === decoded) || null;
 
     return {
       slug: rawParam || decoded,
@@ -47,8 +37,7 @@ const resolveProduct = cache(
 );
 
 export async function generateStaticParams() {
-  const db = await getDb();
-  const allProducts = await db.query.products.findMany();
+  const allProducts = await getCachedPublishedProducts();
   return allProducts.map((product) => ({
     slug: product.id,
   }));
@@ -83,6 +72,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   });
 }
 
+export const revalidate = 86400;
+
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
   const { slug, product } = await resolveProduct(params);
 
@@ -90,7 +81,6 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const db = await getDb();
   const variants = product.variants || [];
 
   const defaultVariant =
@@ -134,32 +124,18 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
     ],
   };
 
-  // Fetch candidate related products from D1 (limit query size instead of scanning full DB)
-  let candidateProducts = await db.query.products.findMany({
-    where: (p, { ne, eq, and }) =>
-      and(
-        ne(p.id, product.id),
-        eq(p.categoryId, product.categoryId),
-        eq(p.isPublished, true)
-      ),
-    limit: 4,
-    with: {
-      variants: true,
-    },
-  });
+  const allPublished = await getCachedPublishedProducts();
+  const sameCategory = allPublished.filter(
+    (p) => p.id !== product.id && p.categoryId === product.categoryId
+  );
+  let candidateProducts = sameCategory.slice(0, 4);
 
   if (candidateProducts.length < 4) {
-    const extraProducts = await db.query.products.findMany({
-      where: (p, { ne, eq, and }) =>
-        and(ne(p.id, product.id), eq(p.isPublished, true)),
-      limit: 6,
-      with: {
-        variants: true,
-      },
-    });
+    const extraProducts = allPublished.filter((p) => p.id !== product.id);
     const combined = [...candidateProducts];
-    for (const p of extraProducts) {
-      if (p.id !== product.id && !combined.some((c) => c.id === p.id)) {
+    for (let i = 0; i < extraProducts.length; i++) {
+      const p = extraProducts[i];
+      if (!combined.some((c) => c.id === p.id)) {
         combined.push(p);
       }
       if (combined.length >= 4) break;

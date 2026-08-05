@@ -1,6 +1,9 @@
 import React from "react";
 import ArticleLayout from "@/components/ArticleLayout";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function TillageBasicsGuide() {
   return (
     <ArticleLayout
@@ -46,11 +49,11 @@ export default function TillageBasicsGuide() {
         Following primary tillage, the soil is too rough for planting small seeds. Secondary tillage is shallower (usually only 2 to 6 inches deep) and is designed to pulverize massive clods, level the field, and kill emerging weed seedlings.
       </p>
       <p>
-        <strong>Implements Used:</strong> Disc harrows, cultivators, and rotary tillers (rotavators). This is where KOREVA9's heavy-duty rotavators excel, capable of turning a rough plowed field into a perfect seedbed in just one or two passes.
+        <strong>Implements Used:</strong> Disc harrows, cultivators, and rotary tillers (rotavators). This is where KOREVA9&apos;s heavy-duty rotavators excel, capable of turning a rough plowed field into a perfect seedbed in just one or two passes.
       </p>
 
       <blockquote>
-        "Over-tilling is just as dangerous as under-tilling. Pulverizing soil into a fine dust destroys its aggregate structure, leading to severe wind erosion and a crusting effect after the first rain."
+        &quot;Over-tilling is just as dangerous as under-tilling. Pulverizing soil into a fine dust destroys its aggregate structure, leading to severe wind erosion and a crusting effect after the first rain.&quot;
       </blockquote>
 
       <h2>Conservation Tillage: The Modern Approach</h2>

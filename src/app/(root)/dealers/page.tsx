@@ -20,6 +20,9 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Koreva Dealer", "Koreva9 Service Center", "Power Weeder Dealer India"],
 });
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
 export default async function DealersPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {

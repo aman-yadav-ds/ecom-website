@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
 
@@ -13,12 +13,13 @@ interface ProductGalleryProps {
 const ProductGallery: React.FC<ProductGalleryProps> = ({ images, imagesAlt, productName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
+  const [prevImages, setPrevImages] = useState(images);
 
-  // Reset active index and error state when images change (e.g. variant changes)
-  useEffect(() => {
+  if (prevImages !== images) {
+    setPrevImages(images);
     setActiveIndex(0);
     setHasError(false);
-  }, [images]);
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     if (e.key === "Enter" || e.key === " ") {

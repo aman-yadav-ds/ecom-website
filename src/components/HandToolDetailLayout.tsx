@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import Link from "next/link";
@@ -12,23 +12,12 @@ interface HandToolDetailLayoutProps {
   variants: Variant[];
 }
 
-const emptySubscribe = () => () => {};
-function useHasMounted() {
-  return React.useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-}
-
 export default function HandToolDetailLayout({ product, variants }: HandToolDetailLayoutProps) {
   const [activeVariantId, setActiveVariantId] = useState(
     product.defaultVariantId || (variants.length > 0 ? variants[0].id : "")
   );
 
   const { selectedProductIds, toggleProduct } = useCompareStore();
-  const mounted = useHasMounted();
-
 
   const isSelected = selectedProductIds.includes(product.id);
   const isMaxReached = selectedProductIds.length >= 3;
@@ -55,8 +44,6 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
   });
 
   const steel = activeVariant?.technicalDetails["Blade Steel"] || "High Carbon Steel";
-  const capacity = activeVariant?.technicalDetails["Cutting Capacity"] || "Pruning & Harvesting";
-  const coating = activeVariant?.technicalDetails["Finish / Coating"] || "Anti-Rust Coating";
 
   return (
     <div className="flex flex-col gap-12 font-jost">
@@ -186,7 +173,7 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
               <input
                 type="checkbox"
                 className="w-5 h-5 border-gray-300 rounded-sm text-amber-600 focus:ring-amber-500 disabled:cursor-not-allowed"
-                checked={mounted ? isSelected : false}
+                checked={isSelected}
                 onChange={handleCompareChange}
                 disabled={disabled}
               />

@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
+import type { Category, ProductWithRelations } from "@/db/schema";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
@@ -106,14 +107,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getCachedPublishedProducts(),
     ]);
 
-    categoryRoutes = categoriesList.map((category) => ({
+    categoryRoutes = categoriesList.map((category: Category) => ({
       url: `${baseUrl}/products/${category.slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.85,
     }));
 
-    productRoutes = productsList.map((product) => ({
+    productRoutes = productsList.map((product: ProductWithRelations) => ({
       url: `${baseUrl}/products/${product.id}`,
       lastModified: new Date(),
       changeFrequency: "weekly",

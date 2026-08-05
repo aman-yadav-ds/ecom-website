@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Download, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle2, ChevronDown, ChevronUp } from "lucide-react";
 
 interface DetailTabsSectionProps {
   description: string;
@@ -92,7 +92,7 @@ const DetailTabsSection: React.FC<DetailTabsSectionProps> = ({
           <div className="prose prose-sm sm:prose-base max-w-none text-dark-700">
             <p className="leading-relaxed">{description}</p>
             <p className="mt-4 leading-relaxed">
-              Engineered for extreme environments, this product delivers unmatched durability and performance. It undergoes rigorous quality testing to meet KOREVA's exacting industrial standards.
+              Engineered for extreme environments, this product delivers unmatched durability and performance. It undergoes rigorous quality testing to meet KOREVA&apos;s exacting industrial standards.
             </p>
           </div>
         </div>

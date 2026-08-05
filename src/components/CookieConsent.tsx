@@ -1,24 +1,26 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 
+const emptySubscribe = () => () => {};
+
 export default function CookieConsent() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [userDismissed, setUserDismissed] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   
   // Cookie Preferences State
   const [functionalCookies, setFunctionalCookies] = useState(true);
   const [optionalCookies, setOptionalCookies] = useState(false);
 
-  useEffect(() => {
-    // Check if consent was already given
-    const consent = localStorage.getItem("koreva_cookie_consent");
-    if (!consent) {
-      setIsVisible(true);
-    }
-  }, []);
+  const hasConsent = React.useSyncExternalStore(
+    emptySubscribe,
+    () => Boolean(localStorage.getItem("koreva_cookie_consent")),
+    () => true
+  );
+
+  const isVisible = !hasConsent && !userDismissed;
 
   const handleAcceptAll = () => {
     saveConsent(true, true);
@@ -36,7 +38,7 @@ export default function CookieConsent() {
       timestamp: new Date().toISOString()
     };
     localStorage.setItem("koreva_cookie_consent", JSON.stringify(preferences));
-    setIsVisible(false);
+    setUserDismissed(true);
   };
 
   if (!isVisible) return null;
@@ -51,7 +53,7 @@ export default function CookieConsent() {
               <h2 className="text-lg md:text-xl font-extrabold text-dark-900 uppercase tracking-wide mb-2">We Value Your Privacy</h2>
               <p className="text-dark-600 text-xs sm:text-sm leading-relaxed mb-2 font-medium">
                 We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
-                By clicking "Accept All", you consent to our use of cookies. 
+                By clicking &quot;Accept All&quot;, you consent to our use of cookies. 
               </p>
               <Link href="/cookies" className="text-brand-red text-xs sm:text-sm font-bold hover:underline">
                 Read our Cookie Policy
@@ -99,7 +101,7 @@ export default function CookieConsent() {
                 <div className="pr-4">
                   <h3 className="font-bold text-dark-900 mb-1">Functional & Profile Cookies</h3>
                   <p className="text-xs text-dark-700 leading-relaxed">
-                    These cookies allow the website to remember choices you make (like 'Join Us' form data or dealer network preferences) to provide enhanced, personalized features.
+                    These cookies allow the website to remember choices you make (like &apos;Join Us&apos; form data or dealer network preferences) to provide enhanced, personalized features.
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">

@@ -6,20 +6,26 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const idsParam = searchParams.get("ids");
     if (!idsParam) {
-      return NextResponse.json([]) as any;
+      return NextResponse.json([]);
     }
 
     const ids = idsParam.split(",").filter(Boolean);
     if (ids.length === 0) {
-      return NextResponse.json([]) as any;
+      return NextResponse.json([]);
     }
 
+    const idSet = new Set(ids);
     const allProducts = await getCachedPublishedProducts();
-    const fetchedProducts = allProducts.filter((p) => ids.includes(p.id));
+    const productMap = new Map<string, typeof allProducts[0]>();
+    for (let i = 0; i < allProducts.length; i++) {
+      if (idSet.has(allProducts[i].id)) {
+        productMap.set(allProducts[i].id, allProducts[i]);
+      }
+    }
 
     const mapped = ids
       .map((id) => {
-        const product = fetchedProducts.find((p) => p.id === id);
+        const product = productMap.get(id);
         if (!product) return null;
         const variants = product.variants || [];
         const defaultVariant =
@@ -33,12 +39,12 @@ export async function GET(request: Request) {
       })
       .filter(Boolean);
 
-    return NextResponse.json(mapped) as any;
+    return NextResponse.json(mapped);
   } catch (error) {
     console.error("[Products Summary API Error]", error);
     return NextResponse.json(
       { error: "Failed to fetch products summary" },
       { status: 500 }
-    ) as any;
+    );
   }
 }

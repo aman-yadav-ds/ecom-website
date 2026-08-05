@@ -63,6 +63,9 @@ const contactPageJsonLd = {
   }
 };
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function ContactUsPage() {
   return (
     <main className="min-h-screen bg-light-100">

@@ -121,8 +121,8 @@ export default function DealerListView({ initialDealers, defaultCenter }: Dealer
               <MapPin className="w-8 h-8" />
             </div>
             <p className="font-jost text-lg md:text-xl text-dark-900 font-extrabold max-w-2xl leading-relaxed uppercase">
-              Our dealer network currently hasn't extended to <br />
-              <span className="text-brand-red">'{activeLocationName || searchTerm || "this area"}'</span>.
+              Our dealer network currently hasn&apos;t extended to <br />
+              <span className="text-brand-red">&apos;{activeLocationName || searchTerm || "this area"}&apos;</span>.
             </p>
 
             <div className="w-16 h-1 bg-light-300 rounded-full my-2"></div>

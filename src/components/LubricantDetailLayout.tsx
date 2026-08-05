@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Product, Variant } from "@/lib/types";
 import ProductGallery from "./ProductGallery";
 import Link from "next/link";
@@ -55,8 +55,6 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
   });
 
   const viscosity = activeVariant?.technicalDetails["Viscosity Grade"] || "Universal Fluid";
-  const apiRating = activeVariant?.technicalDetails["API Rating"] || "Industrial Standard";
-  const containerVol = activeVariant?.technicalDetails["Container Volume"] || activeVariant?.name;
 
   return (
     <div className="flex flex-col gap-12 font-jost">

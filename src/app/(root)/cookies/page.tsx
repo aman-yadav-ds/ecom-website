@@ -1,6 +1,9 @@
 import React from "react";
 import { Cookie } from "lucide-react";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function CookiesPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
@@ -16,7 +19,7 @@ export default function CookiesPage() {
         
         <div className="space-y-6 text-dark-700 leading-relaxed font-medium text-sm sm:text-base">
           <p>
-            This Cookies Policy explains how <strong className="text-dark-900 font-extrabold">KOREVA GLOBAL LLP</strong> ("we", "us", or "our") uses cookies and similar technologies to recognize you when you visit our website.
+            This Cookies Policy explains how <strong className="text-dark-900 font-extrabold">KOREVA GLOBAL LLP</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies and similar technologies to recognize you when you visit our website.
           </p>
 
           <h2 className="text-lg font-extrabold text-dark-900 uppercase mt-8 mb-2">What are Cookies?</h2>

@@ -1,25 +1,13 @@
-import { getDb } from "@/db";
 import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 import { ProductListingItem } from "@/components/ProductCatalogClient";
-import { unstable_cache } from "next/cache";
+import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
+import type { Category } from "@/db/schema";
 
-const getCachedRawProducts = unstable_cache(
-  async (categoryIdFilter?: string) => {
-    const db = await getDb();
-    return db.query.products.findMany({
-      where: (products, { eq, and }) =>
-        categoryIdFilter
-          ? and(eq(products.isPublished, true), eq(products.categoryId, categoryIdFilter))
-          : eq(products.isPublished, true),
-      with: {
-        category: true,
-        variants: true,
-      },
-    });
-  },
-  ["catalog-raw-products-key"],
-  { revalidate: 3600, tags: ["products"] }
-);
+const getCachedRawProducts = async (categoryIdFilter?: string) => {
+  const all = await getCachedPublishedProducts();
+  if (!categoryIdFilter) return all;
+  return all.filter((p) => p.categoryId === categoryIdFilter);
+};
 
 export interface CatalogQueryParams {
   search?: string;
@@ -44,127 +32,141 @@ export interface CatalogResult {
  */
 export async function getCatalogData(
   queryParams: CatalogQueryParams = {},
-  categorySlug?: string
+  categorySlug?: string,
+  preloadedCategory?: { id: string; name: string } | null
 ): Promise<CatalogResult> {
-  const db = await getDb();
+  let categoryIdFilter: string | undefined = preloadedCategory?.id;
+  let categoryNameFromSlug: string | undefined = preloadedCategory?.name;
 
-  // 1. Resolve category filter if accessing a category-specific page
-  let categoryIdFilter: string | undefined = undefined;
-  let categoryNameFromSlug: string | undefined = undefined;
-
-  if (categorySlug) {
-    const category = await db.query.categories.findFirst({
-      where: (c, { eq }) => eq(c.slug, categorySlug),
-    });
+  if (categorySlug && !preloadedCategory) {
+    const categoriesList = await getCachedCategories();
+    const category = categoriesList.find((c: Category) => c.slug === categorySlug);
     if (category) {
       categoryIdFilter = category.id;
       categoryNameFromSlug = category.name;
     }
   }
 
-  // 2. Fetch published products with category and variant details from D1 (cached for 1 hour)
+  // Fetch published products (cached)
   const rawProducts = await getCachedRawProducts(categoryIdFilter);
 
-  const allProductsMapped: ProductListingItem[] = rawProducts.map((product) => {
+  const activeCategoryParam = (queryParams.category as string) || categoryNameFromSlug || categorySlug;
+  const isMainProductsPage = !activeCategoryParam || activeCategoryParam === "All";
+
+  const allowedKeys =
+    activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam]
+      ? CATEGORY_FILTERS[activeCategoryParam]
+      : ALLOWED_FILTERS;
+  const allowedKeysSet = new Set(allowedKeys);
+
+  const filtersMap: Record<string, Set<string>> = {};
+  const categorySet = isMainProductsPage ? new Set<string>() : null;
+
+  // Single-pass mapping and filter aggregation
+  const allProductsMapped: ProductListingItem[] = new Array(rawProducts.length);
+
+  for (let i = 0; i < rawProducts.length; i++) {
+    const product = rawProducts[i];
     const category = product.category;
     const productVariants = product.variants || [];
-    const defaultVariant =
-      productVariants.find((v) => v.id === product.defaultVariantId) ||
-      productVariants[0];
 
-    return {
+    let defaultVariant = productVariants[0];
+    if (product.defaultVariantId) {
+      for (let j = 0; j < productVariants.length; j++) {
+        if (productVariants[j].id === product.defaultVariantId) {
+          defaultVariant = productVariants[j];
+          break;
+        }
+      }
+    }
+
+    const categoryName = category?.name || "Uncategorized";
+    if (categorySet && categoryName) {
+      categorySet.add(categoryName);
+    }
+
+    const allVariantsTech = productVariants.map((v) => v.technicalDetails);
+
+    const item: ProductListingItem = {
       id: product.id,
       name: product.name,
       description: product.description,
       categoryId: product.categoryId,
-      categoryName: category?.name || "Uncategorized",
+      categoryName,
       tags: product.tags || [],
       price: defaultVariant ? parseFloat(defaultVariant.price) : 0,
       image: product.coverImage || defaultVariant?.images?.[0] || "/placeholder.png",
       imageAlt: product.coverImageAlt || defaultVariant?.imagesAlt?.[0] || product.name,
       variantsCount: productVariants.length,
       technicalDetails: defaultVariant ? defaultVariant.technicalDetails : {},
-      allVariantsTechnicalDetails: productVariants.map((v) => v.technicalDetails),
+      allVariantsTechnicalDetails: allVariantsTech,
     };
-  });
 
-  // 3. Compute available sidebar filters dynamically for current context
-  const activeCategoryParam = (queryParams.category as string) || categoryNameFromSlug || categorySlug;
-  const isMainProductsPage = !activeCategoryParam || activeCategoryParam === "All";
+    allProductsMapped[i] = item;
 
-  const filtersMap: Record<string, Set<string>> = {};
+    // Aggregate filters if product matches current category context
+    const matchesCategoryContext =
+      !activeCategoryParam ||
+      activeCategoryParam === "All" ||
+      categoryName === activeCategoryParam ||
+      product.categoryId === activeCategoryParam ||
+      categoryName.toLowerCase() === activeCategoryParam.toLowerCase() ||
+      product.categoryId.toLowerCase() === activeCategoryParam.toLowerCase();
 
-  if (isMainProductsPage) {
-    const categorySet = new Set<string>();
-    allProductsMapped.forEach((p) => {
-      if (p.categoryName) categorySet.add(p.categoryName);
-    });
-    if (categorySet.size > 1) {
-      filtersMap["Category"] = categorySet;
+    if (matchesCategoryContext) {
+      const variantsTech = allVariantsTech.length > 0 ? allVariantsTech : [item.technicalDetails];
+      for (let vIdx = 0; vIdx < variantsTech.length; vIdx++) {
+        const tech = variantsTech[vIdx] || {};
+        const keys = Object.keys(tech);
+        for (let kIdx = 0; kIdx < keys.length; kIdx++) {
+          const key = keys[kIdx];
+          const value = tech[key];
+          if (value && allowedKeysSet.has(key)) {
+            if (!filtersMap[key]) {
+              filtersMap[key] = new Set();
+            }
+            filtersMap[key].add(value);
+          }
+        }
+      }
     }
   }
 
-  const allowedKeys =
-    activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam]
-      ? CATEGORY_FILTERS[activeCategoryParam]
-      : ALLOWED_FILTERS;
-
-  allProductsMapped.forEach((product) => {
-    if (
-      activeCategoryParam &&
-      activeCategoryParam !== "All" &&
-      product.categoryName !== activeCategoryParam &&
-      product.categoryId !== activeCategoryParam &&
-      product.categoryName?.toLowerCase() !== activeCategoryParam.toLowerCase() &&
-      product.categoryId?.toLowerCase() !== activeCategoryParam.toLowerCase()
-    ) {
-      return;
-    }
-
-    const variantsTech =
-      product.allVariantsTechnicalDetails && product.allVariantsTechnicalDetails.length > 0
-        ? product.allVariantsTechnicalDetails
-        : [product.technicalDetails];
-
-    variantsTech.forEach((tech) => {
-      Object.entries(tech || {}).forEach(([key, value]) => {
-        if (!value) return;
-        if (!allowedKeys.includes(key)) return;
-        if (!filtersMap[key]) {
-          filtersMap[key] = new Set();
-        }
-        filtersMap[key].add(value);
-      });
-    });
-  });
+  if (categorySet && categorySet.size > 1) {
+    filtersMap["Category"] = categorySet;
+  }
 
   const availableFilters: Record<string, string[]> = {};
-  Object.keys(filtersMap).forEach((key) => {
+  const filterMapKeys = Object.keys(filtersMap);
+  for (let k = 0; k < filterMapKeys.length; k++) {
+    const key = filterMapKeys[k];
     const sortedValues = Array.from(filtersMap[key]).sort();
     if (sortedValues.length > 1) {
       availableFilters[key] = sortedValues;
     }
-  });
+  }
 
-  // 4. Extract Search, Sort, and Technical Filter values from queryParams
+  // Extract query filters
   const searchQuery = typeof queryParams.search === "string" ? queryParams.search.toLowerCase().trim() : "";
   const sortMode = typeof queryParams.sort === "string" ? queryParams.sort : "featured";
 
-  const activeTechnicalFilters: Record<string, string[]> = {};
-  Object.keys(queryParams).forEach((key) => {
+  const activeTechnicalFiltersEntries: [string, string[]][] = [];
+  const qKeys = Object.keys(queryParams);
+  for (let i = 0; i < qKeys.length; i++) {
+    const key = qKeys[i];
     if (key !== "search" && key !== "sort" && key !== "page" && key !== "limit") {
       const val = queryParams[key];
       if (val !== undefined && val !== null && val !== "") {
-        activeTechnicalFilters[key] = Array.isArray(val)
-          ? (val as string[])
-          : [val as string];
+        activeTechnicalFiltersEntries.push([
+          key,
+          Array.isArray(val) ? (val as string[]) : [val as string],
+        ]);
       }
     }
-  });
+  }
 
-  // 5. Apply filtering across all products in database
-  let filtered = allProductsMapped.filter((product) => {
-    // Search query matching
+  // Filter matching
+  const filtered = allProductsMapped.filter((product) => {
     if (searchQuery) {
       const nameMatch = product.name.toLowerCase().includes(searchQuery);
       const tagMatch = product.tags.some((tag) => tag.toLowerCase().includes(searchQuery));
@@ -174,8 +176,8 @@ export async function getCatalogData(
       }
     }
 
-    // Technical / Category filter matching
-    for (const [filterKey, selectedValues] of Object.entries(activeTechnicalFilters)) {
+    for (let f = 0; f < activeTechnicalFiltersEntries.length; f++) {
+      const [filterKey, selectedValues] = activeTechnicalFiltersEntries[f];
       if (!selectedValues || selectedValues.length === 0) continue;
 
       if (filterKey.toLowerCase() === "category") {
@@ -202,14 +204,12 @@ export async function getCatalogData(
     return true;
   });
 
-  // 6. Apply sorting
   if (sortMode === "price_asc") {
-    filtered = [...filtered].sort((a, b) => a.price - b.price);
+    filtered.sort((a, b) => a.price - b.price);
   } else if (sortMode === "price_desc") {
-    filtered = [...filtered].sort((a, b) => b.price - a.price);
+    filtered.sort((a, b) => b.price - a.price);
   }
 
-  // 7. Apply pagination
   const pageSize = Number(queryParams.limit) || 12;
   const totalProducts = filtered.length;
   const totalPages = Math.max(1, Math.ceil(totalProducts / pageSize));

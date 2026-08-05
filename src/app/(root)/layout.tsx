@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
-import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
 import JoinNetworkModal from "@/components/JoinNetworkModal";

@@ -94,3 +94,14 @@ export const variantsRelations = relations(variants, ({ one }) => ({
     references: [products.id],
   }),
 }));
+
+export type Category = typeof categories.$inferSelect;
+export type Product = typeof products.$inferSelect;
+export type Variant = typeof variants.$inferSelect;
+export type Dealer = typeof dealers.$inferSelect;
+export type NewsArticle = typeof newsArticles.$inferSelect;
+
+export type ProductWithRelations = Product & {
+  category: Category | null;
+  variants: Variant[];
+};

@@ -1,6 +1,9 @@
 import React from "react";
 import ArticleLayout from "@/components/ArticleLayout";
 
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+
 export default function TractorAttachmentsGuide() {
   return (
     <ArticleLayout
@@ -11,7 +14,7 @@ export default function TractorAttachmentsGuide() {
       heroImage="/guides/tractor-attachment.jpg"
     >
       <p>
-        Investing in a KOREVA9 tractor is only the first step toward maximizing your farm's productivity. The true power of your machinery is unlocked by selecting the correct implements for your specific soil type, crop requirements, and field conditions. 
+        Investing in a KOREVA9 tractor is only the first step toward maximizing your farm&apos;s productivity. The true power of your machinery is unlocked by selecting the correct implements for your specific soil type, crop requirements, and field conditions. 
       </p>
       <p>
         In this guide, we break down the most common secondary tillage attachments—Harrows and Rotavators—and help you decide which one belongs on your farm.
@@ -19,7 +22,7 @@ export default function TractorAttachmentsGuide() {
 
       <h2>The Rotavator (Rotary Tiller)</h2>
       <p>
-        A rotavator utilizes a series of rotating blades (tines) driven by the tractor's Power Take-Off (PTO) shaft. As the tractor moves forward, the spinning blades cut into the soil, churn it, and throw it against a trailing board to shatter clods.
+        A rotavator utilizes a series of rotating blades (tines) driven by the tractor&apos;s Power Take-Off (PTO) shaft. As the tractor moves forward, the spinning blades cut into the soil, churn it, and throw it against a trailing board to shatter clods.
       </p>
       <ul>
         <li><strong>Best For:</strong> Hard, compacted soils and aggressive weed eradication.</li>
