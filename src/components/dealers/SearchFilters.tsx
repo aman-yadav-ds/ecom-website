@@ -32,7 +32,7 @@ export default function SearchFilters({
     setIsLocating(true);
     try {
       const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`);
-      const data = await res.json();
+      const data = (await res.json()) as Array<{ lat: string; lon: string; display_name?: string }>;
       
       if (data && data.length > 0) {
         onLocationChange({

@@ -1,4 +1,4 @@
-export interface D1Database {
+export interface D1DatabaseLike {
   prepare(query: string): {
     bind(...values: unknown[]): unknown;
     first<T = Record<string, unknown>>(column?: string): Promise<T | null>;
@@ -12,7 +12,7 @@ export interface D1Database {
 let initPromise: Promise<void> | null = null;
 let isInitialized = false;
 
-export async function ensureTablesAndSeed(d1: D1Database): Promise<void> {
+export async function ensureTablesAndSeed(d1: any): Promise<void> {
   if (isInitialized) {
     return;
   }
@@ -24,7 +24,7 @@ export async function ensureTablesAndSeed(d1: D1Database): Promise<void> {
     try {
       // Fast path: probe if tables are already initialized & seeded
       try {
-        const check = await d1.prepare("SELECT count(*) as count FROM categories").first<{ count: number }>();
+        const check = (await d1.prepare("SELECT count(*) as count FROM categories").first()) as { count: number } | null;
         if (check && (check.count ?? 0) > 0) {
           isInitialized = true;
           return;
@@ -54,7 +54,7 @@ export async function ensureTablesAndSeed(d1: D1Database): Promise<void> {
 
       // 2. If database has no categories (e.g. fresh local dev/build environment), seed from migration SQL
       try {
-        const checkResult = await d1.prepare("SELECT count(*) as count FROM categories").first<{ count: number }>();
+        const checkResult = (await d1.prepare("SELECT count(*) as count FROM categories").first()) as { count: number } | null;
         const count = checkResult?.count ?? 0;
 
         if (count === 0) {

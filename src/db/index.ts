@@ -1,7 +1,7 @@
 import { drizzle, DrizzleD1Database } from "drizzle-orm/d1";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import * as schema from "./schema";
-import { ensureTablesAndSeed, D1Database } from "./init";
+import { ensureTablesAndSeed } from "./init";
 
 export type DbType = DrizzleD1Database<typeof schema>;
 
@@ -16,7 +16,7 @@ const globalForDb = globalThis as unknown as {
 export async function getDb(): Promise<DbType> {
   try {
     const { env } = await getCloudflareContext({ async: true });
-    const envMap = env as Record<string, D1Database>;
+    const envMap = env as unknown as Record<string, D1Database>;
     const d1 = envMap.DB || envMap.ecom_db;
     if (!d1) {
       throw new Error(
