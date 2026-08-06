@@ -217,7 +217,7 @@ export const getCachedDealers = unstable_cache(
  */
 export const getCachedCategoryFacets = unstable_cache(
   async (categoryKey?: string): Promise<Record<string, string[]>> => {
-    const rawProducts = await getCachedPublishedProducts(100, 0, categoryKey);
+    const rawProducts = await getCachedPublishedProducts();
     const activeCategoryParam = categoryKey;
     const isMainProductsPage = !activeCategoryParam || activeCategoryParam === "All";
 
