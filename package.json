@@ -44,6 +44,13 @@
     "typescript": "^5",
     "wrangler": "^4.118.0"
   },
+  "browserslist": [
+    "chrome >= 100",
+    "firefox >= 100",
+    "safari >= 15.4",
+    "edge >= 100",
+    "not dead"
+  ],
   "overrides": {
     "undici": "^7.28.1",
     "esbuild": "^0.25.0"

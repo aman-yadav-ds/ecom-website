@@ -18,8 +18,8 @@ const Footer = () => {
               <Award className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-dark-900 uppercase tracking-wider">ISO 9001:2015 Certified Manufacturing</h4>
-              <p className="text-xs text-dark-500">Engineering heavy-duty farm equipment & ISO certified STOU lubricants for Indian agriculture.</p>
+              <p className="text-sm font-bold text-dark-900 uppercase tracking-wider">ISO 9001:2015 Certified Manufacturing</p>
+              <p className="text-xs text-dark-700">Engineering heavy-duty farm equipment & ISO certified STOU lubricants for Indian agriculture.</p>
             </div>
           </div>
           <div className="flex items-center gap-3 shrink-0">
@@ -186,7 +186,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-light-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-dark-500 font-medium">
+        <div className="border-t border-light-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-dark-700 font-medium">
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="flex items-center gap-2 text-dark-900 font-semibold">
               <MapPin className="w-3.5 h-3.5 text-brand-red" />

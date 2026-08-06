@@ -111,7 +111,7 @@ export default function ArticleLayout({
               <div className="pt-6 border-t border-light-200">
                 <Link href="/dealers" className="flex items-center justify-between bg-brand-black text-white p-5 rounded-2xl hover:bg-brand-red transition-all group shadow-xs active:scale-95">
                   <div>
-                    <h4 className="font-extrabold uppercase tracking-wide text-xs">Need Technical Help?</h4>
+                    <p className="font-extrabold uppercase tracking-wide text-xs">Need Technical Help?</p>
                     <p className="text-xs text-gray-300 font-medium mt-0.5">Find an authorized dealer</p>
                   </div>
                   <ChevronRight className="w-5 h-5 text-brand-red group-hover:text-white transition-colors" />

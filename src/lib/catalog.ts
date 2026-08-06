@@ -1,6 +1,5 @@
-import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 import { ProductListingItem } from "@/components/ProductCatalogClient";
-import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
+import { getCachedCategories, getCachedPublishedProducts, getCachedCategoryFacets } from "@/lib/cached-queries";
 import type { Category } from "@/db/schema";
 
 const getCachedRawProducts = async (categoryIdFilter?: string) => {
@@ -51,18 +50,8 @@ export async function getCatalogData(
   const rawProducts = await getCachedRawProducts(categoryIdFilter);
 
   const activeCategoryParam = (queryParams.category as string) || categoryNameFromSlug || categorySlug;
-  const isMainProductsPage = !activeCategoryParam || activeCategoryParam === "All";
 
-  const allowedKeys =
-    activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam]
-      ? CATEGORY_FILTERS[activeCategoryParam]
-      : ALLOWED_FILTERS;
-  const allowedKeysSet = new Set(allowedKeys);
-
-  const filtersMap: Record<string, Set<string>> = {};
-  const categorySet = isMainProductsPage ? new Set<string>() : null;
-
-  // Single-pass mapping and filter aggregation
+  // Single-pass mapping
   const allProductsMapped: ProductListingItem[] = new Array(rawProducts.length);
 
   for (let i = 0; i < rawProducts.length; i++) {
@@ -81,9 +70,6 @@ export async function getCatalogData(
     }
 
     const categoryName = category?.name || "Uncategorized";
-    if (categorySet && categoryName) {
-      categorySet.add(categoryName);
-    }
 
     const allVariantsTech = productVariants.map((v) => v.technicalDetails);
 
@@ -103,48 +89,9 @@ export async function getCatalogData(
     };
 
     allProductsMapped[i] = item;
-
-    // Aggregate filters if product matches current category context
-    const matchesCategoryContext =
-      !activeCategoryParam ||
-      activeCategoryParam === "All" ||
-      categoryName === activeCategoryParam ||
-      product.categoryId === activeCategoryParam ||
-      categoryName.toLowerCase() === activeCategoryParam.toLowerCase() ||
-      product.categoryId.toLowerCase() === activeCategoryParam.toLowerCase();
-
-    if (matchesCategoryContext) {
-      const variantsTech = allVariantsTech.length > 0 ? allVariantsTech : [item.technicalDetails];
-      for (let vIdx = 0; vIdx < variantsTech.length; vIdx++) {
-        const tech = variantsTech[vIdx] || {};
-        const keys = Object.keys(tech);
-        for (let kIdx = 0; kIdx < keys.length; kIdx++) {
-          const key = keys[kIdx];
-          const value = tech[key];
-          if (value && allowedKeysSet.has(key)) {
-            if (!filtersMap[key]) {
-              filtersMap[key] = new Set();
-            }
-            filtersMap[key].add(value);
-          }
-        }
-      }
-    }
   }
 
-  if (categorySet && categorySet.size > 1) {
-    filtersMap["Category"] = categorySet;
-  }
-
-  const availableFilters: Record<string, string[]> = {};
-  const filterMapKeys = Object.keys(filtersMap);
-  for (let k = 0; k < filterMapKeys.length; k++) {
-    const key = filterMapKeys[k];
-    const sortedValues = Array.from(filtersMap[key]).sort();
-    if (sortedValues.length > 1) {
-      availableFilters[key] = sortedValues;
-    }
-  }
+  const availableFilters = await getCachedCategoryFacets(activeCategoryParam);
 
   // Extract query filters
   const searchQuery = typeof queryParams.search === "string" ? queryParams.search.toLowerCase().trim() : "";

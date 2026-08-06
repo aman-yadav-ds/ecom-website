@@ -38,6 +38,7 @@ export default function AboutPage() {
               className="object-cover scale-105 filter brightness-95 opacity-25"
               priority
               loading="eager"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfb]/90 via-[#fbfbfb]/80 to-[#fbfbfb] z-10" />
             <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/8 rounded-full blur-[140px] pointer-events-none z-10" />

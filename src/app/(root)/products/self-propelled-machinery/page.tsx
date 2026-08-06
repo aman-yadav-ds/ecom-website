@@ -23,13 +23,18 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function SelfPropelledMachineryPage() {
+export default async function SelfPropelledMachineryPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "self-propelled-machinery");
 
   if (!category) notFound();
 
-  const catalogData = await getCatalogData({}, "self-propelled-machinery", category);
+  const catalogData = await getCatalogData(resolvedParams, "self-propelled-machinery", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

@@ -27,7 +27,7 @@ const CollapsibleFeature: React.FC<CollapsibleFeatureProps> = ({
       >
         <div className="flex items-center gap-3">
           {icon && <div className="text-brand-red">{icon}</div>}
-          <h4 className="text-sm font-bold text-dark-900">{title}</h4>
+          <span className="text-sm font-bold text-dark-900">{title}</span>
         </div>
         <ChevronDown
           className={`w-5 h-5 text-dark-500 transition-transform duration-300 ${

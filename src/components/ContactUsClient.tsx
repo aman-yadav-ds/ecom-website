@@ -417,9 +417,9 @@ export default function ContactUsClient() {
                 />
               </div>
               <div>
-                <h4 className="font-extrabold text-dark-900 uppercase text-base">
+                <h3 className="font-extrabold text-dark-900 uppercase text-base">
                   Koreva Global LLP Manufacturing Facility
-                </h4>
+                </h3>
                 <p className="text-xs text-dark-600 mt-1 leading-relaxed font-medium">
                   Located along NH 9 Kichha Rudrapur Road, Uttarakhand. Equipped with modern assembly lines and testing facilities.
                 </p>

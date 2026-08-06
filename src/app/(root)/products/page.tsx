@@ -30,8 +30,13 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function ProductsPage() {
-  const catalogData = await getCatalogData({});
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
+  const catalogData = await getCatalogData(resolvedParams);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

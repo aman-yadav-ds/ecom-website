@@ -1,6 +1,7 @@
 import { getDb } from "@/db";
 import { unstable_cache } from "next/cache";
-import { eq, and } from "drizzle-orm";
+import { eq, and, inArray } from "drizzle-orm";
+import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 import {
   categories,
   products,
@@ -46,8 +47,15 @@ export const getCachedPublishedProducts = unstable_cache(
           .limit(limit)
           .offset(offset);
 
-        const categoriesList = await db.select().from(categories);
-        const variantsList = await db.select().from(variants);
+        if (!productsList || productsList.length === 0) {
+          return [];
+        }
+
+        const productIds = productsList.map((p) => p.id);
+        const [categoriesList, variantsList] = await Promise.all([
+          db.select().from(categories),
+          db.select().from(variants).where(inArray(variants.productId, productIds)),
+        ]);
 
         const categoryMap = new Map<string, Category>(categoriesList.map((c) => [c.id, c]));
         const variantsByProduct = new Map<string, Variant[]>();
@@ -84,12 +92,40 @@ export const getCachedPublishedProducts = unstable_cache(
 );
 
 /**
- * Single product lookup by ID using cached products pool.
+ * Single product lookup by ID using cached targeted query.
  */
-export const getCachedProductById = async (id: string): Promise<ProductWithRelations | null> => {
-  const all = await getCachedPublishedProducts();
-  return all.find((p) => p.id === id) || null;
-};
+export const getCachedProductById = unstable_cache(
+  async (id: string): Promise<ProductWithRelations | null> => {
+    try {
+      const db = await getDb();
+      const productsList = await db
+        .select()
+        .from(products)
+        .where(and(eq(products.isPublished, true), eq(products.id, id)))
+        .limit(1);
+
+      if (!productsList || productsList.length === 0) {
+        return null;
+      }
+
+      const p = productsList[0];
+      const [categoriesList, variantsList] = await Promise.all([
+        db.select().from(categories).where(eq(categories.id, p.categoryId)),
+        db.select().from(variants).where(eq(variants.productId, p.id)),
+      ]);
+
+      return {
+        ...p,
+        category: categoriesList[0] || null,
+        variants: variantsList || [],
+      };
+    } catch {
+      return null;
+    }
+  },
+  ["cached-product-by-id-key"],
+  { revalidate: 3600, tags: ["products"] }
+);
 
 /**
  * Cached fetch for all categories.
@@ -173,4 +209,68 @@ export const getCachedDealers = unstable_cache(
   },
   ["cached-dealers-key"],
   { revalidate: 3600, tags: ["dealers"] }
+);
+
+/**
+ * Cached fetch for category filter facets (sidebar options).
+ * Computes distinct technical options per category once and caches for 1 hour.
+ */
+export const getCachedCategoryFacets = unstable_cache(
+  async (categoryKey?: string): Promise<Record<string, string[]>> => {
+    const rawProducts = await getCachedPublishedProducts(100, 0, categoryKey);
+    const activeCategoryParam = categoryKey;
+    const isMainProductsPage = !activeCategoryParam || activeCategoryParam === "All";
+
+    const allowedKeys =
+      activeCategoryParam && CATEGORY_FILTERS[activeCategoryParam]
+        ? CATEGORY_FILTERS[activeCategoryParam]
+        : ALLOWED_FILTERS;
+    const allowedKeysSet = new Set(allowedKeys);
+
+    const filtersMap: Record<string, Set<string>> = {};
+    const categorySet = isMainProductsPage ? new Set<string>() : null;
+
+    for (let i = 0; i < rawProducts.length; i++) {
+      const product = rawProducts[i];
+      const categoryName = product.category?.name || "Uncategorized";
+      if (categorySet && categoryName) {
+        categorySet.add(categoryName);
+      }
+      const productVariants = product.variants || [];
+      const variantsTech = productVariants.map((v) => v.technicalDetails);
+
+      for (let vIdx = 0; vIdx < variantsTech.length; vIdx++) {
+        const tech = variantsTech[vIdx] || {};
+        const keys = Object.keys(tech);
+        for (let kIdx = 0; kIdx < keys.length; kIdx++) {
+          const key = keys[kIdx];
+          const value = tech[key];
+          if (value && allowedKeysSet.has(key)) {
+            if (!filtersMap[key]) {
+              filtersMap[key] = new Set();
+            }
+            filtersMap[key].add(value);
+          }
+        }
+      }
+    }
+
+    if (categorySet && categorySet.size > 1) {
+      filtersMap["Category"] = categorySet;
+    }
+
+    const availableFilters: Record<string, string[]> = {};
+    const filterMapKeys = Object.keys(filtersMap);
+    for (let k = 0; k < filterMapKeys.length; k++) {
+      const key = filterMapKeys[k];
+      const sortedValues = Array.from(filtersMap[key]).sort();
+      if (sortedValues.length > 1) {
+        availableFilters[key] = sortedValues;
+      }
+    }
+
+    return availableFilters;
+  },
+  ["cached-category-facets-key"],
+  { revalidate: 3600, tags: ["products", "categories"] }
 );

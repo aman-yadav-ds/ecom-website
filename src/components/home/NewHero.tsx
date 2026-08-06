@@ -17,6 +17,7 @@ export function NewHero() {
           sizes="100vw"
           priority
           loading="eager"
+          fetchPriority="high"
           className="object-cover scale-105 filter brightness-95 opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfb]/70 via-[#fbfbfb]/50 to-[#fbfbfb]/90 z-10" />

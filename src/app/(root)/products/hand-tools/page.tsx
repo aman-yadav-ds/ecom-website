@@ -24,13 +24,18 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function HandToolsPage() {
+export default async function HandToolsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "hand-tools");
 
   if (!category) notFound();
 
-  const catalogData = await getCatalogData({}, "hand-tools", category);
+  const catalogData = await getCatalogData(resolvedParams, "hand-tools", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

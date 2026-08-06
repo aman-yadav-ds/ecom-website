@@ -23,13 +23,18 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function FoodProcessingUnitsPage() {
+export default async function FoodProcessingUnitsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "food-processing-units");
 
   if (!category) notFound();
 
-  const catalogData = await getCatalogData({}, "food-processing-units", category);
+  const catalogData = await getCatalogData(resolvedParams, "food-processing-units", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

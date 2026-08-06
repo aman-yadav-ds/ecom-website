@@ -23,13 +23,18 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function TractorAttachmentsPage() {
+export default async function TractorAttachmentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "tractor-attachments");
 
   if (!category) notFound();
 
-  const catalogData = await getCatalogData({}, "tractor-attachments", category);
+  const catalogData = await getCatalogData(resolvedParams, "tractor-attachments", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

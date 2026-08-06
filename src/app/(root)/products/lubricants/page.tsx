@@ -24,13 +24,18 @@ export const metadata: Metadata = buildProductMetadata({
 
 export const revalidate = 60;
 
-export default async function LubricantsPage() {
+export default async function LubricantsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = (await searchParams) || {};
   const categoriesList = await getCachedCategories();
   const category = categoriesList.find((c) => c.slug === "lubricants");
 
   if (!category) notFound();
 
-  const catalogData = await getCatalogData({}, "lubricants", category);
+  const catalogData = await getCatalogData(resolvedParams, "lubricants", category);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">

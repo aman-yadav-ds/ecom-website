@@ -200,8 +200,8 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
             <div className="flex items-center gap-3">
               <Info className="w-5 h-5 text-emerald-700 shrink-0" />
               <div>
-                <h4 className="text-xs font-bold text-dark-900 uppercase">Technical & Safety Data (TDS/SDS)</h4>
-                <p className="text-xs text-dark-500">Download official oil viscosity & safety compliance sheets.</p>
+                <p className="text-xs font-bold text-dark-900 uppercase">Technical & Safety Data (TDS/SDS)</p>
+                <p className="text-xs text-dark-700">Download official oil viscosity & safety compliance sheets.</p>
               </div>
             </div>
             <Link

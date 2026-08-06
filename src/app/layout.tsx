@@ -5,6 +5,7 @@ import "./globals.css";
 const jost = Jost({
   variable: '--font-jost',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
@@ -149,6 +150,9 @@ export default function RootLayout({
       className={`${jost.className} h-full antialiased`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
