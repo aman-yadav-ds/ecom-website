@@ -75,6 +75,17 @@ export const newsArticles = sqliteTable("news_articles", {
   >(),
 });
 
+export const downloads = sqliteTable("downloads", {
+  id: text("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  fileUrl: text("file_url"),
+  fileType: text("file_type").notNull().default("pdf"),
+  fileSize: text("file_size").notNull(),
+  category: text("category").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
 // Relational Definitions
 export const categoriesRelations = relations(categories, ({ many }) => ({
   products: many(products),
@@ -100,6 +111,7 @@ export type Product = typeof products.$inferSelect;
 export type Variant = typeof variants.$inferSelect;
 export type Dealer = typeof dealers.$inferSelect;
 export type NewsArticle = typeof newsArticles.$inferSelect;
+export type Download = typeof downloads.$inferSelect;
 
 export type ProductWithRelations = Product & {
   category: Category | null;

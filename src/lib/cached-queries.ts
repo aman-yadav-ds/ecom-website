@@ -1,6 +1,6 @@
 import { getDb } from "@/db";
 import { unstable_cache } from "next/cache";
-import { eq, and, inArray } from "drizzle-orm";
+import { eq, and, inArray, asc } from "drizzle-orm";
 import { ALLOWED_FILTERS, CATEGORY_FILTERS } from "@/lib/filter";
 import {
   categories,
@@ -8,11 +8,13 @@ import {
   variants,
   newsArticles,
   dealers,
+  downloads,
   type Category,
   type ProductWithRelations,
   type NewsArticle,
   type Dealer,
   type Variant,
+  type Download,
 } from "@/db/schema";
 
 const globalForCache = globalThis as unknown as {
@@ -20,6 +22,7 @@ const globalForCache = globalThis as unknown as {
   __categoriesFetchPromise?: Promise<Category[]>;
   __newsFetchPromise?: Promise<NewsArticle[]>;
   __dealersFetchPromise?: Promise<Dealer[]>;
+  __downloadsFetchPromise?: Promise<Download[]>;
 };
 
 /**
@@ -273,4 +276,35 @@ export const getCachedCategoryFacets = unstable_cache(
   },
   ["cached-category-facets-key"],
   { revalidate: 3600, tags: ["products", "categories"] }
+);
+
+/**
+ * Cached fetch for published downloads/documents ordered by sortOrder.
+ */
+export const getCachedDownloads = unstable_cache(
+  async (): Promise<Download[]> => {
+    if (globalForCache.__downloadsFetchPromise) {
+      return globalForCache.__downloadsFetchPromise;
+    }
+
+    const fetchTask = (async () => {
+      try {
+        const db = await getDb();
+        return await db
+          .select()
+          .from(downloads)
+          .orderBy(asc(downloads.id));
+      } catch (error) {
+        console.error("[getCachedDownloads Error]", error);
+        return [];
+      } finally {
+        globalForCache.__downloadsFetchPromise = undefined;
+      }
+    })();
+
+    globalForCache.__downloadsFetchPromise = fetchTask;
+    return fetchTask;
+  },
+  ["cached-downloads-key"],
+  { revalidate: 3600, tags: ["downloads"] }
 );

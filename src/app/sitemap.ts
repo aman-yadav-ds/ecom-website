@@ -1,6 +1,11 @@
 import { MetadataRoute } from "next";
-import { getCachedCategories, getCachedPublishedProducts } from "@/lib/cached-queries";
-import type { Category, ProductWithRelations } from "@/db/schema";
+import {
+  getCachedCategories,
+  getCachedPublishedProducts,
+  getCachedNewsArticles,
+  getCachedDealers,
+} from "@/lib/cached-queries";
+import type { Category, ProductWithRelations, NewsArticle, Dealer } from "@/db/schema";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
@@ -100,11 +105,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let categoryRoutes: MetadataRoute.Sitemap = [];
   let productRoutes: MetadataRoute.Sitemap = [];
+  let newsRoutes: MetadataRoute.Sitemap = [];
+  let dealerRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    const [categoriesList, productsList] = await Promise.all([
+    const [categoriesList, productsList, newsList, dealersList] = await Promise.all([
       getCachedCategories(),
       getCachedPublishedProducts(),
+      getCachedNewsArticles(),
+      getCachedDealers(),
     ]);
 
     categoryRoutes = categoriesList.map((category: Category) => ({
@@ -120,9 +129,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     }));
+
+    newsRoutes = newsList.map((article: NewsArticle) => ({
+      url: `${baseUrl}/news/${article.id}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+
+    dealerRoutes = dealersList.map((dealer: Dealer) => ({
+      url: `${baseUrl}/dealers/${dealer.id}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
   } catch (error) {
     console.error("[Sitemap Generation Error]", error);
   }
 
-  return [...staticRoutes, ...categoryRoutes, ...productRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...productRoutes, ...newsRoutes, ...dealerRoutes];
 }

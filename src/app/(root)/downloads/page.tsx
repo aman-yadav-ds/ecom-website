@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { FileCheck2 } from "lucide-react";
 import { DownloadsClient } from "@/components/DownloadsClient";
 
+import { getCachedDownloads } from "@/lib/cached-queries";
+
 import {
   formatPageSeoTitle,
   formatPageSeoDescription,
@@ -16,15 +18,14 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["Koreva Manuals", "Koreva9 Catalog", "Power Weeder User Guide"],
 });
 
-// Static download data lives in the Server Component.
-// The page h1, description, and download titles are pre-rendered in the HTML.
-const downloads = [
+const defaultDownloads = [
   {
     id: "1",
     title: "KOREVA Master Product Catalogue 2026",
     type: "Catalogue" as const,
     size: "12.4 MB",
     date: "Jan 2026",
+    fileUrl: undefined,
   },
   {
     id: "2",
@@ -32,6 +33,7 @@ const downloads = [
     type: "Manual" as const,
     size: "4.2 MB",
     date: "Mar 2026",
+    fileUrl: undefined,
   },
   {
     id: "3",
@@ -47,6 +49,7 @@ const downloads = [
     type: "Manual" as const,
     size: "3.5 MB",
     date: "Apr 2026",
+    fileUrl: undefined,
   },
   {
     id: "5",
@@ -70,15 +73,26 @@ const downloads = [
     type: "Catalogue" as const,
     size: "5.6 MB",
     date: "Jun 2026",
+    fileUrl: undefined,
   },
 ];
 
-// Server Component — Metadata export is now possible.
-// h1 and page description are pre-rendered for SEO.
-export const dynamic = 'force-static';
-export const revalidate = 86400;
+export const revalidate = 3600;
 
-export default function DownloadsPage() {
+export default async function DownloadsPage() {
+  const dbDownloads = await getCachedDownloads();
+  const downloadsList =
+    dbDownloads && dbDownloads.length > 0
+      ? dbDownloads.map((d) => ({
+          id: d.id,
+          title: d.title,
+          type: (d.category as "Catalogue" | "Manual" | "Safety") || "Catalogue",
+          size: d.fileSize,
+          date: d.createdAt,
+          fileUrl: d.fileUrl || undefined,
+        }))
+      : defaultDownloads;
+
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 py-12 md:py-20 px-4 sm:px-6 lg:px-8 font-jost">
       <div className="max-w-5xl mx-auto">
@@ -98,7 +112,7 @@ export default function DownloadsPage() {
         </div>
 
         {/* Tab filtering state is the only client concern */}
-        <DownloadsClient downloads={downloads} />
+        <DownloadsClient downloads={downloadsList} />
       </div>
     </div>
   );

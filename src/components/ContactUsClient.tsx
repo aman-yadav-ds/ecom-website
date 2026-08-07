@@ -276,6 +276,9 @@ export default function ContactUsClient() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+91 98765 43210"
+                    minLength={10}
+                    pattern="^(?:\+?91[\s-]?)?[6-9]\d{9}$|^\+?[1-9]\d{7,14}$"
+                    title="Please enter a valid 10-digit mobile number (e.g. 9876543210 or +91 98765 43210)"
                     required
                     className="w-full px-4 py-3.5 bg-white border border-light-300 rounded-2xl text-dark-900 text-sm font-medium focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all shadow-xs"
                   />

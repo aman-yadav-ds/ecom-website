@@ -18,12 +18,55 @@ export const metadata: Metadata = buildProductMetadata({
   keywords: ["About Koreva Global LLP", "Koreva9 Manufacturer", "Agricultural Machinery Manufacturer"],
 });
 
+const aboutPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Koreva Global LLP",
+  "url": "https://koreva9.com/about",
+  "description": "Corporate about page for Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) agricultural machinery manufacturer in Uttarakhand, India.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Koreva Global LLP",
+    "alternateName": [
+      "Koreva",
+      "Koreva9",
+      "Koreva Agriculture",
+      "Koreva Machines",
+      "Koreva Global"
+    ],
+    "url": "https://koreva9.com",
+    "logo": "https://koreva9.com/icon.png",
+    "foundingDate": "2026",
+    "knowsAbout": [
+      "Power Weeders",
+      "Disc Harrows",
+      "Rotavators",
+      "Agricultural Lubricants",
+      "Farm Equipment"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",
+      "addressLocality": "Kichha",
+      "addressRegion": "Udham Singh Nagar, Uttarakhand",
+      "postalCode": "263148",
+      "addressCountry": "IN"
+    }
+  }
+};
+
 export const dynamic = 'force-static';
 export const revalidate = 86400;
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 flex flex-col font-jost">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(aboutPageJsonLd),
+        }}
+      />
       <main className="flex-grow">
         
         {/* Hero Section */}

@@ -206,6 +206,9 @@ export default function JoinNetworkModal() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="e.g. +91 98765 43210"
+                      minLength={10}
+                      pattern="^(?:\+?91[\s-]?)?[6-9]\d{9}$|^\+?[1-9]\d{7,14}$"
+                      title="Please enter a valid 10-digit mobile number (e.g. 9876543210 or +91 98765 43210)"
                       required 
                       className="w-full bg-light-200/80 focus:bg-white border border-light-300 rounded-xl py-3 pl-11 pr-4 font-jost font-medium text-brand-black text-sm md:text-base placeholder:text-dark-500 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all shadow-xs" 
                     />

@@ -29,8 +29,39 @@ export default async function DealerDetailPage(props: { params: Promise<{ id: st
     dealer.mapLink ||
     `https://maps.google.com/?q=${dealer.coordinates.lat},${dealer.coordinates.lng}`;
 
+  const dealerJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HardwareStore",
+    "name": dealer.name,
+    "url": `https://koreva9.com/dealers/${dealer.id}`,
+    "telephone": dealer.contactNo || undefined,
+    "email": dealer.email || undefined,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": `${dealer.addressLine1}, ${dealer.addressLine2}`,
+      "addressLocality": dealer.addressLine3,
+      "addressCountry": "IN",
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": dealer.coordinates.lat,
+      "longitude": dealer.coordinates.lng,
+    },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Koreva Global LLP",
+      "url": "https://koreva9.com",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(dealerJsonLd),
+        }}
+      />
       {/* Structural Hero Header */}
       <div className="relative border-b border-light-300 overflow-hidden pt-10 pb-14 px-4 md:px-8 bg-[#fbfbfb]">
         <div className="absolute top-0 right-1/4 w-80 h-80 bg-brand-red/8 rounded-full filter blur-[120px] pointer-events-none" />

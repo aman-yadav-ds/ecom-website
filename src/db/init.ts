@@ -50,6 +50,9 @@ export async function ensureTablesAndSeed(d1: D1DatabaseLike): Promise<void> {
         d1.prepare(
           `CREATE TABLE IF NOT EXISTS variants (id text PRIMARY KEY NOT NULL, name text NOT NULL, product_id text NOT NULL, images text NOT NULL, images_alt text, price text NOT NULL, applicable_gst text NOT NULL, technical_details text NOT NULL, FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE no action ON DELETE cascade)`
         ),
+        d1.prepare(
+          `CREATE TABLE IF NOT EXISTS downloads (id text PRIMARY KEY NOT NULL, title text NOT NULL, description text, file_url text, file_type text DEFAULT 'pdf' NOT NULL, file_size text NOT NULL, category text NOT NULL, created_at text NOT NULL)`
+        ),
       ]);
 
       // 2. If database has no categories (e.g. fresh local dev/build environment), seed from migration SQL
@@ -76,6 +79,24 @@ export async function ensureTablesAndSeed(d1: D1DatabaseLike): Promise<void> {
         }
       } catch (seedErr) {
         console.warn("[D1 Local Auto-Seed Warning]", seedErr);
+      }
+
+      // 3. Ensure downloads table is populated even if database was created previously
+      try {
+        const dlCheck = (await d1.prepare("SELECT count(*) as count FROM downloads").first()) as { count: number } | null;
+        if (!dlCheck || (dlCheck.count ?? 0) === 0) {
+          await d1.batch([
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('1', 'KOREVA Master Product Catalogue 2026', 'Complete product catalog for all Koreva machinery and tools', NULL, 'pdf', '12.4 MB', 'Catalogue', 'Jan 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('2', '7HP Khet Shakti Power Weeder - User Manual', 'Operating and maintenance manual for 7HP Power Weeder', NULL, 'pdf', '4.2 MB', 'Manual', 'Mar 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('3', 'Rotavator Attachment Installation Guide', 'Step by step assembly instructions for tractor rotavators', '/downloads/rotavator-installation-guide.pdf', 'pdf', '148 KB', 'Manual', 'Feb 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('4', 'Brush Cutter Pro - Operating Instructions', 'Safety procedures and blade installation for brush cutters', NULL, 'pdf', '3.5 MB', 'Manual', 'Apr 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('5', 'E20 Petrol Safety & Carburetor Care', 'Maintenance guidelines regarding 20% ethanol blended fuel', '/downloads/e20-petrol-safety-care.pdf', 'pdf', '135 KB', 'Safety', 'May 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('6', 'Heavy Machinery General Safety Guidelines', 'General field safety and personal protective equipment rules', '/downloads/heavy-machinery-safety-guidelines.pdf', 'pdf', '142 KB', 'Safety', 'Jan 2026')`),
+            d1.prepare(`INSERT OR IGNORE INTO downloads (id, title, description, file_url, file_type, file_size, category, created_at) VALUES ('7', 'Food Processing Units - Mini Rice Mill Specs', 'Technical specifications for mini rice mill processing units', NULL, 'pdf', '5.6 MB', 'Catalogue', 'Jun 2026')`),
+          ]);
+        }
+      } catch (dlSeedErr) {
+        console.warn("[D1 Downloads Auto-Seed Warning]", dlSeedErr);
       }
 
       isInitialized = true;

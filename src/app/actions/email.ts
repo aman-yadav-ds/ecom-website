@@ -1,6 +1,65 @@
 "use server";
 
 import { Resend } from "resend";
+import { z } from "zod";
+
+// Fast zero-dependency HTML escaping helper for email template strings
+function escapeHtml(str: string): string {
+  return str.replace(/[&<>"']/g, (match) => {
+    switch (match) {
+      case "&":
+        return "&amp;";
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case '"':
+        return "&quot;";
+      case "'":
+        return "&#39;";
+      default:
+        return match;
+    }
+  });
+}
+
+// Reusable phone number validation schema enforcing valid 10-digit Indian numbers (+91 / 0 prefix) or international phone formats
+const phoneSchema = z
+  .string()
+  .trim()
+  .min(10, "Phone number must be at least 10 digits")
+  .max(20, "Phone number is too long")
+  .regex(
+    /^(?:\+?91[\s-]?)?[6-9]\d{9}$|^\+?[1-9]\d{7,14}$/,
+    "Please enter a valid 10-digit mobile number (e.g. 9876543210 or +91 98765 43210)"
+  );
+
+// Reusable email validation schema using Zod 4 z.email()
+const emailSchema = z.email("Invalid email address").max(255);
+
+// Module-level Zod schemas compiled ONCE to optimize Cloudflare Worker CPU execution (<10ms budget)
+const dealerRequestSchema = z.object({
+  companyName: z.string().trim().min(1, "Company name is required").max(150),
+  contactName: z.string().trim().min(1, "Contact name is required").max(150),
+  email: emailSchema,
+  phone: phoneSchema,
+  address: z.string().trim().min(1, "Address is required").max(500),
+  yearsExp: z.union([z.string(), z.number()]).transform((val) => String(val)),
+  brands: z.string().trim().max(300).optional(),
+});
+
+const newsletterSubscriptionSchema = z.object({
+  email: emailSchema,
+});
+
+const contactUsSchema = z.object({
+  fullName: z.string().trim().min(1, "Full name is required").max(150),
+  email: emailSchema,
+  phone: phoneSchema,
+  inquiryType: z.string().trim().min(1).max(100).default("General Inquiry"),
+  subject: z.string().trim().max(200).optional().default("General Inquiry"),
+  message: z.string().trim().min(1, "Message is required").max(2000),
+});
 
 export interface DealerRequestData {
   companyName: string;
@@ -22,19 +81,29 @@ export interface ActionResult {
  */
 export async function sendDealerRequestAction(data: DealerRequestData): Promise<ActionResult> {
   try {
+    const parsed = dealerRequestSchema.safeParse(data);
+    if (!parsed.success) {
+      const firstIssue = parsed.error.issues[0]?.message || "Invalid input data provided.";
+      return { success: false, message: firstIssue };
+    }
+    const validatedData = parsed.data;
+
     const apiKey = process.env.RESEND_API_KEY || "";
     const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
 
-    // Validate inputs
-    if (!data.companyName || !data.contactName || !data.email || !data.phone || !data.address) {
-      return { success: false, message: "Please fill in all required fields." };
-    }
-
     const submissionDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+    const safeCompanyName = escapeHtml(validatedData.companyName);
+    const safeContactName = escapeHtml(validatedData.contactName);
+    const safeEmail = escapeHtml(validatedData.email);
+    const safePhone = escapeHtml(validatedData.phone);
+    const safeAddress = escapeHtml(validatedData.address);
+    const safeYearsExp = escapeHtml(validatedData.yearsExp);
+    const safeBrands = validatedData.brands ? escapeHtml(validatedData.brands) : "N/A";
 
     // Fallback/demo mode handling if API key is unconfigured or a demo placeholder
     if (!apiKey || apiKey.includes("demo")) {
-      console.log("[Server Action - Dealer Request (Demo Mode)]", data);
+      console.log("[Server Action - Dealer Request (Demo Mode)]", validatedData);
       return {
         success: true,
         message: "Application submitted successfully! (Demo mode configured: update .env with live Resend API key)",
@@ -51,31 +120,31 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>
             <td style="padding: 8px 0; font-weight: bold; width: 180px;">Company / Dealership:</td>
-            <td style="padding: 8px 0;">${data.companyName}</td>
+            <td style="padding: 8px 0;">${safeCompanyName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Contact Person:</td>
-            <td style="padding: 8px 0;">${data.contactName}</td>
+            <td style="padding: 8px 0;">${safeContactName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Email:</td>
-            <td style="padding: 8px 0;"><a href="mailto:${data.email}">${data.email}</a></td>
+            <td style="padding: 8px 0;"><a href="mailto:${safeEmail}">${safeEmail}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Phone:</td>
-            <td style="padding: 8px 0;">${data.phone}</td>
+            <td style="padding: 8px 0;">${safePhone}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Full Address:</td>
-            <td style="padding: 8px 0;">${data.address}</td>
+            <td style="padding: 8px 0;">${safeAddress}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Years of Experience:</td>
-            <td style="padding: 8px 0;">${data.yearsExp}</td>
+            <td style="padding: 8px 0;">${safeYearsExp}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Current Brands Handled:</td>
-            <td style="padding: 8px 0;">${data.brands || "N/A"}</td>
+            <td style="padding: 8px 0;">${safeBrands}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Submitted At:</td>
@@ -91,8 +160,8 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
     const { error } = await resend.emails.send({
       from: "KOREVA <send@mail.koreva9.com>",
       to: [recipientEmail],
-      replyTo: data.email,
-      subject: `New Dealer Application - ${data.companyName}`,
+      replyTo: validatedData.email,
+      subject: `New Dealer Application - ${safeCompanyName}`,
       html: htmlContent,
     });
 
@@ -119,9 +188,13 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
  */
 export async function sendNewsletterSubscriptionAction(userEmail: string): Promise<ActionResult> {
   try {
-    if (!userEmail || !userEmail.includes("@")) {
-      return { success: false, message: "Please enter a valid email address." };
+    const parsed = newsletterSubscriptionSchema.safeParse({ email: userEmail });
+    if (!parsed.success) {
+      const firstIssue = parsed.error.issues[0]?.message || "Please enter a valid email address.";
+      return { success: false, message: firstIssue };
     }
+    const validatedEmail = parsed.data.email;
+    const safeEmail = escapeHtml(validatedEmail);
 
     const apiKey = process.env.RESEND_API_KEY || "";
     const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
@@ -129,7 +202,7 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
 
     // Fallback/demo mode handling if API key is unconfigured or a demo placeholder
     if (!apiKey || apiKey.includes("demo")) {
-      console.log("[Server Action - Newsletter (Demo Mode)] Subscriber:", userEmail);
+      console.log("[Server Action - Newsletter (Demo Mode)] Subscriber:", validatedEmail);
       return {
         success: true,
         message: "Subscribed successfully! Thank you for joining KOREVA updates.",
@@ -146,7 +219,7 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>
             <td style="padding: 8px 0; font-weight: bold; width: 180px;">Subscriber Email:</td>
-            <td style="padding: 8px 0;"><a href="mailto:${userEmail}">${userEmail}</a></td>
+            <td style="padding: 8px 0;"><a href="mailto:${safeEmail}">${safeEmail}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Subscribed At:</td>
@@ -162,8 +235,8 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
     const { error } = await resend.emails.send({
       from: "KOREVA <sales@mail.koreva9.com>",
       to: [recipientEmail],
-      replyTo: userEmail,
-      subject: `New Newsletter Subscription - ${userEmail}`,
+      replyTo: validatedEmail,
+      subject: `New Newsletter Subscription - ${safeEmail}`,
       html: htmlContent,
     });
 
@@ -199,17 +272,27 @@ export interface ContactUsData {
  */
 export async function sendContactUsAction(data: ContactUsData): Promise<ActionResult> {
   try {
+    const parsed = contactUsSchema.safeParse(data);
+    if (!parsed.success) {
+      const firstIssue = parsed.error.issues[0]?.message || "Please fill in all required fields.";
+      return { success: false, message: firstIssue };
+    }
+    const validatedData = parsed.data;
+
     const apiKey = process.env.RESEND_API_KEY || "";
     const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
 
-    if (!data.fullName || !data.email || !data.phone || !data.message) {
-      return { success: false, message: "Please fill in all required fields." };
-    }
-
     const submissionDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
+    const safeFullName = escapeHtml(validatedData.fullName);
+    const safeEmail = escapeHtml(validatedData.email);
+    const safePhone = escapeHtml(validatedData.phone);
+    const safeInquiryType = escapeHtml(validatedData.inquiryType);
+    const safeSubject = escapeHtml(validatedData.subject || "General Inquiry");
+    const safeMessage = escapeHtml(validatedData.message);
+
     if (!apiKey || apiKey.includes("demo")) {
-      console.log("[Server Action - Contact Us (Demo Mode)]", data);
+      console.log("[Server Action - Contact Us (Demo Mode)]", validatedData);
       return {
         success: true,
         message: "Thank you for contacting Koreva Global LLP! Our representative will respond within 24 hours.",
@@ -226,27 +309,27 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>
             <td style="padding: 8px 0; font-weight: bold; width: 180px;">Inquiry Type:</td>
-            <td style="padding: 8px 0;">${data.inquiryType}</td>
+            <td style="padding: 8px 0;">${safeInquiryType}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Full Name:</td>
-            <td style="padding: 8px 0;">${data.fullName}</td>
+            <td style="padding: 8px 0;">${safeFullName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Email Address:</td>
-            <td style="padding: 8px 0;"><a href="mailto:${data.email}">${data.email}</a></td>
+            <td style="padding: 8px 0;"><a href="mailto:${safeEmail}">${safeEmail}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Phone Number:</td>
-            <td style="padding: 8px 0;">${data.phone}</td>
+            <td style="padding: 8px 0;">${safePhone}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Subject:</td>
-            <td style="padding: 8px 0;">${data.subject || "General Inquiry"}</td>
+            <td style="padding: 8px 0;">${safeSubject}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; vertical-align: top;">Message:</td>
-            <td style="padding: 8px 0; white-space: pre-wrap;">${data.message}</td>
+            <td style="padding: 8px 0; white-space: pre-wrap;">${safeMessage}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold;">Submitted At:</td>
@@ -262,8 +345,8 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
     const { error } = await resend.emails.send({
       from: "Koreva9 Contact <info@mail.koreva9.com>",
       to: [recipientEmail],
-      replyTo: data.email,
-      subject: `[Contact Form] ${data.inquiryType}: ${data.subject || data.fullName}`,
+      replyTo: validatedData.email,
+      subject: `[Contact Form] ${safeInquiryType}: ${safeSubject}`,
       html: htmlContent,
     });
 
