@@ -12,7 +12,7 @@ interface TractorAttachmentDetailLayoutProps {
   variants: Variant[];
 }
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 function useHasMounted() {
   return React.useSyncExternalStore(
     emptySubscribe,
@@ -58,10 +58,10 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
   const assemblyConfig = activeVariant?.technicalDetails["Number of Discs"]
     ? `${activeVariant.technicalDetails["Number of Discs"]} Discs`
     : activeVariant?.technicalDetails["Number of Blades"]
-    ? `${activeVariant.technicalDetails["Number of Blades"]} Blades`
-    : activeVariant?.technicalDetails["Bucket Sheet Thickness"]
-    ? `Bucket ${activeVariant.technicalDetails["Bucket Sheet Thickness"]}`
-    : activeVariant?.technicalDetails["Threshing Blades"] || "Heavy Duty Steel";
+      ? `${activeVariant.technicalDetails["Number of Blades"]} Blades`
+      : activeVariant?.technicalDetails["Bucket Sheet Thickness"]
+        ? `Bucket ${activeVariant.technicalDetails["Bucket Sheet Thickness"]}`
+        : activeVariant?.technicalDetails["Threshing Blades"] || "Heavy Duty Steel";
 
   return (
     <div className="flex flex-col gap-10 sm:gap-12 font-jost">
@@ -131,7 +131,7 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-xs text-dark-500 font-medium">
-                Inclusive of {activeVariant.applicableGst}% GST. Additional tractor hitch mounting accessories included.
+                Inclusive of {activeVariant.applicableGst}. Additional tractor hitch mounting accessories included.
               </p>
             )}
           </div>
@@ -149,11 +149,10 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
                     <button
                       key={v.id}
                       onClick={() => setActiveVariantId(v.id)}
-                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
-                        isSelectedVariant
-                          ? "border-brand-red bg-red-50/70 shadow-xs"
-                          : "border-light-300 bg-white hover:border-red-300"
-                      }`}
+                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${isSelectedVariant
+                        ? "border-brand-red bg-red-50/70 shadow-xs"
+                        : "border-light-300 bg-white hover:border-red-300"
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className={`text-xs font-extrabold uppercase ${isSelectedVariant ? "text-brand-red" : "text-dark-900"}`}>
@@ -181,9 +180,8 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
               Find Authorized Attachment Dealer
             </Link>
             <label
-              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-brand-red min-h-[48px] ${
-                disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-brand-red min-h-[48px] ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
               onClick={(e) => {
                 if (disabled) {
                   e.preventDefault();
@@ -243,10 +241,10 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
           {(product.maintenanceTips && product.maintenanceTips.length > 0
             ? product.maintenanceTips
             : [
-                "Grease triple-sealed bearings and PTO cross joints every 20 hours of field operation.",
-                "Check hitch pin connections and torque frame bolts prior to heavy field work.",
-                "Genuine replacement parts and hydraulic seal kits are available through certified KOREVA dealers."
-              ]
+              "Grease triple-sealed bearings and PTO cross joints every 20 hours of field operation.",
+              "Check hitch pin connections and torque frame bolts prior to heavy field work.",
+              "Genuine replacement parts and hydraulic seal kits are available through certified KOREVA dealers."
+            ]
           ).map((tip, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <Shield className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />

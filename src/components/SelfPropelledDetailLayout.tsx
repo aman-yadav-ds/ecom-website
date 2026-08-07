@@ -12,7 +12,7 @@ interface SelfPropelledDetailLayoutProps {
   variants: Variant[];
 }
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 function useHasMounted() {
   return React.useSyncExternalStore(
     emptySubscribe,
@@ -125,7 +125,7 @@ export default function SelfPropelledDetailLayout({ product, variants }: SelfPro
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-xs text-dark-500 font-medium">
-                Inclusive of {activeVariant.applicableGst}% GST. Pre-tested engine oil & tool kit included.
+                Inclusive of {activeVariant.applicableGst}. Pre-tested engine oil & tool kit included.
               </p>
             )}
           </div>
@@ -143,11 +143,10 @@ export default function SelfPropelledDetailLayout({ product, variants }: SelfPro
                     <button
                       key={v.id}
                       onClick={() => setActiveVariantId(v.id)}
-                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 ${
-                        isSelectedVariant
+                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 ${isSelectedVariant
                           ? "border-orange-500 bg-orange-50/70 shadow-xs"
                           : "border-light-300 bg-white hover:border-orange-300"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className={`text-xs font-extrabold uppercase ${isSelectedVariant ? "text-orange-700" : "text-dark-900"}`}>
@@ -175,9 +174,8 @@ export default function SelfPropelledDetailLayout({ product, variants }: SelfPro
               Find Authorized Machinery Dealer
             </Link>
             <label
-              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-orange-500 min-h-[48px] ${
-                disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-orange-500 min-h-[48px] ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
               onClick={(e) => {
                 if (disabled) {
                   e.preventDefault();
@@ -237,10 +235,10 @@ export default function SelfPropelledDetailLayout({ product, variants }: SelfPro
           {(product.maintenanceTips && product.maintenanceTips.length > 0
             ? product.maintenanceTips
             : [
-                "Check engine oil level (using KOREVA 4T 20W-50) before every field operation.",
-                "Clean foam air filter element every 25 hours to prevent dirt ingress into engine carburetor.",
-                "Inspect gear oil level and clutch cable tension monthly for smooth speed shifting."
-              ]
+              "Check engine oil level (using KOREVA 4T 20W-50) before every field operation.",
+              "Clean foam air filter element every 25 hours to prevent dirt ingress into engine carburetor.",
+              "Inspect gear oil level and clutch cable tension monthly for smooth speed shifting."
+            ]
           ).map((tip, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <Shield className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />

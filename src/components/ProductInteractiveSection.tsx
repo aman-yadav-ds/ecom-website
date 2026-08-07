@@ -20,7 +20,7 @@ interface ProductInteractiveSectionProps {
   variants: Variant[];
 }
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 function useHasMounted() {
   return React.useSyncExternalStore(
     emptySubscribe,
@@ -67,7 +67,7 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
     <div className="flex flex-col gap-16 font-jost">
       {/* Top Grid: Gallery (Left) & Metadata (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16">
-        
+
         {/* Left Column: Gallery */}
         <div className="w-full">
           <ProductGallery images={images} imagesAlt={imagesAlt} productName={activeVariant?.name || product.name} />
@@ -75,7 +75,7 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
 
         {/* Right Column: Metadata, Selectors, Actions */}
         <div className="flex flex-col gap-8">
-          
+
           {/* Header Block */}
           <div className="flex flex-col gap-2 border-b border-light-300 pb-6">
             <h1 className="text-3xl lg:text-4xl font-bold text-dark-900 tracking-tight uppercase">
@@ -93,7 +93,7 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-sm text-dark-500 font-medium">
-                Includes {activeVariant.applicableGst}% GST. Additional shipping & mounting fees may apply.
+                Includes {activeVariant.applicableGst}. Additional shipping & mounting fees may apply.
               </p>
             )}
           </div>
@@ -109,14 +109,14 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
 
           {/* Action Area */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Link 
-              href="/dealers" 
+            <Link
+              href="/dealers"
               className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
             >
               <MapPin className="w-5 h-5" />
               Find a Local Dealer
             </Link>
-            <label 
+            <label
               className={`flex-none flex items-center justify-center gap-2 px-6 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-brand-red ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
               onClick={(e) => {
                 if (disabled) {
@@ -125,9 +125,9 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
                 }
               }}
             >
-              <input 
-                type="checkbox" 
-                className="w-5 h-5 border-gray-300 rounded-sm text-brand-red focus:ring-brand-red disabled:cursor-not-allowed" 
+              <input
+                type="checkbox"
+                className="w-5 h-5 border-gray-300 rounded-sm text-brand-red focus:ring-brand-red disabled:cursor-not-allowed"
                 checked={mounted ? isSelected : false}
                 onChange={handleCompareChange}
                 disabled={disabled}
@@ -158,7 +158,7 @@ function EquipmentDetailLayout({ product, variants }: ProductInteractiveSectionP
 
       {/* Full Width Specs & Details */}
       <div className="w-full">
-        <DetailTabsSection 
+        <DetailTabsSection
           description={product.description}
           technicalDetails={activeVariant?.technicalDetails || {}}
         />

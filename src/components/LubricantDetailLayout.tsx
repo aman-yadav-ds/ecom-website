@@ -12,7 +12,7 @@ interface LubricantDetailLayoutProps {
   variants: Variant[];
 }
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 function useHasMounted() {
   return React.useSyncExternalStore(
     emptySubscribe,
@@ -84,7 +84,7 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
         {/* Left Column: Gallery */}
         <div className="w-full">
           <ProductGallery images={images} imagesAlt={imagesAlt} productName={activeVariant?.name || product.name} />
-          
+
           {/* Quick Certifications Bar below gallery */}
           <div className="grid grid-cols-3 gap-3 mt-6">
             <div className="glass-card border border-emerald-200 p-3 rounded-2xl text-center">
@@ -122,7 +122,7 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-xs text-dark-500 font-medium">
-                Inclusive of {activeVariant.applicableGst}% GST. Bulk discounts available via local authorized dealers.
+                Inclusive of {activeVariant.applicableGst}. Bulk discounts available via local authorized dealers.
               </p>
             )}
           </div>
@@ -140,11 +140,10 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
                     <button
                       key={v.id}
                       onClick={() => setActiveVariantId(v.id)}
-                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
-                        isSelectedVariant
+                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${isSelectedVariant
                           ? "border-emerald-600 bg-emerald-50 shadow-sm"
                           : "border-light-300 bg-white hover:border-emerald-300"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className={`text-xs font-extrabold uppercase ${isSelectedVariant ? "text-emerald-800" : "text-dark-900"}`}>
@@ -172,9 +171,8 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
               Find Local Fluid Dealer
             </Link>
             <label
-              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-emerald-500 ${
-                disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-emerald-500 ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
               onClick={(e) => {
                 if (disabled) {
                   e.preventDefault();
@@ -225,10 +223,10 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
           {(product.maintenanceTips && product.maintenanceTips.length > 0
             ? product.maintenanceTips
             : [
-                "Store lubricant containers in a dry, covered area away from direct sunlight.",
-                "Thoroughly clean fill necks and funnels before topping up oil sumps.",
-                "Follow OEM equipment maintenance intervals for full fluid drainage and filter replacement."
-              ]
+              "Store lubricant containers in a dry, covered area away from direct sunlight.",
+              "Thoroughly clean fill necks and funnels before topping up oil sumps.",
+              "Follow OEM equipment maintenance intervals for full fluid drainage and filter replacement."
+            ]
           ).map((tip, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />

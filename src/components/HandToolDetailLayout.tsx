@@ -110,7 +110,7 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
             </div>
             {activeVariant?.applicableGst && (
               <p className="text-xs text-dark-500 font-medium">
-                Inclusive of {activeVariant.applicableGst}% GST. Bulk discount boxes available for orchard managers & nurseries.
+                Inclusive of {activeVariant.applicableGst}. Bulk discount boxes available for orchard managers & nurseries.
               </p>
             )}
           </div>
@@ -128,11 +128,10 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
                     <button
                       key={v.id}
                       onClick={() => setActiveVariantId(v.id)}
-                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
-                        isSelectedVariant
+                      className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${isSelectedVariant
                           ? "border-amber-600 bg-amber-50 shadow-sm"
                           : "border-light-300 bg-white hover:border-amber-300"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className={`text-xs font-extrabold uppercase ${isSelectedVariant ? "text-amber-900" : "text-dark-900"}`}>
@@ -160,9 +159,8 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
               Locate Authorized Tool Dealer
             </Link>
             <label
-              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-amber-500 ${
-                disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-amber-500 ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
               onClick={(e) => {
                 if (disabled) {
                   e.preventDefault();
@@ -212,10 +210,10 @@ export default function HandToolDetailLayout({ product, variants }: HandToolDeta
           {(product.maintenanceTips && product.maintenanceTips.length > 0
             ? product.maintenanceTips
             : [
-                "Clean tool steel with a dry cloth after use to remove moisture and plant sap.",
-                "Apply a thin film of protective oil to metal surfaces before off-season storage.",
-                "Sharpen cutting edges with a fine diamond stone or file following original bevel angles."
-              ]
+              "Clean tool steel with a dry cloth after use to remove moisture and plant sap.",
+              "Apply a thin film of protective oil to metal surfaces before off-season storage.",
+              "Sharpen cutting edges with a fine diamond stone or file following original bevel angles."
+            ]
           ).map((tip, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <CheckCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
