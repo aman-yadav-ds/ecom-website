@@ -141,8 +141,8 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
                       key={v.id}
                       onClick={() => setActiveVariantId(v.id)}
                       className={`p-3 rounded-md border-2 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${isSelectedVariant
-                          ? "border-emerald-600 bg-emerald-50 shadow-sm"
-                          : "border-light-300 bg-white hover:border-emerald-300"
+                        ? "border-emerald-600 bg-emerald-50 shadow-sm"
+                        : "border-light-300 bg-white hover:border-emerald-300"
                         }`}
                     >
                       <div className="flex items-center justify-between">
