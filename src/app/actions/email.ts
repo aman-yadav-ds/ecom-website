@@ -2,6 +2,7 @@
 
 import { Resend } from "resend";
 import { z } from "zod";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 // Fast zero-dependency HTML escaping helper for email template strings
 function escapeHtml(str: string): string {
@@ -23,19 +24,49 @@ function escapeHtml(str: string): string {
   });
 }
 
-// Reusable phone number validation schema enforcing valid 10-digit Indian numbers (+91 / 0 prefix) or international phone formats
+/**
+ * Retrieve environment variables supporting both process.env and Cloudflare Worker context bindings
+ */
+async function getEnvVars(): Promise<{ apiKey: string; recipientEmail: string }> {
+  let apiKey = process.env.RESEND_API_KEY;
+  let recipientEmail = process.env.RECIPIENT_EMAIL;
+
+  try {
+    const { env } = await getCloudflareContext({ async: true });
+    const cfEnv = env as unknown as Record<string, string | undefined>;
+    if (!apiKey && cfEnv.RESEND_API_KEY) {
+      apiKey = cfEnv.RESEND_API_KEY;
+    }
+    if (!recipientEmail && cfEnv.RECIPIENT_EMAIL) {
+      recipientEmail = cfEnv.RECIPIENT_EMAIL;
+    }
+  } catch {
+    // Ignore error if Cloudflare context is uninitialized (e.g., SSG build step or static evaluation)
+  }
+
+  return {
+    apiKey: apiKey || "",
+    recipientEmail: recipientEmail || "korevasales@gmail.com",
+  };
+}
+
+// Reusable phone number validation schema enforcing a valid 10-digit mobile number
 const phoneSchema = z
   .string()
   .trim()
-  .min(10, "Phone number must be at least 10 digits")
-  .max(20, "Phone number is too long")
-  .regex(
-    /^(?:\+?91[\s-]?)?[6-9]\d{9}$|^\+?[1-9]\d{7,14}$/,
-    "Please enter a valid 10-digit mobile number (e.g. 9876543210 or +91 98765 43210)"
+  .transform((val) => val.replace(/[\s\-()]/g, ""))
+  .pipe(
+    z
+      .string()
+      .length(10, "Phone number must be exactly 10 digits")
+      .regex(
+        /^[6-9]\d{9}$/,
+        "Please enter a valid 10-digit mobile number (e.g. 9876543210)"
+      )
   );
 
-// Reusable email validation schema using Zod 4 z.email()
-const emailSchema = z.email("Invalid email address").max(255);
+// Reusable email validation schema
+const emailSchema = z.string().trim().email("Invalid email address").max(255);
 
 // Module-level Zod schemas compiled ONCE to optimize Cloudflare Worker CPU execution (<10ms budget)
 const dealerRequestSchema = z.object({
@@ -77,7 +108,7 @@ export interface ActionResult {
 }
 
 /**
- * Server Action: Sends Dealer Joining Application details to sales.koreva@gmail.com via Resend SDK
+ * Server Action: Sends Dealer Joining Application details to recipient email via Resend SDK
  */
 export async function sendDealerRequestAction(data: DealerRequestData): Promise<ActionResult> {
   try {
@@ -88,8 +119,23 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
     }
     const validatedData = parsed.data;
 
-    const apiKey = process.env.RESEND_API_KEY || "";
-    const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
+    const { apiKey, recipientEmail } = await getEnvVars();
+
+    if (!apiKey) {
+      console.error("[Server Action - Dealer Request] RESEND_API_KEY is not configured.");
+      return {
+        success: false,
+        message: "Email service is temporarily unavailable. Please contact our support line directly.",
+      };
+    }
+
+    if (apiKey.includes("demo")) {
+      console.log("[Server Action - Dealer Request (Demo Mode)]", validatedData);
+      return {
+        success: true,
+        message: "Application submitted successfully! (Demo mode active)",
+      };
+    }
 
     const submissionDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
@@ -100,15 +146,6 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
     const safeAddress = escapeHtml(validatedData.address);
     const safeYearsExp = escapeHtml(validatedData.yearsExp);
     const safeBrands = validatedData.brands ? escapeHtml(validatedData.brands) : "N/A";
-
-    // Fallback/demo mode handling if API key is unconfigured or a demo placeholder
-    if (!apiKey || apiKey.includes("demo")) {
-      console.log("[Server Action - Dealer Request (Demo Mode)]", validatedData);
-      return {
-        success: true,
-        message: "Application submitted successfully! (Demo mode configured: update .env with live Resend API key)",
-      };
-    }
 
     const resend = new Resend(apiKey);
 
@@ -157,7 +194,7 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
       </div>
     `;
 
-    const { error } = await resend.emails.send({
+    let emailRes = await resend.emails.send({
       from: "KOREVA <send@mail.koreva9.com>",
       to: [recipientEmail],
       replyTo: validatedData.email,
@@ -165,9 +202,20 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
       html: htmlContent,
     });
 
-    if (error) {
-      console.error("[Resend Error - Dealer Action]", error);
-      return { success: false, message: "Failed to send email. Please try again later." };
+    if (emailRes.error) {
+      console.warn("[Resend primary domain error, retrying with onboarding domain]", emailRes.error);
+      emailRes = await resend.emails.send({
+        from: "KOREVA <onboarding@resend.dev>",
+        to: [recipientEmail],
+        replyTo: validatedData.email,
+        subject: `New Dealer Application - ${safeCompanyName}`,
+        html: htmlContent,
+      });
+    }
+
+    if (emailRes.error) {
+      console.error("[Resend Error - Dealer Action]", emailRes.error);
+      return { success: false, message: `Email delivery failed: ${emailRes.error.message}` };
     }
 
     return {
@@ -184,7 +232,7 @@ export async function sendDealerRequestAction(data: DealerRequestData): Promise<
 }
 
 /**
- * Server Action: Sends Newsletter Subscription notification to sales.koreva@gmail.com via Resend SDK
+ * Server Action: Sends Newsletter Subscription notification to recipient email via Resend SDK
  */
 export async function sendNewsletterSubscriptionAction(userEmail: string): Promise<ActionResult> {
   try {
@@ -196,12 +244,17 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
     const validatedEmail = parsed.data.email;
     const safeEmail = escapeHtml(validatedEmail);
 
-    const apiKey = process.env.RESEND_API_KEY || "";
-    const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
-    const subscribedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+    const { apiKey, recipientEmail } = await getEnvVars();
 
-    // Fallback/demo mode handling if API key is unconfigured or a demo placeholder
-    if (!apiKey || apiKey.includes("demo")) {
+    if (!apiKey) {
+      console.error("[Server Action - Newsletter] RESEND_API_KEY is not configured.");
+      return {
+        success: false,
+        message: "Subscription service is temporarily unavailable.",
+      };
+    }
+
+    if (apiKey.includes("demo")) {
       console.log("[Server Action - Newsletter (Demo Mode)] Subscriber:", validatedEmail);
       return {
         success: true,
@@ -209,6 +262,7 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
       };
     }
 
+    const subscribedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
     const resend = new Resend(apiKey);
 
     const htmlContent = `
@@ -232,7 +286,7 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
       </div>
     `;
 
-    const { error } = await resend.emails.send({
+    let emailRes = await resend.emails.send({
       from: "KOREVA <sales@mail.koreva9.com>",
       to: [recipientEmail],
       replyTo: validatedEmail,
@@ -240,9 +294,20 @@ export async function sendNewsletterSubscriptionAction(userEmail: string): Promi
       html: htmlContent,
     });
 
-    if (error) {
-      console.error("[Resend Error - Newsletter Action]", error);
-      return { success: false, message: "Failed to subscribe. Please try again later." };
+    if (emailRes.error) {
+      console.warn("[Resend primary domain error, retrying with onboarding domain]", emailRes.error);
+      emailRes = await resend.emails.send({
+        from: "KOREVA <onboarding@resend.dev>",
+        to: [recipientEmail],
+        replyTo: validatedEmail,
+        subject: `New Newsletter Subscription - ${safeEmail}`,
+        html: htmlContent,
+      });
+    }
+
+    if (emailRes.error) {
+      console.error("[Resend Error - Newsletter Action]", emailRes.error);
+      return { success: false, message: `Failed to subscribe: ${emailRes.error.message}` };
     }
 
     return {
@@ -268,7 +333,7 @@ export interface ContactUsData {
 }
 
 /**
- * Server Action: Sends Contact Us inquiry details to sales.koreva@gmail.com via Resend SDK
+ * Server Action: Sends Contact Us inquiry details to recipient email via Resend SDK
  */
 export async function sendContactUsAction(data: ContactUsData): Promise<ActionResult> {
   try {
@@ -279,8 +344,23 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
     }
     const validatedData = parsed.data;
 
-    const apiKey = process.env.RESEND_API_KEY || "";
-    const recipientEmail = process.env.RECIPIENT_EMAIL || "sales.koreva@gmail.com";
+    const { apiKey, recipientEmail } = await getEnvVars();
+
+    if (!apiKey) {
+      console.error("[Server Action - Contact Us] RESEND_API_KEY is not configured.");
+      return {
+        success: false,
+        message: "Contact service is temporarily unavailable. Please call our hotline (+91 7455 973 188) directly.",
+      };
+    }
+
+    if (apiKey.includes("demo")) {
+      console.log("[Server Action - Contact Us (Demo Mode)]", validatedData);
+      return {
+        success: true,
+        message: "Thank you for contacting Koreva Global LLP! Our representative will respond within 24 hours.",
+      };
+    }
 
     const submissionDate = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
@@ -290,14 +370,6 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
     const safeInquiryType = escapeHtml(validatedData.inquiryType);
     const safeSubject = escapeHtml(validatedData.subject || "General Inquiry");
     const safeMessage = escapeHtml(validatedData.message);
-
-    if (!apiKey || apiKey.includes("demo")) {
-      console.log("[Server Action - Contact Us (Demo Mode)]", validatedData);
-      return {
-        success: true,
-        message: "Thank you for contacting Koreva Global LLP! Our representative will respond within 24 hours.",
-      };
-    }
 
     const resend = new Resend(apiKey);
 
@@ -342,7 +414,7 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
       </div>
     `;
 
-    const { error } = await resend.emails.send({
+    let emailRes = await resend.emails.send({
       from: "Koreva9 Contact <info@mail.koreva9.com>",
       to: [recipientEmail],
       replyTo: validatedData.email,
@@ -350,9 +422,20 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
       html: htmlContent,
     });
 
-    if (error) {
-      console.error("[Resend Error - Contact Us]", error);
-      return { success: false, message: "Failed to send your message. Please call our support line." };
+    if (emailRes.error) {
+      console.warn("[Resend primary domain error, retrying with onboarding domain]", emailRes.error);
+      emailRes = await resend.emails.send({
+        from: "Koreva9 Contact <onboarding@resend.dev>",
+        to: [recipientEmail],
+        replyTo: validatedData.email,
+        subject: `[Contact Form] ${safeInquiryType}: ${safeSubject}`,
+        html: htmlContent,
+      });
+    }
+
+    if (emailRes.error) {
+      console.error("[Resend Error - Contact Us]", emailRes.error);
+      return { success: false, message: `Email delivery failed: ${emailRes.error.message}` };
     }
 
     return {
@@ -367,3 +450,4 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
     };
   }
 }
+
