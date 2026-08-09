@@ -2,10 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { ChevronRight, Award, ShieldCheck, Zap } from "lucide-react";
+import { ChevronRight, Award, ShieldCheck, Zap, FileSpreadsheet } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRfqStore } from "@/store/useRfqStore";
 
 export function HeroMotionContent() {
+  const { openModal: openRfqModal } = useRfqStore();
+
   return (
     <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center gap-5 md:gap-6">
       {/* Floating Glass Badge */}
@@ -49,6 +52,13 @@ export function HeroMotionContent() {
           <span>View Machinery Catalog</span>
           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
+        <button
+          onClick={openRfqModal}
+          className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-dark-900 hover:bg-black text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
+        >
+          <FileSpreadsheet className="w-4 h-4 text-brand-red" />
+          <span>Request Wholesale RFQ</span>
+        </button>
         <Link
           href="/dealers"
           className="w-full sm:w-auto px-7 py-3.5 rounded-full glass-panel hover:bg-white text-dark-900 border border-light-300 font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs flex items-center justify-center gap-2 active:scale-95 cursor-pointer"

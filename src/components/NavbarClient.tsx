@@ -23,9 +23,12 @@ import {
   ChevronRight,
   Phone,
   FileText,
+  FileSpreadsheet,
+  Factory,
 } from "lucide-react";
 import SearchComponent from "./Search";
 import { useModalStore } from "@/store/useModalStore";
+import { useRfqStore } from "@/store/useRfqStore";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Static data — defined here so it's tree-shaken from the Server Component.
@@ -51,6 +54,7 @@ export default function NavbarClient() {
   >("Products");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { openJoinModal } = useModalStore();
+  const { openModal: openRfqModal, totalItems: rfqTotalItems } = useRfqStore();
 
   // ─── Scroll-Driven Motion Values ────────────────────────────────────────────
   const { scrollY } = useScroll();
@@ -264,8 +268,23 @@ export default function NavbarClient() {
                   ))}
                 </nav>
 
-                {/* Right: Search + Join */}
+                {/* Right: Search + RFQ Cart + Join */}
                 <div className="hidden md:flex flex-shrink-0 items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={openRfqModal}
+                    className="relative px-3.5 py-2 rounded-full bg-brand-red/10 border border-brand-red/30 text-brand-red font-extrabold text-xs uppercase tracking-wider hover:bg-brand-red hover:text-white transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+                    aria-label="Request for Quote Cart"
+                  >
+                    <FileSpreadsheet className="w-4 h-4" />
+                    <span>RFQ Quote</span>
+                    {rfqTotalItems() > 0 && (
+                      <span className="w-5 h-5 rounded-full bg-brand-red text-white text-[10px] font-black flex items-center justify-center -mr-1">
+                        {rfqTotalItems()}
+                      </span>
+                    )}
+                  </button>
+
                   {isScrolled && (
                     <button
                       type="button"
@@ -287,8 +306,21 @@ export default function NavbarClient() {
                   </button>
                 </div>
 
-                {/* Mobile: Search + Hamburger */}
+                {/* Mobile: RFQ + Search + Hamburger */}
                 <div className="flex items-center gap-2 md:hidden">
+                  <button
+                    type="button"
+                    onClick={openRfqModal}
+                    className="relative p-2 rounded-full text-brand-red bg-brand-red/10 hover:bg-brand-red hover:text-white transition-colors focus:outline-none w-9 h-9 flex items-center justify-center border border-brand-red/30 cursor-pointer"
+                    aria-label="RFQ Cart"
+                  >
+                    <FileSpreadsheet className="w-4 h-4" />
+                    {rfqTotalItems() > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-red text-white text-[9px] font-black flex items-center justify-center">
+                        {rfqTotalItems()}
+                      </span>
+                    )}
+                  </button>
                   <button
                     type="button"
                     aria-label="Product Search"
@@ -627,6 +659,18 @@ export default function NavbarClient() {
                                     About KOREVA Global LLP &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">20+ years of manufacturing excellence</span>
+                                </li>
+                                <li>
+                                  <Link href="/manufacturing" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                    Infrastructure &amp; Plant &gt;
+                                  </Link>
+                                  <span className="text-[11px] text-dark-500 block">50,000+ sq ft ISO certified facility</span>
+                                </li>
+                                <li>
+                                  <Link href="/oem-services" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                    OEM &amp; Private Labeling &gt;
+                                  </Link>
+                                  <span className="text-[11px] text-dark-500 block">Custom branding, engineering &amp; export</span>
                                 </li>
                                 <li>
                                   <Link href="/news" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">

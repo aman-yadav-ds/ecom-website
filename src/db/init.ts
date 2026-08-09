@@ -45,15 +45,35 @@ export async function ensureTablesAndSeed(d1: D1DatabaseLike): Promise<void> {
           `CREATE TABLE IF NOT EXISTS news_articles (id text PRIMARY KEY NOT NULL, slug text NOT NULL UNIQUE, title text NOT NULL, excerpt text NOT NULL, content text NOT NULL, date text NOT NULL, author text NOT NULL, category text NOT NULL, image text NOT NULL, related_products text)`
         ),
         d1.prepare(
-          `CREATE TABLE IF NOT EXISTS products (id text PRIMARY KEY NOT NULL, name text NOT NULL, description text NOT NULL, cover_image text NOT NULL, cover_image_alt text, category_id text NOT NULL, tags text NOT NULL, is_published integer DEFAULT true NOT NULL, default_variant_id text, maintenance_tips text, FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE no action ON DELETE cascade)`
+          `CREATE TABLE IF NOT EXISTS products (id text PRIMARY KEY NOT NULL, name text NOT NULL, description text NOT NULL, cover_image text NOT NULL, cover_image_alt text, category_id text NOT NULL, tags text NOT NULL, is_published integer DEFAULT true NOT NULL, default_variant_id text, maintenance_tips text, moq text, lead_time text, is_oem_available integer DEFAULT false NOT NULL, spec_sheet_url text, FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE no action ON DELETE cascade)`
         ),
         d1.prepare(
-          `CREATE TABLE IF NOT EXISTS variants (id text PRIMARY KEY NOT NULL, name text NOT NULL, product_id text NOT NULL, images text NOT NULL, images_alt text, price text NOT NULL, applicable_gst text NOT NULL, technical_details text NOT NULL, FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE no action ON DELETE cascade)`
+          `CREATE TABLE IF NOT EXISTS variants (id text PRIMARY KEY NOT NULL, name text NOT NULL, product_id text NOT NULL, images text NOT NULL, images_alt text, price text NOT NULL, applicable_gst text NOT NULL, technical_details text NOT NULL, bulk_pricing_tiers text, FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE no action ON DELETE cascade)`
         ),
         d1.prepare(
           `CREATE TABLE IF NOT EXISTS downloads (id text PRIMARY KEY NOT NULL, title text NOT NULL, description text, file_url text, file_type text DEFAULT 'pdf' NOT NULL, file_size text NOT NULL, category text NOT NULL, created_at text NOT NULL)`
         ),
+        d1.prepare(
+          `CREATE TABLE IF NOT EXISTS inquiries (id text PRIMARY KEY NOT NULL, full_name text NOT NULL, company_name text, email text NOT NULL, phone text NOT NULL, country_or_region text, inquiry_type text DEFAULT 'rfq' NOT NULL, message text NOT NULL, items text, status text DEFAULT 'new' NOT NULL, notes text, created_at text NOT NULL)`
+        ),
       ]);
+
+      // Ensure existing local SQLite tables have new B2B columns
+      try {
+        await d1.prepare(`ALTER TABLE products ADD COLUMN moq text`).run();
+      } catch {}
+      try {
+        await d1.prepare(`ALTER TABLE products ADD COLUMN lead_time text`).run();
+      } catch {}
+      try {
+        await d1.prepare(`ALTER TABLE products ADD COLUMN is_oem_available integer DEFAULT false NOT NULL`).run();
+      } catch {}
+      try {
+        await d1.prepare(`ALTER TABLE products ADD COLUMN spec_sheet_url text`).run();
+      } catch {}
+      try {
+        await d1.prepare(`ALTER TABLE variants ADD COLUMN bulk_pricing_tiers text`).run();
+      } catch {}
 
       // 2. If database has no categories (e.g. fresh local dev/build environment), seed from migration SQL
       try {

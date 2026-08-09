@@ -189,18 +189,32 @@ export default function AboutPage() {
         <section className="py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto glass-panel border border-light-300 rounded-3xl p-8 sm:p-12 shadow-md flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="flex-1 space-y-4 text-center lg:text-left">
-              <span className="text-brand-red font-extrabold uppercase tracking-widest text-xs">Certified Manufacturing</span>
+              <span className="text-brand-red font-extrabold uppercase tracking-widest text-xs">Certified Manufacturing Infrastructure</span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-900 uppercase">
                 ISO 9001:2015 CERTIFIED FACILITY
               </h2>
               <p className="text-dark-700 text-sm sm:text-base leading-relaxed font-medium max-w-2xl">
-                Our modern Uttarakhand manufacturing hub follows international quality protocols, state subsidy compliance guidelines, and precision metal forging standards.
+                Our 50,000+ sq ft Uttarakhand manufacturing hub follows international quality protocols, CNC machining, robotic welding, and state subsidy compliance standards.
               </p>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
+                <a
+                  href="/manufacturing"
+                  className="px-5 py-2.5 rounded-full bg-brand-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-brand-red-accent transition-all shadow-xs"
+                >
+                  Explore Plant Facilities &gt;
+                </a>
+                <a
+                  href="/oem-services"
+                  className="px-5 py-2.5 rounded-full glass-panel border border-light-300 text-dark-900 font-extrabold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-xs"
+                >
+                  OEM &amp; Private Labeling &gt;
+                </a>
+              </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 shrink-0">
               <div className="px-6 py-4 rounded-2xl bg-white border border-light-300 text-center shadow-xs">
-                <span className="text-2xl sm:text-3xl font-extrabold text-brand-red block">100%</span>
-                <span className="text-xs font-bold text-dark-700 uppercase tracking-wider">Field Tested</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-brand-red block">10,000+</span>
+                <span className="text-xs font-bold text-dark-700 uppercase tracking-wider">Units / Month</span>
               </div>
               <div className="px-6 py-4 rounded-2xl bg-white border border-light-300 text-center shadow-xs">
                 <span className="text-2xl sm:text-3xl font-extrabold text-dark-900 block">500+</span>

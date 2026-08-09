@@ -20,6 +20,12 @@ export interface Product {
   isPublished: boolean;
   defaultVariantId: string | null;
   maintenanceTips?: string[];
+
+  // B2B Portfolio & RFQ Extensions (Optional for defensive rendering)
+  moq?: string | null;
+  leadTime?: string | null;
+  isOemAvailable?: boolean | null;
+  specSheetUrl?: string | null;
 }
 
 export interface Variant {
@@ -31,6 +37,9 @@ export interface Variant {
   price: string;
   applicableGst: string;
   technicalDetails: Record<string, string>;
+
+  // B2B Portfolio Extensions (Optional for defensive rendering)
+  bulkPricingTiers?: { minQty: number; price: string }[] | null;
 }
 
 export interface Dealer {

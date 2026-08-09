@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CompareDrawer from "@/components/CompareDrawer";
 import JoinNetworkModal from "@/components/JoinNetworkModal";
 import CookieConsent from "@/components/CookieConsent";
+import RfqModal from "@/components/RfqModal";
 
 export default function AppLayout({
   children,
@@ -18,6 +19,7 @@ export default function AppLayout({
       <CompareDrawer />
       <JoinNetworkModal />
       <CookieConsent />
+      <RfqModal />
       <Footer />
     </div>
   );

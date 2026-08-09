@@ -207,6 +207,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             isPublished: product.isPublished,
             defaultVariantId: product.defaultVariantId || null,
             maintenanceTips: product.maintenanceTips || undefined,
+            moq: product.moq || undefined,
+            leadTime: product.leadTime || undefined,
+            isOemAvailable: product.isOemAvailable ?? false,
+            specSheetUrl: product.specSheetUrl || undefined,
           }}
           variants={variants.map((v) => ({
             id: v.id,
@@ -217,6 +221,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             price: v.price,
             applicableGst: v.applicableGst,
             technicalDetails: v.technicalDetails,
+            bulkPricingTiers: v.bulkPricingTiers || undefined,
           }))}
         />
       </article>

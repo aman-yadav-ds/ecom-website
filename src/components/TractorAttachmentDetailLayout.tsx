@@ -6,6 +6,7 @@ import ProductGallery from "./ProductGallery";
 import Link from "next/link";
 import { MapPin, Shield, Check, Cog, Gauge, Award, Wrench, RefreshCw, Layers } from "lucide-react";
 import { useCompareStore } from "@/store/useCompareStore";
+import B2BProductActions from "./B2BProductActions";
 
 interface TractorAttachmentDetailLayoutProps {
   product: Product;
@@ -170,37 +171,8 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
             </div>
           )}
 
-          {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-            <Link
-              href="/dealers"
-              className="flex-1 bg-brand-red hover:bg-brand-red-accent text-white font-bold py-4 px-6 rounded-sm shadow-md transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red min-h-[48px]"
-            >
-              <MapPin className="w-5 h-5" />
-              Find Authorized Attachment Dealer
-            </Link>
-            <label
-              className={`flex-none flex items-center justify-center gap-2 px-5 py-4 border-2 border-light-300 rounded-sm hover:border-dark-500 transition-colors group bg-white focus-within:ring-2 focus-within:ring-brand-red min-h-[48px] ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-                }`}
-              onClick={(e) => {
-                if (disabled) {
-                  e.preventDefault();
-                  handleCompareChange();
-                }
-              }}
-            >
-              <input
-                type="checkbox"
-                className="w-5 h-5 border-gray-300 rounded-sm text-brand-red focus:ring-brand-red disabled:cursor-not-allowed"
-                checked={mounted ? isSelected : false}
-                onChange={handleCompareChange}
-                disabled={disabled}
-              />
-              <span className={`text-xs font-bold ${isSelected ? "text-brand-red" : "text-dark-900"}`}>
-                {isSelected ? "In Compare" : "Compare"}
-              </span>
-            </label>
-          </div>
+          {/* B2B Action Area */}
+          <B2BProductActions product={product} activeVariant={activeVariant} />
         </div>
       </div>
 
