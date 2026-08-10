@@ -80,6 +80,7 @@ export default async function CategoryGridShowcase() {
               <Link
                 key={`mobile-${category.id}`}
                 href={`/products/${category.slug}`}
+                prefetch={false}
                 className={`group relative flex flex-col justify-between p-4 min-w-[210px] w-[210px] shrink-0 snap-start glass-card border border-light-300/80 rounded-2xl shadow-xs transition-all duration-300 active:scale-[0.98] ${meta.hoverBorder} overflow-hidden`}
               >
                 <div>
@@ -122,6 +123,7 @@ export default async function CategoryGridShowcase() {
               <Link
                 key={category.id}
                 href={`/products/${category.slug}`}
+                prefetch={false}
                 className={`group relative flex flex-col justify-between p-5 glass-card border border-light-300/80 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md ${meta.hoverBorder} overflow-hidden`}
               >
                 <div>

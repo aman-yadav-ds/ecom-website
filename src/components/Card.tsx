@@ -41,7 +41,7 @@ const Card: React.FC<CardProps> = ({
       {/* Content Container */}
       <div className="flex flex-col flex-grow">
         <h3 className="text-xs sm:text-base md:text-lg font-extrabold text-dark-900 leading-tight mb-1 group-hover:text-brand-red transition-colors line-clamp-2 min-h-[36px] sm:min-h-[48px]">
-          <Link href={href} className="before:absolute before:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xl">
+          <Link href={href} prefetch={false} className="before:absolute before:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xl">
             {title}
           </Link>
         </h3>
@@ -64,6 +64,7 @@ const Card: React.FC<CardProps> = ({
             )}
             <Link
               href={href}
+              prefetch={false}
               className="relative z-10 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-brand-red rounded-full flex items-center justify-center text-white hover:bg-brand-red-accent transition-all duration-200 shadow-xs hover:scale-105 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red active:scale-95"
               aria-label={`View details for ${title}`}
             >

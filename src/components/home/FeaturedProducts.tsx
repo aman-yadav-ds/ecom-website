@@ -94,6 +94,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
           >
             <Link
               href="/products"
+              prefetch={false}
               className="flex items-center gap-2 text-brand-red border border-brand-red/50 hover:bg-brand-red hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 px-7 py-3.5 rounded-full group shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red active:scale-95"
             >
               <span>Explore Catalog</span>
@@ -148,6 +149,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
                 >
                   <Link
                     href={`/products/${product.id}`}
+                    prefetch={false}
                     className="group block rounded-2xl glass-card border border-light-300/80 hover:border-brand-red/40 overflow-hidden h-full flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red shadow-xs hover:shadow-md"
                   >
                     <div className="relative w-full h-[140px] sm:h-[200px] md:h-[260px] bg-white p-3 sm:p-6 flex items-center justify-center overflow-hidden border-b border-light-200">
@@ -196,6 +198,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
         <div className="mt-10 flex justify-center md:hidden">
           <Link
             href="/products"
+            prefetch={false}
             className="flex items-center justify-center gap-2 text-white bg-brand-red hover:bg-brand-red-accent font-bold text-sm uppercase tracking-wider transition-all duration-300 px-8 py-4 rounded-full w-full shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
           >
             <span>View Complete Catalog</span>

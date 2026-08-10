@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           {/* Logo & Vision Section */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block py-1">
+            <Link href="/" prefetch={false} className="inline-block py-1">
               <div className="p-2 rounded-xl bg-white border border-light-300 shadow-xs inline-block">
                 <Image
                   src="/trademark.webp"
@@ -54,22 +54,22 @@ const Footer = () => {
               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Equipment</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
-                  <Link href="/products/tractor-attachments" className="hover:text-brand-red transition-colors">
+                  <Link href="/products/tractor-attachments" prefetch={false} className="hover:text-brand-red transition-colors">
                     Tractor Attachments
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/self-propelled-machinery" className="hover:text-brand-red transition-colors">
+                  <Link href="/products/self-propelled-machinery" prefetch={false} className="hover:text-brand-red transition-colors">
                     Self Propelled
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/food-processing-units" className="hover:text-brand-red transition-colors">
+                  <Link href="/products/food-processing-units" prefetch={false} className="hover:text-brand-red transition-colors">
                     Food Processing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/lubricants" className="hover:text-brand-red transition-colors">
+                  <Link href="/products/lubricants" prefetch={false} className="hover:text-brand-red transition-colors">
                     STOU Lubricants
                   </Link>
                 </li>
@@ -80,22 +80,22 @@ const Footer = () => {
               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Support</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
-                  <Link href="/dealers" className="hover:text-brand-red transition-colors">
+                  <Link href="/dealers" prefetch={false} className="hover:text-brand-red transition-colors">
                     Dealer Locator
                   </Link>
                 </li>
                 <li>
-                  <Link href="/spare-parts" className="hover:text-brand-red transition-colors">
+                  <Link href="/spare-parts" prefetch={false} className="hover:text-brand-red transition-colors">
                     Spare Parts
                   </Link>
                 </li>
                 <li>
-                  <Link href="/warranty" className="hover:text-brand-red transition-colors">
+                  <Link href="/warranty" prefetch={false} className="hover:text-brand-red transition-colors">
                     Warranty Claims
                   </Link>
                 </li>
                 <li>
-                  <Link href="/guides" className="hover:text-brand-red transition-colors">
+                  <Link href="/guides" prefetch={false} className="hover:text-brand-red transition-colors">
                     Farming Guides
                   </Link>
                 </li>
@@ -106,22 +106,22 @@ const Footer = () => {
               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Corporate</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
-                  <Link href="/about" className="hover:text-brand-red transition-colors">
+                  <Link href="/about" prefetch={false} className="hover:text-brand-red transition-colors">
                     About KOREVA
                   </Link>
                 </li>
                 <li>
-                  <Link href="/news" className="hover:text-brand-red transition-colors">
+                  <Link href="/news" prefetch={false} className="hover:text-brand-red transition-colors">
                     News &amp; Events
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services-events/contact-us" className="hover:text-brand-red transition-colors">
+                  <Link href="/services-events/contact-us" prefetch={false} className="hover:text-brand-red transition-colors">
                     Contact Corporate
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy-policy" className="hover:text-brand-red transition-colors">
+                  <Link href="/privacy-policy" prefetch={false} className="hover:text-brand-red transition-colors">
                     Privacy Policy
                   </Link>
                 </li>
@@ -196,13 +196,13 @@ const Footer = () => {
           </div>
 
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-brand-red transition-colors">
+            <Link href="/privacy-policy" prefetch={false} className="hover:text-brand-red transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/legal-notice" className="hover:text-brand-red transition-colors">
+            <Link href="/legal-notice" prefetch={false} className="hover:text-brand-red transition-colors">
               Legal Notice
             </Link>
-            <Link href="/cookies" className="hover:text-brand-red transition-colors">
+            <Link href="/cookies" prefetch={false} className="hover:text-brand-red transition-colors">
               Cookie Settings
             </Link>
           </div>

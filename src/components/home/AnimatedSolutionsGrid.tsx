@@ -32,6 +32,7 @@ export function AnimatedSolutionsGrid({ solutions }: AnimatedSolutionsGridProps)
         >
           <Link
             href={item.link}
+            prefetch={false}
             className="group relative block rounded-3xl glass-card overflow-hidden border border-light-300 shadow-xs hover:shadow-md h-[460px] md:h-[500px] flex flex-col justify-between p-6 sm:p-8"
           >
             {/* Background Image */}
