@@ -11,17 +11,17 @@ export function NewHero() {
       {/* Background Facility Image — server-rendered, priority-loaded */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/about_factory_1784013199832.jpg"
-          alt="KOREVA GLOBAL LLP Agricultural Machinery Manufacturing Facility"
+          src="/images/hero_bg_koreva.jpg"
+          alt="KOREVA GLOBAL LLP Agricultural Machinery Manufacturing Plant & Assembly Line"
           fill
           sizes="100vw"
           priority
           loading="eager"
           fetchPriority="high"
-          className="object-cover scale-105 filter brightness-95 opacity-45"
+          className="object-cover object-center filter brightness-95 contrast-105 saturate-105 opacity-65"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfb]/70 via-[#fbfbfb]/50 to-[#fbfbfb]/90 z-10" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/10 rounded-full blur-[120px] pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/50 to-[#fbfbfb] z-10" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-brand-red/10 rounded-full blur-[150px] pointer-events-none z-10" />
       </div>
 
       {/* Client boundary: animated text, badge, and CTAs */}

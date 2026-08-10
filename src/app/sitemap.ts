@@ -10,6 +10,7 @@ import type { Category, ProductWithRelations, NewsArticle, Dealer } from "@/db/s
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://koreva9.com";
 
+  // Core static routes including main company, services, and sub-guides
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
@@ -21,7 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/manufacturing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/services-events/contact-us`,
@@ -34,6 +41,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
+    },
+    // Core Product Category Static Pages
+    {
+      url: `${baseUrl}/products/tractor-attachments`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/products/self-propelled-machinery`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/products/food-processing-units`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/products/lubricants`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/products/hand-tools`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/dealers`,
@@ -57,6 +95,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/guides`,
       lastModified: new Date(),
       changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    // Guide Sub-Articles
+    {
+      url: `${baseUrl}/guides/e20-petrol`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/guides/maintenance-checklist`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/guides/tillage-basics`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/guides/tractor-attachments`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
       priority: 0.7,
     },
     {
@@ -103,7 +166,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  let categoryRoutes: MetadataRoute.Sitemap = [];
+  let dynamicCategoryRoutes: MetadataRoute.Sitemap = [];
   let productRoutes: MetadataRoute.Sitemap = [];
   let newsRoutes: MetadataRoute.Sitemap = [];
   let dealerRoutes: MetadataRoute.Sitemap = [];
@@ -116,36 +179,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getCachedDealers(),
     ]);
 
-    categoryRoutes = categoriesList.map((category: Category) => ({
-      url: `${baseUrl}/products/${category.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.85,
-    }));
+    const staticUrlsSet = new Set(staticRoutes.map((r) => r.url));
+
+    dynamicCategoryRoutes = categoriesList
+      .map((category: Category) => ({
+        url: `${baseUrl}/products/${category.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.85,
+      }))
+      .filter((route) => !staticUrlsSet.has(route.url));
 
     productRoutes = productsList.map((product: ProductWithRelations) => ({
       url: `${baseUrl}/products/${product.id}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
 
     newsRoutes = newsList.map((article: NewsArticle) => ({
       url: `${baseUrl}/news/${article.id}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
 
     dealerRoutes = dealersList.map((dealer: Dealer) => ({
       url: `${baseUrl}/dealers/${dealer.id}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
   } catch (error) {
     console.error("[Sitemap Generation Error]", error);
   }
 
-  return [...staticRoutes, ...categoryRoutes, ...productRoutes, ...newsRoutes, ...dealerRoutes];
+  return [...staticRoutes, ...dynamicCategoryRoutes, ...productRoutes, ...newsRoutes, ...dealerRoutes];
 }

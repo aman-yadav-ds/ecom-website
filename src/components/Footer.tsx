@@ -12,27 +12,27 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Accreditation Strip */}
-        <div className="mb-12 p-6 rounded-2xl glass-panel border border-light-300 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red">
+        <div className="mb-12 p-5 sm:p-6 rounded-2xl glass-panel-elevated border border-brand-red/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+          <div className="flex items-center gap-3.5">
+            <div className="p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red shrink-0">
               <Award className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-bold text-dark-900 uppercase tracking-wider">ISO 9001:2015 Certified Manufacturing</p>
-              <p className="text-xs text-dark-700">Engineering heavy-duty farm equipment & ISO certified STOU lubricants for Indian agriculture.</p>
+              <p className="text-xs sm:text-sm font-extrabold text-dark-900 uppercase tracking-wider">ISO 9001:2015 Certified Manufacturing</p>
+              <p className="text-xs text-dark-700 font-medium">Engineering heavy-duty farm equipment &amp; ISO certified STOU lubricants for Indian agriculture.</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <ShieldCheck className="w-5 h-5 text-green-600" />
-            <span className="text-xs font-bold text-dark-700 uppercase tracking-widest">Pan-India Dealer Support</span>
+          <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-green-500/10 border border-green-500/20 shrink-0">
+            <ShieldCheck className="w-4 h-4 text-green-700 shrink-0" />
+            <span className="text-[11px] font-extrabold text-green-800 uppercase tracking-widest">Pan-India Dealer Support</span>
           </div>
         </div>
 
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           {/* Logo & Vision Section */}
-          <div className="md:col-span-4">
-            <Link href="/" className="inline-block py-2">
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-block py-1">
               <div className="p-2 rounded-xl bg-white border border-light-300 shadow-xs inline-block">
                 <Image
                   src="/trademark.webp"
@@ -49,9 +49,9 @@ const Footer = () => {
           </div>
 
           {/* Direct Navigation Links */}
-          <div className="md:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-6">
+          <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
             <div>
-              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Equipment</h3>
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Equipment</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
                   <Link href="/products/tractor-attachments" className="hover:text-brand-red transition-colors">
@@ -77,7 +77,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Support</h3>
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Support</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
                   <Link href="/dealers" className="hover:text-brand-red transition-colors">
@@ -103,7 +103,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-4">Corporate</h3>
+              <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3.5">Corporate</h3>
               <ul className="space-y-2.5 text-xs text-dark-700 font-medium">
                 <li>
                   <Link href="/about" className="hover:text-brand-red transition-colors">
@@ -112,7 +112,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="/news" className="hover:text-brand-red transition-colors">
-                    News & Events
+                    News &amp; Events
                   </Link>
                 </li>
                 <li>
@@ -130,7 +130,7 @@ const Footer = () => {
           </div>
 
           {/* Social Links & Location */}
-          <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between gap-4">
+          <div className="sm:col-span-2 lg:col-span-3 flex flex-col items-start lg:items-end justify-between gap-4">
             <div className="flex gap-3">
               <a
                 href="https://x.com/koreva9"
@@ -179,7 +179,7 @@ const Footer = () => {
             </a>
             </div>
 
-            <div className="text-dark-600 text-left md:text-right max-w-xs text-[11px] leading-relaxed font-medium">
+            <div className="text-dark-600 text-left lg:text-right max-w-xs text-[11px] leading-relaxed font-medium">
               KOREVA GLOBAL LLP, NH9 KICHHA RUDRAPUR ROAD, KISHANPUR, U.S.NAGAR, UTTARAKHAND, INDIA - 263148
             </div>
           </div>

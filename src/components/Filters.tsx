@@ -81,7 +81,7 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-xs md:hidden transition-opacity duration-300"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -89,35 +89,35 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
 
       {/* Sidebar/Drawer */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-xl md:static md:z-auto md:block md:shadow-none md:w-64 transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[85vw] bg-white/98 backdrop-blur-2xl shadow-2xl md:static md:z-auto md:block md:shadow-none md:w-64 font-jost transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        <div className="flex flex-col h-full overflow-y-auto">
+        <div className="flex flex-col h-full overflow-y-auto p-4 md:p-0">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 md:px-0">
+          <div className="flex items-center justify-between pb-4 mb-2 border-b border-light-300">
             <div className="flex items-center gap-2 text-dark-900">
-              <FilterIcon className="w-5 h-5" />
-              <h2 className="text-lg font-semibold">Filters</h2>
+              <FilterIcon className="w-5 h-5 text-brand-red" />
+              <h2 className="text-base font-extrabold uppercase tracking-wide">Filters</h2>
               {activeFilterCount > 0 && (
-                <span className="flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-brand-red rounded-full">
+                <span className="flex items-center justify-center w-5 h-5 text-[11px] font-black text-white bg-brand-red rounded-full">
                   {activeFilterCount}
                 </span>
               )}
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               {activeFilterCount > 0 && (
                 <button 
                   onClick={handleClearAll}
-                  className="text-sm text-brand-red hover:text-brand-red-accent font-bold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs"
+                  className="text-xs text-brand-red hover:text-brand-red-accent font-extrabold uppercase tracking-wider hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs cursor-pointer"
                 >
-                  Clear
+                  Clear All
                 </button>
               )}
               <button
                 onClick={onClose}
-                className="p-1 text-gray-500 hover:bg-gray-100 rounded-md md:hidden"
+                className="p-1.5 text-dark-900 hover:bg-light-200 rounded-full md:hidden cursor-pointer"
                 aria-label="Close filters"
               >
                 <X className="w-5 h-5" />
@@ -126,43 +126,43 @@ const Filters: React.FC<FiltersProps> = ({ availableFilters, isOpen, onClose }) 
           </div>
 
           {/* Filter Groups */}
-          <div className="p-4 md:px-0 space-y-6 md:mt-4">
+          <div className="space-y-4 md:mt-2">
             {filterKeys.length === 0 && (
-              <p className="text-sm text-gray-500">No filters available.</p>
+              <p className="text-sm text-dark-500 font-medium">No filters available.</p>
             )}
             
             {filterKeys.map((group) => (
-              <div key={group} className="border-b border-gray-100 pb-4 last:border-0">
+              <div key={group} className="border-b border-light-200 pb-3 last:border-0">
                 <button
-                  className="flex items-center justify-between w-full text-left min-h-[44px] py-2 px-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                  className="flex items-center justify-between w-full text-left min-h-[44px] py-2 px-1 rounded-lg hover:bg-light-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer"
                   onClick={() => toggleGroup(group)}
                   aria-expanded={expandedGroups[group]}
                 >
-                  <h3 className="text-sm font-bold text-gray-900 capitalize">
+                  <h3 className="text-xs font-extrabold text-dark-900 uppercase tracking-wider">
                     {group.replace(/([A-Z])/g, ' $1').trim()}
                   </h3>
                   {expandedGroups[group] ? (
-                    <ChevronUp className="w-4 h-4 text-brand-red" />
+                    <ChevronUp className="w-4 h-4 text-brand-red shrink-0" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-gray-500" />
+                    <ChevronDown className="w-4 h-4 text-dark-500 shrink-0" />
                   )}
                 </button>
                 
                 {expandedGroups[group] && (
-                  <div className="mt-1 space-y-1">
+                  <div className="mt-1 space-y-0.5">
                     {availableFilters[group].map((value) => {
                       const checked = isSelected(group, value);
                       const id = `filter-${group}-${value}`;
                       return (
-                        <label key={value} htmlFor={id} className="flex items-center min-h-[44px] py-1.5 px-1 rounded-xs cursor-pointer select-none hover:bg-light-200 transition-colors">
+                        <label key={value} htmlFor={id} className="flex items-center min-h-[44px] py-1.5 px-2 rounded-lg cursor-pointer select-none hover:bg-light-200/80 transition-colors">
                           <input
                             id={id}
                             type="checkbox"
                             checked={checked}
                             onChange={(e) => handleCheckboxChange(group, value, e.target.checked)}
-                            className="w-4 h-4 text-brand-red border-gray-300 rounded focus:ring-brand-red focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer shrink-0"
+                            className="w-4 h-4 text-brand-red border-light-300 rounded focus:ring-brand-red focus-visible:ring-2 focus-visible:ring-brand-red cursor-pointer shrink-0"
                           />
-                          <span className="ml-3 text-sm text-gray-700 font-medium hover:text-brand-red transition-colors">
+                          <span className="ml-3 text-xs text-dark-800 font-medium hover:text-brand-red transition-colors">
                             {value}
                           </span>
                         </label>

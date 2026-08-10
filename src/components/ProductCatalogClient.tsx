@@ -127,23 +127,23 @@ export default function ProductCatalogClient({
 
       {/* Active Filter Chips / Pills */}
       {activeFilterChips.length > 0 && (
-        <div className="mb-6 flex flex-wrap items-center gap-2 p-3 bg-light-200/80 rounded-md border border-light-300">
-          <span className="text-xs font-bold text-dark-900 uppercase tracking-wider mr-1">
+        <div className="mb-6 flex flex-wrap items-center gap-2 p-3.5 bg-white/80 backdrop-blur-md rounded-2xl border border-light-300 shadow-xs">
+          <span className="text-xs font-extrabold text-brand-red uppercase tracking-widest mr-1">
             Active Filters:
           </span>
           {activeFilterChips.map((chip, idx) => (
             <button
               key={`${chip.key}-${chip.value}-${idx}`}
               onClick={() => handleRemoveChip(chip.key, chip.value)}
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-light-300 text-xs font-semibold text-dark-900 rounded-full hover:border-brand-red hover:text-brand-red transition-all shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-red/5 border border-brand-red/20 text-xs font-extrabold text-dark-900 rounded-full hover:bg-brand-red hover:text-white hover:border-brand-red transition-all shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
             >
               <span>{chip.label}</span>
-              <X className="w-3 h-3 text-dark-500 group-hover:text-brand-red transition-colors" />
+              <X className="w-3.5 h-3.5 text-brand-red group-hover:text-white transition-colors" />
             </button>
           ))}
           <button
             onClick={handleClearAllFilters}
-            className="text-xs text-brand-red font-bold hover:underline ml-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs"
+            className="text-xs text-brand-red font-extrabold uppercase tracking-wider hover:underline ml-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-xs cursor-pointer"
           >
             Clear All
           </button>

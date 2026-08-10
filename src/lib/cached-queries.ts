@@ -77,6 +77,9 @@ export const getCachedPublishedProducts = unstable_cache(
           category: categoryMap.get(p.categoryId) || null,
           variants: variantsByProduct.get(p.id) || [],
         }));
+      } catch (error) {
+        console.error("[getCachedPublishedProducts Error]", error);
+        return [];
       } finally {
         if (limit === 50 && offset === 0 && !categoryId) {
           globalForCache.__productsFetchPromise = undefined;
@@ -143,6 +146,9 @@ export const getCachedCategories = unstable_cache(
       try {
         const db = await getDb();
         return await db.select().from(categories).limit(20);
+      } catch (error) {
+        console.error("[getCachedCategories Error]", error);
+        return [];
       } finally {
         globalForCache.__categoriesFetchPromise = undefined;
       }
@@ -167,6 +173,9 @@ export const getCachedNewsArticles = unstable_cache(
       try {
         const db = await getDb();
         return await db.select().from(newsArticles).limit(limit).offset(offset);
+      } catch (error) {
+        console.error("[getCachedNewsArticles Error]", error);
+        return [];
       } finally {
         if (limit === 20 && offset === 0) {
           globalForCache.__newsFetchPromise = undefined;
@@ -197,6 +206,9 @@ export const getCachedDealers = unstable_cache(
       try {
         const db = await getDb();
         return await db.select().from(dealers).limit(limit).offset(offset);
+      } catch (error) {
+        console.error("[getCachedDealers Error]", error);
+        return [];
       } finally {
         if (limit === 50 && offset === 0) {
           globalForCache.__dealersFetchPromise = undefined;

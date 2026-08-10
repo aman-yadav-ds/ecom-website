@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Metadata } from "next";
 import { BecomePartnerButton } from "@/components/BecomePartnerButton";
 import { Building2, Users, ShieldCheck, TrendingUp, Leaf } from "lucide-react";
@@ -194,21 +195,15 @@ export default function AboutPage() {
                 ISO 9001:2015 CERTIFIED FACILITY
               </h2>
               <p className="text-dark-700 text-sm sm:text-base leading-relaxed font-medium max-w-2xl">
-                Our 50,000+ sq ft Uttarakhand manufacturing hub follows international quality protocols, CNC machining, robotic welding, and state subsidy compliance standards.
+                Our Uttarakhand manufacturing &amp; assembly facility focuses on precision engineering, strict quality inspection, and custom OEM solutions for modern farming.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
-                <a
+                <Link
                   href="/manufacturing"
                   className="px-5 py-2.5 rounded-full bg-brand-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-brand-red-accent transition-all shadow-xs"
                 >
-                  Explore Plant Facilities &gt;
-                </a>
-                <a
-                  href="/oem-services"
-                  className="px-5 py-2.5 rounded-full glass-panel border border-light-300 text-dark-900 font-extrabold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-xs"
-                >
-                  OEM &amp; Private Labeling &gt;
-                </a>
+                  Explore Manufacturing &amp; OEM Services &gt;
+                </Link>
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 shrink-0">

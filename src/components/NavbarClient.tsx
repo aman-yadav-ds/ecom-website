@@ -7,9 +7,7 @@ import {
   motion,
   AnimatePresence,
   useScroll,
-  useTransform,
   useMotionValueEvent,
-  useMotionTemplate,
 } from "framer-motion";
 import {
   MapPin,
@@ -56,38 +54,15 @@ export default function NavbarClient() {
   const { openJoinModal } = useModalStore();
   const { openModal: openRfqModal, totalItems: rfqTotalItems } = useRfqStore();
 
-  // ─── Scroll-Driven Motion Values ────────────────────────────────────────────
   const { scrollY } = useScroll();
 
-  // Contact strip is ~28px tall; utility bar is ~38px tall.
-  const BANNER_RANGE = [0, 50];
-  const NAV_RANGE    = [0, 80];
-
-  const bannerOpacity   = useTransform(scrollY, BANNER_RANGE, [1, 0]);
-  const bannerHeight    = useTransform(scrollY, BANNER_RANGE, [28, 0]);
-  const utilityHeight   = useTransform(scrollY, BANNER_RANGE, [38, 0]);
-
-  // Main bar numeric values
-  const bgOpacity       = useTransform(scrollY, NAV_RANGE, [0.92, 0.98]);
-  const blurAmount      = useTransform(scrollY, NAV_RANGE, [16, 48]);
-  const navHeight       = useTransform(scrollY, NAV_RANGE, [72, 60]);
-  const outerPaddingX   = useTransform(scrollY, NAV_RANGE, [0, 16]);
-  const outerPaddingTop = useTransform(scrollY, NAV_RANGE, [0, 8]);
-  const borderRadius    = useTransform(scrollY, NAV_RANGE, [0, 24]);
-  const shadowOpacity   = useTransform(scrollY, NAV_RANGE, [0, 0.15]);
-  const borderOpacity   = useTransform(scrollY, NAV_RANGE, [0.08, 0.18]);
-  const barPaddingY     = useTransform(scrollY, NAV_RANGE, [0, 4]);
-
-  // useMotionTemplate builds a MotionValue<string> — reactive & correctly typed
-  const bgColor        = useMotionTemplate`rgba(255,255,255,${bgOpacity})`;
-  const backdropFilter = useMotionTemplate`blur(${blurAmount}px)`;
-  const boxShadow      = useMotionTemplate`0 4px 32px rgba(0,0,0,${shadowOpacity}), 0 1px 6px rgba(0,0,0,${shadowOpacity})`;
-  const borderValue    = useMotionTemplate`1px solid rgba(0,0,0,${borderOpacity})`;
-
-  // Drive the isScrolled boolean (only update state on actual threshold cross)
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const shouldBeScrolled = latest > 40;
-    setIsScrolled((prev) => (prev !== shouldBeScrolled ? shouldBeScrolled : prev));
+  // Drive the isScrolled boolean with hysteresis to prevent scroll boundary oscillation
+  useMotionValueEvent(scrollY, "change", (latest: number) => {
+    if (latest > 60) {
+      setIsScrolled(true);
+    } else if (latest < 20) {
+      setIsScrolled(false);
+    }
   });
 
   // Close dropdown on outside click
@@ -129,97 +104,73 @@ export default function NavbarClient() {
         onClose={() => setIsSearchOpen(false)}
       />
 
-      {/* ── Outer Unified Sticky Container ────────────────────────────── */}
+      {/* ── Top Contact Strip (Normal Flow) ────────────────────────── */}
+      <div className="w-full bg-gradient-to-r from-brand-red via-red-700 to-brand-red text-white text-center text-xs font-bold uppercase tracking-widest shadow-inner">
+        <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-white/90 animate-pulse" />
+          <span>Support Hotline: +91 7455 973 188</span>
+        </div>
+      </div>
+
+      {/* ── Top Utility Bar (Normal Flow) ───────────────────────────── */}
+      <div className="w-full bg-white/80 backdrop-blur-xl border-b border-light-200/80 font-jost">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex justify-between items-center text-xs text-dark-900 font-bold">
+          <Link
+            href="/dealers"
+            className="flex items-center space-x-1.5 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
+          >
+            <MapPin className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
+            <span className="tracking-tight uppercase">Find a Dealer</span>
+          </Link>
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            <Link
+              href="/services-events/contact-us"
+              aria-label="Contact Us"
+              className="flex items-center hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+            >
+              <Mail className="w-3.5 h-3.5" />
+            </Link>
+            <button
+              type="button"
+              className="flex items-center space-x-1.5 hover:text-brand-red transition-colors bg-transparent border-0 font-extrabold uppercase cursor-pointer focus-visible:outline-none"
+              onClick={() => setIsSearchOpen(true)}
+            >
+              <Search className="w-3.5 h-3.5 text-brand-red" />
+              <span>Product search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Sticky Main Navigation Header ───────────────────────────── */}
       <header
         ref={dropdownRef}
         onClick={handleLinkClick}
         className="sticky top-0 z-50 w-full font-jost"
       >
-        {/* ── Contact Strip: height + opacity both animate to 0 ── */}
-        <motion.div
-          style={{ height: bannerHeight, opacity: bannerOpacity, overflow: "hidden" }}
-          className="w-full bg-gradient-to-r from-brand-red via-red-700 to-brand-red text-white text-center text-xs font-bold uppercase tracking-widest shadow-inner"
-        >
-          <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-white/90 animate-pulse" />
-            <span>Support Hotline: +91 7455 973 188</span>
-          </div>
-        </motion.div>
-
-        {/* ── Top Utility Bar: height + opacity both animate to 0 ── */}
-        <motion.div
-          style={{ height: utilityHeight, opacity: bannerOpacity, overflow: "hidden" }}
-          className="w-full bg-white/80 backdrop-blur-xl border-b border-light-200/80 font-jost"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-xs text-dark-900 font-bold">
-            <Link
-              href="/dealers"
-              className="flex items-center space-x-1.5 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
-            >
-              <MapPin className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
-              <span className="tracking-tight uppercase">Find a Dealer</span>
-            </Link>
-            <div className="flex items-center space-x-4 sm:space-x-6">
-              <Link
-                href="/services-events/contact-us"
-                aria-label="Contact Us"
-                className="flex items-center hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
-              >
-                <Mail className="w-3.5 h-3.5" />
-              </Link>
-              <button
-                type="button"
-                className="flex items-center space-x-1.5 hover:text-brand-red transition-colors bg-transparent border-0 font-extrabold uppercase cursor-pointer focus-visible:outline-none"
-                onClick={() => setIsSearchOpen(true)}
-              >
-                <Search className="w-3.5 h-3.5 text-brand-red" />
-                <span>Product search</span>
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
         {/* ── Main Navigation Floating Pill Wrapper ───────────────────── */}
-        <motion.div
-          style={{
-            paddingTop: outerPaddingTop,
-            paddingLeft: outerPaddingX,
-            paddingRight: outerPaddingX,
-          }}
-          className="w-full"
+        <div
+          className={`w-full transition-all duration-300 ease-in-out ${
+            isScrolled ? "px-2 sm:px-4 lg:px-6 pt-2" : "px-0 pt-0"
+          }`}
         >
-          {/* Inner pill wrapper — fills (100% - 2×outerPaddingX) */}
-          <motion.div
-            style={{
-              borderRadius,
-              boxShadow,
-              border: borderValue,
-            }}
-            className="relative"
+          {/* Inner pill wrapper */}
+          <div
+            className={`relative transition-all duration-300 ease-in-out ${
+              isScrolled
+                ? "rounded-2xl sm:rounded-3xl border border-light-300/90 bg-white/95 backdrop-blur-2xl shadow-xl"
+                : "rounded-none border-b border-light-300/80 bg-white/92 backdrop-blur-xl shadow-xs"
+            }`}
           >
-            {/* Glass background layer — clips background blur/color without clipping dropdowns */}
-            <motion.div
-              style={{
-                borderRadius,
-                backgroundColor: bgColor,
-                backdropFilter,
-                WebkitBackdropFilter: backdropFilter,
-              }}
-              className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-            />
-
-
-          {/* Vertical padding wrapper */}
-          <motion.div
-            style={{ paddingTop: barPaddingY, paddingBottom: barPaddingY }}
-            className="relative z-10 px-4 sm:px-6 lg:px-8"
-          >
-            <div className="max-w-7xl mx-auto relative">
-              {/* Nav Row */}
-              <motion.div
-                style={{ height: navHeight }}
-                className="flex justify-between items-center"
-              >
+            {/* Vertical padding wrapper */}
+            <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-7xl mx-auto relative">
+                {/* Nav Row */}
+                <div
+                  className={`flex justify-between items-center transition-all duration-300 ease-in-out ${
+                    isScrolled ? "h-14 sm:h-15" : "h-16 sm:h-18"
+                  }`}
+                >
                 {/* Logo */}
                 <div className="flex-shrink-0 flex items-center">
                   <Link
@@ -338,7 +289,7 @@ export default function NavbarClient() {
                     <Menu className="w-5 h-5 text-dark-900" />
                   </button>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Desktop Mega Menu Dropdown */}
               <AnimatePresence>
@@ -658,19 +609,13 @@ export default function NavbarClient() {
                                   <Link href="/about" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     About KOREVA Global LLP &gt;
                                   </Link>
-                                  <span className="text-[11px] text-dark-500 block">20+ years of manufacturing excellence</span>
+                                  <span className="text-[11px] text-dark-500 block">Agricultural machinery &amp; farm tools brand</span>
                                 </li>
                                 <li>
                                   <Link href="/manufacturing" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
-                                    Infrastructure &amp; Plant &gt;
+                                    Manufacturing &amp; OEM Services &gt;
                                   </Link>
-                                  <span className="text-[11px] text-dark-500 block">50,000+ sq ft ISO certified facility</span>
-                                </li>
-                                <li>
-                                  <Link href="/oem-services" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
-                                    OEM &amp; Private Labeling &gt;
-                                  </Link>
-                                  <span className="text-[11px] text-dark-500 block">Custom branding, engineering &amp; export</span>
+                                  <span className="text-[11px] text-dark-500 block">Custom assembly, OEM solutions &amp; plant hub</span>
                                 </li>
                                 <li>
                                   <Link href="/news" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
@@ -736,9 +681,9 @@ export default function NavbarClient() {
                 )}
               </AnimatePresence>
             </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </div>
+        </div>
+      </div>
     </header>
 
 
@@ -848,6 +793,7 @@ export default function NavbarClient() {
                 {/* Company */}
                 <div className="p-4 rounded-2xl glass-card border border-light-300/80 shadow-xs space-y-2 text-xs font-extrabold uppercase tracking-wider">
                   <Link href="/about" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>About KOREVA</Link>
+                  <Link href="/manufacturing" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Manufacturing &amp; OEM</Link>
                   <Link href="/news" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Corporate News</Link>
                   <Link href="/services-events/contact-us" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
                 </div>
