@@ -207,6 +207,7 @@ export default function B2BProductActions({
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <Link
             href="/dealers"
+            prefetch={false}
             className="flex-1 bg-dark-900 hover:bg-black text-white font-extrabold py-3.5 px-6 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider"
           >
             <MapPin className="w-4 h-4 text-brand-red" />

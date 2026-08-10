@@ -47,6 +47,7 @@ export function HeroMotionContent() {
       >
         <Link
           href="/products"
+          prefetch={false}
           className="w-full sm:w-auto min-h-[44px] px-6 sm:px-7 py-3.5 rounded-full bg-brand-red hover:bg-brand-red-accent text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-brand-red/30 flex items-center justify-center gap-2 group active:scale-95 cursor-pointer"
         >
           <span>View Machinery Catalog</span>
@@ -61,6 +62,7 @@ export function HeroMotionContent() {
         </button>
         <Link
           href="/dealers"
+          prefetch={false}
           className="w-full sm:w-auto min-h-[44px] px-6 sm:px-7 py-3.5 rounded-full glass-panel hover:bg-white text-dark-900 border border-light-300 font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
         >
           <span>Find Authorized Dealer</span>

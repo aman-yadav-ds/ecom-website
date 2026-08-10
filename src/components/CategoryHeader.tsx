@@ -58,11 +58,11 @@ export default function CategoryHeader({ category, totalProducts }: CategoryHead
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex items-center space-x-2 text-xs font-extrabold text-dark-600 uppercase tracking-wider">
             <li>
-              <Link href="/" className="hover:text-brand-red transition-colors">Home</Link>
+              <Link href="/" prefetch={false} className="hover:text-brand-red transition-colors">Home</Link>
             </li>
             <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
             <li>
-              <Link href="/products" className="hover:text-brand-red transition-colors">Products</Link>
+              <Link href="/products" prefetch={false} className="hover:text-brand-red transition-colors">Products</Link>
             </li>
             <li><ChevronRight className="w-3.5 h-3.5 text-dark-400" /></li>
             <li className="text-dark-900" aria-current="page">{category.name}</li>

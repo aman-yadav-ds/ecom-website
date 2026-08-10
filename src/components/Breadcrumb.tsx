@@ -40,7 +40,7 @@ export default function Breadcrumb() {
   return (
     <div className="bg-light-200 py-3 px-4 md:px-8 border-b border-light-300 text-sm font-jost text-dark-700">
       <div className="max-w-7xl mx-auto flex items-center gap-2">
-        <Link href="/" className="hover:text-brand-red transition-colors">Koreva9</Link>
+        <Link href="/" prefetch={false} className="hover:text-brand-red transition-colors">Koreva9</Link>
         <span>&gt;</span>
         <span className="font-[600] text-brand-dark uppercase">{pageName}</span>
       </div>

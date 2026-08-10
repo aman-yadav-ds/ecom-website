@@ -126,6 +126,7 @@ const CompareDrawer = () => {
             </button>
             <Link
               href={`/compare${queryStringResult ? `?${queryStringResult}` : ""}`}
+              prefetch={false}
               className="bg-brand-red hover:bg-brand-red-accent text-white px-8 py-3.5 rounded-full font-extrabold shadow-md transition-all w-full sm:w-auto text-center flex items-center justify-center min-h-[44px] uppercase text-xs sm:text-sm tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red active:scale-95"
             >
               Compare Products ({selectedProductIds.length})

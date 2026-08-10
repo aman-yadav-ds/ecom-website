@@ -79,6 +79,7 @@ const ComparisonMatrix: React.FC<ComparisonMatrixProps> = ({ products }) => {
                     </p>
                     <Link
                       href={`/products/${product.id}`}
+                      prefetch={false}
                       className="w-full py-2.5 px-3 bg-brand-red hover:bg-brand-red-accent text-white font-extrabold rounded-full shadow-xs transition-all text-xs uppercase tracking-wider text-center active:scale-95"
                     >
                       View Details

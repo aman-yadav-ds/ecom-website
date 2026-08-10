@@ -49,6 +49,7 @@ export default async function NewsPage() {
         {featuredArticle && (
           <Link
             href={`/news/${featuredArticle.id}`}
+            prefetch={false}
             className="group glass-panel-elevated border border-light-300 shadow-md rounded-3xl overflow-hidden flex flex-col lg:flex-row mb-12 hover:shadow-xl transition-all duration-300 block"
           >
             <div className="w-full lg:w-[58%] relative min-h-[280px] sm:min-h-[350px] lg:min-h-[420px]">
@@ -102,6 +103,7 @@ export default async function NewsPage() {
             <Link
               key={article.id}
               href={`/news/${article.id}`}
+              prefetch={false}
               className="group glass-card border border-light-300/80 shadow-xs rounded-3xl overflow-hidden flex flex-col h-full hover:shadow-md transition-all duration-300 block"
             >
               <div className="w-full relative aspect-[16/9] overflow-hidden bg-white">

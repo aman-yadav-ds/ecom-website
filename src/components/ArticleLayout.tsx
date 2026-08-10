@@ -37,6 +37,7 @@ export default function ArticleLayout({
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-10 md:pb-16">
             <Link 
               href="/guides" 
+              prefetch={false}
               className="inline-flex items-center text-white/90 hover:text-brand-red mb-4 transition-colors uppercase tracking-wider text-xs font-extrabold"
             >
               <ArrowLeft className="w-4 h-4 mr-2 text-brand-red" /> Back to Knowledge Guides
@@ -83,25 +84,25 @@ export default function ArticleLayout({
               </h3>
               <ul className="space-y-5">
                 <li>
-                  <Link href="/guides/e20-petrol" className="group block">
+                  <Link href="/guides/e20-petrol" prefetch={false} className="group block">
                     <span className="text-xs text-brand-red font-extrabold uppercase tracking-wider mb-1 block">Machine Care</span>
                     <h4 className="text-dark-900 font-extrabold group-hover:text-brand-red transition-colors text-sm leading-snug uppercase">E20 Petrol: Protecting Your Carburetor</h4>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/guides/tractor-attachments" className="group block">
+                  <Link href="/guides/tractor-attachments" prefetch={false} className="group block">
                     <span className="text-xs text-brand-red font-extrabold uppercase tracking-wider mb-1 block">Buying Guide</span>
                     <h4 className="text-dark-900 font-extrabold group-hover:text-brand-red transition-colors text-sm leading-snug uppercase">Choosing the Right Tractor Attachment</h4>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/guides/tillage-basics" className="group block">
+                  <Link href="/guides/tillage-basics" prefetch={false} className="group block">
                     <span className="text-xs text-brand-red font-extrabold uppercase tracking-wider mb-1 block">Farming Advice</span>
                     <h4 className="text-dark-900 font-extrabold group-hover:text-brand-red transition-colors text-sm leading-snug uppercase">Tillage Farming Basics for Better Yields</h4>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/guides/maintenance-checklist" className="group block">
+                  <Link href="/guides/maintenance-checklist" prefetch={false} className="group block">
                     <span className="text-xs text-brand-red font-extrabold uppercase tracking-wider mb-1 block">Maintenance</span>
                     <h4 className="text-dark-900 font-extrabold group-hover:text-brand-red transition-colors text-sm leading-snug uppercase">End-of-Season Equipment Checklist</h4>
                   </Link>
@@ -109,7 +110,7 @@ export default function ArticleLayout({
               </ul>
               
               <div className="pt-6 border-t border-light-200">
-                <Link href="/dealers" className="flex items-center justify-between bg-brand-black text-white p-5 rounded-2xl hover:bg-brand-red transition-all group shadow-xs active:scale-95">
+                <Link href="/dealers" prefetch={false} className="flex items-center justify-between bg-brand-black text-white p-5 rounded-2xl hover:bg-brand-red transition-all group shadow-xs active:scale-95">
                   <div>
                     <p className="font-extrabold uppercase tracking-wide text-xs">Need Technical Help?</p>
                     <p className="text-xs text-gray-300 font-medium mt-0.5">Find an authorized dealer</p>

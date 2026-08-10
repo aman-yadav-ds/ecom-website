@@ -172,7 +172,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
       <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto mb-6">
         <ol className="flex items-center space-x-2 text-xs font-extrabold text-dark-600 uppercase tracking-wider">
           <li>
-            <Link href="/" className="hover:text-brand-red transition-colors">
+            <Link href="/" prefetch={false} className="hover:text-brand-red transition-colors">
               Home
             </Link>
           </li>
@@ -180,7 +180,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             <ChevronRight className="w-3.5 h-3.5 text-dark-400" />
           </li>
           <li>
-            <Link href="/products" className="hover:text-brand-red transition-colors">
+            <Link href="/products" prefetch={false} className="hover:text-brand-red transition-colors">
               Equipment
             </Link>
           </li>
@@ -237,6 +237,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href="/downloads"
+            prefetch={false}
             className="glass-card flex items-center justify-between p-6 sm:p-8 border border-light-300/80 rounded-3xl hover:border-brand-red shadow-xs hover:shadow-md transition-all group"
           >
             <div className="flex items-center gap-5">
@@ -257,6 +258,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <Link
             href="/faq"
+            prefetch={false}
             className="glass-card flex items-center justify-between p-6 sm:p-8 border border-light-300/80 rounded-3xl hover:border-brand-red shadow-xs hover:shadow-md transition-all group"
           >
             <div className="flex items-center gap-5">
@@ -286,6 +288,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             </h2>
             <Link
               href="/products"
+              prefetch={false}
               className="text-xs font-extrabold text-brand-red hover:underline flex items-center gap-1 uppercase tracking-wider"
             >
               <span>View All</span>

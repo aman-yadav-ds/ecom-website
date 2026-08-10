@@ -117,6 +117,7 @@ export default function NavbarClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex justify-between items-center text-xs text-dark-900 font-bold">
           <Link
             href="/dealers"
+            prefetch={false}
             className="flex items-center space-x-1.5 hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red group"
           >
             <MapPin className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
@@ -125,6 +126,7 @@ export default function NavbarClient() {
           <div className="flex items-center space-x-4 sm:space-x-6">
             <Link
               href="/services-events/contact-us"
+              prefetch={false}
               aria-label="Contact Us"
               className="flex items-center hover:text-brand-red transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
             >
@@ -175,6 +177,7 @@ export default function NavbarClient() {
                 <div className="flex-shrink-0 flex items-center">
                   <Link
                     href="/"
+                    prefetch={false}
                     className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-lg"
                   >
                     <div className="p-1.5 rounded-xl bg-white border border-light-300/80 shadow-xs group-hover:scale-105 transition-transform duration-300">
@@ -318,19 +321,19 @@ export default function NavbarClient() {
                             <div className="p-5 rounded-2xl bg-light-100/90 border border-light-300/80 shadow-xs hover:border-brand-red/30 transition-colors">
                               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3 flex items-center gap-1.5">
                                 <span className="w-2 h-2 rounded-full bg-brand-red" />
-                                <Link href="/products/tractor-attachments" className="hover:underline">
+                                <Link href="/products/tractor-attachments" prefetch={false} className="hover:underline">
                                   Tractor Attachments &gt;
                                 </Link>
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/products/tractor-attachments?search=Harrow" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/tractor-attachments?search=Harrow" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Disc Harrow
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Tractor-mounted heavy soil tillage</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/tractor-attachments?search=Rotavator" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/tractor-attachments?search=Rotavator" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Rotavator
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">KOBRA series seedbed rotators</span>
@@ -342,25 +345,25 @@ export default function NavbarClient() {
                             <div className="p-5 rounded-2xl bg-light-100/90 border border-light-300/80 shadow-xs hover:border-brand-red/30 transition-colors">
                               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3 flex items-center gap-1.5">
                                 <span className="w-2 h-2 rounded-full bg-brand-red" />
-                                <Link href="/products/self-propelled-machinery" className="hover:underline">
+                                <Link href="/products/self-propelled-machinery" prefetch={false} className="hover:underline">
                                   Self Propelled Gear &gt;
                                 </Link>
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/products/self-propelled-machinery?search=Power+Weeder" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/self-propelled-machinery?search=Power+Weeder" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Power Weeder
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">DHURANDHAR &amp; VIJAY 7HP/9HP models</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/self-propelled-machinery?search=Power+Reaper" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/self-propelled-machinery?search=Power+Reaper" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Power Reaper
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Crop harvesting &amp; field clearing</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/self-propelled-machinery?search=Brush+Cutter" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/self-propelled-machinery?search=Brush+Cutter" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Brush Cutter Pro
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Heavy-duty grass &amp; brush control</span>
@@ -372,25 +375,25 @@ export default function NavbarClient() {
                             <div className="p-5 rounded-2xl bg-light-100/90 border border-light-300/80 shadow-xs hover:border-brand-red/30 transition-colors">
                               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3 flex items-center gap-1.5">
                                 <span className="w-2 h-2 rounded-full bg-brand-red" />
-                                <Link href="/products/food-processing-units" className="hover:underline">
+                                <Link href="/products/food-processing-units" prefetch={false} className="hover:underline">
                                   Processing &amp; Fluids &gt;
                                 </Link>
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/products/food-processing-units?search=Pulveriser" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/food-processing-units?search=Pulveriser" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Commercial Pulveriser
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Grain &amp; spice grinding mills</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/food-processing-units?search=MINI+Rice+Mill" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/food-processing-units?search=MINI+Rice+Mill" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     MINI Rice Mill
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Compact paddy processing units</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/lubricants" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/lubricants" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     STOU 15W-40 Lubricants
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">ISO 9001 universal tractor oils</span>
@@ -402,19 +405,19 @@ export default function NavbarClient() {
                             <div className="p-5 rounded-2xl bg-light-100/90 border border-light-300/80 shadow-xs hover:border-brand-red/30 transition-colors">
                               <h3 className="text-xs font-extrabold text-brand-red uppercase tracking-widest mb-3 flex items-center gap-1.5">
                                 <span className="w-2 h-2 rounded-full bg-brand-red" />
-                                <Link href="/products/hand-tools" className="hover:underline">
+                                <Link href="/products/hand-tools" prefetch={false} className="hover:underline">
                                   Hand Tools &gt;
                                 </Link>
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/products/hand-tools?search=Bypass+Secateur" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/hand-tools?search=Bypass+Secateur" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Bypass Secateurs
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Forged SK5 alloy pruning shears</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/hand-tools?search=Sickle" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/hand-tools?search=Sickle" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Harvesting Sickles
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Micro-serrated steel harvesting tools</span>
@@ -424,7 +427,7 @@ export default function NavbarClient() {
                           </div>
 
                           <div className="pt-3 border-t border-light-200 flex justify-between items-center">
-                            <Link href="/products" className="inline-flex items-center gap-2 text-xs font-extrabold text-brand-red uppercase tracking-wider hover:underline">
+                            <Link href="/products" prefetch={false} className="inline-flex items-center gap-2 text-xs font-extrabold text-brand-red uppercase tracking-wider hover:underline">
                               View Complete Product Catalog <ArrowRight className="w-4 h-4" />
                             </Link>
                           </div>
@@ -446,19 +449,19 @@ export default function NavbarClient() {
                               </div>
                               <ul className="space-y-2 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/guides" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/guides" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Farming Guides &amp; Articles
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Modern agriculture techniques &amp; crop tips</span>
                                 </li>
                                 <li>
-                                  <Link href="/compare" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/compare" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Equipment Comparison Tool
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Compare weeders, harrows &amp; power tools</span>
                                 </li>
                                 <li>
-                                  <Link href="/faq" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/faq" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Frequently Asked Questions
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">E20 petrol safety, maintenance &amp; help</span>
@@ -477,19 +480,19 @@ export default function NavbarClient() {
                               </div>
                               <ul className="space-y-2 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/downloads" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/downloads" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Master Product Catalogue 2026
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">PDF download (12.4 MB)</span>
                                 </li>
                                 <li>
-                                  <Link href="/downloads" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/downloads" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     User Operating Manuals
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Power weeder &amp; rotavator specs</span>
                                 </li>
                                 <li>
-                                  <Link href="/downloads" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/downloads" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Safety &amp; E20 Maintenance Care
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Carburetor safety instructions</span>
@@ -508,13 +511,13 @@ export default function NavbarClient() {
                               </div>
                               <ul className="space-y-2 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/news" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/news" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Corporate News &amp; Updates
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Product launches &amp; expo announcements</span>
                                 </li>
                                 <li>
-                                  <Link href="/dealers" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/dealers" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Pan-India Network Expansion
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Authorized regional centers</span>
@@ -536,13 +539,13 @@ export default function NavbarClient() {
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/spare-parts" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/spare-parts" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     Spare Parts Catalog &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Original blades, carburetor kits &amp; belts</span>
                                 </li>
                                 <li>
-                                  <Link href="/products/lubricants" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/products/lubricants" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     STOU 15W-40 &amp; Gear Fluids
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">ISO 9001 engine &amp; transmission oils</span>
@@ -557,13 +560,13 @@ export default function NavbarClient() {
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/warranty" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/warranty" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     Warranty Policy &amp; Claims &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">1-Year OEM structure &amp; engine warranty</span>
                                 </li>
                                 <li>
-                                  <Link href="/about" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/about" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     ISO 9001:2015 Standards
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Multi-point quality inspection process</span>
@@ -578,13 +581,13 @@ export default function NavbarClient() {
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/dealers" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/dealers" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     Locate Service Center &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">500+ dealer hubs across India</span>
                                 </li>
                                 <li>
-                                  <Link href="/services-events/contact-us" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/services-events/contact-us" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Contact Support Team
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Direct customer helpline &amp; support</span>
@@ -606,19 +609,19 @@ export default function NavbarClient() {
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/about" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/about" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     About KOREVA Global LLP &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Agricultural machinery &amp; farm tools brand</span>
                                 </li>
                                 <li>
-                                  <Link href="/manufacturing" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/manufacturing" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     Manufacturing &amp; OEM Services &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Custom assembly, OEM solutions &amp; plant hub</span>
                                 </li>
                                 <li>
-                                  <Link href="/news" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/news" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Corporate News &amp; Events
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Latest updates &amp; trade announcements</span>
@@ -645,7 +648,7 @@ export default function NavbarClient() {
                                   <span className="text-[11px] text-dark-500 block">Become an authorized KOREVA dealer</span>
                                 </li>
                                 <li>
-                                  <Link href="/dealers" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/dealers" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Find Authorized Dealer
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Map &amp; contact list of dealers</span>
@@ -660,13 +663,13 @@ export default function NavbarClient() {
                               </h3>
                               <ul className="space-y-2.5 text-xs sm:text-sm text-dark-700 font-medium">
                                 <li>
-                                  <Link href="/services-events/contact-us" className="hover:text-brand-red transition-colors block font-bold text-dark-900">
+                                  <Link href="/services-events/contact-us" prefetch={false} className="hover:text-brand-red transition-colors block font-bold text-dark-900">
                                     Get in Touch &gt;
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Uttarakhand manufacturing HQ &amp; office</span>
                                 </li>
                                 <li>
-                                  <Link href="/privacy-policy" className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
+                                  <Link href="/privacy-policy" prefetch={false} className="hover:text-brand-red transition-colors block font-semibold text-dark-900">
                                     Privacy Policy &amp; Terms
                                   </Link>
                                   <span className="text-[11px] text-dark-500 block">Legal &amp; privacy documentation</span>
@@ -709,7 +712,7 @@ export default function NavbarClient() {
             >
               {/* Sidebar Header */}
               <div className="p-5 border-b border-light-300 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-10">
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                <Link href="/" prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
                   <div className="p-1.5 rounded-xl bg-white border border-light-300 shadow-xs">
                     <Image src="/trademark.webp" alt="KOREVA" width={80} height={20} className="h-5 w-auto object-contain" priority />
                   </div>
@@ -734,21 +737,21 @@ export default function NavbarClient() {
                   <AnimatePresence>
                     {expandedMobileSection === "Products" && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="px-4 pb-4 space-y-3 pt-2 text-xs font-medium border-t border-light-200">
-                        <Link href="/products" className="block text-brand-red font-bold hover:underline" onClick={() => setIsMobileMenuOpen(false)}>All Products Catalog &gt;</Link>
+                        <Link href="/products" prefetch={false} className="block text-brand-red font-bold hover:underline" onClick={() => setIsMobileMenuOpen(false)}>All Products Catalog &gt;</Link>
                         <div className="space-y-1 pl-2 border-l-2 border-brand-red/20">
-                          <Link href="/products/tractor-attachments" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Tractor Attachments</Link>
-                          <Link href="/products/tractor-attachments?search=Harrow" className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Disc Harrow</Link>
-                          <Link href="/products/tractor-attachments?search=Rotavator" className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Rotavator</Link>
+                          <Link href="/products/tractor-attachments" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Tractor Attachments</Link>
+                          <Link href="/products/tractor-attachments?search=Harrow" prefetch={false} className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Disc Harrow</Link>
+                          <Link href="/products/tractor-attachments?search=Rotavator" prefetch={false} className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Rotavator</Link>
                         </div>
                         <div className="space-y-1 pl-2 border-l-2 border-brand-red/20">
-                          <Link href="/products/self-propelled-machinery" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Self Propelled Machinery</Link>
-                          <Link href="/products/self-propelled-machinery?search=Power+Weeder" className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Power Weeder</Link>
-                          <Link href="/products/self-propelled-machinery?search=Power+Reaper" className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Power Reaper</Link>
+                          <Link href="/products/self-propelled-machinery" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Self Propelled Machinery</Link>
+                          <Link href="/products/self-propelled-machinery?search=Power+Weeder" prefetch={false} className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Power Weeder</Link>
+                          <Link href="/products/self-propelled-machinery?search=Power+Reaper" prefetch={false} className="block py-0.5 text-dark-700 hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>• Power Reaper</Link>
                         </div>
                         <div className="space-y-1 pl-2 border-l-2 border-brand-red/20">
-                          <Link href="/products/food-processing-units" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Food Processing Units</Link>
-                          <Link href="/products/lubricants" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Lubricants</Link>
-                          <Link href="/products/hand-tools" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Hand Tools</Link>
+                          <Link href="/products/food-processing-units" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Food Processing Units</Link>
+                          <Link href="/products/lubricants" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Lubricants</Link>
+                          <Link href="/products/hand-tools" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Hand Tools</Link>
                         </div>
                       </motion.div>
                     )}
@@ -764,10 +767,10 @@ export default function NavbarClient() {
                   <AnimatePresence>
                     {expandedMobileSection === "Resources" && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="px-4 pb-4 space-y-2 pt-2 text-xs font-medium border-t border-light-200">
-                        <Link href="/guides" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Farming Guides & Articles</Link>
-                        <Link href="/downloads" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Product Manuals & Downloads</Link>
-                        <Link href="/faq" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Frequently Asked Questions</Link>
-                        <Link href="/compare" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Equipment Comparison</Link>
+                        <Link href="/guides" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Farming Guides & Articles</Link>
+                        <Link href="/downloads" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Product Manuals & Downloads</Link>
+                        <Link href="/faq" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Frequently Asked Questions</Link>
+                        <Link href="/compare" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Equipment Comparison</Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -782,9 +785,9 @@ export default function NavbarClient() {
                   <AnimatePresence>
                     {expandedMobileSection === "Service" && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="px-4 pb-4 space-y-2 pt-2 text-xs font-medium border-t border-light-200">
-                        <Link href="/spare-parts" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Genuine Spare Parts Inventory</Link>
-                        <Link href="/warranty" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Warranty Terms & Claims</Link>
-                        <Link href="/dealers" className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Locate Dealer / Service Center</Link>
+                        <Link href="/spare-parts" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Genuine Spare Parts Inventory</Link>
+                        <Link href="/warranty" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Warranty Terms & Claims</Link>
+                        <Link href="/dealers" prefetch={false} className="block py-1 text-dark-900 font-bold hover:text-brand-red" onClick={() => setIsMobileMenuOpen(false)}>Locate Dealer / Service Center</Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -792,16 +795,16 @@ export default function NavbarClient() {
 
                 {/* Company */}
                 <div className="p-4 rounded-2xl glass-card border border-light-300/80 shadow-xs space-y-2 text-xs font-extrabold uppercase tracking-wider">
-                  <Link href="/about" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>About KOREVA</Link>
-                  <Link href="/manufacturing" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Manufacturing &amp; OEM</Link>
-                  <Link href="/news" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Corporate News</Link>
-                  <Link href="/services-events/contact-us" className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
+                  <Link href="/about" prefetch={false} className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>About KOREVA</Link>
+                  <Link href="/manufacturing" prefetch={false} className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Manufacturing &amp; OEM</Link>
+                  <Link href="/news" prefetch={false} className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Corporate News</Link>
+                  <Link href="/services-events/contact-us" prefetch={false} className="block py-1.5 text-dark-900 hover:text-brand-red transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
                 </div>
               </div>
 
               {/* Sidebar Footer */}
               <div className="p-5 border-t border-light-300 space-y-3 bg-light-100/90 backdrop-blur-md">
-                <Link href="/dealers" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 w-full py-3 rounded-full glass-panel border border-light-300 text-dark-900 font-extrabold text-xs uppercase tracking-wider hover:bg-white transition-colors shadow-xs">
+                <Link href="/dealers" prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 w-full py-3 rounded-full glass-panel border border-light-300 text-dark-900 font-extrabold text-xs uppercase tracking-wider hover:bg-white transition-colors shadow-xs">
                   <MapPin className="w-4 h-4 text-brand-red" />
                   <span>Find Authorized Dealer</span>
                 </Link>
@@ -831,6 +834,7 @@ export default function NavbarClient() {
           >
             <Link
               href="/dealers"
+              prefetch={false}
               className="flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-2xl border border-brand-red/30 text-dark-900 font-extrabold text-xs uppercase tracking-wider shadow-2xl hover:bg-brand-red hover:text-white transition-all duration-300 group active:scale-95 cursor-pointer"
             >
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-brand-red/10 group-hover:bg-white/20 text-brand-red group-hover:text-white flex items-center justify-center transition-colors">

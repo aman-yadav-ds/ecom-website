@@ -176,6 +176,7 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
             </div>
             <Link
               href="/downloads"
+              prefetch={false}
               className="px-3 py-2 bg-emerald-700 text-white hover:bg-emerald-800 rounded-xs text-xs font-bold flex items-center gap-1 shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
               <Download className="w-4 h-4" />
@@ -233,6 +234,7 @@ export default function LubricantDetailLayout({ product, variants }: LubricantDe
         </div>
         <Link
           href="/services-events/contact-us"
+          prefetch={false}
           className="inline-flex items-center gap-2 px-6 py-3.5 bg-emerald-500 text-dark-900 hover:bg-emerald-400 font-extrabold text-sm uppercase rounded-sm transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           <PhoneCall className="w-4 h-4" />

@@ -71,7 +71,7 @@ export default function GuidesPage() {
         </div>
 
         {/* Featured Guide: The E20 Warning */}
-        <Link href={guides[0].href} className="glass-panel-elevated border border-light-300 shadow-md rounded-3xl overflow-hidden flex flex-col md:flex-row mb-12 group cursor-pointer hover:shadow-xl transition-all block">
+        <Link href={guides[0].href} prefetch={false} className="glass-panel-elevated border border-light-300 shadow-md rounded-3xl overflow-hidden flex flex-col md:flex-row mb-12 group cursor-pointer hover:shadow-xl transition-all block">
           <div className="w-full md:w-1/2 relative min-h-[280px] sm:min-h-[350px]">
             <Image
               src={guides[0].image}
@@ -108,7 +108,7 @@ export default function GuidesPage() {
           {guides.slice(1).map((guide, idx) => {
             const Icon = guide.icon;
             return (
-              <Link href={guide.href} key={idx} className="glass-card border border-light-300/80 shadow-xs group cursor-pointer hover:shadow-md transition-all flex flex-col h-full rounded-3xl overflow-hidden block">
+              <Link href={guide.href} prefetch={false} key={idx} className="glass-card border border-light-300/80 shadow-xs group cursor-pointer hover:shadow-md transition-all flex flex-col h-full rounded-3xl overflow-hidden block">
                 <div className="w-full relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={guide.image}
