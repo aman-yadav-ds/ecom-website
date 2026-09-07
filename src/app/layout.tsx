@@ -1,9 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Jost } from "next/font/google";
+import { Jost, Manrope, Caveat } from "next/font/google";
 import "./globals.css";
 
 const jost = Jost({
   variable: '--font-jost',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const manrope = Manrope({
+  variable: '--font-manrope',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const caveat = Caveat({
+  variable: '--font-caveat',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -147,7 +159,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${jost.className} h-full antialiased`}
+      className={`${jost.variable} ${manrope.variable} ${caveat.variable} ${jost.className} h-full antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />

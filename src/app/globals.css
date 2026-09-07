@@ -3,20 +3,23 @@
 html, body {
   overflow-x: clip;
   max-width: 100vw;
-  scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
 
 @theme {
+  --breakpoint-xs: 480px;
+
   /* Brand Colors (Koreva 9) */
-  --color-brand-red: #a80000;
-  /* Deep red from the logo '9' */
+  --color-brand-red: #C40000;
+  --color-brand-deepred: #980000;
   --color-brand-red-accent: #d32f2f;
-  /* Vibrant red for hover states/CTAs */
-  --color-brand-black: #080808;
-  /* Deep black for strong headings & logos */
+  --color-brand-black: #0A0A0A;
   --color-brand-dark: #1a1a1a;
-  /* Off-black for readable primary body text */
+  --color-brand-offwhite: #F7F7F5;
+  --color-brand-surface: #FBF9F8;
+  --color-brand-gray: #6B6B6B;
+  --color-brand-border: #E4E4E4;
+  --color-brand-green: #008A3E;
 
   /* Dark shades */
   --color-dark-900: #111111;
@@ -24,19 +27,22 @@ html, body {
   --color-dark-500: #555555;
 
   /* Light shades */
+  --color-white: #ffffff;
+  --color-black: #000000;
   --color-light-100: #ffffff;
   --color-light-200: #f5f5f5;
   --color-light-300: #e5e5e5;
   --color-light-400: #cccccc;
 
   /* Supporting colors */
-  --color-green: #007d48;
-  --color-red: #d33918;
-  /* Retained your original red for error/alert states */
+  --color-green: #008A3E;
+  --color-red: #C40000;
   --color-orange: #d37918;
 
-  /* Font family */
+  /* Font families */
   --font-jost: "Jost", sans-serif;
+  --font-manrope: var(--font-manrope), "Manrope", sans-serif;
+  --font-caveat: var(--font-caveat), "Caveat", cursive;
 
   /* Heading sizes */
   --text-heading-1: 72px;
@@ -121,5 +127,48 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a80000;
+  background: #C40000;
+}
+
+/* Industrial Telemetry Ticker */
+@keyframes tickerSlide {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: tickerSlide 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Nav links sweep effect */
+.nav-sweep {
+  position: relative;
+}
+
+.nav-sweep::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #C40000;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-sweep:hover::after {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none !important;
+  }
 }

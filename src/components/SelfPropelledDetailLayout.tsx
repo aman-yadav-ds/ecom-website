@@ -119,7 +119,7 @@ export default function SelfPropelledDetailLayout({ product, variants }: SelfPro
           </div>
 
           {/* Pricing Box */}
-          <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-light-300 flex flex-col gap-1 shadow-xs bg-gradient-to-br from-white to-orange-50/30">
+          <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-light-300 flex flex-col gap-1 shadow-xs bg-linear-to-br from-white to-orange-50/30">
             <span className="text-xs font-extrabold text-dark-500 uppercase tracking-wider">Commercial Equipment Price</span>
             <div className="text-3xl sm:text-4xl font-extrabold text-orange-600">
               {activeVariant?.price ? priceFormatter.format(Number(activeVariant.price)) : "Price on Request"}

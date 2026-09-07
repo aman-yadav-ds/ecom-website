@@ -23,10 +23,7 @@ export const metadata: Metadata = buildProductMetadata({
 export const dynamic = 'force-static';
 export const revalidate = 3600;
 
-export default async function DealersPage(props: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  await props.searchParams;
+export default async function DealersPage() {
   const dealersList = await getCachedDealers();
 
   // Default center is Uttarakhand

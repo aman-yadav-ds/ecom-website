@@ -39,9 +39,11 @@ export default function Search({ isOpen, onClose }: SearchProps) {
     onClose();
   };
 
+  if (!isOpen) return null;
+
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-start pt-[12vh] md:pt-[15vh] justify-center bg-black/40 backdrop-blur-3xl transition-all duration-300 ease-out ${
+      className={`fixed inset-0 z-100 flex items-start pt-[12vh] md:pt-[15vh] justify-center bg-black/40 backdrop-blur-3xl transition-all duration-300 ease-out ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       }`}
     >

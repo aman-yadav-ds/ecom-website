@@ -24,13 +24,17 @@ export async function getDb(): Promise<DbType> {
       );
     }
 
-    if (!globalForDb.__d1TablesInitPromise) {
-      globalForDb.__d1TablesInitPromise = ensureTablesAndSeed(d1).catch((err) => {
-        globalForDb.__d1TablesInitPromise = undefined;
-        console.error("[Table Init Warning]", err);
-      });
+    // Runtime requests on Cloudflare should never execute DDL / seed checks.
+    // Guard auto-seed so it only runs if explicitly requested in local development.
+    if (process.env.NODE_ENV === "development" && process.env.ENABLE_AUTO_SEED === "true") {
+      if (!globalForDb.__d1TablesInitPromise) {
+        globalForDb.__d1TablesInitPromise = ensureTablesAndSeed(d1).catch((err) => {
+          globalForDb.__d1TablesInitPromise = undefined;
+          console.warn("[Table Init Warning]", err);
+        });
+      }
+      await globalForDb.__d1TablesInitPromise;
     }
-    await globalForDb.__d1TablesInitPromise;
 
     return drizzle(d1, { schema });
   } catch (error) {

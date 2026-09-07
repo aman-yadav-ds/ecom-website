@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 import CompareDrawer from "@/components/CompareDrawer";
 import JoinNetworkModal from "@/components/JoinNetworkModal";
 import CookieConsent from "@/components/CookieConsent";

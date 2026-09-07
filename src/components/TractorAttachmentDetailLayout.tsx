@@ -125,7 +125,7 @@ export default function TractorAttachmentDetailLayout({ product, variants }: Tra
           </div>
 
           {/* Pricing Box */}
-          <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-light-300 flex flex-col gap-1 shadow-xs bg-gradient-to-br from-white to-red-50/30">
+          <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-light-300 flex flex-col gap-1 shadow-xs bg-linear-to-br from-white to-red-50/30">
             <span className="text-xs font-extrabold text-dark-500 uppercase tracking-wider">Commercial List Price</span>
             <div className="text-3xl sm:text-4xl font-extrabold text-brand-red">
               {activeVariant?.price ? priceFormatter.format(Number(activeVariant.price)) : "Price on Request"}

@@ -1,14 +1,14 @@
 import React from "react";
 import { Metadata } from "next";
+import { ScrollProgress } from "@/components/home/ScrollProgress";
 import { NewHero } from "@/components/home/NewHero";
-import { StatsSection } from "@/components/home/StatsSection";
-import { OurSolutions } from "@/components/home/OurSolutions";
-import { OurStrength } from "@/components/home/OurStrength";
-import { Sustainability } from "@/components/home/Sustainability";
-import { FeaturedProducts } from "@/components/home/FeaturedProducts";
-import { AboutUsPreview } from "@/components/home/AboutUsPreview";
-import { NewsletterSection } from "@/components/home/NewsletterSection";
-import { getCachedPublishedProducts } from "@/lib/cached-queries";
+import { IndustrialTicker } from "@/components/home/IndustrialTicker";
+import { EngineeringStrength } from "@/components/home/EngineeringStrength";
+import { FleetShowcase } from "@/components/home/FleetShowcase";
+import { EditorialHeritage } from "@/components/home/EditorialHeritage";
+import { SustainabilitySection } from "@/components/home/SustainabilitySection";
+import { ActionNewsletter } from "@/components/home/ActionNewsletter";
+import { FloatingDealerCTA } from "@/components/home/FloatingDealerCTA";
 
 import {
   formatPageSeoTitle,
@@ -17,7 +17,9 @@ import {
 } from "@/lib/seo";
 
 const pageTitle = formatPageSeoTitle("Koreva Agriculture & Farm Machinery");
-const pageDescription = formatPageSeoDescription("Official store of Koreva Global LLP. High-performance Power Weeders, Rotavators, Disc Harrows, STOU Lubricants, and Hand Tools.");
+const pageDescription = formatPageSeoDescription(
+  "Official store of Koreva Global LLP. High-performance Power Weeders, Rotavators, Disc Harrows, STOU Lubricants, and Hand Tools."
+);
 
 export const metadata: Metadata = buildProductMetadata({
   title: pageTitle,
@@ -41,54 +43,72 @@ export const metadata: Metadata = buildProductMetadata({
   ],
 });
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 export const revalidate = 86400;
 
-export default async function Home() {
-  const productsList = await getCachedPublishedProducts();
-
+export default function Home() {
   // JSON-LD WebSite schema with SearchAction for Google Sitelinks Searchbox
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Koreva Agriculture & Machines",
-    "alternateName": [
+    name: "Koreva Agriculture & Machines",
+    alternateName: [
       "Koreva9",
       "Koreva",
       "Koreva Agriculture",
       "Koreva Machines",
       "Koreva Global",
-      "Koreva Global LLP"
+      "Koreva Global LLP",
     ],
-    "url": "https://koreva9.com",
-    "description": "Koreva Global (Koreva Agriculture / Koreva Machines / Koreva9) is a leading Indian manufacturer of Power Weeders, tractor Harrows, Rotavators, Power Reapers, STOU Lubricants, and Hand Tools.",
-    "potentialAction": {
+    url: "https://koreva9.com",
+    description:
+      "Koreva Global (Koreva Agriculture / Koreva Machines / Koreva9) is a premier Indian manufacturer of Power Weeders, tractor Harrows, Rotavators, Power Reapers, STOU Lubricants, and Hand Tools.",
+    potentialAction: {
       "@type": "SearchAction",
-      "target": {
+      target: {
         "@type": "EntryPoint",
-        "urlTemplate": "https://koreva9.com/products?q={search_term_string}"
+        urlTemplate: "https://koreva9.com/products?q={search_term_string}",
       },
-      "query-input": "required name=search_term_string"
-    }
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
-    <div className="min-h-screen bg-light-100 flex flex-col font-jost">
+    <div className="min-h-screen bg-brand-offwhite flex flex-col font-manrope selection:bg-brand-red selection:text-white">
+      {/* 0. Top Hardware-Accelerated Scroll Progress Bar */}
+      <ScrollProgress />
+
       {/* Structured Data Script for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <main className="flex-grow">
+        {/* 1. First Viewport Industrial Showcase & Parallax Hero */}
         <NewHero />
-        <StatsSection />
-        <FeaturedProducts products={productsList} />
-        <OurSolutions />
-        <OurStrength />
-        <Sustainability />
-        <AboutUsPreview />
-        <NewsletterSection />
+
+        {/* 2. Seamless High-Performance Industrial Ticker */}
+        <IndustrialTicker />
+
+        {/* 3. Interactive Metallurgy & Robotic Engineering Showcase */}
+        <EngineeringStrength />
+
+        {/* 4. Production Fleet & Machinery Categories Grid */}
+        <FleetShowcase />
+
+        {/* 5. Editorial Heritage: Indian Roots, Global Standards */}
+        <EditorialHeritage />
+
+        {/* 6. Sustainable Agriculture & Eco-Tillage */}
+        <SustainabilitySection />
+
+        {/* 7. Action Deck: Dealer Locator & Field Insights Newsletter */}
+        <ActionNewsletter />
       </main>
+
+      {/* 8. Scroll-Aware Floating Dealer Pill */}
+      <FloatingDealerCTA />
     </div>
   );
 }
