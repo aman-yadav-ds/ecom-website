@@ -138,8 +138,9 @@ export default function Navbar() {
                   <Image
                     src="/trademark.webp"
                     alt="Koreva 9"
-                    width={150}
-                    height={40}
+                    width={155}
+                    height={32}
+                    style={{ width: "auto" }}
                     className="h-7 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     priority
                   />
@@ -923,8 +924,9 @@ export default function Navbar() {
                   <Image
                     src="/trademark.webp"
                     alt="Koreva 9"
-                    width={110}
-                    height={28}
+                    width={116}
+                    height={24}
+                    style={{ width: "auto" }}
                     className="h-6 w-auto object-contain"
                     priority
                   />

@@ -33,30 +33,49 @@ export async function ensureTablesAndSeed(d1: D1DatabaseLike): Promise<void> {
         // Table doesn't exist yet, proceed with table creation DDLs
       }
 
-      // 1. Create tables in a single D1 batch round-trip
-      await d1.batch([
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS categories (id text PRIMARY KEY NOT NULL, name text NOT NULL, slug text NOT NULL UNIQUE, parent_id text, description text, tagline text, badge text, highlights text)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS dealers (id text PRIMARY KEY NOT NULL, name text NOT NULL, address_line_1 text NOT NULL, address_line_2 text NOT NULL, address_line_3 text NOT NULL, contact_no text, email text, map_link text, coordinates text NOT NULL, website text, assortment text NOT NULL, services text NOT NULL, is_premium_hub integer DEFAULT false NOT NULL)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS news_articles (id text PRIMARY KEY NOT NULL, slug text NOT NULL UNIQUE, title text NOT NULL, excerpt text NOT NULL, content text NOT NULL, date text NOT NULL, author text NOT NULL, category text NOT NULL, image text NOT NULL, related_products text)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS products (id text PRIMARY KEY NOT NULL, name text NOT NULL, description text NOT NULL, cover_image text NOT NULL, cover_image_alt text, category_id text NOT NULL, tags text NOT NULL, is_published integer DEFAULT true NOT NULL, default_variant_id text, maintenance_tips text, moq text, lead_time text, is_oem_available integer DEFAULT false NOT NULL, spec_sheet_url text, FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE no action ON DELETE cascade)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS variants (id text PRIMARY KEY NOT NULL, name text NOT NULL, product_id text NOT NULL, images text NOT NULL, images_alt text, price text NOT NULL, applicable_gst text NOT NULL, technical_details text NOT NULL, bulk_pricing_tiers text, FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE no action ON DELETE cascade)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS downloads (id text PRIMARY KEY NOT NULL, title text NOT NULL, description text, file_url text, file_type text DEFAULT 'pdf' NOT NULL, file_size text NOT NULL, category text NOT NULL, created_at text NOT NULL)`
-        ),
-        d1.prepare(
-          `CREATE TABLE IF NOT EXISTS inquiries (id text PRIMARY KEY NOT NULL, full_name text NOT NULL, company_name text, email text NOT NULL, phone text NOT NULL, country_or_region text, inquiry_type text DEFAULT 'rfq' NOT NULL, message text NOT NULL, items text, status text DEFAULT 'new' NOT NULL, notes text, created_at text NOT NULL)`
-        ),
-      ]);
+      // 1. Create tables in a single D1 batch round-trip with retry for concurrent build workers
+      for (let attempt = 0; attempt < 5; attempt++) {
+        try {
+          const check = (await d1.prepare("SELECT count(*) as count FROM categories").first()) as { count: number } | null;
+          if (check && (check.count ?? 0) > 0) {
+            isInitialized = true;
+            return;
+          }
+          await d1.batch([
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS categories (id text PRIMARY KEY NOT NULL, name text NOT NULL, slug text NOT NULL UNIQUE, parent_id text, description text, tagline text, badge text, highlights text)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS dealers (id text PRIMARY KEY NOT NULL, name text NOT NULL, address_line_1 text NOT NULL, address_line_2 text NOT NULL, address_line_3 text NOT NULL, contact_no text, email text, map_link text, coordinates text NOT NULL, website text, assortment text NOT NULL, services text NOT NULL, is_premium_hub integer DEFAULT false NOT NULL)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS news_articles (id text PRIMARY KEY NOT NULL, slug text NOT NULL UNIQUE, title text NOT NULL, excerpt text NOT NULL, content text NOT NULL, date text NOT NULL, author text NOT NULL, category text NOT NULL, image text NOT NULL, related_products text)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS products (id text PRIMARY KEY NOT NULL, name text NOT NULL, description text NOT NULL, cover_image text NOT NULL, cover_image_alt text, category_id text NOT NULL, tags text NOT NULL, is_published integer DEFAULT true NOT NULL, default_variant_id text, maintenance_tips text, moq text, lead_time text, is_oem_available integer DEFAULT false NOT NULL, spec_sheet_url text, FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE no action ON DELETE cascade)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS variants (id text PRIMARY KEY NOT NULL, name text NOT NULL, product_id text NOT NULL, images text NOT NULL, images_alt text, price text NOT NULL, applicable_gst text NOT NULL, technical_details text NOT NULL, bulk_pricing_tiers text, FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE no action ON DELETE cascade)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS downloads (id text PRIMARY KEY NOT NULL, title text NOT NULL, description text, file_url text, file_type text DEFAULT 'pdf' NOT NULL, file_size text NOT NULL, category text NOT NULL, created_at text NOT NULL)`
+            ),
+            d1.prepare(
+              `CREATE TABLE IF NOT EXISTS inquiries (id text PRIMARY KEY NOT NULL, full_name text NOT NULL, company_name text, email text NOT NULL, phone text NOT NULL, country_or_region text, inquiry_type text DEFAULT 'rfq' NOT NULL, message text NOT NULL, items text, status text DEFAULT 'new' NOT NULL, notes text, created_at text NOT NULL)`
+            ),
+          ]);
+          break;
+        } catch (err: unknown) {
+          const errMsg = String(err);
+          if (attempt < 4 && (errMsg.includes("locked") || errMsg.includes("SQLITE_BUSY"))) {
+            await new Promise((r) => setTimeout(r, 120 * (attempt + 1)));
+            continue;
+          }
+          if (!errMsg.includes("locked") && !errMsg.includes("SQLITE_BUSY")) {
+            throw err;
+          }
+        }
+      }
 
       // Ensure existing local SQLite tables have new B2B columns
       try {

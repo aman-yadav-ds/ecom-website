@@ -38,7 +38,8 @@ const Footer = () => {
                   src="/trademark.webp"
                   alt="Koreva Agriculture & Farm Machines - Koreva Global LLP (Koreva9)"
                   height={24}
-                  width={140}
+                  width={116}
+                  style={{ width: "auto" }}
                   className="h-6 w-auto object-contain"
                 />
               </div>
