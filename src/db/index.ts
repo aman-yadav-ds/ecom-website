@@ -9,6 +9,11 @@ const globalForDb = globalThis as unknown as {
   __d1TablesInitPromise?: Promise<void>;
 };
 
+function isCloudflareWorkerRuntime(): boolean {
+  // In Cloudflare Workers workerd environment, navigator.userAgent is 'Cloudflare-Workers'
+  return typeof navigator !== "undefined" && navigator.userAgent === "Cloudflare-Workers";
+}
+
 /**
  * Instantiate Drizzle ORM bound to Cloudflare D1 using getCloudflareContext({ async: true })
  * Supporting static site generation (SSG), local development (next dev), and runtime requests.
@@ -24,9 +29,11 @@ export async function getDb(): Promise<DbType> {
       );
     }
 
-    // Runtime requests on Cloudflare should never execute DDL / seed checks.
-    // Guard auto-seed so it only runs if explicitly requested in local development.
-    if (process.env.NODE_ENV === "development" && process.env.ENABLE_AUTO_SEED === "true") {
+    // Runtime requests on Cloudflare Workers edge should never execute DDL / seed checks,
+    // protecting against the 10ms CPU execution limit on Cloudflare Free Tier.
+    // During build time (static site generation in Node.js / CI) or local dev, ensure
+    // the local Miniflare D1 database has tables and seed data ready for SSG queries.
+    if (!isCloudflareWorkerRuntime()) {
       if (!globalForDb.__d1TablesInitPromise) {
         globalForDb.__d1TablesInitPromise = ensureTablesAndSeed(d1).catch((err) => {
           globalForDb.__d1TablesInitPromise = undefined;
