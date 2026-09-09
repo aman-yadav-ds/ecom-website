@@ -323,8 +323,8 @@ export function useHeroAnimations(): HeroRefs {
           const panelQuickX = panelRef.current ? gsap.quickTo(panelRef.current, "x", { duration: 0.5, ease: "power2.out" }) : null;
           const panelQuickY = panelRef.current ? gsap.quickTo(panelRef.current, "y", { duration: 0.5, ease: "power2.out" }) : null;
           const headlineQuickX = headlineRef.current ? gsap.quickTo(headlineRef.current, "x", { duration: 0.7, ease: "power2.out" }) : null;
-          const cardRotateX = gsap.quickTo(card, "rotateX", { duration: 0.6, ease: "power2.out" });
-          const cardRotateY = gsap.quickTo(card, "rotateY", { duration: 0.6, ease: "power2.out" });
+          const cardRotateX = gsap.quickTo(card, "rotationX", { duration: 0.6, ease: "power2.out" });
+          const cardRotateY = gsap.quickTo(card, "rotationY", { duration: 0.6, ease: "power2.out" });
 
           const handleMouseMove = (e: MouseEvent) => {
             const rect = container.getBoundingClientRect();

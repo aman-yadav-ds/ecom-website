@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Tractor, Disc3, ShieldAlert, Droplet, Wrench, ChevronRight } from "lucide-react";
-import { parseQueryParams, updateQueryParams } from "@/lib/utils/query";
 
 interface CategoryMeta {
   id: string;
@@ -46,44 +46,11 @@ const CATEGORIES: CategoryMeta[] = [
 ];
 
 export default function CategoryExplorer() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const currentCategory = searchParams.get("category") || "";
-
-  const handleCategoryClick = (category: CategoryMeta) => {
-    const currentParams = parseQueryParams(searchParams.toString());
-    const isCurrentlyActive =
-      currentCategory.toLowerCase() === category.name.toLowerCase() ||
-      currentCategory.toLowerCase() === category.slug.toLowerCase();
-
-    let newQueryString = "";
-    if (isCurrentlyActive) {
-      // Toggle off
-      delete currentParams.category;
-      delete currentParams.page;
-      newQueryString = updateQueryParams(currentParams, {});
-    } else {
-      // Filter by category name
-      newQueryString = updateQueryParams(currentParams, {
-        category: category.name,
-        page: 1,
-      });
-    }
-
-    router.push(`?${newQueryString}`, { scroll: false });
-
-    // Smooth scroll down to catalog section
-    const catalogElement = document.getElementById("product-catalog-section");
-    if (catalogElement) {
-      catalogElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
+  const pathname = usePathname();
 
   return (
     <section className="py-8 sm:py-10 bg-white border-b border-light-300 font-jost">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-3">
           <div>
@@ -108,15 +75,14 @@ export default function CategoryExplorer() {
         <div className="flex md:grid md:grid-cols-5 gap-3 sm:gap-4 overflow-x-auto pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none snap-x snap-mandatory">
           {CATEGORIES.map((cat) => {
             const IconComponent = cat.icon;
-            const isActive =
-              currentCategory.toLowerCase() === cat.name.toLowerCase() ||
-              currentCategory.toLowerCase() === cat.slug.toLowerCase();
+            const categoryHref = `/products/${cat.slug}`;
+            const isActive = pathname === categoryHref;
 
             return (
-              <button
+              <Link
                 key={cat.id}
-                type="button"
-                onClick={() => handleCategoryClick(cat)}
+                href={categoryHref}
+                prefetch={false}
                 className={`group relative flex items-center justify-between p-3.5 sm:p-4 rounded-2xl transition-all duration-200 cursor-pointer min-w-[210px] md:min-w-0 shrink-0 md:shrink text-left snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
                   isActive
                     ? "bg-brand-red text-white shadow-md shadow-brand-red/20 border border-brand-red"
@@ -155,7 +121,7 @@ export default function CategoryExplorer() {
                 >
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>

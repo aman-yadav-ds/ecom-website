@@ -47,6 +47,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>("Products");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navContainerRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -75,6 +76,16 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
+
+  // Track page scroll to elevate sticky navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavMouseEnter = (key: string) => {
     if (closeTimeoutRef.current) {
@@ -114,17 +125,22 @@ export default function Navbar() {
         onClose={() => setIsSearchOpen(false)}
       />
 
-      {/* ── Outer Navigation Header Wrapper ────────────────────────────── */}
+      {/* ── Top Contact Strip ───────────────────────────────────────── */}
+      <TopContactStrip />
+
+      {/* ── Sticky Main Navigation Bar ───────────────────────────────── */}
       <div
         ref={navContainerRef}
         onMouseLeave={handleNavMouseLeave}
-        className="relative z-50 w-full font-manrope select-none"
+        className="sticky top-0 z-50 w-full font-manrope select-none"
       >
-        {/* ── Top Contact Strip ───────────────────────────────────────── */}
-        <TopContactStrip />
-
-        {/* ── Sticky Main Navigation Bar ───────────────────────────────── */}
-        <header className="sticky top-0 z-50 w-full bg-white border-b border-neutral-200/90 shadow-2xs">
+        <header
+          className={`w-full bg-white/95 backdrop-blur-md border-b transition-all duration-300 ${
+            isScrolled
+              ? "shadow-md border-neutral-200/90"
+              : "shadow-2xs border-neutral-200/80"
+          }`}
+        >
           <div className="max-w-345 mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-18 sm:h-20">
               {/* Logo */}

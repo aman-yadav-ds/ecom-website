@@ -128,7 +128,17 @@ export async function getCatalogData(
       if (!selectedValues || selectedValues.length === 0) continue;
 
       if (filterKey.toLowerCase() === "category") {
-        if (!selectedValues.includes(product.categoryName)) {
+        const matchesCategory = selectedValues.some((val) => {
+          const v = val.toLowerCase().trim();
+          const pName = product.categoryName.toLowerCase().trim();
+          const pSlug = pName.replace(/\s+/g, "-");
+          return (
+            pName === v ||
+            pSlug === v ||
+            product.categoryId.toLowerCase().trim() === v
+          );
+        });
+        if (!matchesCategory) {
           return false;
         }
       } else {
