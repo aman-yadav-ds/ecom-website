@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProductCatalogClient from "@/components/ProductCatalogClient";
-import CategoryGridShowcase from "@/components/CategoryGridShowcase";
+import CatalogHero from "@/components/catalog/CatalogHero";
+import CategoryExplorer from "@/components/catalog/CategoryExplorer";
+import TrustSection from "@/components/catalog/TrustSection";
 import { getCatalogData } from "@/lib/catalog";
-import { Tractor } from "lucide-react";
 
 import {
   formatPageSeoTitle,
@@ -12,9 +13,9 @@ import {
 } from "@/lib/seo";
 
 export const metadata: Metadata = buildProductMetadata({
-  title: formatPageSeoTitle("Agricultural Products & Farm Machinery"),
+  title: formatPageSeoTitle("Agricultural Equipments & Food Processing Machinery Catalog"),
   description: formatPageSeoDescription(
-    "Browse the complete Koreva9 farm equipment lineup including Power Weeders, Rotavators, Laser Land Levellers, STOU Lubricants, and Hand Tools."
+    "Browse the official Koreva9 heavy agricultural equipment catalog: Disc Harrows, Rotavators, Laser Land Levellers, Straw Reapers, Power Weeders, STOU Lubricants, and SK5 Hand Tools."
   ),
   canonicalUrl: "/products",
   keywords: [
@@ -24,11 +25,37 @@ export const metadata: Metadata = buildProductMetadata({
     "Koreva9",
     "Power Weeder Catalog",
     "Disc Harrow Catalog",
+    "Rotavator India",
     "Agricultural Machinery India",
+    "Food Processing Units",
   ],
 });
 
 export const revalidate = 60;
+
+function CatalogSkeleton() {
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-pulse font-jost">
+      <div className="h-14 bg-light-200 rounded-full mb-8"></div>
+      <div className="flex gap-8">
+        <div className="hidden md:block w-64 h-96 bg-light-200 rounded-2xl"></div>
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="bg-white border border-light-200 rounded-2xl p-4 h-80 flex flex-col justify-between">
+              <div className="w-full h-44 bg-light-200 rounded-xl mb-3"></div>
+              <div className="h-4 bg-light-200 rounded w-3/4 mb-2"></div>
+              <div className="h-3 bg-light-200 rounded w-1/3 mb-4"></div>
+              <div className="flex justify-between items-center pt-2 border-t border-light-200">
+                <div className="h-5 bg-light-200 rounded w-1/3"></div>
+                <div className="w-8 h-8 rounded-full bg-light-200"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default async function ProductsPage({
   searchParams,
@@ -39,30 +66,15 @@ export default async function ProductsPage({
   const catalogData = await getCatalogData(resolvedParams);
 
   return (
-    <main className="min-h-screen bg-[#fbfbfb] text-dark-900 font-jost">
-      {/* Main Catalog Hero Section */}
-      <section className="relative py-12 md:py-16 px-4 sm:px-6 lg:px-8 border-b border-light-300 overflow-hidden bg-[#fbfbfb]">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-red/8 rounded-full filter blur-[140px] pointer-events-none" />
+    <main className="min-h-screen bg-[#fafafa] text-dark-900 font-jost">
+      {/* 1. Hero Section */}
+      <CatalogHero />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-red/20 text-brand-red text-xs font-extrabold uppercase tracking-widest mb-4 shadow-xs">
-            <Tractor className="w-4 h-4" />
-            <span>KOREVA Machinery Catalog</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight uppercase mb-3 text-dark-900">
-            Agricultural Equipments and Food Processing Machinery
-          </h1>
-          <p className="text-base sm:text-lg text-dark-700 max-w-3xl font-medium leading-relaxed">
-            High-yield tractor attachments, autonomous self-propelled machinery, food processing units, certified thermal lubricants, and forged SK5 hand tools.
-          </p>
-        </div>
-      </section>
+      {/* 2. Category Explorer */}
+      <CategoryExplorer />
 
-      {/* Visual Category Cards Grid Showcase */}
-      <CategoryGridShowcase />
-
-      {/* Main Product Catalog */}
-      <Suspense fallback={<div className="p-8 text-center text-dark-600 font-medium">Loading catalog...</div>}>
+      {/* 3. Main Product Catalog */}
+      <Suspense fallback={<CatalogSkeleton />}>
         <ProductCatalogClient
           products={catalogData.products}
           totalProducts={catalogData.totalProducts}
@@ -72,6 +84,9 @@ export default async function ProductsPage({
           availableFilters={catalogData.availableFilters}
         />
       </Suspense>
+
+      {/* 4. Trust & Certification Section */}
+      <TrustSection />
     </main>
   );
 }

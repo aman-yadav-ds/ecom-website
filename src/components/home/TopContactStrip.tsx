@@ -11,9 +11,9 @@ export function TopContactStrip() {
       <div className="max-w-345 mx-auto px-3 sm:px-6 lg:px-8 h-8 sm:h-9 flex items-center justify-between text-[11px] sm:text-xs">
         {/* Phone Support Hotline */}
         <a
-          href="tel:+917455973188"
+          href="tel:+9174569973988"
           className="group flex items-center gap-1.5 sm:gap-2 text-neutral-300 hover:text-white active:scale-95 transition-all py-1"
-          aria-label="Call Support Hotline +91 7455 973 188"
+          aria-label="Call Support Hotline +91 7456 9973 988"
         >
           <span className="relative flex items-center justify-center w-5 h-5 rounded-full bg-white/5 border border-white/10 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all shrink-0">
             <Phone className="w-2.5 h-2.5" />
@@ -30,7 +30,7 @@ export function TopContactStrip() {
             HOTLINE:
           </span>
           <span className="text-white font-bold tracking-tight text-[11px] sm:text-xs group-hover:text-brand-red transition-colors whitespace-nowrap">
-            +91 7455 973 188
+            +91 7456 9973 988
           </span>
         </a>
 

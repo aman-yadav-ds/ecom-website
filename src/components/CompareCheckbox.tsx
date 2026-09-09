@@ -33,17 +33,19 @@ const CompareCheckbox: React.FC<CompareCheckboxProps> = ({ productId }) => {
 
   return (
     <label 
-      className={`relative z-10 inline-flex items-center gap-1.5 md:gap-2 cursor-pointer group/checkbox min-h-[44px] min-w-[44px] py-1 pr-2 select-none ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`relative z-10 inline-flex items-center gap-1 sm:gap-1.5 cursor-pointer group/checkbox py-1 select-none shrink-0 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       onClick={(e) => e.stopPropagation()} // Prevent card click
     >
       <input 
         type="checkbox" 
-        className="w-4 h-4 md:w-5 md:h-5 border-gray-300 rounded-sm text-brand-red focus:ring-brand-red cursor-pointer disabled:cursor-not-allowed" 
+        className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 border-light-300 rounded text-brand-red accent-[#C40000] focus:ring-brand-red cursor-pointer disabled:cursor-not-allowed shrink-0" 
         checked={isSelected}
         onChange={handleChange}
         disabled={disabled}
       />
-      <span className="text-[10px] sm:text-xs md:text-sm text-gray-700 font-bold leading-none">Compare</span>
+      <span className="text-[10px] sm:text-xs text-dark-700 font-bold leading-none select-none group-hover/checkbox:text-brand-red transition-colors">
+        Compare
+      </span>
     </label>
   );
 };

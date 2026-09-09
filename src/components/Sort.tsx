@@ -50,8 +50,8 @@ const Sort: React.FC = () => {
   return (
     <div className="relative inline-block text-left w-full sm:w-auto font-jost" ref={dropdownRef} onKeyDown={handleKeyDown}>
       <div className="flex items-center gap-2 w-full sm:w-auto">
-        <span className="hidden sm:inline text-xs font-extrabold uppercase tracking-wider text-dark-500 whitespace-nowrap">
-          Sort By:
+        <span className="hidden sm:inline text-xs font-black uppercase tracking-wider text-dark-900 whitespace-nowrap">
+          SORT BY:
         </span>
 
         {/* Custom Brand Styled Trigger Button */}
@@ -61,18 +61,18 @@ const Sort: React.FC = () => {
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label="Sort product catalog"
-          className={`flex items-center justify-between gap-3 w-full sm:w-auto min-h-[44px] px-5 py-2.5 bg-white/90 backdrop-blur-xl border rounded-full shadow-xs transition-all duration-200 text-xs sm:text-sm font-extrabold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
+          className={`flex items-center justify-between gap-2 sm:gap-3 w-full sm:w-auto min-h-[34px] sm:min-h-[38px] px-3 sm:px-4 py-1 sm:py-1.5 bg-white border rounded-full shadow-2xs transition-all duration-200 text-xs font-black uppercase tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red ${
             isOpen
-              ? "border-brand-red text-brand-red shadow-md ring-1 ring-brand-red"
-              : "border-light-300 text-dark-900 hover:border-brand-red/60 hover:text-brand-red"
+              ? "border-brand-red text-brand-red ring-1 ring-brand-red"
+              : "border-light-300 text-dark-800 hover:border-brand-red/60 hover:text-brand-red"
           }`}
         >
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="w-4 h-4 text-brand-red shrink-0" />
-            <span className="truncate">{activeOption.label}</span>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <ArrowUpDown className="w-3.5 h-3.5 text-brand-red shrink-0" />
+            <span className="truncate max-w-[120px] sm:max-w-none">{activeOption.label}</span>
           </div>
           <ChevronDown
-            className={`w-4 h-4 text-dark-500 transition-transform duration-200 shrink-0 ${
+            className={`w-3.5 h-3.5 text-dark-400 transition-transform duration-200 shrink-0 ${
               isOpen ? "rotate-180 text-brand-red" : ""
             }`}
           />

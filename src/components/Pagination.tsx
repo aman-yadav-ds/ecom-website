@@ -72,16 +72,16 @@ export default function Pagination({
       </div>
 
       {/* Pagination Controls */}
-      <nav aria-label="Pagination Navigation" className="flex items-center gap-1.5">
+      <nav aria-label="Pagination Navigation" className="flex items-center gap-1.5 sm:gap-2">
         {/* Previous Page Button */}
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage <= 1}
           aria-label="Go to previous page"
-          className="inline-flex items-center gap-1 px-3 py-2 text-xs font-extrabold uppercase tracking-wider rounded-xl border border-light-300 bg-white text-dark-800 hover:border-brand-red hover:text-brand-red disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-light-300 disabled:hover:text-dark-800 transition-all shadow-xs"
+          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-black uppercase tracking-wider rounded-full border border-light-300 bg-white text-dark-700 hover:border-brand-red hover:text-brand-red disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-300 disabled:hover:text-dark-700 transition-all shadow-2xs cursor-pointer"
         >
-          <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Prev</span>
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>PREV</span>
         </button>
 
         {/* Page Number Buttons */}
@@ -91,7 +91,7 @@ export default function Pagination({
               return (
                 <span
                   key={`ellipsis-${idx}`}
-                  className="px-2 py-1 text-xs font-bold text-dark-400 select-none"
+                  className="px-1.5 py-1 text-xs font-bold text-dark-400 select-none"
                 >
                   ...
                 </span>
@@ -105,10 +105,10 @@ export default function Pagination({
                 onClick={() => handlePageChange(page)}
                 aria-current={isCurrent ? "page" : undefined}
                 aria-label={`Go to page ${page}`}
-                className={`min-w-[36px] h-[36px] px-2.5 flex items-center justify-center text-xs font-extrabold rounded-xl border transition-all shadow-xs ${
+                className={`w-8 h-8 flex items-center justify-center text-xs font-black rounded-full transition-all cursor-pointer ${
                   isCurrent
-                    ? "bg-brand-red border-brand-red text-white shadow-sm"
-                    : "bg-white border-light-300 text-dark-800 hover:border-brand-red hover:text-brand-red"
+                    ? "bg-brand-red text-white shadow-xs"
+                    : "bg-white hover:bg-neutral-100 text-dark-700 hover:text-brand-red border border-light-300"
                 }`}
               >
                 {page}
@@ -122,10 +122,10 @@ export default function Pagination({
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
           aria-label="Go to next page"
-          className="inline-flex items-center gap-1 px-3 py-2 text-xs font-extrabold uppercase tracking-wider rounded-xl border border-light-300 bg-white text-dark-800 hover:border-brand-red hover:text-brand-red disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-light-300 disabled:hover:text-dark-800 transition-all shadow-xs"
+          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-black uppercase tracking-wider rounded-full border border-light-300 bg-white text-dark-700 hover:border-brand-red hover:text-brand-red disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-light-300 disabled:hover:text-dark-700 transition-all shadow-2xs cursor-pointer"
         >
-          <span className="hidden sm:inline">Next</span>
-          <ChevronRight className="w-4 h-4" />
+          <span>NEXT</span>
+          <ChevronRight className="w-3.5 h-3.5" />
         </button>
       </nav>
     </div>

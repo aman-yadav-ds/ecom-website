@@ -193,11 +193,32 @@ export default function Navbar() {
 
               {/* Right Side Desktop Actions */}
               <div className="hidden md:flex shrink-0 items-center gap-3">
+                {/* Search Bar / Trigger */}
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Search products"
+                  className="hidden lg:flex items-center gap-2.5 px-4 py-2 rounded-full bg-neutral-100/80 hover:bg-neutral-100 border border-neutral-200/80 text-neutral-400 hover:text-neutral-700 transition-all text-xs font-medium w-40 xl:w-48 cursor-pointer shadow-2xs group"
+                >
+                  <Search className="w-3.5 h-3.5 text-neutral-400 group-hover:text-brand-red transition-colors shrink-0" />
+                  <span className="truncate">Search products...</span>
+                </button>
+
+                {/* Search Icon button for smaller md-only screens */}
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Product Search"
+                  className="lg:hidden w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200/80 text-neutral-700 hover:text-brand-red flex items-center justify-center transition-colors cursor-pointer shadow-2xs"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
+
                 {/* RFQ Quote Outline Button */}
                 <button
                   type="button"
                   onClick={openRfqModal}
-                  className="relative px-4 py-2 rounded-full border border-neutral-300 hover:border-brand-red bg-white hover:bg-neutral-50 text-neutral-800 hover:text-brand-red font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-2xs group"
+                  className="relative px-4 py-2 rounded-full border border-neutral-300 hover:border-brand-red bg-white hover:bg-neutral-50 text-neutral-800 hover:text-brand-red font-extrabold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-2xs group"
                   aria-label="Request for Quote Cart"
                 >
                   <FileText className="w-3.5 h-3.5 text-brand-red group-hover:scale-110 transition-transform" />
@@ -209,24 +230,14 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Search Icon Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(true)}
-                  aria-label="Product Search"
-                  className="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200/80 text-neutral-700 hover:text-brand-red flex items-center justify-center transition-colors cursor-pointer shadow-2xs"
-                >
-                  <Search className="w-4 h-4" />
-                </button>
-
-                {/* Join Network Black Pill Button */}
+                {/* Join Network Koreva Red Pill Button */}
                 <button
                   type="button"
                   onClick={openJoinModal}
-                  className="px-5 py-2.5 rounded-full bg-neutral-950 hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow active:scale-95 cursor-pointer"
+                  className="px-5 py-2.5 rounded-full bg-brand-red hover:bg-brand-red-accent text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-xs hover:shadow-md active:scale-95 cursor-pointer group"
                 >
                   <span>JOIN NETWORK</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                 </button>
               </div>
 
