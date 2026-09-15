@@ -43,11 +43,17 @@ function CatalogSkeleton() {
           {[...Array(6)].map((_, i) => (
             <div key={i} className="bg-white border border-light-200 rounded-2xl p-4 h-80 flex flex-col justify-between">
               <div className="w-full h-44 bg-light-200 rounded-xl mb-3"></div>
+              <div className="h-3 bg-light-200 rounded w-1/4 mb-1"></div>
               <div className="h-4 bg-light-200 rounded w-3/4 mb-2"></div>
-              <div className="h-3 bg-light-200 rounded w-1/3 mb-4"></div>
-              <div className="flex justify-between items-center pt-2 border-t border-light-200">
-                <div className="h-5 bg-light-200 rounded w-1/3"></div>
-                <div className="w-8 h-8 rounded-full bg-light-200"></div>
+              <div className="pt-2 border-t border-light-200 mt-auto space-y-2">
+                <div className="flex justify-between items-center">
+                  <div className="h-4 bg-light-200 rounded w-28"></div>
+                  <div className="h-3 bg-light-200 rounded w-16"></div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="h-4 bg-light-200 rounded w-16"></div>
+                  <div className="w-8 h-8 rounded-lg bg-light-200"></div>
+                </div>
               </div>
             </div>
           ))}

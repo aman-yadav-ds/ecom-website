@@ -199,7 +199,6 @@ export default function ProductCatalogClient({
                       id={product.id}
                       title={product.name}
                       category={product.categoryName}
-                      price={product.price}
                       image={product.image}
                       imageAlt={product.imageAlt}
                       variants={product.variantsCount}

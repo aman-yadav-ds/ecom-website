@@ -310,9 +310,9 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   id={relatedProduct.id}
                   title={relatedProduct.name}
                   category={relatedProduct.categoryId}
-                  price={price}
                   image={relatedProduct.coverImage}
                   imageAlt={relatedProduct.coverImageAlt || undefined}
+                  variants={relatedVariants.length}
                   href={`/products/${relatedProduct.id}`}
                 />
               );
