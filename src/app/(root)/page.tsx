@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { ScrollProgress } from "@/components/home/ScrollProgress";
 import { NewHero } from "@/components/home/NewHero";
+import { ProductShowcase } from "@/components/home/ProductShowcase";
 import { IndustrialTicker } from "@/components/home/IndustrialTicker";
 import { EngineeringStrength } from "@/components/home/EngineeringStrength";
 import { FleetShowcase } from "@/components/home/FleetShowcase";
@@ -87,6 +88,9 @@ export default function Home() {
       <main className="flex-grow">
         {/* 1. First Viewport Industrial Showcase & Parallax Hero */}
         <NewHero />
+
+        {/* 1.5. Interactive Cinematic Product Showcase */}
+        <ProductShowcase />
 
         {/* 2. Seamless High-Performance Industrial Ticker */}
         <IndustrialTicker />
