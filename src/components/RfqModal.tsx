@@ -20,6 +20,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { z } from "zod";
+import { SITE_CONFIG } from "@/config/site";
 
 const formSchema = z.object({
   fullName: z.string().trim().min(2, "Full Name is required"),
@@ -151,7 +152,7 @@ export default function RfqModal() {
     } catch {
       setSubmitResult({
         type: "error",
-        message: "Network error occurred. Please check your internet connection or call hotline +91 7455 973 188.",
+        message: `Network error occurred. Please check your internet connection or call hotline ${SITE_CONFIG.phone.display}.`,
       });
     } finally {
       setIsSubmitting(false);

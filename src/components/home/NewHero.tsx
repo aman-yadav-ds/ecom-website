@@ -64,12 +64,12 @@ export function NewHero() {
                 ref={hero.primaryBtnRef}
                 href="/products"
                 prefetch={false}
-                className="group inline-flex items-center justify-center space-x-3 px-6 sm:px-8 py-3.5 rounded bg-brand-red text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider hover:bg-brand-deepred active:scale-[0.98] transition-all duration-300 shadow-lg shadow-brand-red/25 hover:shadow-[0_8px_25px_rgba(196,0,0,0.35)] text-center cursor-pointer"
+                className="group inline-flex items-center justify-center space-x-3 px-6 sm:px-8 py-3.5 rounded-xl bg-brand-red text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider hover:bg-brand-deepred active:scale-[0.98] transition-all duration-300 shadow-lg shadow-brand-red/25 hover:shadow-[0_8px_25px_rgba(196,0,0,0.35)] text-center cursor-pointer"
               >
                 <span>Explore Product Fleet</span>
                 <ArrowRight
                   ref={hero.primaryArrowRef}
-                  className="w-4 h-4 transition-transform duration-300"
+                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                 />
               </Link>
 
@@ -77,7 +77,7 @@ export function NewHero() {
                 ref={hero.secondaryBtnRef}
                 onClick={() => setIsVideoModalOpen(true)}
                 type="button"
-                className="group inline-flex items-center justify-center space-x-2.5 px-5 sm:px-6 py-3.5 rounded border border-neutral-300 bg-white/95 hover:bg-white text-neutral-900 text-xs sm:text-sm font-bold tracking-tight shadow-xs active:scale-95 transition-all duration-300 hover:border-brand-red hover:shadow-md cursor-pointer"
+                className="group inline-flex items-center justify-center space-x-2.5 px-5 sm:px-6 py-3.5 rounded-xl border border-neutral-300 bg-white/95 hover:bg-white text-neutral-900 text-xs sm:text-sm font-bold tracking-tight shadow-xs active:scale-95 transition-all duration-300 hover:border-brand-red hover:shadow-md cursor-pointer"
               >
                 <span className="w-6 h-6 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center group-hover:bg-brand-red group-hover:text-white transition-colors duration-300 shrink-0">
                   <Play className="w-3 h-3 fill-current ml-0.5" />
@@ -132,8 +132,10 @@ export function NewHero() {
                   src="/images/generated/hero_machinery_koreva.jpg"
                   alt="Heavy-Duty Red Koreva Tractor with Rotavator Attachment working in agricultural field"
                   fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={true}
+                  fetchPriority="high"
+                  loading="eager"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   className="object-cover object-center"
                 />
               </div>

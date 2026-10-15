@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { SITE_CONFIG } from "@/config/site";
 
 const Footer = () => {
   return (
@@ -29,15 +29,29 @@ const Footer = () => {
               <p className="text-xs text-dark-600 leading-relaxed max-w-sm font-medium mb-3">
                 Koreva Global LLP (Koreva Agriculture) &amp; Koreva Machines (Koreva9) is a premier Indian manufacturer of heavy-duty farm equipment &amp; ISO certified STOU lubricants for Indian agriculture.
               </p>
-              <p className="text-xs text-dark-700 font-bold mb-4">
-                Rudrapur, Distt. Udham Singh Nagar, Uttarakhand, INDIA
+              <p className="text-xs text-dark-700 font-bold mb-2">
+                {SITE_CONFIG.address.full}
               </p>
+              <div className="text-xs text-dark-600 mb-4 space-y-1">
+                <div>
+                  <span className="font-semibold text-dark-700">Support: </span>
+                  <a href={SITE_CONFIG.phone.telLink} className="hover:text-brand-red transition-colors font-bold text-dark-900">
+                    {SITE_CONFIG.phone.display}
+                  </a>
+                </div>
+                <div>
+                  <span className="font-semibold text-dark-700">Inquiries: </span>
+                  <a href={SITE_CONFIG.email.mailtoPrimary} className="hover:text-brand-red transition-colors font-medium">
+                    {SITE_CONFIG.email.primary}
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Social Icons */}
             <div className="flex items-center gap-2.5 pt-2">
               <a
-                href="https://www.youtube.com/@koreva9"
+                href={SITE_CONFIG.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-white border border-light-300 flex items-center justify-center text-dark-600 hover:text-white hover:bg-brand-red hover:border-brand-red transition-all shadow-2xs"

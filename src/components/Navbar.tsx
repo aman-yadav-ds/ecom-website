@@ -31,6 +31,7 @@ import SearchComponent from "./Search";
 import { TopContactStrip } from "./home/TopContactStrip";
 import { useModalStore } from "@/store/useModalStore";
 import { useRfqStore } from "@/store/useRfqStore";
+import { SITE_CONFIG } from "@/config/site";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Navigation Items configuration
@@ -1206,8 +1207,8 @@ export default function Navbar() {
 
                 <div className="pt-2 text-center text-[11px] text-neutral-500 font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5">
                   <Phone className="w-3 h-3 text-brand-red" />
-                  <a href="tel:+917455973188" className="hover:text-neutral-900">
-                    Hotline: +91 7455 973 188
+                  <a href={SITE_CONFIG.phone.telLink} className="hover:text-neutral-900">
+                    Hotline: {SITE_CONFIG.phone.display}
                   </a>
                 </div>
               </div>

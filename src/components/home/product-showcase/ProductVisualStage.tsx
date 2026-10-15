@@ -56,15 +56,15 @@ export function ProductVisualStage({
         </span>
       </motion.div>
 
-      {/* 4. Subtle Telemetry Crosshairs & Coordinate HUD */}
-      <div className="absolute top-2 left-2 text-[9px] font-mono text-white/30 hidden xs:flex items-center space-x-1.5 pointer-events-none">
-        <Compass className="w-3 h-3 text-brand-red/60 animate-spin-slow" />
-        <span>K9-METROLOGY // {currentVariant.code}</span>
+      {/* 4. Machinery Identification & Production Status */}
+      <div className="absolute top-2 left-2 text-[10px] font-mono text-white/50 hidden xs:flex items-center space-x-1.5 pointer-events-none">
+        <Compass className="w-3.5 h-3.5 text-brand-red" />
+        <span className="font-bold tracking-wider uppercase">MODEL SERIES: K9-{currentVariant.code}</span>
       </div>
 
-      <div className="absolute top-2 right-2 text-[9px] font-mono text-white/30 hidden xs:flex items-center space-x-1.5 pointer-events-none">
-        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
-        <span>STAGE ACTIVE</span>
+      <div className="absolute top-2 right-2 text-[10px] font-mono text-white/50 hidden xs:flex items-center space-x-1.5 pointer-events-none">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="font-bold tracking-wider uppercase">IN PRODUCTION • DEALER STOCK AVAILABLE</span>
       </div>
 
       {/* B. The Hero Machinery Visual with Zero Blur (Crisp at all times) */}

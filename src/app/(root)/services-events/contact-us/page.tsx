@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import ContactUsClient from "@/components/ContactUsClient";
+import { SITE_CONFIG } from "@/config/site";
 import {
   formatPageSeoTitle,
   formatPageSeoDescription,
@@ -22,34 +23,29 @@ const contactPageJsonLd = {
   "description": "Corporate contact page for Koreva Global LLP (Koreva Agriculture / Koreva Machines / Koreva9) agricultural machinery manufacturer.",
   "mainEntity": {
     "@type": "Organization",
-    "name": "Koreva Global LLP",
-    "alternateName": [
-      "Koreva",
-      "Koreva9",
-      "Koreva Agriculture",
-      "Koreva Machines",
-      "Koreva Global"
-    ],
-    "url": "https://koreva9.com",
+    "name": SITE_CONFIG.legalName,
+    "alternateName": SITE_CONFIG.brandAliases,
+    "url": SITE_CONFIG.url,
     "logo": "https://koreva9.com/icon.png",
-    "telephone": "+91-7455973188",
-    "email": "info@koreva.com",
+    "telephone": SITE_CONFIG.phone.display,
+    "email": SITE_CONFIG.email.primary,
     "sameAs": [
-      "https://www.facebook.com/profile.php?id=61592533542061",
-      "https://www.instagram.com/koreva_global/",
-      "https://x.com/koreva9"
+      SITE_CONFIG.social.facebook,
+      SITE_CONFIG.social.instagram,
+      SITE_CONFIG.social.twitter,
+      SITE_CONFIG.social.youtube,
     ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",
-      "addressLocality": "Kichha",
-      "addressRegion": "Udham Singh Nagar, Uttarakhand",
-      "postalCode": "263148",
-      "addressCountry": "IN"
+      "streetAddress": SITE_CONFIG.address.street,
+      "addressLocality": SITE_CONFIG.address.city,
+      "addressRegion": SITE_CONFIG.address.state,
+      "postalCode": SITE_CONFIG.address.postalCode,
+      "addressCountry": SITE_CONFIG.address.countryCode,
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-7455973188",
+      "telephone": SITE_CONFIG.phone.display,
       "contactType": "customer service",
       "areaServed": "IN",
       "availableLanguage": ["en", "hi"],

@@ -244,7 +244,7 @@ export const SHOWCASE_PRODUCTS: ShowcaseProduct[] = [
       {
         id: "grah-laxmi-2hp",
         name: "KO-1170 GRAH LAXMI",
-        code: "2 HP",
+        code: "GRAH LAXMI",
         tagline: "2 HP Single-Phase Commercial Grain Mill",
         image: "/products/Pulverizer.webp",
         imageAlt: "Koreva KO-1170 Grah Laxmi 2HP Electric Pulverizer",

@@ -3,6 +3,7 @@
 import { Resend } from "resend";
 import { z } from "zod";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { SITE_CONFIG } from "@/config/site";
 
 // Fast zero-dependency HTML escaping helper for email template strings
 function escapeHtml(str: string): string {
@@ -46,7 +47,7 @@ async function getEnvVars(): Promise<{ apiKey: string; recipientEmail: string }>
 
   return {
     apiKey: apiKey || "",
-    recipientEmail: recipientEmail || "korevasales@gmail.com",
+    recipientEmail: recipientEmail || SITE_CONFIG.email.primary,
   };
 }
 
@@ -350,7 +351,7 @@ export async function sendContactUsAction(data: ContactUsData): Promise<ActionRe
       console.error("[Server Action - Contact Us] RESEND_API_KEY is not configured.");
       return {
         success: false,
-        message: "Contact service is temporarily unavailable. Please call our hotline (+91 7455 973 188) directly.",
+        message: `Contact service is temporarily unavailable. Please call our hotline (${SITE_CONFIG.phone.display}) directly.`,
       };
     }
 

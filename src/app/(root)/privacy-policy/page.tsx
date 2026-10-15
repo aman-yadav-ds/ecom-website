@@ -1,5 +1,6 @@
 import React from "react";
 import { ShieldCheck } from "lucide-react";
+import { SITE_CONFIG } from "@/config/site";
 
 export const dynamic = 'force-static';
 export const revalidate = 86400;
@@ -48,9 +49,10 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-lg font-extrabold text-dark-900 uppercase mt-8 mb-4">4. Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact us at:<br /><br />
-            <strong className="text-dark-900 font-extrabold">KOREVA GLOBAL LLP</strong><br />
-            NH9 KICHHA RUDRAPUR ROAD, KISHANPUR<br />
-            U.S.NAGAR, UTTARAKHAND, INDIA - 263148
+            <strong className="text-dark-900 font-extrabold">{SITE_CONFIG.legalName}</strong><br />
+            {SITE_CONFIG.address.full}<br />
+            Phone: <a href={SITE_CONFIG.phone.telLink} className="text-brand-red font-bold hover:underline">{SITE_CONFIG.phone.display}</a><br />
+            Email: <a href={SITE_CONFIG.email.mailtoPrimary} className="text-brand-red font-bold hover:underline">{SITE_CONFIG.email.primary}</a>
           </p>
           
           <div className="mt-8 p-4 bg-light-100 border-l-4 border-brand-red text-xs sm:text-sm rounded-r-2xl font-bold text-dark-800">

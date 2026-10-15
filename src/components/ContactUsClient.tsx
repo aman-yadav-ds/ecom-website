@@ -17,6 +17,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { sendContactUsAction } from "@/app/actions/email";
+import { SITE_CONFIG } from "@/config/site";
 
 export default function ContactUsClient() {
   const [formData, setFormData] = useState({
@@ -63,7 +64,7 @@ export default function ContactUsClient() {
     } catch {
       setResultMessage({
         type: "error",
-        text: "Something went wrong. Please call our hotline directly.",
+        text: `Something went wrong. Please call our hotline directly (${SITE_CONFIG.phone.display}).`,
       });
     } finally {
       setIsSubmitting(false);
@@ -107,19 +108,19 @@ export default function ContactUsClient() {
                 Customer Support Hotline
               </span>
               <a
-                href="tel:+917455973188"
+                href={SITE_CONFIG.phone.telLink}
                 className="text-xl sm:text-2xl font-extrabold text-dark-900 hover:text-brand-red transition-colors block mb-2"
               >
-                +91 7455 973 188
+                {SITE_CONFIG.phone.display}
               </a>
               <p className="text-xs text-dark-600 font-medium flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-brand-red" />
-                Monday – Saturday: 10:00 AM – 6:00 PM IST
+                {SITE_CONFIG.operatingHours.full}
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-light-200">
               <a
-                href="tel:+917455973188"
+                href={SITE_CONFIG.phone.telLink}
                 className="text-xs font-extrabold uppercase tracking-wider text-brand-red flex items-center gap-1 hover:underline"
               >
                 <span>Call Customer Care</span>
@@ -138,18 +139,18 @@ export default function ContactUsClient() {
                 Official Email Correspondence
               </span>
               <a
-                href="mailto:info@koreva.com"
+                href={SITE_CONFIG.email.mailtoPrimary}
                 className="text-xl sm:text-2xl font-extrabold text-dark-900 hover:text-brand-red transition-colors block mb-2"
               >
-                info@koreva.com
+                {SITE_CONFIG.email.primary}
               </a>
               <p className="text-xs text-dark-600 font-medium">
-                Sales inquiries, bulk quotes, & technical documentation requests.
+                Sales inquiries, bulk quotes, &amp; technical documentation requests.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-light-200">
               <a
-                href="mailto:info@koreva.com"
+                href={SITE_CONFIG.email.mailtoPrimary}
                 className="text-xs font-extrabold uppercase tracking-wider text-brand-red flex items-center gap-1 hover:underline"
               >
                 <span>Send Email</span>
@@ -165,18 +166,18 @@ export default function ContactUsClient() {
                 <MapPin className="w-7 h-7" />
               </div>
               <span className="text-xs font-extrabold uppercase tracking-widest text-dark-500 block mb-1">
-                Manufacturing & Corporate Hub
+                Manufacturing &amp; Corporate Hub
               </span>
               <p className="text-sm font-extrabold text-dark-900 leading-snug mb-1 uppercase">
-                KOREVA GLOBAL LLP
+                {SITE_CONFIG.legalName}
               </p>
               <p className="text-xs text-dark-600 leading-relaxed font-medium">
-                NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur, Udham Singh Nagar, Uttarakhand - 263148, India
+                {SITE_CONFIG.address.full}
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-light-200">
               <a
-                href="https://maps.app.goo.gl/NyPHE3a5nzvR4YJAA"
+                href={SITE_CONFIG.maps.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-extrabold uppercase tracking-wider text-brand-red flex items-center gap-1 hover:underline"
@@ -378,7 +379,7 @@ export default function ContactUsClient() {
                     For new dealer registrations, territory inquiries, and tractor attachment catalog orders.
                   </p>
                   <span className="text-brand-red font-bold block mt-1">
-                    Email: info@koreva.com
+                    Email: {SITE_CONFIG.email.sales}
                   </span>
                 </div>
 
@@ -390,7 +391,7 @@ export default function ContactUsClient() {
                     Order genuine replacement blades, carburetor kits, EP-90 gear oils, and operator manuals.
                   </p>
                   <span className="text-brand-red font-bold block mt-1">
-                    Hotline: +91 7455 973 188
+                    Hotline: {SITE_CONFIG.phone.display}
                   </span>
                 </div>
 
@@ -402,7 +403,7 @@ export default function ContactUsClient() {
                     International shipments of power weeders and SK5 hand tools across South Asia & Africa.
                   </p>
                   <span className="text-brand-red font-bold block mt-1">
-                    Desk: export@koreva9.com
+                    Desk: {SITE_CONFIG.email.export}
                   </span>
                 </div>
               </div>
@@ -424,7 +425,7 @@ export default function ContactUsClient() {
                   Koreva Global LLP Manufacturing Facility
                 </h3>
                 <p className="text-xs text-dark-600 mt-1 leading-relaxed font-medium">
-                  Located along NH 9 Kichha Rudrapur Road, Uttarakhand. Equipped with modern assembly lines and testing facilities.
+                  Located at Panchakki, Kichha Rudrapur Road, Distt. Udham Singh Nagar, Uttarakhand. Equipped with modern assembly lines and testing facilities.
                 </p>
               </div>
             </div>

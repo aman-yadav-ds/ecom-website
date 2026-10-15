@@ -10,16 +10,16 @@ const engineeringTabs = [
   {
     id: "welding",
     icon: Flame,
-    title: "Robotic Welding & CNC Plasma",
-    badge: "Structural Rigidity",
-    summary: "Precision laser-cut structural frames welded by multi-axis industrial robotics eliminate torsional fatigue in rocky terrains.",
-    metric: "0.02mm",
-    metricLabel: "Machining Tolerance",
+    title: "Shot-Blasting & Powder Coating",
+    badge: "Corrosion Armor",
+    summary: "100% automated shot blasting cleans metal surfaces before multi-stage thermoset industrial powder coating for maximum rust protection in wet fields.",
+    metric: "100%",
+    metricLabel: "Shot-Blasted & Powder Coated",
   },
   {
     id: "metallurgy",
     icon: Cpu,
-    title: "Heat-Treated Boron Steel",
+    title: "Heat-Treated Boron Steel Blades",
     badge: "Anti-Wear Metallurgy",
     summary: "Blades and tines forged from premium Boron alloy steel, quenched and tempered for 3x durability against abrasive sandy loams.",
     metric: "48-52 HRC",
@@ -149,11 +149,11 @@ export function EngineeringStrength() {
               </div>
 
               {/* Active Tab Overlaid Metric Card */}
-              <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 bg-brand-black/90 backdrop-blur-md border border-neutral-700/80 rounded-xl p-4 sm:p-5 text-white">
+              <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 bg-brand-black/95 backdrop-blur-md border border-neutral-700/80 rounded-xl p-4 sm:p-5 text-white">
                 <div className="flex items-center justify-between border-b border-neutral-800 pb-3 mb-3">
                   <div>
-                    <span className="text-[10px] font-mono text-brand-red uppercase tracking-widest block">
-                      Live Metric Benchmark
+                    <span className="text-[10px] font-mono text-brand-red uppercase tracking-widest block font-bold">
+                      MANUFACTURING SPECIFICATION
                     </span>
                     <h4 className="text-sm sm:text-base font-black uppercase tracking-tight text-white">
                       {engineeringTabs[activeTab].title}
@@ -163,15 +163,15 @@ export function EngineeringStrength() {
                     <span className="text-xl sm:text-2xl font-black text-brand-red font-mono">
                       {engineeringTabs[activeTab].metric}
                     </span>
-                    <span className="text-[9px] font-medium text-neutral-400 block uppercase">
+                    <span className="text-[9px] font-bold text-neutral-300 block uppercase">
                       {engineeringTabs[activeTab].metricLabel}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-neutral-400 font-mono">
-                  <span>FACILITY: RUDRAPUR-UNIT-1</span>
-                  <span className="text-neutral-300">CERT: ISO 9001:2015</span>
+                <div className="flex items-center justify-between text-[11px] text-neutral-300 font-mono font-medium">
+                  <span>ISO 9001:2015 Certified Facility — Rudrapur, UK</span>
+                  <span className="text-emerald-400 font-bold uppercase">QA Approved</span>
                 </div>
               </div>
             </div>

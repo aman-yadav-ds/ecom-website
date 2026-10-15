@@ -7,6 +7,7 @@ import { useRfqStore } from "@/store/useRfqStore";
 import { useCompareStore } from "@/store/useCompareStore";
 import { useCartStore } from "@/store/useCartStore";
 import { ENABLE_DIRECT_CHECKOUT } from "@/lib/config";
+import { SITE_CONFIG } from "@/config/site";
 import {
   FileSpreadsheet,
   MapPin,
@@ -82,7 +83,7 @@ export default function B2BProductActions({
   const whatsappMessage = encodeURIComponent(
     `Hello KOREVA Team, I am interested in getting a B2B quote for ${activeName} (Model Code: ${activeVariantId}). Please share specifications and pricing.`
   );
-  const whatsappUrl = `https://wa.me/917455973188?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsapp.number}?text=${whatsappMessage}`;
 
   const priceNumber = activeVariant?.price ? Number(activeVariant.price) : 0;
 

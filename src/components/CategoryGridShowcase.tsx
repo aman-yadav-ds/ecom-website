@@ -21,10 +21,10 @@ const CATEGORY_META: Record<
     gradient: "from-amber-500/10 via-transparent to-transparent",
   },
   "food-processing-units": {
-    icon: <ShieldCheck className="w-5 h-5 text-cyan-600" />,
-    color: "text-cyan-600",
-    hoverBorder: "hover:border-cyan-500/50",
-    gradient: "from-cyan-500/10 via-transparent to-transparent",
+    icon: <ShieldCheck className="w-5 h-5 text-slate-700" />,
+    color: "text-slate-800",
+    hoverBorder: "hover:border-slate-500/50",
+    gradient: "from-slate-500/10 via-transparent to-transparent",
   },
   lubricants: {
     icon: <Droplet className="w-5 h-5 text-emerald-600" />,

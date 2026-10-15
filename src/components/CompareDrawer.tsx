@@ -53,15 +53,12 @@ const CompareDrawer = () => {
     };
   }, [selectedProductIds]);
 
-  if (!mounted) return null;
+  if (!mounted || selectedProductIds.length === 0) return null;
 
   const isVisible = selectedProductIds.length > 0;
-  const activeProducts = isVisible ? selectedProducts : [];
+  const activeProducts = selectedProducts;
 
-  const queryStringResult =
-    selectedProductIds.length > 0
-      ? buildQueryString({ ids: selectedProductIds.join(",") })
-      : "";
+  const queryStringResult = buildQueryString({ ids: selectedProductIds.join(",") });
 
   return (
     <div

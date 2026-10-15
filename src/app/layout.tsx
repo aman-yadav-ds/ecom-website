@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Jost, Manrope, Caveat } from "next/font/google";
 import "./globals.css";
+import { SITE_CONFIG } from "@/config/site";
 
 const jost = Jost({
   variable: '--font-jost',
@@ -124,17 +125,18 @@ const organizationJsonLd = {
     "alternateName": ["Koreva Machines", "Koreva Agriculture", "Koreva", "Koreva Global"]
   },
   "foundingDate": "2026",
+  "email": SITE_CONFIG.email.primary,
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",
-    "addressLocality": "Kichha",
-    "addressRegion": "Udham Singh Nagar, Uttarakhand",
-    "postalCode": "263148",
-    "addressCountry": "IN"
+    "streetAddress": SITE_CONFIG.address.street,
+    "addressLocality": SITE_CONFIG.address.city,
+    "addressRegion": SITE_CONFIG.address.state,
+    "postalCode": SITE_CONFIG.address.postalCode,
+    "addressCountry": SITE_CONFIG.address.countryCode,
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+91-7455973188",
+    "telephone": SITE_CONFIG.phone.display,
     "contactType": "customer service",
     "areaServed": "IN",
     "availableLanguage": ["en", "hi"],
@@ -144,9 +146,10 @@ const organizationJsonLd = {
     "name": "IN"
   },
   "sameAs": [
-    "https://www.facebook.com/profile.php?id=61592533542061",
-    "https://www.instagram.com/koreva_global/",
-    "https://x.com/koreva9"
+    SITE_CONFIG.social.facebook,
+    SITE_CONFIG.social.instagram,
+    SITE_CONFIG.social.twitter,
+    SITE_CONFIG.social.youtube,
   ],
 };
 
@@ -162,9 +165,6 @@ export default function RootLayout({
       className={`${jost.variable} ${manrope.variable} ${caveat.variable} ${jost.className} h-full antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -27,10 +27,10 @@ const CATEGORY_THEMES: Record<string, {
     icon: <Award className="w-4 h-4 text-amber-600" />,
   },
   "food-processing-units": {
-    accentColor: "border-cyan-500",
-    badgeBg: "bg-cyan-50 text-cyan-800 border-cyan-200",
+    accentColor: "border-slate-700",
+    badgeBg: "bg-slate-100 text-slate-800 border-slate-300",
     badgeText: "Commercial Grade SS",
-    icon: <ShieldCheck className="w-4 h-4 text-cyan-700" />,
+    icon: <ShieldCheck className="w-4 h-4 text-slate-700" />,
   },
   "lubricants": {
     accentColor: "border-emerald-500",

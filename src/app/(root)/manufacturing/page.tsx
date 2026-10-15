@@ -16,6 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SITE_CONFIG } from "@/config/site";
 import {
   formatPageSeoTitle,
   formatPageSeoDescription,
@@ -119,11 +120,11 @@ export default function ManufacturingPage() {
     "description": "Agricultural equipment manufacturing, custom OEM assembly, and private labeling facility in Kichha, Uttarakhand, India.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "NH 9, Kichha Rudrapur Road, Nearby Yes Bank, Kishanpur",
-      "addressLocality": "Kichha",
-      "addressRegion": "Udham Singh Nagar, Uttarakhand",
-      "postalCode": "263148",
-      "addressCountry": "IN",
+      "streetAddress": SITE_CONFIG.address.street,
+      "addressLocality": SITE_CONFIG.address.city,
+      "addressRegion": SITE_CONFIG.address.state,
+      "postalCode": SITE_CONFIG.address.postalCode,
+      "addressCountry": SITE_CONFIG.address.countryCode,
     },
   };
 

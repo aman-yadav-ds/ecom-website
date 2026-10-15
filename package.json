@@ -49,11 +49,8 @@
     "wrangler": "^4.118.0"
   },
   "browserslist": [
-    "chrome >= 100",
-    "firefox >= 100",
-    "safari >= 15.4",
-    "edge >= 100",
-    "not dead"
+    "defaults and fully supports es6-module",
+    "maintained node versions"
   ],
   "overrides": {
     "undici": "^7.28.1",

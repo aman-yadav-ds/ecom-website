@@ -67,7 +67,7 @@ export function ProductShowcaseItem({
         <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-6 sm:mb-8">
           <div className="flex items-center space-x-3">
             <span className="text-brand-red font-mono font-black text-xs sm:text-sm tracking-wider">
-              {product.numericIndex} // {String(total).padStart(2, "0")}
+              {product.numericIndex} / {String(total).padStart(2, "0")}
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
             <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-neutral-400">
@@ -75,9 +75,9 @@ export function ProductShowcaseItem({
             </span>
           </div>
 
-          <div className="hidden sm:inline-flex items-center space-x-2 text-[11px] font-mono text-neutral-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <span>COMMERCIAL DEPLOYMENT READY</span>
+          <div className="hidden sm:inline-flex items-center space-x-2 text-[11px] font-mono text-neutral-300 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>FIELD READY • SUBSIDY APPROVED</span>
           </div>
         </div>
 

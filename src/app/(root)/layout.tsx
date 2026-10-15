@@ -1,8 +1,6 @@
-import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-import CompareDrawer from "@/components/CompareDrawer";
+import CompareDrawerWrapper from "@/components/CompareDrawerWrapper";
 import JoinNetworkModal from "@/components/JoinNetworkModal";
 import CookieConsent from "@/components/CookieConsent";
 import RfqModal from "@/components/RfqModal";
@@ -16,7 +14,7 @@ export default function AppLayout({
     <div className="flex flex-col min-h-screen bg-light-100">
       <Navbar />
       {children}
-      <CompareDrawer />
+      <CompareDrawerWrapper />
       <JoinNetworkModal />
       <CookieConsent />
       <RfqModal />

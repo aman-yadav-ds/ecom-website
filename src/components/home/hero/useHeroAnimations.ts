@@ -106,103 +106,32 @@ export function useHeroAnimations(): HeroRefs {
         }
 
         // ==========================================
-        // 2. ENTRANCE TIMELINE SEQUENCE
+        // 2. ENTRANCE TIMELINE SEQUENCE (Zero Opacity Delay - LCP Protected)
         // ==========================================
+        // Guarantee all critical above-the-fold elements are 100% visible immediately without hydration flash
+        gsap.set(
+          [
+            containerRef.current,
+            badgeRef.current,
+            headlineRef.current,
+            headlineLine1Ref.current,
+            headlineLine2Ref.current,
+            headlineLine3Ref.current,
+            headlineLine4Ref.current,
+            paragraphRef.current,
+            ctaContainerRef.current,
+            statsContainerRef.current,
+            cardContainerRef.current,
+          ].filter(Boolean),
+          { opacity: 1, y: 0, scale: 1 }
+        );
+
         const entranceTl = gsap.timeline({
           defaults: { ease: "power3.out" },
         });
 
-        // Phase 1: Background container settles into place
-        if (containerRef.current) {
-          entranceTl.fromTo(
-            containerRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.9, ease: "power2.out" },
-            0
-          );
-        }
-
-        // Phase 2: Status Telemetry Badge
-        if (badgeRef.current) {
-          entranceTl.fromTo(
-            badgeRef.current,
-            { opacity: 0, y: 15, scale: 0.96 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.65 },
-            0.1
-          );
-        }
-
-        // Phase 3: Staggered Headline Reveal
-        const blackLines = [headlineLine1Ref.current, headlineLine2Ref.current].filter(Boolean);
-        const redLines = [headlineLine3Ref.current, headlineLine4Ref.current].filter(Boolean);
-
-        if (blackLines.length > 0) {
-          entranceTl.fromTo(
-            blackLines,
-            { opacity: 0, y: 35 },
-            { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: "power3.out" },
-            0.22
-          );
-        }
-
-        if (redLines.length > 0) {
-          entranceTl.fromTo(
-            redLines,
-            { opacity: 0, y: 35 },
-            { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: "power4.out" },
-            0.42
-          );
-        }
-
-        // Phase 4: Paragraph Reveal
-        if (paragraphRef.current) {
-          entranceTl.fromTo(
-            paragraphRef.current,
-            { opacity: 0, y: 22 },
-            { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
-            0.68
-          );
-        }
-
-        // Phase 5: CTA Buttons Reveal
-        if (ctaContainerRef.current) {
-          entranceTl.fromTo(
-            ctaContainerRef.current,
-            { opacity: 0, y: 18 },
-            { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" },
-            0.88
-          );
-        }
-
-        if (primaryArrowRef.current) {
-          entranceTl.fromTo(
-            primaryArrowRef.current,
-            { x: -6 },
-            { x: 0, duration: 0.5, ease: "power2.out" },
-            0.98
-          );
-        }
-
-        // Phase 6: Hero Machinery Card Settle
-        if (cardContainerRef.current) {
-          entranceTl.fromTo(
-            cardContainerRef.current,
-            { opacity: 0, scale: 0.96, y: 16 },
-            { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: "power3.out" },
-            0.3
-          );
-        }
-
-        // Phase 7: Facts / Statistics Reveal & Count-Up
+        // Facts / Statistics Count-Up
         if (statsContainerRef.current) {
-          const statItems = statsContainerRef.current.children;
-          entranceTl.fromTo(
-            statItems,
-            { opacity: 0, y: 16 },
-            { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out" },
-            1.05
-          );
-
           // Counter 1: 0 -> 400+
           if (stat1NumRef.current) {
             const countObj1 = { val: 0 };
@@ -218,7 +147,7 @@ export function useHeroAnimations(): HeroRefs {
                   }
                 },
               },
-              1.1
+              0.2
             );
           }
 
@@ -237,10 +166,11 @@ export function useHeroAnimations(): HeroRefs {
                   }
                 },
               },
-              1.15
+              0.25
             );
           }
         }
+
 
         // ==========================================
         // 3. CONTINUOUS AMBIENT MOTION
